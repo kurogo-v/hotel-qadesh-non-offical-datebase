@@ -9,47 +9,64 @@
 <style>
 :root{
   --bg:#08080c;--bg2:#0c0c14;--bg3:#111118;
-  --gold:#c9a84c;--gold2:#e8c96a;--gold-dim:rgba(201,168,76,0.1);
-  --text:#d0cbc0;--text-dim:#504c48;--border:rgba(201,168,76,0.07);
+  --gold:#c9a84c;--gold2:#e8c96a;--gold-dim:rgba(201,168,76,0.12);
+  --text:#d0cbc0;--text-dim:#706860;--border:rgba(201,168,76,0.09);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'Noto Serif JP',serif;overflow-x:hidden;}
-.container{position:relative;z-index:1;max-width:1800px;margin:0 auto;padding:2rem 1.5rem 3rem;}
+.container{position:relative;z-index:1;max-width:1900px;margin:0 auto;padding:2rem 1.5rem 3rem;}
 header{text-align:center;margin-bottom:1.6rem;padding-bottom:1.3rem;border-bottom:1px solid var(--border);position:relative;}
 header::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:44px;height:1px;background:var(--gold);}
 .hotel-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;}
 .hotel-name span{display:block;font-size:0.3em;font-style:italic;letter-spacing:0.4em;color:var(--gold2);opacity:0.6;margin-top:0.2em;}
 .subtitle{margin-top:0.7rem;font-family:'Share Tech Mono',monospace;font-size:0.96rem;letter-spacing:0.18em;color:var(--text-dim);text-transform:uppercase;}
-.filter-bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:1.4rem;
-  padding:0.85rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:2px;}
-.filter-label{font-family:'Share Tech Mono',monospace;font-size:0.9rem;letter-spacing:0.14em;color:var(--text-dim);margin-right:4px;text-transform:uppercase;}
-.filter-btn{font-family:'Share Tech Mono',monospace;font-size:0.87rem;letter-spacing:0.08em;padding:5px 13px;
-  border:1px solid rgba(201,168,76,0.15);background:transparent;color:var(--text-dim);cursor:pointer;transition:all 0.14s;border-radius:1px;}
-.filter-btn:hover{color:var(--gold);border-color:rgba(201,168,76,0.4);}
-.filter-btn.active{color:var(--gold);border-color:var(--gold);background:var(--gold-dim);}
-.filter-btn.f-友好.active{color:#b0a8e8;border-color:#7c6fd4;background:rgba(124,111,212,0.09);}
-.filter-btn.f-関連友好.active{color:#e8a0c0;border-color:#c0517a;background:rgba(192,81,122,0.09);}
-.filter-btn.f-企業.active{color:#5ab878;border-color:#2d8a5e;background:rgba(45,138,94,0.09);}
-.filter-btn.f-公的.active{color:#5ac8d8;border-color:#1a7a8a;background:rgba(26,122,138,0.09);}
-.filter-btn.f-敵対.active{color:#e07070;border-color:#c0392b;background:rgba(192,57,43,0.09);}
-.filter-btn.f-国家.active{color:#c8a860;border-color:#7a5a2a;background:rgba(122,90,42,0.09);}
-.filter-btn.f-職業.active{color:#a0a898;border-color:#5a6858;background:rgba(90,104,88,0.09);}
+
+/* ===== フィルターバー：文字を大きく・視認性UP ===== */
+.filter-bar{
+  display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+  margin-bottom:1.4rem;padding:1rem 1.2rem;
+  background:#141420;border:1px solid rgba(201,168,76,0.2);border-radius:3px;
+}
+.filter-label{
+  font-family:'Share Tech Mono',monospace;font-size:1.2rem;
+  letter-spacing:0.14em;color:#c8c0b0;margin-right:6px;text-transform:uppercase;
+  font-weight:400;
+}
+.filter-btn{
+  font-family:'Share Tech Mono',monospace;font-size:1.05rem;letter-spacing:0.08em;
+  padding:6px 16px;border:1px solid rgba(200,192,176,0.3);
+  background:rgba(255,255,255,0.04);color:#b0a898;
+  cursor:pointer;transition:all 0.14s;border-radius:2px;
+}
+.filter-btn:hover{color:#e8e0d0;border-color:rgba(200,192,176,0.6);background:rgba(255,255,255,0.08);}
+.filter-btn.active{color:#f0e8d8;border-color:#c9a84c;background:rgba(201,168,76,0.18);font-weight:500;}
+.filter-btn.f-友好.active{color:#c8c0f0;border-color:#9088e0;background:rgba(144,136,224,0.18);}
+.filter-btn.f-関連友好.active{color:#f0b0d0;border-color:#d06090;background:rgba(208,96,144,0.18);}
+.filter-btn.f-企業.active{color:#88d8a8;border-color:#40a870;background:rgba(64,168,112,0.18);}
+.filter-btn.f-公的.active{color:#88d8e8;border-color:#28a0b8;background:rgba(40,160,184,0.18);}
+.filter-btn.f-敵対.active{color:#f09090;border-color:#d04848;background:rgba(208,72,72,0.18);}
+.filter-btn.f-国家.active{color:#d8c080;border-color:#a07838;background:rgba(160,120,56,0.18);}
+.filter-btn.f-職業.active{color:#c0c8b8;border-color:#809078;background:rgba(128,144,120,0.18);}
+
 .legend-spacer{flex:1;}
-.legend{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
-.legend-item{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--text-dim);}
-.legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.legend{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.legend-item{display:flex;align-items:center;gap:6px;font-family:'Share Tech Mono',monospace;font-size:0.9rem;color:#a09888;}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+
 .diagram-wrap{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:2px;overflow:hidden;}
 canvas#diagram{display:block;width:100%;cursor:default;}
-.tooltip{position:fixed;background:var(--bg3);border:1px solid rgba(201,168,76,0.2);
-  padding:9px 14px;font-size:0.93rem;line-height:1.6;pointer-events:none;opacity:0;
-  transition:opacity 0.1s;max-width:240px;z-index:100;color:var(--text);
-  font-family:'Noto Serif JP',serif;box-shadow:0 6px 24px rgba(0,0,0,0.7);}
+.tooltip{
+  position:fixed;background:var(--bg3);border:1px solid rgba(201,168,76,0.22);
+  padding:10px 14px;font-size:1.0rem;line-height:1.6;pointer-events:none;opacity:0;
+  transition:opacity 0.1s;max-width:260px;z-index:100;color:var(--text);
+  font-family:'Noto Serif JP',serif;box-shadow:0 6px 24px rgba(0,0,0,0.7);
+}
 .tooltip.show{opacity:1;}
-.tt-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);font-weight:400;display:block;margin-bottom:3px;}
-.tt-type{font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:2px;}
-.tt-link{display:block;margin-top:4px;font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--gold);opacity:0.5;}
+.tt-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--gold);font-weight:400;display:block;margin-bottom:3px;}
+.tt-type{font-family:'Share Tech Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:2px;}
+.tt-link{display:block;margin-top:4px;font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--gold);opacity:0.55;}
 footer{text-align:center;margin-top:1.8rem;padding-top:1.1rem;border-top:1px solid var(--border);
-  font-family:'Share Tech Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;color:var(--text-dim);}
+  font-family:'Share Tech Mono',monospace;font-size:0.84rem;letter-spacing:0.1em;color:var(--text-dim);}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .container{animation:fadeIn 0.6s ease both;}
 </style>
@@ -58,29 +75,31 @@ footer{text-align:center;margin-top:1.8rem;padding-top:1.1rem;border-top:1px sol
 <div class="container">
 <header>
   <div class="hotel-name">Hotel Qadesh<span>ホテルカデシュ — 組織相関図</span></div>
-  <div class="subtitle">Organization Correlation Diagram &nbsp;/&nbsp; ver 8.0</div>
+  <div class="subtitle">Organization Correlation Diagram &nbsp;/&nbsp; ver 9.0</div>
 </header>
+
 <div class="filter-bar">
   <span class="filter-label">Filter :</span>
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn f-友好" data-filter="友好">友好</button>
+  <button class="filter-btn active"  data-filter="all">All</button>
+  <button class="filter-btn f-友好"  data-filter="友好">友好</button>
   <button class="filter-btn f-関連友好" data-filter="関連友好">関連友好</button>
-  <button class="filter-btn f-企業" data-filter="企業">企業</button>
-  <button class="filter-btn f-公的" data-filter="公的">公的機関</button>
-  <button class="filter-btn f-敵対" data-filter="敵対">敵対</button>
-  <button class="filter-btn f-国家" data-filter="国家">国家</button>
-  <button class="filter-btn f-職業" data-filter="職業">職業タグ</button>
+  <button class="filter-btn f-企業"  data-filter="企業">企業</button>
+  <button class="filter-btn f-公的"  data-filter="公的">公的機関</button>
+  <button class="filter-btn f-敵対"  data-filter="敵対">敵対</button>
+  <button class="filter-btn f-国家"  data-filter="国家">国家</button>
+  <button class="filter-btn f-職業"  data-filter="職業">職業タグ</button>
   <div class="legend-spacer"></div>
   <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#7c6fd4"></div>友好</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#c0517a"></div>関連友好</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#2d8a5e"></div>企業</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#1a7a8a"></div>公的機関</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#c0392b;border-radius:2px"></div>敵対</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#7a5a2a"></div>国家</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#5a6858"></div>職業</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#9088e0"></div>友好</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#d06090"></div>関連友好</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#40a870"></div>企業</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#28a0b8"></div>公的機関</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#d04848;border-radius:2px"></div>敵対</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#a07838"></div>国家</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#809078"></div>職業</div>
   </div>
 </div>
+
 <div class="diagram-wrap">
   <canvas id="diagram"></canvas>
 </div>
@@ -89,64 +108,84 @@ footer{text-align:center;margin-top:1.8rem;padding-top:1.1rem;border-top:1px sol
   <span class="tt-type" id="tt-type"></span>
   <span class="tt-link" id="tt-link"></span>
 </div>
-<footer>Hotel Qadesh — Organization Correlation Diagram / ver 8.0 &nbsp;|&nbsp; <span style="opacity:0.35">ノードをクリックするとNotionページへ</span></footer>
+<footer>Hotel Qadesh — Organization Correlation Diagram / ver 9.0 &nbsp;|&nbsp; <span style="opacity:0.38">ノードをクリックするとNotionページへ</span></footer>
 </div>
+
 <script>
 // =====================================================================
 // PALETTE
 // =====================================================================
 const PAL = {
-  center:   {fill:'#060608',stroke:'#c9a84c',text:'#c9a84c', sub:'rgba(201,168,76,0.6)'},
-  敵対:     {fill:'#130808',stroke:'#c0392b',text:'#e05050', sub:'rgba(224,80,80,0.6)'},
-  関連友好:  {fill:'#130a10',stroke:'#c0517a',text:'#e090b8', sub:'rgba(224,144,184,0.6)'},
-  公的:     {fill:'#080e12',stroke:'#1a7a8a',text:'#5ac8d8', sub:'rgba(90,200,216,0.6)'},
-  国家:     {fill:'#0e0b04',stroke:'#7a5a2a',text:'#c8a860', sub:'rgba(200,168,96,0.6)'},
-  企業:     {fill:'#050e08',stroke:'#2d8a5e',text:'#5ab878', sub:'rgba(90,184,120,0.6)'},
-  職業:     {fill:'#090c09',stroke:'#5a6858',text:'#a0a898', sub:'rgba(160,168,152,0.6)'},
-  友好:     {fill:'#080812',stroke:'#7c6fd4',text:'#a09ad8', sub:'rgba(160,154,216,0.6)'},
+  center:    {fill:'#060608', stroke:'#c9a84c', text:'#c9a84c',  sub:'rgba(201,168,76,0.65)'},
+  敵対:      {fill:'#130808', stroke:'#d04848', text:'#f09090',  sub:'rgba(240,144,144,0.6)'},
+  公的:      {fill:'#060e12', stroke:'#28a0b8', text:'#88d8e8',  sub:'rgba(136,216,232,0.6)'},
+  国家:      {fill:'#0e0b04', stroke:'#a07838', text:'#d8c080',  sub:'rgba(216,192,128,0.6)'},
+  企業:      {fill:'#040d07', stroke:'#40a870', text:'#88d8a8',  sub:'rgba(136,216,168,0.6)'},
+  職業:      {fill:'#090c09', stroke:'#809078', text:'#c0c8b8',  sub:'rgba(192,200,184,0.6)'},
+  関連友好:  {fill:'#120a0e', stroke:'#d06090', text:'#f0b0d0',  sub:'rgba(240,176,208,0.6)'},
+  友好:      {fill:'#080812', stroke:'#9088e0', text:'#c8c0f0',  sub:'rgba(200,192,240,0.6)'},
 };
 
 // =====================================================================
-// DATA
+// DATA — 3リング分類
 // =====================================================================
-const INNER_DATA = [
-  // 敵対（12時〜10時：上〜左上）
-  {name:'ホテルカデシュ・フランス', cat:'敵対',  url:''},
-  {name:'暁の桜',                  cat:'敵対',  url:''},
-  {name:'NonCREDIT',               cat:'敵対',  url:''},
-  {name:'ブール小隊',               cat:'敵対',  url:''},
-  // 公的機関（1時〜3時：右上〜右）
-  {name:'FBI',                     cat:'公的',  url:''},
-  {name:'CIA',                     cat:'公的',  url:''},
-  {name:'ISMO',                    cat:'公的',  url:''},
-  {name:'SVR',                     cat:'公的',  url:''},
-  {name:'Striker 3rd Team',        cat:'公的',  url:''},
-  // 国家（3時〜4時）
-  {name:'バルベルデ共和国',          cat:'国家',  url:''},
-  // 企業（4時〜5時半）
-  {name:'G.C.C.',                  cat:'企業',  url:'https://www.notion.so/fabc96af8100417ab05913c9a0f816d2'},
-  {name:"RAVEN'S EXPRESS",         cat:'企業',  url:'https://www.notion.so/0165a88c4bd24250826ddc2cc35b143b'},
-  {name:'Southern Cross Eng.',     cat:'企業',  url:''},
-  {name:'G.E.N.',                  cat:'企業',  url:''},
-  {name:'Unicorn Crown',           cat:'企業',  url:''},
-  {name:'アンセム商会',              cat:'企業',  url:''},
-  {name:'Willa',                   cat:'企業',  url:''},
-  {name:'光華世界銀行 他',           cat:'企業',  url:''},
-  // 職業タグ（5時半〜8時）
-  {name:'Spy',                     cat:'職業',  url:''},
-  {name:'Informer',                cat:'職業',  url:''},
-  {name:'Hacker',                  cat:'職業',  url:''},
-  {name:'Confidence man',          cat:'職業',  url:''},
-  {name:'Cleaner',                 cat:'職業',  url:''},
-  {name:'Porter',                  cat:'職業',  url:''},
-  {name:'Merchant',                cat:'職業',  url:''},
-  {name:'Iillegal doctor',         cat:'職業',  url:''},
-  {name:'Negotiator',              cat:'職業',  url:''},
-  {name:'Killer',                  cat:'職業',  url:''},
-  {name:'Handyman',                cat:'職業',  url:''},
+
+// ◎ 内円：敵対 + 公的機関
+const RING1 = [
+  // 敵対（12時〜9時：上〜左上）
+  {name:'ホテルカデシュ・フランス', cat:'敵対', url:''},
+  {name:'暁の桜',                  cat:'敵対', url:''},
+  {name:'NonCREDIT',               cat:'敵対', url:''},
+  {name:'ブール小隊',               cat:'敵対', url:''},
+  // 公的機関（3時〜6時：右上〜右）
+  {name:'FBI',                     cat:'公的', url:''},
+  {name:'CIA',                     cat:'公的', url:''},
+  {name:'ISMO',                    cat:'公的', url:''},
+  {name:'SVR',                     cat:'公的', url:''},
+  {name:'Striker 3rd Team',        cat:'公的', url:''},
 ];
 
-const OUTER_DATA = [
+// ◉ 中間円：企業 + 国家 + 職業タグ
+const RING2 = [
+  // 企業（1時〜5時：右上〜右下）
+  {name:'G.C.C.',                  cat:'企業', url:'https://www.notion.so/fabc96af8100417ab05913c9a0f816d2'},
+  {name:"RAVEN'S EXPRESS",         cat:'企業', url:'https://www.notion.so/0165a88c4bd24250826ddc2cc35b143b'},
+  {name:'Southern Cross Eng.',     cat:'企業', url:''},
+  {name:'G.E.N.',                  cat:'企業', url:''},
+  {name:'Unicorn Crown',           cat:'企業', url:''},
+  {name:'アンセム商会',              cat:'企業', url:''},
+  {name:'Willa',                   cat:'企業', url:''},
+  {name:'光華世界銀行',              cat:'企業', url:''},
+  {name:'星薬狗青電子',              cat:'企業', url:''},
+  {name:'Beyond Horizons',         cat:'企業', url:''},
+  {name:'LSI Industry',            cat:'企業', url:''},
+  {name:'La/C=na',                 cat:'企業', url:''},
+  {name:'Trunk Corporation',       cat:'企業', url:''},
+  {name:'Clean Unclean',           cat:'企業', url:''},
+  {name:'IMR INDUSTRY',            cat:'企業', url:''},
+  {name:'株式会社アンチラ',          cat:'企業', url:''},
+  {name:'Tomcat Toy Box Trade',    cat:'企業', url:''},
+  {name:'Schwarze Katze',          cat:'企業', url:''},
+  {name:'水無月重工',                cat:'企業', url:''},
+  {name:'Bar Casa Segreto',        cat:'企業', url:''},
+  // 国家（6時：下）
+  {name:'バルベルデ共和国',          cat:'国家', url:''},
+  // 職業タグ（7時〜11時：左下〜左上）
+  {name:'Spy',                     cat:'職業', url:''},
+  {name:'Informer',                cat:'職業', url:''},
+  {name:'Hacker',                  cat:'職業', url:''},
+  {name:'Confidence man',          cat:'職業', url:''},
+  {name:'Cleaner',                 cat:'職業', url:''},
+  {name:'Porter',                  cat:'職業', url:''},
+  {name:'Merchant',                cat:'職業', url:''},
+  {name:'Iillegal doctor',         cat:'職業', url:''},
+  {name:'Negotiator',              cat:'職業', url:''},
+  {name:'Killer',                  cat:'職業', url:''},
+  {name:'Handyman',                cat:'職業', url:''},
+];
+
+// ○ 外円：友好 + 関連友好
+const RING3 = [
   {name:'八華組',                   cat:'友好',    url:'https://www.notion.so/1aa7abe41c0f80d0bd47dd3ee3f1c424'},
   {name:"La Famiglia D'Oro",       cat:'友好',    url:'https://www.notion.so/2547abe41c0f808fbaceef557f3aa2ee'},
   {name:'ローザブルーファミリー',    cat:'友好',    url:'https://www.notion.so/1727abe41c0f80799b52d6f57bad4db4'},
@@ -158,10 +197,10 @@ const OUTER_DATA = [
   {name:'EMC',                     cat:'友好',    url:''},
   {name:'Silky',                   cat:'友好',    url:''},
   {name:'孤児院',                   cat:'友好',    url:''},
-  {name:'テンブ・ハウスクリーニング', cat:'友好',   url:''},
+  {name:'テンブ・ハウスクリーニング', cat:'友好',  url:''},
   {name:"Ghoul's Grasp",           cat:'友好',    url:''},
   {name:'MHIC',                    cat:'友好',    url:''},
-  // ピンク2つ隣同士
+  // 関連友好（隣同士）
   {name:'Cradle of bellflowers',   cat:'関連友好', url:''},
   {name:'BAR REBELLION',           cat:'関連友好', url:''},
   {name:'アモルグ',                  cat:'友好',    url:''},
@@ -187,19 +226,28 @@ const ttType  = document.getElementById('tt-type');
 const ttLink  = document.getElementById('tt-link');
 
 let W, H, cx, cy, DPR;
-let R_INNER, R_OUTER;
+let R1, R2, R3;           // 各リングの半径
+let FS1, FS2, FS3;        // 各リングのフォントサイズ
+let NODE_H1, NODE_H2, NODE_H3; // 各リングのノード高さ
 let activeFilter = 'all';
 let nodes = [];
 let hoveredNode = null;
 
-// ノードの幅・高さを文字列から計算（フォントサイズを渡す）
-function calcNodeSize(name, fs){
+// テキスト幅を近似計算（Canvas の measureText の代替）
+function approxTextWidth(name, fs){
   const charsEn = (name.match(/[A-Za-z0-9\s'\-&.]/g)||[]).length;
-  const charsJp = name.length - charsEn;
-  const approxW = charsEn*(fs*0.55) + charsJp*(fs*0.9);
-  const w = Math.max(approxW + fs*1.4, fs*4);
-  const h = fs * 2.0;
-  return {w, h};
+  const charsJp  = name.length - charsEn;
+  return charsEn*(fs*0.58) + charsJp*(fs*0.92);
+}
+
+function calcNodeW(name, fs, pad){
+  return Math.max(approxTextWidth(name, fs) + pad, fs * 3.5);
+}
+
+// 各リングに必要な最小半径を計算（全ノードが重ならない円周）
+function minRadius(data, fs, nodeH, gap){
+  const total = data.reduce((s,d) => s + calcNodeW(d.name, fs, nodeH*1.2) + gap, 0);
+  return total / (2 * Math.PI);
 }
 
 function resize(){
@@ -207,33 +255,27 @@ function resize(){
   DPR = window.devicePixelRatio || 1;
   W   = wrap.clientWidth;
 
-  // ---- フォントサイズ（スケール係数）----
-  const scale = Math.min(W/1400, 1);
-  const FS_INNER = Math.max(10, 13 * scale);  // 内周ノードのフォントサイズ
-  const FS_OUTER = Math.max(9,  12 * scale);  // 外周ノードのフォントサイズ
+  // フォントサイズ（画面幅に応じてスケール）
+  const sc = Math.min(W / 1400, 1.0);
+  FS1 = Math.max(10, 13 * sc);
+  FS2 = Math.max(9.5, 12.5 * sc);
+  FS3 = Math.max(9, 12 * sc);
 
-  // ---- 内周ノードサイズを計算して必要な半径を求める ----
-  const iCount = INNER_DATA.length;
-  const innerSizes = INNER_DATA.map(d => calcNodeSize(d.name, FS_INNER));
+  NODE_H1 = FS1 * 2.2;
+  NODE_H2 = FS2 * 2.2;
+  NODE_H3 = FS3 * 2.2;
 
-  // 内周：隣接ノードが重ならない最小半径を計算
-  // 円周 >= ノード幅の合計 + 最低間隔
-  const GAP_INNER = FS_INNER * 1.2;  // ノード間の最低隙間
-  const totalInnerW = innerSizes.reduce((s,sz) => s + sz.w + GAP_INNER, 0);
-  R_INNER = Math.max(totalInnerW / (2 * Math.PI), W * 0.22);
+  const GAP1 = FS1 * 1.4;
+  const GAP2 = FS2 * 1.2;
+  const GAP3 = FS3 * 1.0;
 
-  // 外周：外周ノードサイズ計算
-  const oCount = OUTER_DATA.length;
-  const outerSizes = OUTER_DATA.map(d => calcNodeSize(d.name, FS_OUTER));
-  const GAP_OUTER = FS_OUTER * 1.0;
-  const totalOuterW = outerSizes.reduce((s,sz) => s + sz.w + GAP_OUTER, 0);
-  R_OUTER = Math.max(totalOuterW / (2 * Math.PI), R_INNER + FS_INNER*3.5);
+  // 各リングの半径（最小値 or 画面比率の大きい方）
+  R1 = Math.max(minRadius(RING1, FS1, NODE_H1, GAP1), W * 0.16);
+  R2 = Math.max(minRadius(RING2, FS2, NODE_H2, GAP2), R1 + NODE_H1 + NODE_H2 + FS1*2);
+  R3 = Math.max(minRadius(RING3, FS3, NODE_H3, GAP3), R2 + NODE_H2 + NODE_H3 + FS2*2);
 
-  // キャンバス高さ：外周ノードが収まるよう（上下にはみ出し可）
-  const innerNodeMaxH = Math.max(...innerSizes.map(s=>s.h));
-  const outerNodeMaxH = Math.max(...outerSizes.map(s=>s.h));
-  H = (R_OUTER + outerNodeMaxH + 20) * 2 + 10;
-
+  // キャンバスサイズ：外円が収まる高さ
+  H = (R3 + NODE_H3 + 24) * 2;
   canvas.width  = W * DPR;
   canvas.height = H * DPR;
   canvas.style.width  = W + 'px';
@@ -242,52 +284,89 @@ function resize(){
   cx = W / 2;
   cy = H / 2;
 
-  buildNodes(FS_INNER, FS_OUTER, innerSizes, outerSizes);
+  buildNodes();
   draw();
 }
 
-function buildNodes(FS_INNER, FS_OUTER, innerSizes, outerSizes){
+function buildNodes(){
   nodes = [];
 
-  // CENTER
-  const cfs = Math.max(14, FS_INNER * 1.4);
-  const cw = Math.max(160, cfs * 10), ch = Math.max(52, cfs * 3.0);
+  // 中心
+  const cfs = Math.max(15, FS1 * 1.5);
+  const cw  = Math.max(170, cfs * 10.5);
+  const ch  = Math.max(54,  cfs * 3.2);
   nodes.push({
-    cx, cy, w:cw, h:ch, fs:cfs, isCenter:true, isOuter:false,
+    cx, cy, w:cw, h:ch, fs:cfs, ring:0, isCenter:true,
     data:{name:'ホテルカデシュ', cat:'center', url:'https://www.notion.so/d139ea4a69fc4ec389ebb0803f732372'}
   });
 
-  // INNER
-  const iN = INNER_DATA.length;
-  INNER_DATA.forEach((d, i) => {
-    const angle = (i / iN) * Math.PI * 2 - Math.PI / 2;
-    const x = cx + Math.cos(angle) * R_INNER;
-    const y = cy + Math.sin(angle) * R_INNER;
-    nodes.push({cx:x, cy:y, w:innerSizes[i].w, h:innerSizes[i].h, fs:FS_INNER,
-                angle, isOuter:false, isCenter:false, data:d});
-  });
+  // RING1
+  placeRing(RING1, R1, FS1, NODE_H1, 1);
+  // RING2
+  placeRing(RING2, R2, FS2, NODE_H2, 2);
+  // RING3
+  placeRing(RING3, R3, FS3, NODE_H3, 3);
+}
 
-  // OUTER
-  const oN = OUTER_DATA.length;
-  OUTER_DATA.forEach((d, i) => {
-    const angle = (i / oN) * Math.PI * 2 - Math.PI / 2;
-    const x = cx + Math.cos(angle) * R_OUTER;
-    const y = cy + Math.sin(angle) * R_OUTER;
-    nodes.push({cx:x, cy:y, w:outerSizes[i].w, h:outerSizes[i].h, fs:FS_OUTER,
-                angle, isOuter:true, isCenter:false, data:d});
+function placeRing(data, R, fs, nh, ringIdx){
+  const n = data.length;
+  data.forEach((d, i) => {
+    const angle = (i / n) * Math.PI * 2 - Math.PI / 2;
+    const nw = calcNodeW(d.name, fs, nh * 1.2);
+    nodes.push({
+      cx: cx + Math.cos(angle) * R,
+      cy: cy + Math.sin(angle) * R,
+      w: nw, h: nh, fs, ring: ringIdx, isCenter:false,
+      data: d
+    });
   });
 }
 
 // =====================================================================
 // DRAW
 // =====================================================================
+function draw(){
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+
+  // 背景グロー
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, R3 * 1.1);
+  grad.addColorStop(0,   'rgba(201,168,76,0.04)');
+  grad.addColorStop(0.55,'rgba(8,6,4,0)');
+  grad.addColorStop(1,   'transparent');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // 軌道円
+  drawOrbit(ctx, R1, 'rgba(201,168,76,0.06)');
+  drawOrbit(ctx, R2, 'rgba(201,168,76,0.05)');
+  drawOrbit(ctx, R3, 'rgba(201,168,76,0.04)');
+
+  // ノード描画（ホバー以外）
+  nodes.forEach(n => {
+    if(n === hoveredNode) return;
+    const vis = n.isCenter || isVisible(n.data.cat);
+    ctx.save();
+    ctx.globalAlpha = vis ? 1 : 0.07;
+    drawNode(ctx, n, false);
+    ctx.restore();
+  });
+  // ホバー最前面
+  if(hoveredNode){
+    ctx.save(); ctx.globalAlpha = 1;
+    drawNode(ctx, hoveredNode, true);
+    ctx.restore();
+  }
+}
+
 function drawOrbit(ctx, r, color){
   ctx.save();
   ctx.beginPath();
   ctx.arc(cx, cy, r, 0, Math.PI*2);
   ctx.strokeStyle = color;
   ctx.lineWidth = 1;
-  ctx.setLineDash([2,8]);
+  ctx.setLineDash([2, 9]);
   ctx.stroke();
   ctx.setLineDash([]);
   ctx.restore();
@@ -295,160 +374,125 @@ function drawOrbit(ctx, r, color){
 
 function drawNode(ctx, n, hovered){
   const isCenter = n.isCenter;
-  const p = isCenter ? PAL.center : (PAL[n.data.cat] || PAL['友好']);
-  const x = n.cx - n.w/2, y = n.cy - n.h/2;
-  const w = n.w, h = n.h;
-  const r = isCenter ? h/2 : 3;
+  const p  = isCenter ? PAL.center : (PAL[n.data.cat] || PAL['友好']);
+  const x  = n.cx - n.w/2, y = n.cy - n.h/2;
+  const w  = n.w, h = n.h;
+  const r  = isCenter ? h/2 : 3;
   const fs = n.fs;
 
   ctx.save();
+
+  // グロー
   if(isCenter || hovered){
     ctx.shadowColor = p.stroke;
-    ctx.shadowBlur  = isCenter ? 20 : 12;
+    ctx.shadowBlur  = isCenter ? 22 : 14;
   }
 
   // 背景
-  ctx.beginPath(); rrect(ctx,x,y,w,h,r);
+  ctx.beginPath(); rrect(ctx, x, y, w, h, r);
   ctx.fillStyle = p.fill; ctx.fill();
   ctx.shadowBlur = 0;
 
-  // 枠
-  ctx.beginPath(); rrect(ctx,x,y,w,h,r);
-  ctx.strokeStyle = hovered ? p.stroke : (isCenter ? p.stroke : p.stroke+'99');
-  ctx.lineWidth   = isCenter ? 1.5 : (hovered ? 1.1 : 0.7);
+  // 枠線
+  ctx.beginPath(); rrect(ctx, x, y, w, h, r);
+  ctx.strokeStyle = hovered ? p.stroke : (isCenter ? p.stroke : p.stroke + (hovered ? 'ff' : 'aa'));
+  ctx.lineWidth   = isCenter ? 1.6 : (hovered ? 1.2 : 0.8);
   ctx.stroke();
 
   if(isCenter){
-    // 内側装飾枠
-    ctx.beginPath(); rrect(ctx,x+5,y+5,w-10,h-10,r-5);
-    ctx.strokeStyle = p.stroke+'33'; ctx.lineWidth=0.5; ctx.stroke();
+    // 装飾二重枠
+    ctx.beginPath(); rrect(ctx, x+5, y+5, w-10, h-10, r-5);
+    ctx.strokeStyle = p.stroke + '30'; ctx.lineWidth = 0.5; ctx.stroke();
   } else {
-    // 上部ライン
-    ctx.fillStyle = hovered ? p.stroke : p.stroke+'bb';
-    ctx.fillRect(x, y, w, 1.5);
+    // 上部アクセントライン
+    ctx.fillStyle = hovered ? p.stroke : p.stroke + 'cc';
+    ctx.fillRect(x, y, w, 1.8);
   }
 
   // テキスト
-  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
 
   if(isCenter){
-    ctx.font=`300 ${fs}px 'Cormorant Garamond',serif`;
-    ctx.fillStyle=p.text;
-    ctx.fillText('HOTEL QADESH', n.cx, n.cy - fs*0.55);
-    ctx.font=`400 ${fs*0.62}px 'Noto Serif JP',serif`;
-    ctx.fillStyle=p.sub;
-    ctx.fillText('ホテルカデシュ', n.cx, n.cy + fs*0.6);
+    ctx.font = `300 ${fs}px 'Cormorant Garamond', serif`;
+    ctx.fillStyle = p.text;
+    ctx.fillText('HOTEL QADESH', n.cx, n.cy - fs * 0.55);
+    ctx.font = `400 ${fs * 0.62}px 'Noto Serif JP', serif`;
+    ctx.fillStyle = p.sub;
+    ctx.fillText('ホテルカデシュ', n.cx, n.cy + fs * 0.62);
   } else {
     const name = n.data.name;
     const isJP = /[\u3000-\u9fff]/.test(name);
     const fam  = isJP ? "'Noto Serif JP',serif" : "'Share Tech Mono',monospace";
-    ctx.font=`400 ${fs}px ${fam}`;
-    ctx.fillStyle = hovered ? p.text : p.text+'dd';
-    const maxW = w - fs;
-
-    if(ctx.measureText(name).width <= maxW){
-      ctx.fillText(name, n.cx, n.cy);
-    } else {
-      // スペースか文字中間で2行に分割
-      let l1, l2;
-      const sp = name.lastIndexOf(' ', Math.ceil(name.length*0.55));
-      if(sp > 0){ l1=name.slice(0,sp); l2=name.slice(sp+1); }
-      else { const mid=Math.ceil(name.length/2); l1=name.slice(0,mid); l2=name.slice(mid); }
-      const lh = fs * 1.25;
-      ctx.fillText(l1, n.cx, n.cy - lh/2);
-      ctx.fillText(l2, n.cx, n.cy + lh/2);
-    }
+    ctx.font = `400 ${fs}px ${fam}`;
+    ctx.fillStyle = hovered ? p.text : p.text + 'e8';
+    ctx.fillText(name, n.cx, n.cy);
   }
+
   ctx.restore();
 }
 
-function rrect(ctx,x,y,w,h,r){
-  r=Math.min(r,w/2,h/2);
-  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+function rrect(ctx, x, y, w, h, r){
+  r = Math.min(r, w/2, h/2);
+  ctx.moveTo(x+r, y); ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
   ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
   ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
   ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
 }
 
 function isVisible(cat){
-  if(activeFilter==='all') return true;
-  if(activeFilter==='公的') return cat==='公的';
-  return cat===activeFilter;
-}
-
-function draw(){
-  const ctx = canvas.getContext('2d');
-  ctx.setTransform(DPR,0,0,DPR,0,0);
-  ctx.clearRect(0,0,W,H);
-
-  // 背景グロー
-  const grad = ctx.createRadialGradient(cx,cy,0,cx,cy,R_OUTER*1.1);
-  grad.addColorStop(0,'rgba(201,168,76,0.03)');
-  grad.addColorStop(0.6,'rgba(10,8,4,0)');
-  grad.addColorStop(1,'transparent');
-  ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
-
-  drawOrbit(ctx, R_INNER, 'rgba(201,168,76,0.055)');
-  drawOrbit(ctx, R_OUTER, 'rgba(201,168,76,0.038)');
-
-  nodes.forEach(n=>{
-    if(n===hoveredNode) return;
-    const visible = n.isCenter || isVisible(n.data.cat);
-    ctx.save(); ctx.globalAlpha = visible ? 1 : 0.08;
-    drawNode(ctx,n,false);
-    ctx.restore();
-  });
-  if(hoveredNode){
-    ctx.save(); ctx.globalAlpha=1;
-    drawNode(ctx,hoveredNode,true);
-    ctx.restore();
-  }
+  if(activeFilter === 'all') return true;
+  if(activeFilter === '公的') return cat === '公的';
+  return cat === activeFilter;
 }
 
 // =====================================================================
 // INTERACTION
 // =====================================================================
-function getNode(mx,my){
-  for(let i=nodes.length-1;i>=0;i--){
-    const n=nodes[i];
-    if(mx>=n.cx-n.w/2&&mx<=n.cx+n.w/2&&my>=n.cy-n.h/2&&my<=n.cy+n.h/2) return n;
+function getNode(mx, my){
+  for(let i = nodes.length-1; i >= 0; i--){
+    const n = nodes[i];
+    if(mx >= n.cx-n.w/2 && mx <= n.cx+n.w/2 &&
+       my >= n.cy-n.h/2 && my <= n.cy+n.h/2) return n;
   }
   return null;
 }
 
-canvas.addEventListener('mousemove',e=>{
-  const r=canvas.getBoundingClientRect();
-  const mx=e.clientX-r.left, my=e.clientY-r.top;
-  const n=getNode(mx,my);
-  if(n!==hoveredNode){hoveredNode=n; draw();}
-  canvas.style.cursor=(n&&n.data.url)?'pointer':'default';
+canvas.addEventListener('mousemove', e => {
+  const r  = canvas.getBoundingClientRect();
+  const mx = e.clientX - r.left;
+  const my = e.clientY - r.top;
+  const n  = getNode(mx, my);
+  if(n !== hoveredNode){ hoveredNode = n; draw(); }
+  canvas.style.cursor = (n && n.data.url) ? 'pointer' : 'default';
   if(n){
-    ttName.textContent=n.data.name;
-    ttType.textContent=n.isCenter?'中心':n.data.cat;
-    const u=n.data.url;
-    ttLink.textContent=u?'→ Notionで開く':'';
-    ttLink.style.display=u?'block':'none';
-    let tx=e.clientX+16,ty=e.clientY+10;
-    if(tx+240>window.innerWidth) tx=e.clientX-250;
-    if(ty+90>window.innerHeight) ty=e.clientY-80;
-    tooltip.style.left=tx+'px'; tooltip.style.top=ty+'px';
+    ttName.textContent = n.data.name;
+    ttType.textContent = n.isCenter ? '中心' : n.data.cat;
+    const u = n.data.url;
+    ttLink.textContent  = u ? '→ Notionで開く' : '';
+    ttLink.style.display = u ? 'block' : 'none';
+    let tx = e.clientX+18, ty = e.clientY+12;
+    if(tx+260 > window.innerWidth)  tx = e.clientX-270;
+    if(ty+90  > window.innerHeight) ty = e.clientY-80;
+    tooltip.style.left = tx+'px'; tooltip.style.top = ty+'px';
     tooltip.classList.add('show');
   } else {
     tooltip.classList.remove('show');
   }
 });
-canvas.addEventListener('mouseleave',()=>{
-  hoveredNode=null; tooltip.classList.remove('show'); draw();
+canvas.addEventListener('mouseleave', () => {
+  hoveredNode = null;
+  tooltip.classList.remove('show');
+  draw();
 });
-canvas.addEventListener('click',e=>{
-  const r=canvas.getBoundingClientRect();
-  const n=getNode(e.clientX-r.left,e.clientY-r.top);
-  if(n&&n.data.url) window.open(n.data.url,'_blank');
+canvas.addEventListener('click', e => {
+  const r = canvas.getBoundingClientRect();
+  const n = getNode(e.clientX-r.left, e.clientY-r.top);
+  if(n && n.data.url) window.open(n.data.url, '_blank');
 });
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    activeFilter=btn.dataset.filter;
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeFilter = btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     draw();
   });
