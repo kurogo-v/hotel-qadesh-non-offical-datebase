@@ -7,680 +7,455 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #0a0a0e;
-  --bg2: #0f0f16;
-  --bg3: #14141e;
-  --gold: #c9a84c;
-  --gold2: #e8c96a;
-  --gold-dim: rgba(201,168,76,0.15);
-  --red: #c0392b;
-  --red-dim: rgba(192,57,43,0.18);
-  --purple: #7c6fd4;
-  --purple-dim: rgba(124,111,212,0.15);
-  --green: #2d8a5e;
-  --green-dim: rgba(45,138,94,0.15);
-  --gray: #4a4a5a;
-  --gray-dim: rgba(74,74,90,0.15);
-  --text: #d4cfc4;
-  --text-dim: #6e6a62;
-  --border: rgba(201,168,76,0.12);
+:root{
+  --bg:#08080c;--bg2:#0c0c14;--bg3:#111118;
+  --gold:#c9a84c;--gold2:#e8c96a;--gold-dim:rgba(201,168,76,0.1);
+  --text:#d0cbc0;--text-dim:#504c48;--border:rgba(201,168,76,0.07);
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Noto Serif JP', serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* 背景テクスチャ */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,168,76,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 80% 80%, rgba(124,111,212,0.04) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ノイズテクスチャ */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.4;
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 3rem 2rem 4rem;
-}
-
-/* ヘッダー */
-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border);
-  position: relative;
-}
-
-header::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 1px;
-  background: var(--gold);
-}
-
-.hotel-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 300;
-  letter-spacing: 0.25em;
-  color: var(--gold);
-  text-transform: uppercase;
-  line-height: 1.1;
-}
-
-.hotel-name span {
-  display: block;
-  font-size: 0.35em;
-  font-style: italic;
-  letter-spacing: 0.4em;
-  color: var(--gold2);
-  opacity: 0.7;
-  margin-top: 0.3em;
-}
-
-.subtitle {
-  margin-top: 1rem;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  color: var(--text-dim);
-  text-transform: uppercase;
-}
-
-/* フィルターバー */
-.filter-bar {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  margin-bottom: 2rem;
-  padding: 1rem 1.25rem;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-}
-
-.filter-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
-  color: var(--text-dim);
-  margin-right: 4px;
-  text-transform: uppercase;
-}
-
-.filter-btn {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  padding: 4px 12px;
-  border: 1px solid rgba(201,168,76,0.2);
-  background: transparent;
-  color: var(--text-dim);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  text-transform: uppercase;
-  border-radius: 1px;
-}
-
-.filter-btn:hover { color: var(--gold); border-color: rgba(201,168,76,0.5); }
-
-.filter-btn.active {
-  color: var(--gold);
-  border-color: var(--gold);
-  background: var(--gold-dim);
-}
-
-.filter-btn.f-友好.active  { color: #a08fdd; border-color: #7c6fd4; background: var(--purple-dim); }
-.filter-btn.f-業務提携.active { color: #5aaa84; border-color: #2d8a5e; background: var(--green-dim); }
-.filter-btn.f-監視.active { color: #888; border-color: #555; background: var(--gray-dim); }
-.filter-btn.f-敵対.active  { color: #e05050; border-color: var(--red); background: var(--red-dim); }
-.filter-btn.f-その他.active { color: #7a8a9a; border-color: #4a5a6a; background: rgba(74,90,106,0.15); }
-
-.legend-spacer { flex: 1; }
-
-.legend {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.68rem;
-  color: var(--text-dim);
-  letter-spacing: 0.08em;
-}
-
-.legend-line {
-  width: 22px;
-  height: 2px;
-  border-radius: 1px;
-}
-
-/* SVGエリア */
-.diagram-wrap {
-  position: relative;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  overflow: visible;
-}
-
-svg#diagram {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* ツールチップ */
-.tooltip {
-  position: fixed;
-  background: var(--bg3);
-  border: 1px solid rgba(201,168,76,0.3);
-  padding: 10px 14px;
-  font-size: 0.78rem;
-  line-height: 1.6;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.15s;
-  max-width: 260px;
-  z-index: 100;
-  color: var(--text);
-  font-family: 'Noto Serif JP', serif;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-}
-
-.tooltip.show { opacity: 1; }
-
-.tooltip-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  color: var(--gold);
-  font-weight: 400;
-  display: block;
-  margin-bottom: 4px;
-  letter-spacing: 0.04em;
-}
-
-.tooltip-type {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-  display: block;
-}
-
-.tooltip-desc {
-  font-size: 0.76rem;
-  color: var(--text-dim);
-  line-height: 1.7;
-}
-
-.tooltip-link {
-  display: block;
-  margin-top: 6px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.62rem;
-  color: var(--gold);
-  letter-spacing: 0.1em;
-  opacity: 0.6;
-}
-
-/* フッター */
-footer {
-  text-align: center;
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.15em;
-  color: var(--text-dim);
-  text-transform: uppercase;
-}
-
-/* アニメーション */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.container { animation: fadeIn 0.8s ease both; }
-header     { animation: fadeIn 0.8s 0.1s ease both; }
-.filter-bar{ animation: fadeIn 0.8s 0.2s ease both; }
-.diagram-wrap { animation: fadeIn 0.8s 0.3s ease both; }
-
-/* ノードホバー */
-.node { cursor: pointer; transition: opacity 0.2s; }
-.node rect, .node ellipse { transition: filter 0.2s; }
-.node:hover rect, .node:hover ellipse { filter: brightness(1.15) drop-shadow(0 0 6px rgba(201,168,76,0.3)); }
-
-.node-no-link { cursor: default; }
-.node-no-link:hover rect { filter: brightness(1.08); }
-
-/* エッジホバー */
-.edge { cursor: default; transition: opacity 0.3s; }
-.edge:hover { cursor: crosshair; }
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'Noto Serif JP',serif;overflow-x:hidden;}
+.container{position:relative;z-index:1;max-width:1800px;margin:0 auto;padding:2rem 1.5rem 3rem;}
+header{text-align:center;margin-bottom:1.6rem;padding-bottom:1.3rem;border-bottom:1px solid var(--border);position:relative;}
+header::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:44px;height:1px;background:var(--gold);}
+.hotel-name{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;letter-spacing:0.25em;color:var(--gold);text-transform:uppercase;}
+.hotel-name span{display:block;font-size:0.3em;font-style:italic;letter-spacing:0.4em;color:var(--gold2);opacity:0.6;margin-top:0.2em;}
+.subtitle{margin-top:0.7rem;font-family:'Share Tech Mono',monospace;font-size:0.96rem;letter-spacing:0.18em;color:var(--text-dim);text-transform:uppercase;}
+.filter-bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:1.4rem;
+  padding:0.85rem 1rem;background:var(--bg2);border:1px solid var(--border);border-radius:2px;}
+.filter-label{font-family:'Share Tech Mono',monospace;font-size:0.9rem;letter-spacing:0.14em;color:var(--text-dim);margin-right:4px;text-transform:uppercase;}
+.filter-btn{font-family:'Share Tech Mono',monospace;font-size:0.87rem;letter-spacing:0.08em;padding:5px 13px;
+  border:1px solid rgba(201,168,76,0.15);background:transparent;color:var(--text-dim);cursor:pointer;transition:all 0.14s;border-radius:1px;}
+.filter-btn:hover{color:var(--gold);border-color:rgba(201,168,76,0.4);}
+.filter-btn.active{color:var(--gold);border-color:var(--gold);background:var(--gold-dim);}
+.filter-btn.f-友好.active{color:#b0a8e8;border-color:#7c6fd4;background:rgba(124,111,212,0.09);}
+.filter-btn.f-関連友好.active{color:#e8a0c0;border-color:#c0517a;background:rgba(192,81,122,0.09);}
+.filter-btn.f-企業.active{color:#5ab878;border-color:#2d8a5e;background:rgba(45,138,94,0.09);}
+.filter-btn.f-公的.active{color:#5ac8d8;border-color:#1a7a8a;background:rgba(26,122,138,0.09);}
+.filter-btn.f-敵対.active{color:#e07070;border-color:#c0392b;background:rgba(192,57,43,0.09);}
+.filter-btn.f-国家.active{color:#c8a860;border-color:#7a5a2a;background:rgba(122,90,42,0.09);}
+.filter-btn.f-職業.active{color:#a0a898;border-color:#5a6858;background:rgba(90,104,88,0.09);}
+.legend-spacer{flex:1;}
+.legend{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.legend-item{display:flex;align-items:center;gap:5px;font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--text-dim);}
+.legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.diagram-wrap{position:relative;background:var(--bg2);border:1px solid var(--border);border-radius:2px;overflow:hidden;}
+canvas#diagram{display:block;width:100%;cursor:default;}
+.tooltip{position:fixed;background:var(--bg3);border:1px solid rgba(201,168,76,0.2);
+  padding:9px 14px;font-size:0.93rem;line-height:1.6;pointer-events:none;opacity:0;
+  transition:opacity 0.1s;max-width:240px;z-index:100;color:var(--text);
+  font-family:'Noto Serif JP',serif;box-shadow:0 6px 24px rgba(0,0,0,0.7);}
+.tooltip.show{opacity:1;}
+.tt-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold);font-weight:400;display:block;margin-bottom:3px;}
+.tt-type{font-family:'Share Tech Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);display:block;margin-bottom:2px;}
+.tt-link{display:block;margin-top:4px;font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--gold);opacity:0.5;}
+footer{text-align:center;margin-top:1.8rem;padding-top:1.1rem;border-top:1px solid var(--border);
+  font-family:'Share Tech Mono',monospace;font-size:0.78rem;letter-spacing:0.1em;color:var(--text-dim);}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.container{animation:fadeIn 0.6s ease both;}
 </style>
 </head>
 <body>
-
 <div class="container">
-  <header>
-    <div class="hotel-name">
-      Hotel Qadesh
-      <span>ホテルカデシュ — 組織相関図</span>
-    </div>
-    <div class="subtitle">Character Correlation Diagram &nbsp;/&nbsp; ver 1.0</div>
-  </header>
-
-  <div class="filter-bar">
-    <span class="filter-label">Filter :</span>
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn f-友好" data-filter="友好">友好</button>
-    <button class="filter-btn f-業務提携" data-filter="業務提携">業務提携</button>
-    <button class="filter-btn f-監視" data-filter="監視・潜伏">監視・潜伏</button>
-    <button class="filter-btn f-敵対" data-filter="敵対">敵対</button>
-    <button class="filter-btn f-その他" data-filter="その他">その他</button>
-    <div class="legend-spacer"></div>
-    <div class="legend">
-      <div class="legend-item"><div class="legend-line" style="background:#7c6fd4"></div>友好</div>
-      <div class="legend-item"><div class="legend-line" style="background:#2d8a5e"></div>業務提携</div>
-      <div class="legend-item"><div class="legend-line" style="background:#c0392b; border-top: 2px dashed #c0392b; height:0; background:none;"></div>敵対</div>
-      <div class="legend-item"><div class="legend-line" style="background:none; border-top:2px dashed #4a4a5a; height:0;"></div>監視・潜伏</div>
-      <div class="legend-item"><div class="legend-line" style="background:#3a4a5a"></div>その他</div>
-    </div>
+<header>
+  <div class="hotel-name">Hotel Qadesh<span>ホテルカデシュ — 組織相関図</span></div>
+  <div class="subtitle">Organization Correlation Diagram &nbsp;/&nbsp; ver 8.0</div>
+</header>
+<div class="filter-bar">
+  <span class="filter-label">Filter :</span>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn f-友好" data-filter="友好">友好</button>
+  <button class="filter-btn f-関連友好" data-filter="関連友好">関連友好</button>
+  <button class="filter-btn f-企業" data-filter="企業">企業</button>
+  <button class="filter-btn f-公的" data-filter="公的">公的機関</button>
+  <button class="filter-btn f-敵対" data-filter="敵対">敵対</button>
+  <button class="filter-btn f-国家" data-filter="国家">国家</button>
+  <button class="filter-btn f-職業" data-filter="職業">職業タグ</button>
+  <div class="legend-spacer"></div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#7c6fd4"></div>友好</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c0517a"></div>関連友好</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2d8a5e"></div>企業</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1a7a8a"></div>公的機関</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c0392b;border-radius:2px"></div>敵対</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7a5a2a"></div>国家</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#5a6858"></div>職業</div>
   </div>
-
-  <div class="diagram-wrap">
-    <svg id="diagram" viewBox="0 0 940 700" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <!-- 矢印マーカー -->
-        <marker id="arr-友好" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
-          <path d="M0,0 L0,7 L9,3.5 z" fill="#7c6fd4"/>
-        </marker>
-        <marker id="arr-業務提携" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
-          <path d="M0,0 L0,7 L9,3.5 z" fill="#2d8a5e"/>
-        </marker>
-        <marker id="arr-敵対" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
-          <path d="M0,0 L0,7 L9,3.5 z" fill="#c0392b"/>
-        </marker>
-        <marker id="arr-監視" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
-          <path d="M0,0 L0,7 L9,3.5 z" fill="#4a4a5a"/>
-        </marker>
-        <marker id="arr-その他" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
-          <path d="M0,0 L0,7 L9,3.5 z" fill="#3a4a5a"/>
-        </marker>
-        <!-- グロー -->
-        <filter id="glow-gold">
-          <feGaussianBlur stdDeviation="3" result="blur"/>
-          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-        </filter>
-      </defs>
-
-      <!-- ======= エッジ ======= -->
-      <!-- 敵対：カデシュ → フランス -->
-      <line class="edge 敵対"
-        x1="418" y1="268" x2="198" y2="95"
-        stroke="#c0392b" stroke-width="1.8" stroke-dasharray="7,4"
-        marker-end="url(#arr-敵対)"
-        data-type="敵対" data-label="ホテルカデシュ → ホテルカデシュ・フランス"
-        data-desc="フランス支部が本店から離反。現在は対立関係にある"/>
-
-      <!-- 友好 -->
-      <line class="edge 友好"
-        x1="448" y1="268" x2="218" y2="170"
-        stroke="#7c6fd4" stroke-width="1.6"
-        marker-end="url(#arr-友好)"
-        data-type="友好" data-label="ホテルカデシュ → 八華組"
-        data-desc="裏社会を監視し危険人物の暗殺・被害者救護を行う日本の特殊武装組織"/>
-      <line class="edge 友好"
-        x1="468" y1="268" x2="705" y2="162"
-        stroke="#7c6fd4" stroke-width="1.6"
-        marker-end="url(#arr-友好)"
-        data-type="友好" data-label="ホテルカデシュ → La Famiglia D'Oro"
-        data-desc="代替りしたばかりのイタリア系マフィア。コネ獲得のためカデシュへ出入り"/>
-      <line class="edge 友好"
-        x1="466" y1="267" x2="585" y2="105"
-        stroke="#7c6fd4" stroke-width="1.6"
-        marker-end="url(#arr-友好)"
-        data-type="友好" data-label="ホテルカデシュ → ローザブルーファミリー"
-        data-desc="花屋ブランドを表の顔に武器取引を行うフィレンツェ発のマフィア"/>
-
-      <!-- 業務提携 -->
-      <line class="edge 業務提携"
-        x1="428" y1="312" x2="165" y2="428"
-        stroke="#2d8a5e" stroke-width="1.6"
-        marker-end="url(#arr-業務提携)"
-        data-type="業務提携" data-label="ホテルカデシュ → G.C.C."
-        data-desc="全世界に支社を置く大企業。製造・医療・輸送技術に長けカデシュと業務提携"/>
-      <line class="edge 業務提携"
-        x1="438" y1="315" x2="338" y2="490"
-        stroke="#2d8a5e" stroke-width="1.6"
-        marker-end="url(#arr-業務提携)"
-        data-type="業務提携" data-label="ホテルカデシュ → RAVEN'S EXPRESS"
-        data-desc="必要な物を最速で届ける輸送・配送・送迎専門の武装企業"/>
-      <line class="edge 業務提携"
-        x1="458" y1="315" x2="578" y2="490"
-        stroke="#2d8a5e" stroke-width="1.6"
-        marker-end="url(#arr-業務提携)"
-        data-type="業務提携" data-label="ホテルカデシュ → Southern Cross Engineering"
-        data-desc="カデシュ関係者・親睦の深い方のみを対象とした個人運営の工房"/>
-
-      <!-- 監視・潜伏 -->
-      <line class="edge 監視・潜伏"
-        x1="778" y1="378" x2="478" y2="305"
-        stroke="#4a4a5a" stroke-width="1.4" stroke-dasharray="5,4"
-        marker-end="url(#arr-監視)"
-        data-type="監視・潜伏" data-label="CIA → ホテルカデシュ"
-        data-desc="サンデーがストリクスのコードを持ちカデシュ周辺を素性を隠して単独観察"/>
-      <line class="edge 監視・潜伏"
-        x1="838" y1="258" x2="678" y2="172"
-        stroke="#4a4a5a" stroke-width="1.4" stroke-dasharray="5,4"
-        marker-end="url(#arr-監視)"
-        data-type="監視・潜伏" data-label="FBI → ホテルカデシュ・フランス"
-        data-desc="アレックス・ヘイデンがカデシュフランスに潜り込みFBIとの二重スパイとして活動"/>
-      <line class="edge 監視・潜伏"
-        x1="778" y1="438" x2="478" y2="315"
-        stroke="#4a4a5a" stroke-width="1.4" stroke-dasharray="5,4"
-        marker-end="url(#arr-監視)"
-        data-type="監視・潜伏" data-label="ISMO → ホテルカデシュ"
-        data-desc="ハスミ・ツバキヤがISMO実働係としてカデシュに関与"/>
-
-      <!-- その他 -->
-      <line class="edge その他"
-        x1="426" y1="312" x2="153" y2="530"
-        stroke="#3a4a5a" stroke-width="1.4"
-        marker-end="url(#arr-その他)"
-        data-type="その他" data-label="ホテルカデシュ → Secret Scale Service"
-        data-desc="社会の外れ者を訓練する裏社会専門の人材紹介所。依頼関係にある"/>
-      <line class="edge その他"
-        x1="443" y1="312" x2="728" y2="540"
-        stroke="#3a4a5a" stroke-width="1.4"
-        marker-end="url(#arr-その他)"
-        data-type="その他" data-label="ホテルカデシュ → 零影"
-        data-desc="遺体処理・証拠隠滅・暗殺を請け負う掃除屋。「影を零に」が合言葉"/>
-
-      <!-- ======= ノード ======= -->
-
-      <!-- ホテルカデシュ・フランス（左上・敵対） -->
-      <g class="node node-no-link"
-        data-id="france" data-type="敵対組織"
-        data-name="ホテルカデシュ・フランス"
-        data-desc="本店から離反したフランス支部。独自の工作活動を展開中。">
-        <rect x="78" y="60" width="240" height="54" rx="1" fill="#1a0a0a" stroke="#c0392b" stroke-width="1"/>
-        <line x1="78" y1="60" x2="318" y2="60" stroke="#c0392b" stroke-width="2"/>
-        <text x="198" y="83" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="11.5" fill="#e05050" font-weight="400">ホテルカデシュ・フランス</text>
-        <text x="198" y="101" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="9.5" fill="#8a3030" letter-spacing="1">FRANCE / DEFECTED</text>
-      </g>
-
-      <!-- 八華組（左上・友好） -->
-      <g class="node"
-        data-id="yakka" data-type="友好組織"
-        data-name="八華組"
-        data-url="https://www.notion.so/1aa7abe41c0f80d0bd47dd3ee3f1c424"
-        data-desc="裏社会を監視し危険人物の暗殺・被害者救護を行う日本の特殊武装組織。">
-        <rect x="108" y="140" width="218" height="54" rx="1" fill="#0e0e1a" stroke="#7c6fd4" stroke-width="1"/>
-        <line x1="108" y1="140" x2="326" y2="140" stroke="#7c6fd4" stroke-width="2"/>
-        <text x="217" y="163" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="13" fill="#a09ad8" font-weight="400">八華組</text>
-        <text x="217" y="181" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="9" fill="#5a548a" letter-spacing="1">YATSUKA-GUMI / FRIENDLY</text>
-      </g>
-
-      <!-- ローザブルーファミリー（上中） -->
-      <g class="node"
-        data-id="rosa" data-type="友好組織"
-        data-name="ローザブルーファミリー"
-        data-url="https://www.notion.so/1727abe41c0f80799b52d6f57bad4db4"
-        data-desc="花屋ブランドを表の顔に武器取引を行うフィレンツェ発のマフィア。">
-        <rect x="458" y="74" width="258" height="54" rx="1" fill="#0e0e1a" stroke="#7c6fd4" stroke-width="1"/>
-        <line x1="458" y1="74" x2="716" y2="74" stroke="#7c6fd4" stroke-width="2"/>
-        <text x="587" y="97" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="12" fill="#a09ad8" font-weight="400">ローザブルーファミリー</text>
-        <text x="587" y="115" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="9" fill="#5a548a" letter-spacing="1">ROSA BLU / FRIENDLY</text>
-      </g>
-
-      <!-- La Famiglia D'Oro（右上・友好） -->
-      <g class="node"
-        data-id="famiglia" data-type="友好組織"
-        data-name="La Famiglia D'Oro"
-        data-url="https://www.notion.so/2547abe41c0f808fbaceef557f3aa2ee"
-        data-desc="代替りしたばかりのカリフォルニア拠点イタリア系マフィア。コネ獲得のためカデシュへ。">
-        <rect x="600" y="140" width="218" height="54" rx="1" fill="#0e0e1a" stroke="#7c6fd4" stroke-width="1"/>
-        <line x1="600" y1="140" x2="818" y2="140" stroke="#7c6fd4" stroke-width="2"/>
-        <text x="709" y="163" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="14" fill="#a09ad8" font-weight="400">La Famiglia D'Oro</text>
-        <text x="709" y="181" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="9" fill="#5a548a" letter-spacing="1">MAFIA / FRIENDLY</text>
-      </g>
-
-      <!-- ======= 中心：ホテルカデシュ ======= -->
-      <g class="node"
-        data-id="qadesh" data-type="中心"
-        data-name="ホテルカデシュ"
-        data-url="https://www.notion.so/d139ea4a69fc4ec389ebb0803f732372"
-        data-desc="裏社会の拠点ホテル。構成員・会員が集まり依頼や取引が行われる。">
-        <ellipse cx="450" cy="292" rx="108" ry="38" fill="#0d0d14" stroke="#c9a84c" stroke-width="1.5"/>
-        <!-- 外枠の装飾 -->
-        <ellipse cx="450" cy="292" rx="114" ry="44" fill="none" stroke="#c9a84c" stroke-width="0.4" opacity="0.4"/>
-        <text x="450" y="285" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="16" fill="#c9a84c" font-weight="300" letter-spacing="3" filter="url(#glow-gold)">HOTEL QADESH</text>
-        <text x="450" y="302" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="10" fill="#8a6e2e" letter-spacing="2">ホテルカデシュ</text>
-      </g>
-
-      <!-- ======= 業務提携（下部） ======= -->
-
-      <!-- G.C.C. -->
-      <g class="node"
-        data-id="gcc" data-type="業務提携企業"
-        data-name="G.C.C. (General Contract Company)"
-        data-url="https://www.notion.so/fabc96af8100417ab05913c9a0f816d2"
-        data-desc="全世界に支社を置く大企業。製造・医療・輸送技術に長けカデシュと業務提携。">
-        <rect x="52" y="400" width="226" height="54" rx="1" fill="#0a140f" stroke="#2d8a5e" stroke-width="1"/>
-        <line x1="52" y1="400" x2="278" y2="400" stroke="#2d8a5e" stroke-width="2"/>
-        <text x="165" y="423" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="15" fill="#5aaa84" font-weight="400">G.C.C.</text>
-        <text x="165" y="441" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#2a6a44" letter-spacing="0.8">GENERAL CONTRACT / PARTNER</text>
-      </g>
-
-      <!-- RAVEN'S EXPRESS -->
-      <g class="node"
-        data-id="ravens" data-type="業務提携企業"
-        data-name="RAVEN'S EXPRESS"
-        data-url="https://www.notion.so/0165a88c4bd24250826ddc2cc35b143b"
-        data-desc="必要な物を最速で届ける輸送・配送・送迎専門の武装企業。">
-        <rect x="228" y="468" width="218" height="54" rx="1" fill="#0a140f" stroke="#2d8a5e" stroke-width="1"/>
-        <line x1="228" y1="468" x2="446" y2="468" stroke="#2d8a5e" stroke-width="2"/>
-        <text x="337" y="491" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="13" fill="#5aaa84" font-weight="400">RAVEN'S EXPRESS</text>
-        <text x="337" y="509" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#2a6a44" letter-spacing="0.8">TRANSPORT / PARTNER</text>
-      </g>
-
-      <!-- Southern Cross Engineering -->
-      <g class="node node-no-link"
-        data-id="sce" data-type="業務提携企業"
-        data-name="Southern Cross Engineering"
-        data-desc="カデシュ関係者・親睦の深い方のみを対象とした個人運営の工房。">
-        <rect x="462" y="468" width="218" height="54" rx="1" fill="#0a140f" stroke="#2d8a5e" stroke-width="1"/>
-        <line x1="462" y1="468" x2="680" y2="468" stroke="#2d8a5e" stroke-width="2"/>
-        <text x="571" y="491" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="12" fill="#5aaa84" font-weight="400">Southern Cross Eng.</text>
-        <text x="571" y="509" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#2a6a44" letter-spacing="0.8">ENGINEERING / PARTNER</text>
-      </g>
-
-      <!-- ======= 捜査機関（右） ======= -->
-
-      <!-- CIA -->
-      <g class="node node-no-link"
-        data-id="cia" data-type="捜査機関"
-        data-name="CIA"
-        data-desc="サンデーがストリクスのコードを持ちカデシュ周辺を素性を隠して単独観察。">
-        <rect x="678" y="348" width="172" height="54" rx="1" fill="#111118" stroke="#4a4a5a" stroke-width="1"/>
-        <line x1="678" y1="348" x2="850" y2="348" stroke="#4a4a5a" stroke-width="1.5"/>
-        <text x="764" y="371" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="15" fill="#888" font-weight="400">CIA</text>
-        <text x="764" y="389" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#4a4a5a" letter-spacing="0.8">CENTRAL INTEL. / SURVEILLANCE</text>
-      </g>
-
-      <!-- FBI -->
-      <g class="node node-no-link"
-        data-id="fbi" data-type="捜査機関"
-        data-name="FBI"
-        data-desc="アレックス・ヘイデンがカデシュフランスに潜り込みFBIとの二重スパイとして活動。">
-        <rect x="718" y="228" width="172" height="54" rx="1" fill="#111118" stroke="#4a4a5a" stroke-width="1"/>
-        <line x1="718" y1="228" x2="890" y2="228" stroke="#4a4a5a" stroke-width="1.5"/>
-        <text x="804" y="251" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="15" fill="#888" font-weight="400">FBI</text>
-        <text x="804" y="269" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#4a4a5a" letter-spacing="0.8">FED. BUREAU / SURVEILLANCE</text>
-      </g>
-
-      <!-- ISMO -->
-      <g class="node node-no-link"
-        data-id="ismo" data-type="捜査機関"
-        data-name="ISMO"
-        data-desc="ハスミ・ツバキヤがISMO実働係としてカデシュに関与。">
-        <rect x="678" y="408" width="172" height="54" rx="1" fill="#111118" stroke="#4a4a5a" stroke-width="1"/>
-        <line x1="678" y1="408" x2="850" y2="408" stroke="#4a4a5a" stroke-width="1.5"/>
-        <text x="764" y="431" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="15" fill="#888" font-weight="400">ISMO</text>
-        <text x="764" y="449" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#4a4a5a" letter-spacing="0.8">SECRET OPS / SURVEILLANCE</text>
-      </g>
-
-      <!-- ======= その他組織 ======= -->
-
-      <!-- Secret Scale Service -->
-      <g class="node"
-        data-id="s3" data-type="その他"
-        data-name="Secret Scale Service (S³)"
-        data-url="https://www.notion.so/2617abe41c0f803caeaad3362d525e14"
-        data-desc="社会の外れ者を訓練する裏社会専門の人材紹介所。依頼関係にある。">
-        <rect x="42" y="504" width="224" height="54" rx="1" fill="#0e1218" stroke="#3a4a5a" stroke-width="1"/>
-        <line x1="42" y1="504" x2="266" y2="504" stroke="#3a4a5a" stroke-width="1.5"/>
-        <text x="154" y="527" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="13" fill="#7a8a9a" font-weight="400">Secret Scale Service</text>
-        <text x="154" y="545" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#3a4a5a" letter-spacing="0.8">S³ / CONTRACTOR</text>
-      </g>
-
-      <!-- 零影 -->
-      <g class="node"
-        data-id="rei" data-type="その他"
-        data-name="零影"
-        data-url="https://www.notion.so/2597abe41c0f806aa999f5425a68afb3"
-        data-desc="遺体処理・証拠隠滅・暗殺を請け負う掃除屋。「影を零に」が合言葉。">
-        <rect x="638" y="514" width="186" height="54" rx="1" fill="#0e1218" stroke="#3a4a5a" stroke-width="1"/>
-        <line x1="638" y1="514" x2="824" y2="514" stroke="#3a4a5a" stroke-width="1.5"/>
-        <text x="731" y="537" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="16" fill="#7a8a9a" font-weight="300" letter-spacing="6">零影</text>
-        <text x="731" y="555" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#3a4a5a" letter-spacing="0.8">REI-IN / CLEANER</text>
-      </g>
-
-      <!-- 区切り装飾ライン -->
-      <line x1="40" y1="645" x2="900" y2="645" stroke="rgba(201,168,76,0.08)" stroke-width="1"/>
-      <text x="470" y="665" text-anchor="middle" font-family="'Share Tech Mono',monospace" font-size="9" fill="rgba(201,168,76,0.2)" letter-spacing="3">— HOTEL QADESH ORGANIZATION MAP —</text>
-    </svg>
-
-    <div class="tooltip" id="tooltip">
-      <span class="tooltip-name" id="tt-name"></span>
-      <span class="tooltip-type" id="tt-type"></span>
-      <span class="tooltip-desc" id="tt-desc"></span>
-      <span class="tooltip-link" id="tt-link"></span>
-    </div>
-  </div>
-
-  <footer>
-    Hotel Qadesh &nbsp;—&nbsp; Organization Correlation Diagram &nbsp;/&nbsp; VRC RP Event &nbsp;&nbsp;|&nbsp;&nbsp;
-    <span style="opacity:0.5">ノードをクリックするとNotionページへ</span>
-  </footer>
 </div>
-
+<div class="diagram-wrap">
+  <canvas id="diagram"></canvas>
+</div>
+<div class="tooltip" id="tooltip">
+  <span class="tt-name" id="tt-name"></span>
+  <span class="tt-type" id="tt-type"></span>
+  <span class="tt-link" id="tt-link"></span>
+</div>
+<footer>Hotel Qadesh — Organization Correlation Diagram / ver 8.0 &nbsp;|&nbsp; <span style="opacity:0.35">ノードをクリックするとNotionページへ</span></footer>
+</div>
 <script>
+// =====================================================================
+// PALETTE
+// =====================================================================
+const PAL = {
+  center:   {fill:'#060608',stroke:'#c9a84c',text:'#c9a84c', sub:'rgba(201,168,76,0.6)'},
+  敵対:     {fill:'#130808',stroke:'#c0392b',text:'#e05050', sub:'rgba(224,80,80,0.6)'},
+  関連友好:  {fill:'#130a10',stroke:'#c0517a',text:'#e090b8', sub:'rgba(224,144,184,0.6)'},
+  公的:     {fill:'#080e12',stroke:'#1a7a8a',text:'#5ac8d8', sub:'rgba(90,200,216,0.6)'},
+  国家:     {fill:'#0e0b04',stroke:'#7a5a2a',text:'#c8a860', sub:'rgba(200,168,96,0.6)'},
+  企業:     {fill:'#050e08',stroke:'#2d8a5e',text:'#5ab878', sub:'rgba(90,184,120,0.6)'},
+  職業:     {fill:'#090c09',stroke:'#5a6858',text:'#a0a898', sub:'rgba(160,168,152,0.6)'},
+  友好:     {fill:'#080812',stroke:'#7c6fd4',text:'#a09ad8', sub:'rgba(160,154,216,0.6)'},
+};
+
+// =====================================================================
+// DATA
+// =====================================================================
+const INNER_DATA = [
+  // 敵対（12時〜10時：上〜左上）
+  {name:'ホテルカデシュ・フランス', cat:'敵対',  url:''},
+  {name:'暁の桜',                  cat:'敵対',  url:''},
+  {name:'NonCREDIT',               cat:'敵対',  url:''},
+  {name:'ブール小隊',               cat:'敵対',  url:''},
+  // 公的機関（1時〜3時：右上〜右）
+  {name:'FBI',                     cat:'公的',  url:''},
+  {name:'CIA',                     cat:'公的',  url:''},
+  {name:'ISMO',                    cat:'公的',  url:''},
+  {name:'SVR',                     cat:'公的',  url:''},
+  {name:'Striker 3rd Team',        cat:'公的',  url:''},
+  // 国家（3時〜4時）
+  {name:'バルベルデ共和国',          cat:'国家',  url:''},
+  // 企業（4時〜5時半）
+  {name:'G.C.C.',                  cat:'企業',  url:'https://www.notion.so/fabc96af8100417ab05913c9a0f816d2'},
+  {name:"RAVEN'S EXPRESS",         cat:'企業',  url:'https://www.notion.so/0165a88c4bd24250826ddc2cc35b143b'},
+  {name:'Southern Cross Eng.',     cat:'企業',  url:''},
+  {name:'G.E.N.',                  cat:'企業',  url:''},
+  {name:'Unicorn Crown',           cat:'企業',  url:''},
+  {name:'アンセム商会',              cat:'企業',  url:''},
+  {name:'Willa',                   cat:'企業',  url:''},
+  {name:'光華世界銀行 他',           cat:'企業',  url:''},
+  // 職業タグ（5時半〜8時）
+  {name:'Spy',                     cat:'職業',  url:''},
+  {name:'Informer',                cat:'職業',  url:''},
+  {name:'Hacker',                  cat:'職業',  url:''},
+  {name:'Confidence man',          cat:'職業',  url:''},
+  {name:'Cleaner',                 cat:'職業',  url:''},
+  {name:'Porter',                  cat:'職業',  url:''},
+  {name:'Merchant',                cat:'職業',  url:''},
+  {name:'Iillegal doctor',         cat:'職業',  url:''},
+  {name:'Negotiator',              cat:'職業',  url:''},
+  {name:'Killer',                  cat:'職業',  url:''},
+  {name:'Handyman',                cat:'職業',  url:''},
+];
+
+const OUTER_DATA = [
+  {name:'八華組',                   cat:'友好',    url:'https://www.notion.so/1aa7abe41c0f80d0bd47dd3ee3f1c424'},
+  {name:"La Famiglia D'Oro",       cat:'友好',    url:'https://www.notion.so/2547abe41c0f808fbaceef557f3aa2ee'},
+  {name:'ローザブルーファミリー',    cat:'友好',    url:'https://www.notion.so/1727abe41c0f80799b52d6f57bad4db4'},
+  {name:'零影',                     cat:'友好',    url:'https://www.notion.so/2597abe41c0f806aa999f5425a68afb3'},
+  {name:'Secret Scale Service',    cat:'友好',    url:'https://www.notion.so/2617abe41c0f803caeaad3362d525e14'},
+  {name:'密売対策課',                cat:'友好',    url:''},
+  {name:'REvolve',                 cat:'友好',    url:''},
+  {name:'ナーワル商会',              cat:'友好',    url:''},
+  {name:'EMC',                     cat:'友好',    url:''},
+  {name:'Silky',                   cat:'友好',    url:''},
+  {name:'孤児院',                   cat:'友好',    url:''},
+  {name:'テンブ・ハウスクリーニング', cat:'友好',   url:''},
+  {name:"Ghoul's Grasp",           cat:'友好',    url:''},
+  {name:'MHIC',                    cat:'友好',    url:''},
+  // ピンク2つ隣同士
+  {name:'Cradle of bellflowers',   cat:'関連友好', url:''},
+  {name:'BAR REBELLION',           cat:'関連友好', url:''},
+  {name:'アモルグ',                  cat:'友好',    url:''},
+  {name:'TABLEEGGS',               cat:'友好',    url:''},
+  {name:'ヴィーヴル商会',            cat:'友好',    url:''},
+  {name:'Paradise of Bubble',      cat:'友好',    url:''},
+  {name:'月蛇会',                   cat:'友好',    url:''},
+  {name:'月華会',                   cat:'友好',    url:''},
+  {name:'Enforcer of Justice',     cat:'友好',    url:''},
+  {name:'Epithymia of Hexis',      cat:'友好',    url:''},
+  {name:'StrorkCompany',           cat:'友好',    url:''},
+  {name:'CW-SnackC-',              cat:'友好',    url:''},
+  {name:"Kowloon&Co.",             cat:'友好',    url:''},
+];
+
+// =====================================================================
+// CANVAS
+// =====================================================================
+const canvas = document.getElementById('diagram');
 const tooltip = document.getElementById('tooltip');
 const ttName  = document.getElementById('tt-name');
 const ttType  = document.getElementById('tt-type');
-const ttDesc  = document.getElementById('tt-desc');
 const ttLink  = document.getElementById('tt-link');
 
+let W, H, cx, cy, DPR;
+let R_INNER, R_OUTER;
 let activeFilter = 'all';
+let nodes = [];
+let hoveredNode = null;
 
-/* フィルター */
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    activeFilter = btn.dataset.filter;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+// ノードの幅・高さを文字列から計算（フォントサイズを渡す）
+function calcNodeSize(name, fs){
+  const charsEn = (name.match(/[A-Za-z0-9\s'\-&.]/g)||[]).length;
+  const charsJp = name.length - charsEn;
+  const approxW = charsEn*(fs*0.55) + charsJp*(fs*0.9);
+  const w = Math.max(approxW + fs*1.4, fs*4);
+  const h = fs * 2.0;
+  return {w, h};
+}
+
+function resize(){
+  const wrap = canvas.parentElement;
+  DPR = window.devicePixelRatio || 1;
+  W   = wrap.clientWidth;
+
+  // ---- フォントサイズ（スケール係数）----
+  const scale = Math.min(W/1400, 1);
+  const FS_INNER = Math.max(10, 13 * scale);  // 内周ノードのフォントサイズ
+  const FS_OUTER = Math.max(9,  12 * scale);  // 外周ノードのフォントサイズ
+
+  // ---- 内周ノードサイズを計算して必要な半径を求める ----
+  const iCount = INNER_DATA.length;
+  const innerSizes = INNER_DATA.map(d => calcNodeSize(d.name, FS_INNER));
+
+  // 内周：隣接ノードが重ならない最小半径を計算
+  // 円周 >= ノード幅の合計 + 最低間隔
+  const GAP_INNER = FS_INNER * 1.2;  // ノード間の最低隙間
+  const totalInnerW = innerSizes.reduce((s,sz) => s + sz.w + GAP_INNER, 0);
+  R_INNER = Math.max(totalInnerW / (2 * Math.PI), W * 0.22);
+
+  // 外周：外周ノードサイズ計算
+  const oCount = OUTER_DATA.length;
+  const outerSizes = OUTER_DATA.map(d => calcNodeSize(d.name, FS_OUTER));
+  const GAP_OUTER = FS_OUTER * 1.0;
+  const totalOuterW = outerSizes.reduce((s,sz) => s + sz.w + GAP_OUTER, 0);
+  R_OUTER = Math.max(totalOuterW / (2 * Math.PI), R_INNER + FS_INNER*3.5);
+
+  // キャンバス高さ：外周ノードが収まるよう（上下にはみ出し可）
+  const innerNodeMaxH = Math.max(...innerSizes.map(s=>s.h));
+  const outerNodeMaxH = Math.max(...outerSizes.map(s=>s.h));
+  H = (R_OUTER + outerNodeMaxH + 20) * 2 + 10;
+
+  canvas.width  = W * DPR;
+  canvas.height = H * DPR;
+  canvas.style.width  = W + 'px';
+  canvas.style.height = H + 'px';
+
+  cx = W / 2;
+  cy = H / 2;
+
+  buildNodes(FS_INNER, FS_OUTER, innerSizes, outerSizes);
+  draw();
+}
+
+function buildNodes(FS_INNER, FS_OUTER, innerSizes, outerSizes){
+  nodes = [];
+
+  // CENTER
+  const cfs = Math.max(14, FS_INNER * 1.4);
+  const cw = Math.max(160, cfs * 10), ch = Math.max(52, cfs * 3.0);
+  nodes.push({
+    cx, cy, w:cw, h:ch, fs:cfs, isCenter:true, isOuter:false,
+    data:{name:'ホテルカデシュ', cat:'center', url:'https://www.notion.so/d139ea4a69fc4ec389ebb0803f732372'}
+  });
+
+  // INNER
+  const iN = INNER_DATA.length;
+  INNER_DATA.forEach((d, i) => {
+    const angle = (i / iN) * Math.PI * 2 - Math.PI / 2;
+    const x = cx + Math.cos(angle) * R_INNER;
+    const y = cy + Math.sin(angle) * R_INNER;
+    nodes.push({cx:x, cy:y, w:innerSizes[i].w, h:innerSizes[i].h, fs:FS_INNER,
+                angle, isOuter:false, isCenter:false, data:d});
+  });
+
+  // OUTER
+  const oN = OUTER_DATA.length;
+  OUTER_DATA.forEach((d, i) => {
+    const angle = (i / oN) * Math.PI * 2 - Math.PI / 2;
+    const x = cx + Math.cos(angle) * R_OUTER;
+    const y = cy + Math.sin(angle) * R_OUTER;
+    nodes.push({cx:x, cy:y, w:outerSizes[i].w, h:outerSizes[i].h, fs:FS_OUTER,
+                angle, isOuter:true, isCenter:false, data:d});
+  });
+}
+
+// =====================================================================
+// DRAW
+// =====================================================================
+function drawOrbit(ctx, r, color){
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(cx, cy, r, 0, Math.PI*2);
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1;
+  ctx.setLineDash([2,8]);
+  ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+}
+
+function drawNode(ctx, n, hovered){
+  const isCenter = n.isCenter;
+  const p = isCenter ? PAL.center : (PAL[n.data.cat] || PAL['友好']);
+  const x = n.cx - n.w/2, y = n.cy - n.h/2;
+  const w = n.w, h = n.h;
+  const r = isCenter ? h/2 : 3;
+  const fs = n.fs;
+
+  ctx.save();
+  if(isCenter || hovered){
+    ctx.shadowColor = p.stroke;
+    ctx.shadowBlur  = isCenter ? 20 : 12;
+  }
+
+  // 背景
+  ctx.beginPath(); rrect(ctx,x,y,w,h,r);
+  ctx.fillStyle = p.fill; ctx.fill();
+  ctx.shadowBlur = 0;
+
+  // 枠
+  ctx.beginPath(); rrect(ctx,x,y,w,h,r);
+  ctx.strokeStyle = hovered ? p.stroke : (isCenter ? p.stroke : p.stroke+'99');
+  ctx.lineWidth   = isCenter ? 1.5 : (hovered ? 1.1 : 0.7);
+  ctx.stroke();
+
+  if(isCenter){
+    // 内側装飾枠
+    ctx.beginPath(); rrect(ctx,x+5,y+5,w-10,h-10,r-5);
+    ctx.strokeStyle = p.stroke+'33'; ctx.lineWidth=0.5; ctx.stroke();
+  } else {
+    // 上部ライン
+    ctx.fillStyle = hovered ? p.stroke : p.stroke+'bb';
+    ctx.fillRect(x, y, w, 1.5);
+  }
+
+  // テキスト
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+
+  if(isCenter){
+    ctx.font=`300 ${fs}px 'Cormorant Garamond',serif`;
+    ctx.fillStyle=p.text;
+    ctx.fillText('HOTEL QADESH', n.cx, n.cy - fs*0.55);
+    ctx.font=`400 ${fs*0.62}px 'Noto Serif JP',serif`;
+    ctx.fillStyle=p.sub;
+    ctx.fillText('ホテルカデシュ', n.cx, n.cy + fs*0.6);
+  } else {
+    const name = n.data.name;
+    const isJP = /[\u3000-\u9fff]/.test(name);
+    const fam  = isJP ? "'Noto Serif JP',serif" : "'Share Tech Mono',monospace";
+    ctx.font=`400 ${fs}px ${fam}`;
+    ctx.fillStyle = hovered ? p.text : p.text+'dd';
+    const maxW = w - fs;
+
+    if(ctx.measureText(name).width <= maxW){
+      ctx.fillText(name, n.cx, n.cy);
+    } else {
+      // スペースか文字中間で2行に分割
+      let l1, l2;
+      const sp = name.lastIndexOf(' ', Math.ceil(name.length*0.55));
+      if(sp > 0){ l1=name.slice(0,sp); l2=name.slice(sp+1); }
+      else { const mid=Math.ceil(name.length/2); l1=name.slice(0,mid); l2=name.slice(mid); }
+      const lh = fs * 1.25;
+      ctx.fillText(l1, n.cx, n.cy - lh/2);
+      ctx.fillText(l2, n.cx, n.cy + lh/2);
+    }
+  }
+  ctx.restore();
+}
+
+function rrect(ctx,x,y,w,h,r){
+  r=Math.min(r,w/2,h/2);
+  ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r); ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h); ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.closePath();
+}
+
+function isVisible(cat){
+  if(activeFilter==='all') return true;
+  if(activeFilter==='公的') return cat==='公的';
+  return cat===activeFilter;
+}
+
+function draw(){
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.clearRect(0,0,W,H);
+
+  // 背景グロー
+  const grad = ctx.createRadialGradient(cx,cy,0,cx,cy,R_OUTER*1.1);
+  grad.addColorStop(0,'rgba(201,168,76,0.03)');
+  grad.addColorStop(0.6,'rgba(10,8,4,0)');
+  grad.addColorStop(1,'transparent');
+  ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+
+  drawOrbit(ctx, R_INNER, 'rgba(201,168,76,0.055)');
+  drawOrbit(ctx, R_OUTER, 'rgba(201,168,76,0.038)');
+
+  nodes.forEach(n=>{
+    if(n===hoveredNode) return;
+    const visible = n.isCenter || isVisible(n.data.cat);
+    ctx.save(); ctx.globalAlpha = visible ? 1 : 0.08;
+    drawNode(ctx,n,false);
+    ctx.restore();
+  });
+  if(hoveredNode){
+    ctx.save(); ctx.globalAlpha=1;
+    drawNode(ctx,hoveredNode,true);
+    ctx.restore();
+  }
+}
+
+// =====================================================================
+// INTERACTION
+// =====================================================================
+function getNode(mx,my){
+  for(let i=nodes.length-1;i>=0;i--){
+    const n=nodes[i];
+    if(mx>=n.cx-n.w/2&&mx<=n.cx+n.w/2&&my>=n.cy-n.h/2&&my<=n.cy+n.h/2) return n;
+  }
+  return null;
+}
+
+canvas.addEventListener('mousemove',e=>{
+  const r=canvas.getBoundingClientRect();
+  const mx=e.clientX-r.left, my=e.clientY-r.top;
+  const n=getNode(mx,my);
+  if(n!==hoveredNode){hoveredNode=n; draw();}
+  canvas.style.cursor=(n&&n.data.url)?'pointer':'default';
+  if(n){
+    ttName.textContent=n.data.name;
+    ttType.textContent=n.isCenter?'中心':n.data.cat;
+    const u=n.data.url;
+    ttLink.textContent=u?'→ Notionで開く':'';
+    ttLink.style.display=u?'block':'none';
+    let tx=e.clientX+16,ty=e.clientY+10;
+    if(tx+240>window.innerWidth) tx=e.clientX-250;
+    if(ty+90>window.innerHeight) ty=e.clientY-80;
+    tooltip.style.left=tx+'px'; tooltip.style.top=ty+'px';
+    tooltip.classList.add('show');
+  } else {
+    tooltip.classList.remove('show');
+  }
+});
+canvas.addEventListener('mouseleave',()=>{
+  hoveredNode=null; tooltip.classList.remove('show'); draw();
+});
+canvas.addEventListener('click',e=>{
+  const r=canvas.getBoundingClientRect();
+  const n=getNode(e.clientX-r.left,e.clientY-r.top);
+  if(n&&n.data.url) window.open(n.data.url,'_blank');
+});
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    activeFilter=btn.dataset.filter;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    document.querySelectorAll('.edge').forEach(edge => {
-      const types = edge.className.baseVal.split(' ').filter(c => c !== 'edge');
-      const match = activeFilter === 'all' || types.includes(activeFilter);
-      edge.style.opacity = match ? '1' : '0.04';
-    });
+    draw();
   });
 });
 
-/* ノードのツールチップ＆クリック */
-document.querySelectorAll('.node, .node-no-link').forEach(node => {
-  node.addEventListener('mouseenter', () => {
-    ttName.textContent  = node.dataset.name  || '';
-    ttType.textContent  = node.dataset.type  || '';
-    ttDesc.textContent  = node.dataset.desc  || '';
-    ttLink.textContent  = node.dataset.url ? '→ Notionで開く' : '';
-    ttLink.style.display = node.dataset.url ? 'block' : 'none';
-    tooltip.classList.add('show');
-  });
-  node.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
-  node.addEventListener('mousemove', e => {
-    let x = e.clientX + 18, y = e.clientY + 12;
-    if (x + 270 > window.innerWidth)  x = e.clientX - 280;
-    if (y + 140 > window.innerHeight) y = e.clientY - 130;
-    tooltip.style.left = x + 'px';
-    tooltip.style.top  = y + 'px';
-  });
-  node.addEventListener('click', () => {
-    const url = node.dataset.url;
-    if (url) window.open(url, '_blank');
-  });
-});
-
-/* エッジのツールチップ */
-document.querySelectorAll('.edge').forEach(edge => {
-  edge.addEventListener('mouseenter', () => {
-    ttName.textContent  = edge.dataset.label || '';
-    ttType.textContent  = edge.dataset.type  || '';
-    ttDesc.textContent  = edge.dataset.desc  || '';
-    ttLink.style.display = 'none';
-    tooltip.classList.add('show');
-  });
-  edge.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
-  edge.addEventListener('mousemove', e => {
-    let x = e.clientX + 18, y = e.clientY + 12;
-    if (x + 270 > window.innerWidth)  x = e.clientX - 280;
-    if (y + 140 > window.innerHeight) y = e.clientY - 130;
-    tooltip.style.left = x + 'px';
-    tooltip.style.top  = y + 'px';
-  });
-});
+window.addEventListener('resize', resize);
+resize();
 </script>
 </body>
 </html>
