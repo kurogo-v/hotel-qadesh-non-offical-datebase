@@ -49,10 +49,33 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Serif JP',serif;ov
 .hotel-name span{display:block;font-size:0.28em;font-style:italic;letter-spacing:0.4em;color:var(--gold2);opacity:0.55;margin-top:0.15em;}
 
 /* ナビゲーションタブ */
-.nav-bar{flex-shrink:0;display:flex;justify-content:center;gap:0;padding:0.5rem 1.5rem 0;border-bottom:1px solid rgba(200,200,208,0.08);}
+.nav-bar{flex-shrink:0;display:flex;align-items:stretch;gap:0;padding:0 1.5rem 0;border-bottom:1px solid rgba(200,200,208,0.08);}
+.nav-tabs{display:flex;align-items:stretch;gap:0;flex-shrink:0;}
 .nav-btn{font-family:'Share Tech Mono',monospace;font-size:1.05rem;letter-spacing:0.18em;padding:0.55rem 2rem;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--silver3);cursor:pointer;transition:all 0.16s;text-transform:uppercase;position:relative;top:1px;}
 .nav-btn:hover{color:var(--silver2);}
 .nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+/* 検索バー */
+.nav-search{flex:1;display:flex;align-items:center;justify-content:flex-end;padding:0.4rem 0 0.4rem 1.5rem;}
+.search-wrap{position:relative;width:min(280px,100%);}
+.search-input{width:100%;background:rgba(200,200,208,0.06);border:1px solid rgba(200,200,208,0.15);border-radius:2px;padding:0.42rem 2.2rem 0.42rem 0.85rem;font-family:'Share Tech Mono',monospace;font-size:0.88rem;letter-spacing:0.06em;color:var(--silver2);outline:none;transition:all 0.18s;}
+.search-input::placeholder{color:var(--silver3);letter-spacing:0.08em;}
+.search-input:focus{border-color:rgba(200,200,208,0.35);background:rgba(200,200,208,0.09);color:var(--silver);}
+.search-icon{position:absolute;right:0.65rem;top:50%;transform:translateY(-50%);color:var(--silver3);font-size:0.82rem;pointer-events:none;font-family:'Share Tech Mono',monospace;}
+.search-clear{position:absolute;right:0.6rem;top:50%;transform:translateY(-50%);color:var(--silver3);font-size:0.9rem;cursor:pointer;background:transparent;border:none;padding:0;line-height:1;display:none;transition:color 0.13s;}
+.search-clear:hover{color:var(--silver);}
+/* 検索結果ドロップダウン */
+.search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg3);border:1px solid var(--border2);border-radius:2px;z-index:500;max-height:340px;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,0.85);display:none;}
+.search-dropdown.show{display:block;}
+.search-dropdown::-webkit-scrollbar{width:4px;}
+.search-dropdown::-webkit-scrollbar-thumb{background:rgba(200,200,208,0.12);border-radius:2px;}
+.search-result-item{padding:0.6rem 0.9rem;border-bottom:1px solid rgba(200,200,208,0.055);cursor:pointer;transition:background 0.1s;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.search-result-item:hover{background:rgba(200,200,208,0.05);}
+.search-result-item:last-child{border-bottom:none;}
+.search-result-name{font-family:'Noto Serif JP',serif;font-size:0.92rem;color:var(--text);line-height:1.35;}
+.search-result-tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px;}
+.search-result-num{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--gold);opacity:0.6;flex-shrink:0;padding-top:1px;}
+.search-no-result{padding:1rem 0.9rem;font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--text-dim);text-align:center;letter-spacing:0.08em;}
+.search-loading-row{padding:0.8rem 0.9rem;display:flex;align-items:center;gap:7px;font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--text-dim);}
 
 /* キャンバスエリア */
 .canvas-area{flex:1;min-height:0;position:relative;overflow:hidden;}
@@ -169,9 +192,19 @@ canvas.corr-canvas{display:block;width:100%;}
     <div class="hotel-name">Hotel Qadesh<span>ホテルカデシュ — Unofficial Database</span></div>
   </div>
   <div class="nav-bar">
-    <button class="nav-btn active" data-nav="profiles">Profiles</button>
-    <button class="nav-btn" data-nav="organization">Organization</button>
-    <button class="nav-btn" data-nav="world">World</button>
+    <div class="nav-tabs">
+      <button class="nav-btn active" data-nav="profiles">Profiles</button>
+      <button class="nav-btn" data-nav="organization">Organization</button>
+      <button class="nav-btn" data-nav="world">World</button>
+    </div>
+    <div class="nav-search">
+      <div class="search-wrap">
+        <input class="search-input" id="searchInput" type="text" placeholder="Search name...">
+        <span class="search-icon" id="searchIcon">⌕</span>
+        <button class="search-clear" id="searchClear">✕</button>
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+    </div>
   </div>
   <div class="canvas-area">
     <canvas id="diagram"></canvas>
@@ -256,6 +289,129 @@ document.querySelectorAll('.nav-btn').forEach(btn=>{
     // Profilesを再アクティブにしてから開く
     setTimeout(()=>{document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.nav==='profiles'));},10);
   });
+});
+
+// ===== SEARCH =====
+const searchInput    = document.getElementById('searchInput');
+const searchClear    = document.getElementById('searchClear');
+const searchIcon     = document.getElementById('searchIcon');
+const searchDropdown = document.getElementById('searchDropdown');
+let searchTimer = null;
+
+function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// 検索フィールドと優先順位の定義
+// matchField: ヒットしたフィールド名を返す（表示用ラベルに使う）
+function getSearchFields(c){
+  return [
+    { key:'name',        value: c.name||'',                          label:null },
+    { key:'nationality', value: c.nationality||'',                   label:'国籍' },
+    { key:'number',      value: c.number&&c.number!=='-'?c.number:'', label:'No.' },
+    { key:'keyword',     value: c.keyword||'',                       label:'キーワード' },
+    // affiliations（所属タグ）は配列なので結合して検索
+    { key:'affiliations',value:(c.affiliations||[]).join(' '),        label:'所属' },
+  ];
+}
+
+function highlightText(text, q){
+  const idx = text.toLowerCase().indexOf(q);
+  if(idx < 0) return escapeHtml(text);
+  return escapeHtml(text.slice(0,idx))
+    + `<span style="color:var(--gold);font-weight:500">${escapeHtml(text.slice(idx,idx+q.length))}</span>`
+    + escapeHtml(text.slice(idx+q.length));
+}
+
+function renderSearchResults(chars, query){
+  const q = query.trim().toLowerCase();
+  if(!q){ searchDropdown.classList.remove('show'); return; }
+
+  // 各キャラについてどのフィールドにヒットしたかを記録
+  const hits = chars.map(c=>{
+    const fields = getSearchFields(c);
+    const matched = fields.find(f => f.value.toLowerCase().includes(q));
+    return matched ? { c, matched } : null;
+  }).filter(Boolean).slice(0, 25);
+
+  if(!hits.length){
+    searchDropdown.innerHTML=`<div class="search-no-result">— No results for "${escapeHtml(query)}" —</div>`;
+    searchDropdown.classList.add('show'); return;
+  }
+
+  const html = hits.map(({c, matched})=>{
+    const hasNum = c.number && c.number!=='-';
+    const numStr = hasNum ? `<span class="search-result-num">No.${escapeHtml(c.number)}</span>` : '';
+    const tagHtml = (c.affiliations||[]).slice(0,3).map(a=>
+      `<span class="char-tag tag-${TAG_TO_CAT[a]||'other'}">${escapeHtml(a)}</span>`
+    ).join('');
+    const pid = (c.pageId||'').replace(/-/g,'');
+    const oc  = pid ? `onclick="window.open('https://www.notion.so/${pid}','_blank')"` : '';
+
+    // 名前は常にハイライト付きで表示
+    const nameHighlighted = highlightText(c.name||'', q);
+
+    // 名前以外のフィールドにヒットした場合はヒット箇所を補足表示
+    let matchHint = '';
+    if(matched.key !== 'name' && matched.label){
+      // affiliation は配列から個別にマッチしたものを探す
+      let hitVal = matched.value;
+      if(matched.key === 'affiliations'){
+        const af = (c.affiliations||[]).find(a=>a.toLowerCase().includes(q));
+        hitVal = af || matched.value;
+      }
+      matchHint = `<div style="font-family:'Share Tech Mono',monospace;font-size:0.58rem;color:var(--text-dim);margin-top:2px;">${escapeHtml(matched.label)}: ${highlightText(hitVal.slice(0,40),q)}</div>`;
+    }
+
+    return `<div class="search-result-item" ${oc}>
+      <div class="char-left">
+        <div class="search-result-name">${nameHighlighted}</div>
+        ${matchHint}
+        <div class="search-result-tags">${tagHtml}</div>
+      </div>${numStr}
+    </div>`;
+  }).join('');
+
+  searchDropdown.innerHTML = html;
+  searchDropdown.classList.add('show');
+}
+
+searchInput.addEventListener('input', ()=>{
+  const val = searchInput.value;
+  // クリアボタンの表示切替
+  searchClear.style.display  = val ? 'block' : 'none';
+  searchIcon.style.display   = val ? 'none'  : 'block';
+
+  clearTimeout(searchTimer);
+  if(!val.trim()){ searchDropdown.classList.remove('show'); return; }
+
+  // キャッシュがあればすぐ検索、なければローディング表示してフェッチ
+  if(charCache){
+    renderSearchResults(charCache, val);
+  } else {
+    searchDropdown.innerHTML=`<div class="search-loading-row"><div class="spinner"></div>読み込み中...</div>`;
+    searchDropdown.classList.add('show');
+    searchTimer = setTimeout(async ()=>{
+      const chars = await fetchChars();
+      if(chars && searchInput.value) renderSearchResults(chars, searchInput.value);
+    }, 300);
+  }
+});
+
+searchClear.addEventListener('click', ()=>{
+  searchInput.value='';
+  searchClear.style.display='none';
+  searchIcon.style.display='block';
+  searchDropdown.classList.remove('show');
+  searchInput.focus();
+});
+
+// ドロップダウン外クリックで閉じる
+document.addEventListener('click', e=>{
+  if(!e.target.closest('.search-wrap')) searchDropdown.classList.remove('show');
+});
+
+// ESCキーで検索をクリア
+searchInput.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ searchInput.value=''; searchClear.style.display='none'; searchIcon.style.display='block'; searchDropdown.classList.remove('show'); }
 });
 
 // ===== CANVAS =====
@@ -596,11 +752,11 @@ async function fetchChars(){
       const res=await fetch('https://api.anthropic.com/v1/messages',{
         method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-          model:'claude-sonnet-4-20250514',max_tokens:5000,
+          model:'claude-sonnet-4-20250514',max_tokens:6000,
           system:`Return ONLY a JSON array, no markdown.
-Format: [{"name":"キャラ名","number":"会員番号or-","affiliations":["tag1"],"pageId":"notionPageId","keyword":"キーワード"}]
+Format: [{"name":"キャラ名","number":"会員番号or-","affiliations":["tag1"],"pageId":"notionPageId","keyword":"キーワード","nationality":"国籍or-"}]
 Notion DB: 7f1bf769-b8ee-4606-bd5b-71ca1ef23d46`,
-          messages:[{role:'user',content:'ホテルカデシュのNotionデータベース（collection://7f1bf769-b8ee-4606-bd5b-71ca1ef23d46）から全キャラクターの名前・Number・Affiliation・ページID・キーワードをJSON配列で返してください。'}]
+          messages:[{role:'user',content:'ホテルカデシュのNotionデータベース（collection://7f1bf769-b8ee-4606-bd5b-71ca1ef23d46）から全キャラクターの名前・Number・Affiliation・ページID・キーワード（メタ含む）・Nationality（国籍）をすべてJSON配列で返してください。'}]
         })
       });
       const data=await res.json();
