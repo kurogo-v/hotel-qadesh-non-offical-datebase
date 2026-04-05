@@ -889,7 +889,7 @@ const CHARS = [
   {"id":"aron_liu","name":"\u5289 \u4e9e\u9f8d\uff08\u30e9\u30a6 \u30e4\u30fc\u30ed\u30f3\uff09","number":"-","affiliations":["\u6708\u86c7\u4f1a","Smuggler"],"nationality":"\u4e2d\u56fd/\u798f\u5efa\u7701","keyword":"\u6708\u86c7\u4f1a","notionUrl":"","iconKey":"aron_liu","catGroup":"none","subGroup":"","fullImgKeys":["aron_liu"]},
   {"id":"cain_crawford","name":"\u30ab\u30a4\u30f3=A=\u30af\u30ed\u30d5\u30a9\u30fc\u30c9\u4f2f\u7235","number":"-","affiliations":["Scotland Yard","Public institution"],"nationality":"UK/\u30ed\u30f3\u30c9\u30f3","keyword":"\u30b9\u30b3\u30c3\u30c8\u30e9\u30f3\u30c9\u30e4\u30fcCID\u8b66\u90e8\u88dc","notionUrl":"","iconKey":"cain_crawford","catGroup":"none","subGroup":"","fullImgKeys":["cain_crawford"]},
   {"id":"sebastian","name":"\u30bb\u30d0\u30b9\u30c1\u30e3\u30f3","number":"-","affiliations":["TABLEEGGS","\u8a72\u5f53\u5206\u985e\u306a\u3057"],"nationality":"\u4e0d\u660e","keyword":"\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a \u57f7\u4e8b","notionUrl":"","iconKey":"sebastian","catGroup":"none","subGroup":"","fullImgKeys":["sebastian"]},
-  {"id":"roz","name":"Roz","number":"-","affiliations":["Beyond Horizons","\u8a72\u5f53\u5206\u985e\u306a\u3057"],"nationality":"Stateless","keyword":"Beyond Horizons","notionUrl":"","iconKey":"roz","catGroup":"none","subGroup":"","fullImgKeys":["roz"]}
+  {"id":"roz","name":"Roz","number":"81913","affiliations":["Member","Beyond Horizons","\u8a72\u5f53\u5206\u985e\u306a\u3057"],"nationality":"Stateless","keyword":"\u30ab\u30c7\u30b7\u30e5\u4f1a\u54e1/Beyond Horizons","notionUrl":"","iconKey":"roz","catGroup":"qadesh","subGroup":"member","fullImgKeys":["roz"]}
 ];
 // =====================================================================
 // カテゴリ定義
@@ -897,11 +897,11 @@ const CHARS = [
 var CATS = {
   '\u6575\u5bfe': { label:'\u6575\u5bfe\u7d44\u7e54', stroke:'#c0302a', fill:'rgba(120,20,15,0.55)', text:'#f09090', sub:'rgba(240,144,144,0.7)', count:1,
     tags:['\u6681\u306e\u6843','\u004e\u006f\u006e\u0043\u0052\u0045\u0044\u0049\u0054','\u30d6\u30fc\u30eb\u5c0f\u968a','\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5\u30fb\u30d5\u30e9\u30f3\u30b9'] },
-  '\u516c\u7684': { label:'\u516c\u7684\u6a5f\u95a2', stroke:'#206878', fill:'rgba(10,50,65,0.55)', text:'#88d8e8', sub:'rgba(136,216,232,0.7)', count:5,
+  '\u516c\u7684': { label:'\u516c\u7684\u6a5f\u95a2', stroke:'#206878', fill:'rgba(10,50,65,0.55)', text:'#88d8e8', sub:'rgba(136,216,232,0.7)', count:6,
     tags:['FBI','CIA','ISMO','SVR','Striker 3rd Team'] },
   '\u4f01\u696d': { label:'\u4f01\u696d', stroke:'#206840', fill:'rgba(10,55,25,0.55)', text:'#88d8a8', sub:'rgba(136,216,168,0.7)', count:7,
     tags:['G.C.C.',"RAVEN'S EXPRESS",'Southern Cross Engineering','G.E.N.','Unicorn Crown','\u30a2\u30f3\u30bb\u30e0\u5546\u4f1a','Willa','\u5149\u83ef\u4e16\u754c\u9280\u884c','\u661f\u85ac\u72d7\u9752\u96fb\u5b50','Beyond Horizons','LSI Industry','La/C=na','Trunk Corporation','Clean Unclean','IMR INDUSTRY','\u682a\u5f0f\u4f1a\u793e\u30a2\u30f3\u30c1\u30e9',"Tomcat's Toy Box Trade Co.",'Schwarze Katze','\u6c34\u7121\u6708\u91cd\u5de5','Bar Casa Segreto','Coalwing Service'] },
-  '\u53cb\u597d': { label:'\u53cb\u597d\u7d44\u7e54', stroke:'#2a2060', fill:'rgba(12,10,55,0.55)', text:'#c8c0f0', sub:'rgba(200,192,240,0.7)', count:15,
+  '\u53cb\u597d': { label:'\u53cb\u597d\u7d44\u7e54', stroke:'#2a2060', fill:'rgba(12,10,55,0.55)', text:'#c8c0f0', sub:'rgba(200,192,240,0.7)', count:16,
     tags:['\u516b\u83ef\u7d44',"La Famiglia D'Oro",'\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc\u30d5\u30a1\u30df\u30ea\u30fc','\u96f6\u5f71','Secret Scale Service','\u5bc6\u58f2\u5bfe\u7b56\u8ab2','REvolve','\u30ca\u30fc\u30ef\u30eb\u5546\u4f1a','EMC','Silky','\u5b64\u5150\u9662','\u30c6\u30f3\u30d6\u30fb\u30cf\u30a6\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0',"Ghoul's Grasp",'MHIC','BAR REBELLION','\u30a2\u30e2\u30eb\u30b0','TABLEEGGS','\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a','Paradise of Bubble','\u6708\u86c7\u4f1a','\u6708\u83ef\u4f1a','Enforcer of Justice','Epithymia of Hexis','StrorkCompany','CW-SnackC-',"Kowloon&Co.",'月華会','Trade Hublist','Cuddly Plush Corps'] },
   '\u56fd\u5bb6': { label:'\u56fd\u5bb6', stroke:'#604820', fill:'rgba(45,30,8,0.55)', text:'#d8c080', sub:'rgba(216,192,128,0.7)', count:0,
     tags:['Country'] },
@@ -1321,6 +1321,7 @@ function buildRegInfo(char) {
   if(aff.indexOf('Coalwing Service')>=0) g3.push({node:'\u4f01\u696d',sub:'Coalwing Service'});
   if(aff.indexOf('Cuddly Plush Corps')>=0) g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:'Cuddly Plush Corps'});
   if(aff.indexOf('\u6708\u86c7\u4f1a')>=0) g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:'\u6708\u86c7\u4f1a'});
+  if(aff.indexOf('\u6708\u86c7\u4f1a')>=0) g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:'\u6708\u86c7\u4f1a'});
   // 4. 職種（job→大分類マップで grp を付与）
   var _shokuMap={
     'Killer':'\u6226\u95d8\u30fb\u6697\u6bba\u7cfb','Assassin':'\u6226\u95d8\u30fb\u6697\u6bba\u7cfb','Hitman':'\u6226\u95d8\u30fb\u6697\u6bba\u7cfb','Mercenary':'\u6226\u95d8\u30fb\u6697\u6bba\u7cfb','Bodyguard':'\u6226\u95d8\u30fb\u6697\u6bba\u7cfb',
@@ -1497,6 +1498,7 @@ function showYukoModal(){
     +'<button class="subcat-btn" id="ykBtn12" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',16,12);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u58ca\u8599\')>=0;}),true)">\u58ca\u8599 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="ykBtn13" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',16,13);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'MHIC\')>=0;}),true)">MHIC <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="ykBtn14" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',16,14);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Cuddly Plush Corps\')>=0;}),true)">Cuddly Plush Corps <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn" id="ykBtn15" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',16,15);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u6708\u86c7\u4f1a\')>=0;}),true)">\u6708\u86c7\u4f1a <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'</div><div class="divider-line"></div><div id="ykSub"></div>';
 }
 function showKigyoModal(){
@@ -1523,6 +1525,7 @@ function showKokiModal(){
     +'<button class="subcat-btn" id="kkBtn2" style="border-color:rgba(40,160,184,0.3);color:#60c8d8;" onclick="dimBtns(\'kkBtn\',6,2);showSubList(\'kkSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u8b66\u5bdf\u5e81\')>=0;}),true)">\u8b66\u5bdf\u5e81 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="kkBtn3" style="border-color:rgba(40,160,184,0.3);color:#60c8d8;" onclick="dimBtns(\'kkBtn\',6,3);showSubList(\'kkSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'US Navy\')>=0;}),true)">US Navy <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="kkBtn4" style="border-color:rgba(40,160,184,0.3);color:#60c8d8;" onclick="dimBtns(\'kkBtn\',6,4);showSubList(\'kkSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'CIA\')>=0;}),true)">CIA <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn" id="kkBtn5" style="border-color:rgba(40,160,184,0.3);color:#60c8d8;" onclick="dimBtns(\'kkBtn\',6,5);showSubList(\'kkSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Scotland Yard\')>=0;}),true)">Scotland Yard <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'</div><div class="divider-line"></div><div id="kkSub"></div>';
 }
 // 共通：同一グループ内のボタンを暗転する
