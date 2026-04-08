@@ -21,6 +21,30 @@ PE html>
   --gold:#c9a84c;--gold2:#e8c96a;
   --text:#c0c0c8;--text-dim:#484858;
 }
+body.light{
+  --bg:#f5f4f0;--bg2:#eeede8;--bg3:#e8e7e2;--bg4:#dddcd6;
+  --silver:#3a3a42;--silver2:#5a5a68;--silver3:#8a8a98;
+  --border:rgba(60,60,80,0.12);--border2:rgba(60,60,80,0.22);
+  --gold:#9a7030;--gold2:#b88c40;
+  --text:#2a2a34;--text-dim:#9a9aa8;
+  color-scheme:light;
+}
+body.light .modal-overlay{background:rgba(220,218,210,0.88);}
+body.light .modal2-overlay{background:rgba(220,218,210,0.92);}
+body.light .lb-overlay{background:rgba(230,228,220,0.97);}
+body.light .search-dropdown{background:var(--bg3);box-shadow:0 12px 40px rgba(0,0,0,0.18);}
+body.light .corr-canvas-wrap{background:#f0eeea;}
+body.light .tooltip{box-shadow:0 4px 18px rgba(0,0,0,0.18);}
+/* ログイン画面ライトモード */
+body.light .notice-box{background:rgba(60,60,80,0.04);border-color:rgba(60,60,80,0.14);}
+body.light .notice-list li{color:rgba(42,42,52,0.78);}
+body.light .notice-warn{color:rgba(130,80,20,0.88)!important;}
+body.light .input-field{background:rgba(60,60,80,0.05);color:rgba(42,42,52,0.45);border-color:rgba(60,60,80,0.22);}
+body.light .login-btn{background:rgba(60,60,80,0.07);border-color:rgba(60,60,80,0.28);color:var(--silver);}
+body.light .login-btn:hover{background:rgba(60,60,80,0.14);border-color:rgba(60,60,80,0.5);color:var(--text);}
+/* ログイン画面スイッチ（ログインボタン真下・右端） */
+.login-mode-wrap{display:flex;align-items:center;justify-content:flex-end;gap:0.45rem;margin-top:0.55rem;}
+.login-mode-wrap .mode-icon{font-size:0.8rem;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;}
 body{background:var(--bg);color:var(--text);font-family:'Noto Serif JP',serif;overflow:hidden;}
@@ -28,7 +52,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Serif JP',serif;ov
 .screen.active{opacity:1;pointer-events:all;}
 #mainScreen{position:fixed;inset:0;display:none;flex-direction:column;background:var(--bg);overflow:hidden;z-index:20;}
 
-#loginScreen{background:radial-gradient(ellipse 50% 40% at 50% 50%,rgba(200,200,208,0.025) 0%,transparent 70%),#000;}
+#loginScreen{background:radial-gradient(ellipse 50% 40% at 50% 50%,rgba(200,200,208,0.025) 0%,transparent 70%),var(--bg);}
 .login-wrap{width:100%;max-width:680px;padding:0 2rem;}
 .login-title{text-align:center;margin-bottom:1.8rem;}
 .login-main{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,5.5vw,3rem);font-weight:300;letter-spacing:0.25em;color:var(--silver);text-transform:uppercase;line-height:1.05;}
@@ -177,6 +201,15 @@ canvas.corr-canvas{display:block;width:100%;}
 .lb-hint{position:fixed;bottom:1.2rem;left:50%;transform:translateX(-50%);font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:rgba(201,168,76,0.3);letter-spacing:0.14em;text-transform:uppercase;pointer-events:none;}
 .full-img{width:100%;border-radius:2px;border:1px solid var(--border);margin-bottom:1rem;display:block;cursor:zoom-in;transition:opacity 0.13s;}
 .full-img:hover{opacity:0.88;}
+/* ===== モード切替スイッチ ===== */
+.mode-toggle{display:flex;align-items:center;margin-right:0.7rem;flex-shrink:0;}
+.mode-switch{position:relative;width:36px;height:20px;cursor:pointer;flex-shrink:0;}
+.mode-switch input{opacity:0;width:0;height:0;position:absolute;}
+.mode-track{position:absolute;inset:0;background:rgba(200,200,208,0.12);border:1px solid var(--border2);border-radius:10px;transition:all 0.22s;}
+body.light .mode-track{background:rgba(60,60,80,0.15);}
+.mode-knob{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#e8e8f0;transition:all 0.22s;box-shadow:0 1px 4px rgba(0,0,0,0.35);}
+body.light .mode-knob{left:18px;background:#2a2a34;}
+.mode-icon{font-size:0.72rem;color:var(--silver3);margin-right:0.3rem;line-height:1;transition:color 0.2s;user-select:none;}
 </style>
 <script>
 // GitHub Pages SPA redirect support
@@ -210,6 +243,14 @@ canvas.corr-canvas{display:block;width:100%;}
       <div class="input-group"><div class="input-label">ID</div><div class="input-field">*****</div></div>
       <div class="input-group"><div class="input-label">Password</div><div class="input-field">*****</div></div>
       <button class="login-btn" id="loginBtn">Login</button>
+      <div class="login-mode-wrap" title="ライト／ダークモード切替">
+        <span class="mode-icon" id="loginModeIcon">☀</span>
+        <label class="mode-switch" aria-label="ライトモード切替">
+          <input type="checkbox" id="loginModeToggle">
+          <span class="mode-track"></span>
+          <span class="mode-knob"></span>
+        </label>
+      </div>
     </div>
   </div>
 </div>
@@ -225,6 +266,14 @@ canvas.corr-canvas{display:block;width:100%;}
       <button class="nav-btn" data-nav="world">World</button>
     </div>
     <div class="nav-search">
+      <div class="mode-toggle" title="ライト／ダークモード切替">
+        <span class="mode-icon" id="modeIcon">☀</span>
+        <label class="mode-switch" aria-label="ライトモード切替">
+          <input type="checkbox" id="modeToggle">
+          <span class="mode-track"></span>
+          <span class="mode-knob"></span>
+        </label>
+      </div>
       <div class="search-wrap">
         <input class="search-input" id="searchInput" type="text" placeholder="Search name...">
         <span class="search-icon" id="searchIcon">⌕</span>
@@ -786,19 +835,26 @@ function buildNodes() {
 function draw() {
   var ctx = canvas.getContext('2d');
   ctx.setTransform(DPR,0,0,DPR,0,0); ctx.clearRect(0,0,W,H);
-  ctx.fillStyle='#000'; ctx.fillRect(0,0,W,H);
+  var isLight=document.body.classList.contains('light');
+  ctx.fillStyle=isLight?'#f5f4f0':'#000'; ctx.fillRect(0,0,W,H);
   var cg = ctx.createRadialGradient(cx,cy,0,cx,cy,CENTER_W*1.2);
-  cg.addColorStop(0,'rgba(201,168,76,0.18)'); cg.addColorStop(0.4,'rgba(201,168,76,0.06)'); cg.addColorStop(1,'transparent');
+  if(isLight){cg.addColorStop(0,'rgba(154,112,48,0.12)');cg.addColorStop(0.4,'rgba(154,112,48,0.04)');cg.addColorStop(1,'transparent');}
+  else{cg.addColorStop(0,'rgba(201,168,76,0.18)');cg.addColorStop(0.4,'rgba(201,168,76,0.06)');cg.addColorStop(1,'transparent');}
   ctx.fillStyle=cg; ctx.fillRect(0,0,W,H);
   nodes.forEach(function(n) {
     if (n.type!=='circle') return;
     var p=CATS[n.cat], dx=cx-n.cx, dy=cy-n.cy, dist=Math.hypot(dx,dy);
     var ux=dx/dist, uy=dy/dist;
-    var sx=n.cx+ux*n.r*0.1, sy=n.cy+uy*n.r*0.1, ex=cx-ux*CENTER_W*0.45, ey=cy-uy*CENTER_H*0.4;
+    var sx=n.cx+ux*n.r, sy=n.cy+uy*n.r, ex=cx-ux*CENTER_W*0.45, ey=cy-uy*CENTER_H*0.4;
+    var isLineLight=document.body.classList.contains('light');
     var gr=ctx.createLinearGradient(sx,sy,ex,ey);
-    gr.addColorStop(0,p.stroke+'40'); gr.addColorStop(0.5,p.stroke+'18'); gr.addColorStop(1,'rgba(201,168,76,0.5)');
-    ctx.save(); ctx.strokeStyle=gr; ctx.lineWidth=0.8; ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(ex,ey); ctx.stroke();
-    ctx.fillStyle=p.stroke+'cc'; ctx.beginPath(); ctx.arc(sx,sy,2,0,Math.PI*2); ctx.fill(); ctx.restore();
+    if(isLineLight){
+      gr.addColorStop(0,p.stroke+'88'); gr.addColorStop(0.5,p.stroke+'44'); gr.addColorStop(1,'rgba(138,96,32,0.6)');
+    } else {
+      gr.addColorStop(0,p.stroke+'40'); gr.addColorStop(0.5,p.stroke+'18'); gr.addColorStop(1,'rgba(201,168,76,0.5)');
+    }
+    ctx.save(); ctx.strokeStyle=gr; ctx.lineWidth=isLineLight?1.2:0.8; ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(ex,ey); ctx.stroke();
+    ctx.fillStyle=p.stroke+(isLineLight?'ee':'cc'); ctx.beginPath(); ctx.arc(sx,sy,2,0,Math.PI*2); ctx.fill(); ctx.restore();
   });
   var gp=ctx.createRadialGradient(cx,cy,0,cx,cy,8);
   gp.addColorStop(0,'rgba(201,168,76,0.8)'); gp.addColorStop(1,'transparent');
@@ -808,39 +864,62 @@ function draw() {
 }
 function drawCenter(ctx,n,hov) {
   ctx.save();
+  var isLight=document.body.classList.contains('light');
+  var goldMain=isLight?'#8a6020':'rgba(201,168,76,0.9)';
+  var goldHov=isLight?'#6a4810':'#e8c96a';
+  var goldGlow=isLight?'rgba(138,96,32,0.6)':'rgba(201,168,76,0.8)';
+  var bgFill=isLight?'rgba(245,244,240,0.97)':'rgba(12,10,4,0.95)';
+  var textMain=isLight?'#6a4810':'#c9a84c';
+  var textHov=isLight?'#3a2800':'#f0d870';
+  var textSub=isLight?'rgba(100,72,16,0.65)':'rgba(201,168,76,0.5)';
   var eg=ctx.createRadialGradient(n.cx,n.cy,n.h/2,n.cx,n.cy,n.h*1.8);
-  eg.addColorStop(0,'rgba(201,168,76,0.35)'); eg.addColorStop(0.5,'rgba(201,168,76,0.1)'); eg.addColorStop(1,'transparent');
+  if(isLight){eg.addColorStop(0,'rgba(138,96,32,0.18)');eg.addColorStop(0.5,'rgba(138,96,32,0.06)');eg.addColorStop(1,'transparent');}
+  else{eg.addColorStop(0,'rgba(201,168,76,0.35)');eg.addColorStop(0.5,'rgba(201,168,76,0.1)');eg.addColorStop(1,'transparent');}
   ctx.fillStyle=eg; ctx.beginPath(); ctx.ellipse(n.cx,n.cy,n.w*0.9,n.h*1.7,0,0,Math.PI*2); ctx.fill();
-  ctx.shadowColor='rgba(201,168,76,0.8)'; ctx.shadowBlur=hov?30:22;
+  ctx.shadowColor=goldGlow; ctx.shadowBlur=hov?30:22;
   ctx.beginPath(); ctx.ellipse(n.cx,n.cy,n.w/2,n.h/2,0,0,Math.PI*2);
-  ctx.fillStyle='rgba(12,10,4,0.95)'; ctx.fill(); ctx.shadowBlur=0;
+  ctx.fillStyle=bgFill; ctx.fill(); ctx.shadowBlur=0;
   ctx.beginPath(); ctx.ellipse(n.cx,n.cy,n.w/2,n.h/2,0,0,Math.PI*2);
-  ctx.strokeStyle=hov?'#e8c96a':'rgba(201,168,76,0.9)'; ctx.lineWidth=hov?1.8:1.4; ctx.stroke();
+  ctx.strokeStyle=hov?goldHov:goldMain; ctx.lineWidth=hov?1.8:1.4; ctx.stroke();
   ctx.beginPath(); ctx.ellipse(n.cx,n.cy,n.w/2-4,n.h/2-4,0,0,Math.PI*2);
-  ctx.strokeStyle='rgba(201,168,76,0.18)'; ctx.lineWidth=0.5; ctx.stroke();
+  ctx.strokeStyle=isLight?'rgba(138,96,32,0.2)':'rgba(201,168,76,0.18)'; ctx.lineWidth=0.5; ctx.stroke();
   var fs=Math.max(11,n.w*0.086); ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.font='300 '+fs+'px \'Cormorant Garamond\',serif';
-  ctx.fillStyle=hov?'#f0d870':'#c9a84c'; ctx.shadowColor='rgba(201,168,76,0.6)'; ctx.shadowBlur=6;
+  ctx.font='400 '+fs+'px \'Cormorant Garamond\',serif';
+  ctx.fillStyle=hov?textHov:textMain;
+  ctx.shadowColor=isLight?'transparent':goldGlow; ctx.shadowBlur=isLight?0:6;
   ctx.fillText('HOTEL QADESH',n.cx,n.cy-fs*0.48); ctx.shadowBlur=0;
-  ctx.font='400 '+(fs*0.58)+'px \'Noto Serif JP\',serif'; ctx.fillStyle='rgba(201,168,76,0.5)';
+  ctx.font='400 '+(fs*0.58)+'px \'Noto Serif JP\',serif'; ctx.fillStyle=textSub;
   ctx.fillText('\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5',n.cx,n.cy+fs*0.6); ctx.restore();
 }
 function drawCircle(ctx,n,hov) {
   var p=CATS[n.cat]; ctx.save();
+  var isLight=document.body.classList.contains('light');
   var eg=ctx.createRadialGradient(n.cx,n.cy,n.r*0.5,n.cx,n.cy,n.r*2.2);
   eg.addColorStop(0,p.stroke+'28'); eg.addColorStop(0.6,p.stroke+'0a'); eg.addColorStop(1,'transparent');
   ctx.fillStyle=eg; ctx.beginPath(); ctx.arc(n.cx,n.cy,n.r*2.2,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(n.cx,n.cy,n.r,0,Math.PI*2); ctx.fillStyle=p.fill; ctx.fill();
-  ctx.shadowColor=p.stroke; ctx.shadowBlur=hov?28:14;
+  if(isLight){
+    ctx.beginPath(); ctx.arc(n.cx,n.cy,n.r,0,Math.PI*2); ctx.fillStyle='rgba(245,244,240,0.92)'; ctx.fill();
+  } else {
+    ctx.beginPath(); ctx.arc(n.cx,n.cy,n.r,0,Math.PI*2); ctx.fillStyle=p.fill; ctx.fill();
+  }
+  // ライトモードでは小ノード(r<70)の輪郭をより太く
+  var strokeW = isLight ? (n.r < 70 ? (hov?3.2:2.4) : (hov?2.2:1.8)) : (hov?1.8:1.2);
+  ctx.shadowColor=p.stroke; ctx.shadowBlur=isLight?(hov?16:6):(hov?28:14);
   ctx.beginPath(); ctx.arc(n.cx,n.cy,n.r,0,Math.PI*2);
-  ctx.strokeStyle=hov?p.stroke:p.stroke+'aa'; ctx.lineWidth=hov?1.8:1.2; ctx.stroke(); ctx.shadowBlur=0;
-  var fsC=Math.max(14,n.r*0.46), fsL=Math.max(8,n.r*0.21); ctx.textAlign='center'; ctx.textBaseline='middle';
-  ctx.font='300 '+fsC+'px \'Cormorant Garamond\',serif'; ctx.fillStyle=hov?p.text:p.text+'cc';
-  ctx.shadowColor=p.stroke; ctx.shadowBlur=hov?8:4;
+  ctx.strokeStyle=hov?p.stroke:p.stroke+(isLight?'ff':'aa'); ctx.lineWidth=strokeW; ctx.stroke(); ctx.shadowBlur=0;
+  // 小ノード(r<70)はライトモード時に文字サイズを底上げ
+  var fsC=isLight&&n.r<70 ? Math.max(18,n.r*0.54) : Math.max(14,n.r*0.46);
+  var fsL=isLight&&n.r<70 ? Math.max(11,n.r*0.27) : Math.max(8,n.r*0.21);
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  // ライトモード: strokeカラーを直接使い視認性確保
+  var textMain=isLight?p.stroke:(hov?p.text:p.text+'cc');
+  var textSub=isLight?p.stroke:(hov?p.sub:p.sub.replace('0.7','0.42'));
+  ctx.font='700 '+fsC+'px \'Cormorant Garamond\',serif'; ctx.fillStyle=textMain;
+  ctx.shadowColor=isLight?'transparent':p.stroke; ctx.shadowBlur=isLight?0:(hov?8:4);
   ctx.fillText(n.count,n.cx,n.cy-fsL*0.65); ctx.shadowBlur=0;
   var isJP=/[\u3000-\u9fff]/.test(p.label);
-  ctx.font='400 '+fsL+'px \''+(isJP?'Noto Serif JP':'Share Tech Mono')+'\'';
-  ctx.fillStyle=hov?p.sub:p.sub.replace('0.7','0.42');
+  ctx.font='700 '+fsL+'px \''+(isJP?'Noto Serif JP':'Share Tech Mono')+'\'';
+  ctx.fillStyle=textSub;
   ctx.fillText(p.label,n.cx,n.cy+fsC*0.55); ctx.restore();
 }
 
@@ -1078,6 +1157,7 @@ function showCharDetail(charId) {
   var body='';
   if(firstSrc) body+='<img class="full-img" id="mfi_'+charId+'" src="'+firstSrc+'" alt="'+esc(self.name)+'">';
   body+=thumbHtml+regHtml;
+  // サンプル用：くろごの場合はcanvasで相関図を描画（ハードコード）
   if(others.length){
     var other=others[0];
     var sOrg=ORG_BG[self.side]||{bg:'rgba(100,100,100,0.2)',border:'#888',label:'',text:'#ccc'};
@@ -1094,7 +1174,7 @@ function showCharDetail(charId) {
       var cc=document.getElementById('corrCanvas'); if(!cc) return;
       var dpr=window.devicePixelRatio||1, cw=cc.parentElement.clientWidth, ch=Math.max(300,cw*0.42);
       cc.width=cw*dpr; cc.height=ch*dpr; cc.style.width=cw+'px'; cc.style.height=ch+'px';
-      var c=cc.getContext('2d'); c.scale(dpr,dpr); c.fillStyle='#06060e'; c.fillRect(0,0,cw,ch);
+      var c=cc.getContext('2d'); c.scale(dpr,dpr); c.fillStyle=document.body.classList.contains('light')?'#f0eeea':'#06060e'; c.fillRect(0,0,cw,ch);
       var ns=Math.min(88,cw*0.13), bp=12, bw=ns+bp*2, bh=ns+bp*2+52;
       var sx=cw*0.28, ox=cw*0.72, my=ch*0.44, nt=my-ns/2;
       [[sx,sOrg],[ox,oOrg]].forEach(function(p){
@@ -1137,7 +1217,18 @@ function showCharDetail(charId) {
         }; I.src=iconSrc;
       }
     },80);
-  } else { if(self.note){ body+='<div class="divider-line"></div>' +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>' +'<div class="corr-memo"><div class="corr-memo-text">'+esc(self.note)+'</div></div>'; } modal2Body.innerHTML=body; openModal2(); }
+  } else {
+    // 通常キャラ：corrImgKey があれば相関図画像を表示
+    if(self.corrImgKey){
+      var _isLight=document.body.classList.contains('light');
+      var corrSrc='images/'+self.corrImgKey+(_isLight?'_corr_l.png':'_corr_b.png');
+      body+='<div class="divider-line"></div>'
+        +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— CORRELATION DIAGRAM —</div>'
+        +'<img class="full-img" src="'+corrSrc+'" alt="'+esc(self.name)+' \u76f8\u95a2\u56f3">';
+    }
+    if(self.note){ body+='<div class="divider-line"></div>'+'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>'+'<div class="corr-memo"><div class="corr-memo-text">'+esc(self.note)+'</div></div>'; }
+    modal2Body.innerHTML=body; openModal2();
+  }
 }
 
 // =====================================================================
@@ -1391,6 +1482,53 @@ window.addEventListener('resize',function(){
   document.addEventListener('keydown', function(e){
     if(e.key==='Escape' && lbOverlay.classList.contains('open')) closeLb();
   });
+})();
+
+// =====================================================================
+// MODE TOGGLE
+// =====================================================================
+(function(){
+  var toggle = document.getElementById('modeToggle');
+  var icon   = document.getElementById('modeIcon');
+  function applyMode(light){
+    if(light){
+      document.body.classList.add('light');
+      toggle.checked = true;
+      icon.textContent = '●'; // ● (dark knob icon)
+    } else {
+      document.body.classList.remove('light');
+      toggle.checked = false;
+      icon.textContent = '☀'; // ☀
+    }
+    // canvasを再描画
+    if(typeof draw === 'function') draw();
+  }
+  var loginToggle = document.getElementById('loginModeToggle');
+  var loginIcon   = document.getElementById('loginModeIcon');
+
+  function applyModeAll(light){
+    applyMode(light);
+    // ログイン画面スイッチにも同期
+    if(loginToggle){ loginToggle.checked = light; }
+    if(loginIcon){ loginIcon.textContent = light ? '●' : '☀'; }
+  }
+
+  toggle.addEventListener('change', function(){
+    var isLight = toggle.checked;
+    try{ localStorage.setItem('hq_light_mode', isLight?'1':'0'); } catch(e){}
+    applyModeAll(isLight);
+  });
+  if(loginToggle){
+    loginToggle.addEventListener('change', function(){
+      var isLight = loginToggle.checked;
+      try{ localStorage.setItem('hq_light_mode', isLight?'1':'0'); } catch(e){}
+      applyModeAll(isLight);
+    });
+  }
+  // 初期値（保存済みがあればそちらを優先、なければダーク）
+  var saved = '0';
+  try{ saved = localStorage.getItem('hq_light_mode')||'0'; } catch(e){}
+  applyModeAll(saved==='1');
 })();
 
 </script>
