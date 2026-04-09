@@ -210,6 +210,23 @@ body.light .mode-track{background:rgba(60,60,80,0.15);}
 .mode-knob{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#e8e8f0;transition:all 0.22s;box-shadow:0 1px 4px rgba(0,0,0,0.35);}
 body.light .mode-knob{left:18px;background:#2a2a34;}
 .mode-icon{font-size:0.72rem;color:var(--silver3);margin-right:0.3rem;line-height:1;transition:color 0.2s;user-select:none;}
+
+/* ===== スマホ対応: ナビバー横スクロール ===== */
+@media (max-width: 640px) {
+  .nav-bar{
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+  .nav-bar::-webkit-scrollbar{ display: none; }
+  .nav-tabs{ flex-shrink: 0; }
+  .nav-search{ flex-shrink: 0; padding-left: 1rem; }
+  .search-wrap{ width: 180px; }
+  .mode-toggle{ margin-right: 0.4rem; }
+}
 </style>
 <script>
 // GitHub Pages SPA redirect support
@@ -538,7 +555,7 @@ const CHARS = [
   {"id": "kurogo2", "name": "くろご (2)", "number": "-", "affiliations": ["Killer"], "nationality": "?", "keyword": "カデシュ・フランス", "notionUrl": "https://www.notion.so/32f7abe41c0f803581fef329c558f74b", "iconKey": "kurogo", "side": "france", "catGroup": "france"},
   {"id": "rizzot", "name": "リゾット", "number": "-", "affiliations": ["BAR REBELLION", "該当分類なし"], "nationality": "ヨーロッパ某国", "keyword": "BAR REBELLION", "notionUrl": "", "iconKey": "rizzot", "catGroup": "none", "subGroup": "rebellion", "nationalitySearch": "国籍不明 不明", "nameSearch": "リゾット りぞっと"},
   {"id": "yomikawa", "name": "黄泉川 零", "number": "25131", "affiliations": ["Killer", "Member"], "nationality": "日本", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "yomikawa", "fullImgKeys": ["yomikawa", "yomikawa2"], "catGroup": "qadesh", "subGroup": "member", "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "黄泉川 零 よみかわ れい よみかわれい ヨミカワ レイ ヨミカワレイ"},
-  {"id": "morte", "name": "モルテ・アッリデーレ", "number": "20150", "affiliations": ["Member", "Free Agent"], "nationality": "不明", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "morte", "catGroup": "qadesh", "subGroup": "member", "nationalitySearch": "国籍不明 不明", "nameSearch": "モルテ アッリデーレ モルテ・アッリデーレ もるて あっりでーれ もるて・あっりでーれ"},
+  {"id": "morte", "name": "モルテ・アッリデーレ", "number": "20150", "affiliations": ["Member", "Assassin", "Porter", "Handyman"], "nationality": "不明", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "morte", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["morte"], "corrImgKey": "morte", "nationalitySearch": "国籍不明 不明", "nameSearch": "モルテ アッリデーレ モルテ・アッリデーレ もるて あっりでーれ もるて・あっりでーれ"},
   {"id": "martel", "name": "マーテル", "number": "95000", "affiliations": ["Member", "該当分類なし"], "nationality": "フランス", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "martel", "catGroup": "qadesh", "subGroup": "member", "nationalitySearch": "フランス FR FRA France france FRANCE", "nameSearch": "マーテル まーてる"},
   {"id": "hans", "name": "ハンス・ギースベルト", "number": "396", "affiliations": ["Member", "RAVEN'S EXPRESS", "該当分類なし"], "nationality": "ドイツ連邦共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "hans", "catGroup": "qadesh", "subGroup": "member", "nationalitySearch": "ドイツ ドイツ連邦共和国 DE DEU Germany germany GERMANY", "nameSearch": "ハンス ギースベルト ハンス・ギースベルト はんす ぎーすべると はんす・ぎーすべると"},
   {"id": "jeffrey", "name": "ジェフリー・リチャードソン", "number": "85324", "affiliations": ["Member", "FBI", "Informer", "Public institution"], "nationality": "アメリカ合衆国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "jeffrey", "catGroup": "qadesh", "subGroup": "member", "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "ジェフリー リチャードソン ジェフリー・リチャードソン じぇふりー りちゃーどそん じぇふりー・りちゃーどそん"},
@@ -546,7 +563,7 @@ const CHARS = [
   {"id": "nieze", "name": "ニーゼ", "number": "4040", "affiliations": ["Member", "Mercenary"], "nationality": "不明", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "nieze", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["nieze"], "nationalitySearch": "国籍不明 不明", "nameSearch": "ニーゼ にーぜ"},
   {"id": "patra", "name": "勘解由小路パトラ", "number": "-", "affiliations": ["LSI Industry", "該当分類なし"], "nationality": "日本", "keyword": "LSI Industry/Prophet", "notionUrl": "", "iconKey": "patra", "catGroup": "none", "subGroup": "", "fullImgKeys": ["patra"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "勘解由小路パトラ かでのこうじ カデノコウジ パトラ 勘解由小路ぱとら ぱとら"},
   {"id": "azusa", "name": "アズーサ(田島薫)", "number": "31180", "affiliations": ["Member", "Swindler", "Beyond Horizons"], "nationality": "日本", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "azusa", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["azusa"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "アズーサ 田島薫 たじまかおる タジマカオル たじま かおる タジマ カオル あずーさ"},
-  {"id": "kenran", "name": "建嵐(ケンラン)", "number": "18817", "affiliations": ["Member", "月華会", "該当分類なし"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "kenran", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["kenran"], "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "建嵐 ケンラン けんらん"},
+  {"id": "kenran", "name": "建岚(ケンラン)", "number": "18817", "affiliations": ["Member", "月華会", "該当分類なし"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "kenran", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["kenran"], "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "建岚 嵐 ケンラン けんらん"},
   {"id": "jensha", "name": "真砂 / ジェンシャ", "number": "13120", "affiliations": ["Member", "月華会", "Mercenary"], "nationality": "中国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "jensha", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["jensha"], "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "真砂 ジェンシャ じぇんしゃ まさご マサゴ jensha"},
   {"id": "carmila", "name": "カーミラ・シシリエンヌ", "number": "18911", "affiliations": ["Member", "La Famiglia D'Oro", "該当分類なし"], "nationality": "アメリカ", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "carmila", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["carmila"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "カーミラ シシリエンヌ カーミラ・シシリエンヌ かーみら ししりえんぬ かーみら・ししりえんぬ"},
   {"id": "kyle", "name": "カイル・アーミテージ (Kyle Armitage)", "number": "33370", "affiliations": ["Member", "TABLEEGGS", "Informer"], "nationality": "UK", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "kyle", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["kyle"], "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド", "nameSearch": "カイル アーミテージ カイル・アーミテージ Kyle Armitage かいる あーみてーじ かいる・あーみてーじ"},
@@ -807,7 +824,10 @@ var _counts = Object.keys(CATS).map(function(k){ return CATS[k].count; });
 var minC = Math.min.apply(null,_counts), maxC = Math.max.apply(null,_counts);
 
 function catRadius(count, sw) {
-  return (BASE_MIN + ((count-minC)/(maxC-minC))*(BASE_MAX-BASE_MIN)) * Math.min(sw/1400, 1.0);
+  var scale = Math.min(sw/1400, 1.0);
+  // スマホ(sw<500)では最低半径を大きめに確保して文字が読めるようにする
+  var minR = sw < 500 ? Math.max(28, sw * 0.065) : BASE_MIN;
+  return minR + ((count-minC)/(maxC-minC))*(BASE_MAX-BASE_MIN) * scale;
 }
 function resize() {
   var area = canvas.parentElement;
@@ -908,19 +928,22 @@ function drawCircle(ctx,n,hov) {
   ctx.beginPath(); ctx.arc(n.cx,n.cy,n.r,0,Math.PI*2);
   ctx.strokeStyle=hov?p.stroke:p.stroke+(isLight?'ff':'aa'); ctx.lineWidth=strokeW; ctx.stroke(); ctx.shadowBlur=0;
   // 小ノード(r<70)はライトモード時に文字サイズを底上げ
-  var fsC=isLight&&n.r<70 ? Math.max(18,n.r*0.54) : Math.max(14,n.r*0.46);
-  var fsL=isLight&&n.r<70 ? Math.max(11,n.r*0.27) : Math.max(8,n.r*0.21);
+  // ただし円からはみ出ないよう n.r に対して比率上限を設ける
+  var fsC=isLight&&n.r<70 ? Math.min(n.r*0.52, Math.max(12,n.r*0.48)) : Math.min(n.r*0.48, Math.max(10,n.r*0.44));
+  var fsL=isLight&&n.r<70 ? Math.min(n.r*0.26, Math.max(8,n.r*0.23))  : Math.min(n.r*0.22, Math.max(7,n.r*0.19));
+  // maxWidthは円の直径の0.82倍に制限
+  var maxW = n.r * 1.64;
   ctx.textAlign='center'; ctx.textBaseline='middle';
   // ライトモード: strokeカラーを直接使い視認性確保
   var textMain=isLight?p.stroke:(hov?p.text:p.text+'cc');
   var textSub=isLight?p.stroke:(hov?p.sub:p.sub.replace('0.7','0.42'));
   ctx.font='700 '+fsC+'px \'Cormorant Garamond\',serif'; ctx.fillStyle=textMain;
   ctx.shadowColor=isLight?'transparent':p.stroke; ctx.shadowBlur=isLight?0:(hov?8:4);
-  ctx.fillText(n.count,n.cx,n.cy-fsL*0.65); ctx.shadowBlur=0;
+  ctx.fillText(n.count,n.cx,n.cy-fsL*0.65,maxW); ctx.shadowBlur=0;
   var isJP=/[\u3000-\u9fff]/.test(p.label);
   ctx.font='700 '+fsL+'px \''+(isJP?'Noto Serif JP':'Share Tech Mono')+'\'';
   ctx.fillStyle=textSub;
-  ctx.fillText(p.label,n.cx,n.cy+fsC*0.55); ctx.restore();
+  ctx.fillText(p.label,n.cx,n.cy+fsC*0.55,maxW); ctx.restore();
 }
 
 // =====================================================================
