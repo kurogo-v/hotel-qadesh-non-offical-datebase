@@ -133,7 +133,7 @@ canvas#diagram{display:block;width:100%;height:100%;cursor:default;}
 .tag-企業{background:rgba(64,168,112,0.12);color:#60c898;border:1px solid rgba(64,168,112,0.2);}
 .tag-友好{background:rgba(144,136,224,0.12);color:#b0a8e8;border:1px solid rgba(144,136,224,0.2);}
 .tag-国家{background:rgba(160,120,56,0.12);color:#c0a060;border:1px solid rgba(160,120,56,0.2);}
-.tag-職種{background:rgba(128,144,120,0.12);color:#a0b098;border:1px solid rgba(128,144,120,0.2);}.tag-該当分類なし{background:rgba(32,140,180,0.1);color:#50c0e0;border:1px solid rgba(32,140,180,0.25);}.tag-中立{background:rgba(122,88,40,0.12);color:#d4a860;border:1px solid rgba(122,88,40,0.2);}
+.tag-職種-戦闘{background:rgba(220,60,60,0.12);color:#e87070;border:1px solid rgba(220,60,60,0.28);}.tag-職種-情報{background:rgba(60,120,220,0.12);color:#6090e8;border:1px solid rgba(60,120,220,0.28);}.tag-職種-売買{background:rgba(60,180,80,0.12);color:#50c870;border:1px solid rgba(60,180,80,0.28);}.tag-職種-技術{background:rgba(210,170,30,0.12);color:#d4b030;border:1px solid rgba(210,170,30,0.28);}.tag-職種-その他{background:rgba(150,60,200,0.12);color:#b060e0;border:1px solid rgba(150,60,200,0.28);}.tag-職種{background:rgba(128,144,120,0.12);color:#a0b098;border:1px solid rgba(128,144,120,0.2);}.tag-該当分類なし{background:rgba(32,140,180,0.1);color:#50c0e0;border:1px solid rgba(32,140,180,0.25);}.tag-中立{background:rgba(122,88,40,0.12);color:#d4a860;border:1px solid rgba(122,88,40,0.2);}
 .tag-Member{background:rgba(201,168,76,0.12);color:#d4b840;border:1px solid rgba(201,168,76,0.2);}
 .tag-other{background:rgba(100,100,110,0.1);color:#888898;border:1px solid rgba(100,100,110,0.2);}
 .subcat-btn{display:inline-flex;align-items:center;gap:6px;padding:0.48rem 0.85rem;background:rgba(200,200,208,0.04);border:1px solid rgba(200,200,208,0.16);border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:0.88rem;color:var(--silver2);cursor:pointer;transition:all 0.13s;margin:0 5px 5px 0;}
@@ -1015,9 +1015,9 @@ function _cardTags(c) {
   if(aff.indexOf('MHIC')>=0) g3.push({l:'MHIC', cl:'\u53cb\u597d'});
   if(aff.indexOf('Coalwing Service')>=0) g3.push({l:'Coalwing Service', cl:'\u4f01\u696d'});
   if(aff.indexOf('Cuddly Plush Corps')>=0) g3.push({l:'Cuddly Plush Corps', cl:'\u53cb\u597d'});
-  ['Killer','Free Agent','Swindler','Mercenary','Informer','Consultant','Bodyguard','Cleaner','Porter','Drug Dealer','Arms Dealer','Back-alley doctor','Negotiator','Assassin','Handyman','Spy','Hacker','Hitman','Other','該当分類なし','Broker','Mechanic','Public institution','Smuggler','Casino dealer','Concierge'].forEach(function(t){
-    if(aff.indexOf(t)>=0) g4.push({l:t, cl:'\u8077\u7a2e'});
-  });
+  var _jClMap={'Killer':'職種-戦闘','Assassin':'職種-戦闘','Hitman':'職種-戦闘','Mercenary':'職種-戦闘','Bodyguard':'職種-戦闘','Spy':'職種-情報','Informer':'職種-情報','Hacker':'職種-情報','Arms Dealer':'職種-売買','Drug Dealer':'職種-売買','Broker':'職種-売買','Negotiator':'職種-売買','Smuggler':'職種-売買','Casino dealer':'職種-売買','Cleaner':'職種-技術','Porter':'職種-技術','Back-alley doctor':'職種-技術','Mechanic':'職種-技術','Free Agent':'職種-その他','Swindler':'職種-その他','Handyman':'職種-その他','Other':'職種-その他','Consultant':'職種-その他','Public institution':'職種-その他','Concierge':'職種-その他'};
+  ['該当分類なし'].forEach(function(t){if(aff.indexOf(t)>=0)g4.push({l:t,cl:'該当分類なし'});});
+  Object.keys(_jClMap).forEach(function(t){if(aff.indexOf(t)>=0)g4.push({l:t,cl:_jClMap[t]});});
   return g1.concat(g2).concat(g3).concat(g4).slice(0,4);
 }
 function charCardHtml(c) {
@@ -1136,8 +1136,16 @@ function buildRegInfo(char) {
   });
   var entries=g1.concat(g2).concat(g3).concat(g4);
   if(!entries.length) return '';
-  var badges=entries.map(function(e){
+  var _grpStyle={
+    '戦闘・暗殺系':{color:'#e87070',bg:'rgba(220,60,60,0.12)',border:'rgba(220,60,60,0.32)'},
+    '情報・潜入系':{color:'#6090e8',bg:'rgba(60,120,220,0.12)',border:'rgba(60,120,220,0.32)'},
+    '売買・取引系':{color:'#50c870',bg:'rgba(60,180,80,0.12)',border:'rgba(60,180,80,0.32)'},
+    '技術職系':{color:'#d4b030',bg:'rgba(210,170,30,0.12)',border:'rgba(210,170,30,0.32)'},
+    'その他':{color:'#b060e0',bg:'rgba(150,60,200,0.12)',border:'rgba(150,60,200,0.32)'}
+  };
+var badges=entries.map(function(e){
     var st=NODE_STYLE[e.node]||{color:'var(--silver2)',bg:'rgba(200,200,208,0.08)',border:'rgba(200,200,208,0.2)'};
+    if(e.node==='職種'&&e.grp&&_grpStyle[e.grp]) st=_grpStyle[e.grp];
     var lbl=e.sub?(e.grp&&e.grp!==e.sub?(e.node+'  \u203a  '+e.grp+'  \u203a  '+e.sub):(e.node+'  \u203a  '+e.sub)):e.node;
     return '<span style="display:inline-flex;font-family:\'Share Tech Mono\',monospace;font-size:0.82rem;color:'+st.color+';background:'+st.bg+';border:1px solid '+st.border+';border-radius:3px;padding:4px 10px;margin:3px 4px 3px 0;white-space:nowrap;">'+esc(lbl)+'</span>';
   }).join('');
@@ -1402,7 +1410,8 @@ function showShokuGroup(gi){
   var jobBtns=activeJobs.map(function(job,ji){
     var cnt=CHARS.filter(function(c){return(c.affiliations||[]).indexOf(job)>=0;}).length;
     return '<button class="subcat-btn cat-\u8077\u7a2e" id="jobBtn'+gi+'_'+ji+'" onclick="showShokuJobList('+gi+','+ji+')"'
-      +'>'+job+' <span style="font-size:0.65rem;opacity:0.6;background:rgba(192,200,184,0.15);border-radius:3px;padding:1px 5px;margin-left:3px;">'+cnt+'</span>'
+      +' style="border-color:'+g.color+';color:'+g.color+';"'
+      +'>'+job+' <span style="font-size:0.65rem;opacity:0.6;background:rgba(255,255,255,0.08);border-radius:3px;padding:1px 5px;margin-left:3px;">'+cnt+'</span>'
       +' <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>';
   }).join('');
   var sub=document.getElementById('skSub');
