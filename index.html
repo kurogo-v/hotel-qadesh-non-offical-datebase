@@ -213,19 +213,22 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
 
 /* ===== スマホ対応: ナビバー横スクロール ===== */
 @media (max-width: 640px) {
+  #mainScreen{ overflow: visible; }
   .nav-bar{
-    overflow-x: auto;
-    overflow-y: visible;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap !important;
     min-width: 0;
+    padding: 0 0.5rem 0 !important;
   }
   .nav-bar::-webkit-scrollbar{ display: none; }
-  .nav-tabs{ flex-shrink: 0; }
-  .nav-search{ flex-shrink: 0; padding-left: 1rem; }
-  .search-wrap{ width: 180px; }
-  .mode-toggle{ margin-right: 0.4rem; }
+  .nav-tabs{ flex-shrink: 0; min-width: max-content; }
+  .nav-btn{ padding: 0.55rem 1.1rem; font-size: 0.85rem; }
+  .nav-search{ flex-shrink: 0; min-width: max-content; padding-left: 0.6rem; }
+  .search-wrap{ width: 160px; }
+  .mode-toggle{ margin-right: 0.3rem; }
 }
 </style>
 <script>
@@ -597,7 +600,7 @@ const CHARS = [
   {"id": "shannon", "name": "シャノン・オルコット", "number": "-", "affiliations": ["無所属", "Swindler", "Informer"], "nationality": "アメリカ", "keyword": "結婚詐欺師/情報屋", "notionUrl": "", "iconKey": "shannon", "catGroup": "none", "subGroup": "", "fullImgKeys": ["shannon"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "シャノン オルコット シャノン・オルコット しゃのん おるこっと しゃのん・おるこっと"},
   {"id": "chevalier", "name": "シュヴァリエ・フレミング", "number": "-", "affiliations": ["Sir Francis", "Spy"], "nationality": "イギリス", "keyword": "諜報員", "notionUrl": "", "iconKey": "chevalier", "catGroup": "none", "subGroup": "", "fullImgKeys": ["chevalier"], "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド", "nameSearch": "シュヴァリエ フレミング シュヴァリエ・フレミング しゅゔぁりえ ふれみんぐ しゅゔぁりえ・ふれみんぐ"},
   {"id": "felicite", "name": "F・アマミヤ（フェリシテ・雨宮）", "number": "-", "affiliations": ["警察庁", "Public institution"], "nationality": "日本", "keyword": "警察庁異常事件捜査対策班/班長", "notionUrl": "", "iconKey": "felicite", "catGroup": "none", "subGroup": "", "fullImgKeys": ["felicite"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "フェリシテ 雨宮 あまみや アマミヤ F・アマミヤ フェリシテ・雨宮 ふぇりして F・あまみや ふぇりして・雨宮"},
-  {"id": "heliolite", "name": "Heliolite/ヘリオライト", "number": "-", "affiliations": ["TABLEEGGS", "Arms Dealer"], "nationality": "サウジアラビア", "keyword": "武器商人", "notionUrl": "", "iconKey": "heliolite", "catGroup": "none", "subGroup": "", "fullImgKeys": ["heliolite"], "nationalitySearch": "サウジアラビア SA SAU Saudi Arabia saudi arabia SAUDI ARABIA", "nameSearch": "Heliolite ヘリオライト へりおらいと"},
+  {"id": "heliolite", "name": "Heliolite/ヘリオライト", "number": "-", "affiliations": ["TABLEEGGS", "Arms Dealer"], "nationality": "サウジアラビア", "keyword": "武器商人", "notionUrl": "", "iconKey": "heliolite", "catGroup": "none", "subGroup": "", "fullImgKeys": ["heliolite"], "corrImgKey": "heliolite", "nationalitySearch": "サウジアラビア SA SAU Saudi Arabia saudi arabia SAUDI ARABIA", "nameSearch": "Heliolite ヘリオライト へりおらいと"},
   {"id": "onyx", "name": "黒田 晶（クロダ　ショウ）/オニキス", "number": "25208", "affiliations": ["Member", "Drug Dealer"], "nationality": "日本", "keyword": "薬商人（表は駄菓子屋）", "notionUrl": "", "iconKey": "onyx", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["onyx"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "黒田 晶 くろだ しょう くろだしょう クロダ ショウ クロダショウ オニキス おにきす"},
   {"id": "raymond", "name": "レイモンド・ウィリアム・ヘリング", "number": "-", "affiliations": ["US Navy", "Public institution"], "nationality": "アメリカ合衆国", "keyword": "アメリカ合衆国海軍特殊作戦コマンド作戦課長", "notionUrl": "", "iconKey": "raymond", "catGroup": "none", "subGroup": "", "fullImgKeys": ["raymond"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "レイモンド ウィリアム ヘリング レイモンド・ウィリアム・ヘリング れいもんど うぃりあむ へりんぐ れいもんど・うぃりあむ・へりんぐ"},
   {"id": "cappellona", "name": "カペローナ・マフィ/cappellona・muffi", "number": "31612", "affiliations": ["Member", "Ghoul's Grasp", "Assassin"], "nationality": "イタリア", "keyword": "『Ghoul's Grasp』社長", "notionUrl": "", "iconKey": "cappellona", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["cappellona"], "nationalitySearch": "イタリア IT ITA Italy italy ITALY Repubblica Italiana", "nameSearch": "カペローナ マフィ カペローナ・マフィ cappellona muffi かぺろーな まふぃ かぺろーな・まふぃ"},
