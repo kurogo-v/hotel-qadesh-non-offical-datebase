@@ -182,6 +182,7 @@ canvas.corr-canvas{display:block;width:100%;}
 .corr-memo{margin-top:0.85rem;background:rgba(200,200,208,0.035);border:1px solid rgba(200,200,208,0.09);border-radius:2px;padding:0.75rem 0.95rem;}
 .corr-memo-label{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--silver2);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.45rem;}
 .corr-memo-text{font-family:'Noto Serif JP',serif;font-size:0.88rem;color:rgba(196,196,204,0.72);line-height:1.75;}
+body.light .corr-memo-text{color:var(--silver2);}
 .tooltip{position:fixed;background:var(--bg3);border:1px solid var(--border2);padding:6px 11px;font-size:0.88rem;line-height:1.5;pointer-events:none;opacity:0;transition:opacity 0.1s;max-width:200px;z-index:300;color:var(--text);font-family:'Noto Serif JP',serif;box-shadow:0 4px 18px rgba(0,0,0,0.85);}
 .tooltip.show{opacity:1;}
 @keyframes spin{to{transform:rotate(360deg);}}
@@ -420,7 +421,6 @@ const IMAGES = {
   'martel': 'images/martel_icon.png',
   'hans': 'images/hans_icon.png',
   'jeffrey': 'images/jeffrey_icon.png',
-  'kurogo': 'images/kurogo_icon.png',
   'marje_s': 'images/marje_s_icon.png',
   'nieze': 'images/nieze_icon.png',
   'patra': 'images/patra_icon.png',
@@ -525,7 +525,6 @@ const FULL_IMGS = {
   'hans': 'images/hans.png',
   'jeffrey': 'images/jeffrey.png',
   'yomikawa2': 'images/yomikawa2.png',
-  'kurogo': 'images/kurogo.png',
   'marje_s': 'images/marje_s.png',
   'nieze': 'images/nieze.png',
   'patra': 'images/patra.png',
@@ -605,8 +604,6 @@ const FULL_IMGS = {
   'lucius2':  'images/lucius2.png',
 };
 const CHARS = [
-  {"id": "kurogo1", "name": "くろご (1)", "number": "-", "affiliations": ["Killer", "Member"], "nationality": "?", "keyword": "カデシュ会員", "notionUrl": "https://www.notion.so/32f7abe41c0f807ca40bf435fd9d74db", "iconKey": "kurogo", "side": "qadesh", "catGroup": "qadesh", "subGroup": "member"},
-  {"id": "kurogo2", "name": "くろご (2)", "number": "-", "affiliations": ["Killer"], "nationality": "?", "keyword": "カデシュ・フランス", "notionUrl": "https://www.notion.so/32f7abe41c0f803581fef329c558f74b", "iconKey": "kurogo", "side": "france", "catGroup": "france"},
   {"id": "rizzot", "name": "リゾット", "number": "-", "affiliations": ["BAR REBELLION", "該当分類なし"], "nationality": "ヨーロッパ某国", "keyword": "BAR REBELLION", "notionUrl": "", "iconKey": "rizzot", "catGroup": "none", "subGroup": "rebellion", "nationalitySearch": "国籍不明 不明", "nameSearch": "リゾット りぞっと"},
   {"id": "yomikawa", "name": "黄泉川 零", "number": "25131", "affiliations": ["Killer", "Member"], "nationality": "日本", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "yomikawa", "fullImgKeys": ["yomikawa", "yomikawa2"], "catGroup": "qadesh", "subGroup": "member", "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "黄泉川 零 よみかわ れい よみかわれい ヨミカワ レイ ヨミカワレイ"},
   {"id": "morte", "name": "モルテ・アッリデーレ", "number": "20150", "affiliations": ["Member", "Assassin", "Porter", "Handyman"], "nationality": "不明", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "morte", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["morte"], "corrImgKey": "morte", "nationalitySearch": "国籍不明 不明", "nameSearch": "モルテ アッリデーレ モルテ・アッリデーレ もるて あっりでーれ もるて・あっりでーれ"},
