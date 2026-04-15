@@ -1111,7 +1111,7 @@ function _cardTags(c) {
   if(aff.indexOf('LSI Industry')>=0)      g3.push({l:'LSI Industry',      cl:'\u4f01\u696d'});
   if(aff.indexOf('Beyond Horizons')>=0)   g3.push({l:'Beyond Horizons',   cl:'\u4f01\u696d'});
   if(aff.indexOf('\u30c6\u30f3\u30d6\u30fb\u30cf\u30a6\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0')>=0) g3.push({l:'\u30c6\u30f3\u30d6\u30fb\u30cf\u30a6\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0', cl:'\u4f01\u696d'});
-  if(aff.indexOf('BAR REBELLION')>=0&&c.catGroup!=='friendly') g3.push({l:'BAR REBELLION', cl:'\u53cb\u597d'});
+  if(aff.indexOf('BAR REBELLION')>=0&&c.catGroup!=='friendly') g3.push({l:'BAR REBELLION', cl:'\u4f01\u696d'});
   if(aff.indexOf('\u6708\u83ef\u4f1a')>=0) g3.push({l:'\u6708\u83ef\u4f1a', cl:'\u53cb\u597d'});
   if(aff.indexOf('EGGNOGS')>=0)               g3.push({l:'EGGNOGS',               cl:'\u4f01\u696d'});
   if(aff.indexOf('\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a')>=0) g3.push({l:'\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a', cl:'\u4f01\u696d'});
@@ -1121,7 +1121,7 @@ function _cardTags(c) {
   if(aff.indexOf('\u516b\u83ef\u7d44')>=0) g3.push({l:'\u516b\u83ef\u7d44', cl:'\u53cb\u597d'});
   if(aff.indexOf('ISMO')>=0) g3.push({l:'ISMO', cl:'\u516c\u7684'});
   if(aff.indexOf('\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc')>=0) g3.push({l:'\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc', cl:'\u53cb\u597d'});
-  if(aff.indexOf('The Night Cloud')>=0) g3.push({l:'The Night Cloud', cl:'\u53cb\u597d'});
+  if(aff.indexOf('The Night Cloud')>=0) g3.push({l:'The Night Cloud', cl:'\u4f01\u696d'});
   if(aff.indexOf('AJYARI')>=0) g3.push({l:'AJYARI', cl:'\u4f01\u696d'});
   if(aff.indexOf('\u8b66\u5bdf\u5e81')>=0) g3.push({l:'\u8b66\u5bdf\u5e81', cl:'\u516c\u7684'});
   if(aff.indexOf('US Navy')>=0) g3.push({l:'US Navy', cl:'\u516c\u7684'});
@@ -1210,13 +1210,17 @@ function buildRegInfo(char) {
   if(char.catGroup!=='official'&&aff.indexOf('FBI')>=0) g3.push({node:'\u516c\u7684\u6a5f\u95a2',sub:'FBI'});
   if(char.catGroup==='friendly'){
     var sl4={'rebellion':'BAR REBELLION'}[char.subGroup]||'';
-    g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:sl4});
+    if(sl4==='BAR REBELLION'){
+      g3.push({node:'\u4f01\u696d',sub:'BAR REBELLION'});
+    } else {
+      g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:sl4});
+    }
   }
   if(aff.indexOf("RAVEN'S EXPRESS")>=0) g3.push({node:'\u4f01\u696d',sub:"RAVEN'S EXPRESS"});
   if(aff.indexOf('LSI Industry')>=0)      g3.push({node:'\u4f01\u696d',sub:'LSI Industry'});
   if(aff.indexOf('Beyond Horizons')>=0)   g3.push({node:'\u4f01\u696d',sub:'Beyond Horizons'});
   if(aff.indexOf('\u30c6\u30f3\u30d6\u30fb\u30cf\u30a6\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0')>=0) g3.push({node:'\u4f01\u696d',sub:'\u30c6\u30f3\u30d6\u30fb\u30cf\u30a6\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0'});
-  if(aff.indexOf('BAR REBELLION')>=0&&char.catGroup!=='friendly') g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:'BAR REBELLION'});
+  if(aff.indexOf('BAR REBELLION')>=0&&char.catGroup!=='friendly') g3.push({node:'\u4f01\u696d',sub:'BAR REBELLION'});
   if(aff.indexOf('\u6708\u83ef\u4f1a')>=0) g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:'\u6708\u83ef\u4f1a'});
   if(aff.indexOf('EGGNOGS')>=0)               g3.push({node:'\u4f01\u696d',sub:'EGGNOGS'});
   if(aff.indexOf('\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a')>=0) g3.push({node:'\u4f01\u696d',sub:'\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a'});
@@ -1226,7 +1230,7 @@ function buildRegInfo(char) {
   if(aff.indexOf('\u516b\u83ef\u7d44')>=0) g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:'\u516b\u83ef\u7d44'});
   if(aff.indexOf('ISMO')>=0) g3.push({node:'\u516c\u7684\u6a5f\u95a2',sub:'ISMO'});
   if(aff.indexOf('\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc')>=0) g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:'\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc'});
-  if(aff.indexOf('The Night Cloud')>=0) g3.push({node:'\u53cb\u597d\u7d44\u7e54',sub:'The Night Cloud'});
+  if(aff.indexOf('The Night Cloud')>=0) g3.push({node:'\u4f01\u696d',sub:'The Night Cloud'});
   if(aff.indexOf('AJYARI')>=0) g3.push({node:'\u4f01\u696d',sub:'AJYARI'});
   if(aff.indexOf('\u8b66\u5bdf\u5e81')>=0) g3.push({node:'\u516c\u7684\u6a5f\u95a2',sub:'\u8b66\u5bdf\u5e81'});
   if(aff.indexOf('US Navy')>=0) g3.push({node:'\u516c\u7684\u6a5f\u95a2',sub:'US Navy'});
@@ -1788,7 +1792,7 @@ function _drawOrgRelView(c, W, H, cx, cy, cw, ch, isLight) {
 
 function _drawOrgTypeView(c, W, H, cx, cy, cw, ch, isLight) {
   var typeKeys = ['企業', '公的機関', '秘密結社', '協会・組合', '組織犯罪集団（マフィア・極道等）', 'その他'];
-  var typeLabels = ['企業', '公的機関', '秘密結社', '協会・組合', '犯罪集団', 'その他'];
+  var typeLabels = ['企業', '公的機関', '秘密結社', '協会・組合', '組織犯罪集団', 'その他'];
   // PROFILES catRadius(6,W) と同じ固定r・中心に近いorbit
   var nodeR = catRadius(6, W);
   var orbit = ORBIT_R;
