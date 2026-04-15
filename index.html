@@ -1,12 +1,4 @@
-<!D,
-  {"id": "grims", "name": "グリムス・リンドバーグ", "number": "1927", "affiliations": ["Member", "Beyond Horizons", "該当分類なし"], "nationality": "米国・英国・豪州", "keyword": "Beyond Horizons/CEO", "notionUrl": "", "iconKey": "grims", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["grims"]},
-  {"id": "adrik", "name": "アドリク・コンラード(Adrik Conrad)", "number": "1511", "affiliations": ["Member", "Secret Scale Service", "該当分類なし"], "nationality": "アメリカ合衆国", "keyword": "Secret Scale Service・副社長", "notionUrl": "", "iconKey": "adrik", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["adrik"]},
-  {"id": "darren", "name": "Darren Lancaster", "number": "1512", "affiliations": ["Member", "Secret Scale Service", "Broker"], "nationality": "America", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "darren", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["darren"]},
-  {"id": "nadia", "name": "ナディア・シェーファー", "number": "-", "affiliations": ["Secret Scale Service", "Back-alley doctor"], "nationality": "ドイツ", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "nadia", "catGroup": "none", "subGroup": "", "fullImgKeys": ["nadia"]},
-  {"id": "matilda_craig", "name": "Matilda Craig（マチルダ・クレイグ）", "number": "20912", "affiliations": ["Member", "Secret Scale Service", "該当分類なし"], "nationality": "America", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "matilda_craig", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["matilda_craig"]},
-  {"id": "crown", "name": "クラウン", "number": "-", "affiliations": ["Secret Scale Service", "Mechanic"], "nationality": "イギリス", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "crown", "catGroup": "none", "subGroup": "", "fullImgKeys": ["crown"]}
-];
-PE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -124,24 +116,44 @@ canvas#diagram{display:block;width:100%;height:100%;cursor:default;}
 .char-left{flex:1;min-width:0;}
 .char-name{font-family:'Noto Serif JP',serif;font-size:0.98rem;color:var(--text);line-height:1.4;}
 .char-tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px;}
-.char-tag{font-family:'Share Tech Mono',monospace;font-size:0.56rem;padding:1px 5px;border-radius:2px;letter-spacing:0.04em;white-space:nowrap;}
+.char-tag{font-family:'Share Tech Mono',monospace;font-size:0.728rem;padding:1px 5px;border-radius:2px;letter-spacing:0.04em;white-space:nowrap;}
 .char-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--gold);opacity:0.6;flex-shrink:0;padding-top:2px;}
 .modal-count-bar{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--text-dim);padding:0 0 0.6rem;margin-bottom:0.3rem;border-bottom:1px solid rgba(200,200,208,0.055);letter-spacing:0.06em;}
 .modal-empty{text-align:center;padding:1.8rem 1rem;font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--text-dim);line-height:2;}
-.tag-敵対{background:rgba(208,72,72,0.12);color:#e07878;border:1px solid rgba(208,72,72,0.2);}
+.tag-敵対{background:rgba(192,48,42,0.12);color:#f09090;border:1px solid rgba(192,48,42,0.28);}
 .tag-公的{background:rgba(40,160,184,0.12);color:#60c8d8;border:1px solid rgba(40,160,184,0.2);}
 .tag-企業{background:rgba(64,168,112,0.12);color:#60c898;border:1px solid rgba(64,168,112,0.2);}
 .tag-友好{background:rgba(144,136,224,0.12);color:#b0a8e8;border:1px solid rgba(144,136,224,0.2);}
 .tag-国家{background:rgba(160,120,56,0.12);color:#c0a060;border:1px solid rgba(160,120,56,0.2);}
 .tag-職種-戦闘{background:rgba(220,60,60,0.12);color:#e87070;border:1px solid rgba(220,60,60,0.28);}.tag-職種-情報{background:rgba(60,120,220,0.12);color:#6090e8;border:1px solid rgba(60,120,220,0.28);}.tag-職種-売買{background:rgba(60,180,80,0.12);color:#50c870;border:1px solid rgba(60,180,80,0.28);}.tag-職種-技術{background:rgba(210,170,30,0.12);color:#d4b030;border:1px solid rgba(210,170,30,0.28);}.tag-職種-その他{background:rgba(150,60,200,0.12);color:#b060e0;border:1px solid rgba(150,60,200,0.28);}.tag-職種{background:rgba(128,144,120,0.12);color:#a0b098;border:1px solid rgba(128,144,120,0.2);}.tag-該当分類なし{background:rgba(32,140,180,0.1);color:#50c0e0;border:1px solid rgba(32,140,180,0.25);}.tag-中立{background:rgba(122,88,40,0.12);color:#d4a860;border:1px solid rgba(122,88,40,0.2);}
 .tag-Member{background:rgba(201,168,76,0.12);color:#d4b840;border:1px solid rgba(201,168,76,0.2);}
+.tag-org-qadesh{background:rgba(201,168,76,0.12);color:#e8c96a;border:1px solid rgba(201,168,76,0.35);}
+body.light .tag-org-qadesh{background:rgba(154,112,48,0.10);color:#7a5010;border-color:rgba(154,112,48,0.45);}
 .tag-other{background:rgba(100,100,110,0.1);color:#888898;border:1px solid rgba(100,100,110,0.2);}
+/* ライトモード：タグ文字色を暗くして視認性確保 */
+body.light .tag-敵対{background:rgba(192,48,42,0.10);color:#a01c18;border-color:rgba(192,48,42,0.45);}
+body.light .tag-公的{background:rgba(40,160,184,0.10);color:#1a7890;border-color:rgba(40,160,184,0.35);}
+body.light .tag-企業{background:rgba(64,168,112,0.10);color:#1a7840;border-color:rgba(64,168,112,0.35);}
+body.light .tag-友好{background:rgba(80,70,180,0.15);color:#2218a0;border-color:rgba(80,70,180,0.55);}
+body.light .tag-中立{background:rgba(122,88,40,0.10);color:#7a5010;border-color:rgba(122,88,40,0.35);}
+body.light .tag-other{background:rgba(80,80,90,0.08);color:#505060;border-color:rgba(80,80,90,0.3);}
+body.light .tag-職種-戦闘{background:rgba(200,50,50,0.10);color:#a02020;border-color:rgba(200,50,50,0.35);}
+body.light .tag-職種-情報{background:rgba(40,100,200,0.10);color:#1a50b0;border-color:rgba(40,100,200,0.35);}
+body.light .tag-職種-売買{background:rgba(40,160,60,0.10);color:#1a7828;border-color:rgba(40,160,60,0.35);}
+body.light .tag-職種-技術{background:rgba(180,140,20,0.10);color:#907010;border-color:rgba(180,140,20,0.35);}
+body.light .tag-職種-その他{background:rgba(130,40,180,0.10);color:#6820a0;border-color:rgba(130,40,180,0.35);}
+body.light .tag-職種{background:rgba(90,100,80,0.10);color:#505840;border-color:rgba(90,100,80,0.3);}
+body.light .tag-該当分類なし{background:rgba(20,120,160,0.10);color:#106888;border-color:rgba(20,120,160,0.3);}
 .subcat-btn{display:inline-flex;align-items:center;gap:6px;padding:0.48rem 0.85rem;background:rgba(200,200,208,0.04);border:1px solid rgba(200,200,208,0.16);border-radius:2px;font-family:'Share Tech Mono',monospace;font-size:0.88rem;color:var(--silver2);cursor:pointer;transition:all 0.13s;margin:0 5px 5px 0;}
 .subcat-btn:hover{background:rgba(200,200,208,0.09);border-color:rgba(200,200,208,0.38);color:var(--silver);}
 .subcat-btn.cat-敵対{border-color:rgba(208,72,72,0.28);color:#e07878;}
 .subcat-btn.cat-敵対:hover{background:rgba(208,72,72,0.09);}
 .subcat-btn.cat-職種{border-color:rgba(128,144,120,0.28);color:#a0b098;}
 .subcat-btn.cat-職種:hover{background:rgba(128,144,120,0.09);}
+.subcat-btn.cat-友好{border-color:rgba(144,136,224,0.3);color:#b0a8e8;}
+.subcat-btn.cat-友好:hover{background:rgba(144,136,224,0.09);}
+body.light .subcat-btn.cat-友好{color:#2218a0;border-color:rgba(80,70,180,0.55);background:rgba(80,70,180,0.06);}
+body.light .subcat-btn.cat-友好:hover{background:rgba(80,70,180,0.12);}
 .icon-grid{display:flex;flex-wrap:wrap;gap:0.9rem;margin-top:0.7rem;}
 .icon-card{display:flex;flex-direction:column;align-items:center;gap:0.4rem;cursor:pointer;transition:opacity 0.15s;width:78px;}
 .icon-card:hover{opacity:0.8;}
@@ -168,7 +180,7 @@ canvas#diagram{display:block;width:100%;height:100%;cursor:default;}
 .corr-canvas-wrap{border:1px solid var(--border);border-radius:2px;overflow:hidden;background:#06060e;}
 canvas.corr-canvas{display:block;width:100%;}
 .corr-memo{margin-top:0.85rem;background:rgba(200,200,208,0.035);border:1px solid rgba(200,200,208,0.09);border-radius:2px;padding:0.75rem 0.95rem;}
-.corr-memo-label{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--text-dim);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.45rem;}
+.corr-memo-label{font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:var(--silver2);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.45rem;}
 .corr-memo-text{font-family:'Noto Serif JP',serif;font-size:0.88rem;color:rgba(196,196,204,0.72);line-height:1.75;}
 .tooltip{position:fixed;background:var(--bg3);border:1px solid var(--border2);padding:6px 11px;font-size:0.88rem;line-height:1.5;pointer-events:none;opacity:0;transition:opacity 0.1s;max-width:200px;z-index:300;color:var(--text);font-family:'Noto Serif JP',serif;box-shadow:0 4px 18px rgba(0,0,0,0.85);}
 .tooltip.show{opacity:1;}
@@ -206,6 +218,9 @@ canvas.corr-canvas{display:block;width:100%;}
 .mode-switch{position:relative;width:36px;height:20px;cursor:pointer;flex-shrink:0;}
 .mode-switch input{opacity:0;width:0;height:0;position:absolute;}
 .mode-track{position:absolute;inset:0;background:rgba(200,200,208,0.12);border:1px solid var(--border2);border-radius:10px;transition:all 0.22s;}
+body.light .org-detail-label{color:#5a5060;}
+body.light .org-detail-val{color:#2a2030;}
+body.light .org-detail-val.empty{color:#9a9098;font-style:italic;}
 body.light .mode-track{background:rgba(60,60,80,0.15);}
 .mode-knob{position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#e8e8f0;transition:all 0.22s;box-shadow:0 1px 4px rgba(0,0,0,0.35);}
 body.light .mode-knob{left:18px;background:#2a2a34;}
@@ -230,6 +245,20 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
   .search-wrap{ width: 160px; }
   .mode-toggle{ margin-right: 0.3rem; }
 }
+
+/* Organization view */
+.org-switch-btn{font-family:'Share Tech Mono',monospace;font-size:1.02rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.42rem 1.35rem;background:transparent;border:1px solid rgba(200,200,208,0.15);border-radius:2px;color:var(--text-dim);cursor:pointer;transition:all 0.15s;}
+.org-switch-btn.active{border-color:rgba(201,168,76,0.5);color:var(--gold);}
+.org-switch-btn:hover{color:var(--silver2);border-color:rgba(200,200,208,0.3);}
+.org-detail-row{display:flex;gap:0.5rem;margin:0.4rem 0;font-size:0.9rem;}
+.org-detail-label{font-family:'Share Tech Mono',monospace;font-size:0.9rem;color:var(--silver3);letter-spacing:0.1em;text-transform:uppercase;flex-shrink:0;width:12rem;padding-top:0.15rem;}
+.org-detail-val{color:var(--text);font-family:'Noto Serif JP',serif;line-height:1.65;word-break:break-all;}
+.org-detail-val.empty{color:var(--text-dim);font-style:italic;}
+.org-img-tab-wrap{display:flex;gap:8px;margin:0 0 0.6rem;}
+.org-img-tab{width:80px;height:50px;border-radius:2px;overflow:hidden;cursor:pointer;flex-shrink:0;border:2px solid rgba(200,200,208,0.2);opacity:0.55;transition:all 0.15s;background:var(--bg2);}
+.org-img-tab.active{border-color:var(--gold);opacity:1;}
+.org-img-tab img{width:100%;height:100%;object-fit:cover;object-position:center;}
+.org-img-placeholder{width:100%;aspect-ratio:16/9;background:var(--bg2);border:1px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:var(--text-dim);font-family:'Share Tech Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;}
 </style>
 <script>
 // GitHub Pages SPA redirect support
@@ -302,7 +331,29 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
       </div>
     </div>
   </div>
+  <!-- Organizationスイッチバー -->
+  <div id="orgSwitchBar" style="display:none;align-items:center;gap:1.2rem;padding:0.75rem 1.8rem;border-bottom:1px solid rgba(200,200,208,0.07);flex-shrink:0;background:var(--bg);">
+    <span style="font-family:'Share Tech Mono',monospace;font-size:0.93rem;color:var(--text-dim);letter-spacing:0.14em;text-transform:uppercase;">VIEW</span>
+    <button id="orgViewRelBtn" class="org-switch-btn active" onclick="setOrgView('rel')">関係性</button>
+    <button id="orgViewTypeBtn" class="org-switch-btn" onclick="setOrgView('type')">組織種別</button>
+  </div>
   <div class="canvas-area"><canvas id="diagram"></canvas></div>
+  <div id="orgView" style="display:none;flex:1;min-height:0;overflow:hidden;flex-direction:column;background:var(--bg);">
+    <div id="orgCanvasWrap" style="flex:1;min-height:0;position:relative;overflow:hidden;">
+      <canvas id="orgDiagram" style="display:block;"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- 組織詳細オーバーレイ -->
+<div class="modal2-overlay" id="orgDetailOverlay">
+  <div class="modal2">
+    <div class="modal2-header">
+      <span class="modal2-title" id="orgDetailTitle">組織詳細</span>
+      <button class="modal2-close" id="orgDetailClose">✕</button>
+    </div>
+    <div class="modal2-body" id="orgDetailBody"></div>
+  </div>
 </div>
 
 <div class="modal-overlay" id="modalOverlay">
@@ -645,7 +696,7 @@ const CHARS = [
   {"id": "aron_liu", "name": "劉 亞龍（ラウ ヤーロン）", "number": "-", "affiliations": ["月蛇会", "Smuggler"], "nationality": "中国/福建省", "keyword": "月蛇会", "notionUrl": "", "iconKey": "aron_liu", "catGroup": "none", "subGroup": "", "fullImgKeys": ["aron_liu"], "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA 福建省", "nameSearch": "劉 亞龍 ラウ ヤーロン ラウヤーロン らう やーろん らうやーろん"},
   {"id": "cain_crawford", "name": "カイン=A=クロフォード伯爵", "number": "-", "affiliations": ["Scotland Yard", "Public institution"], "nationality": "UK/ロンドン", "keyword": "スコットランドヤーCID警部補", "notionUrl": "", "iconKey": "cain_crawford", "catGroup": "none", "subGroup": "", "fullImgKeys": ["cain_crawford"], "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド", "nameSearch": "カイン クロフォード 伯爵 はくしゃく ハクシャク Cain Crawford かいん くろふぉーど"},
   {"id": "sebastian", "name": "セバスチャン", "number": "-", "affiliations": ["ヴィーヴル商会", "該当分類なし"], "nationality": "不明", "keyword": "ヴィーヴル商会 執事", "notionUrl": "", "iconKey": "sebastian", "catGroup": "none", "subGroup": "", "fullImgKeys": ["sebastian"], "nationalitySearch": "国籍不明 不明", "nameSearch": "セバスチャン せばすちゃん"},
-  {"id": "roz", "name": "Roz", "number": "81913", "affiliations": ["Member", "Beyond Horizons", "該当分類なし"], "nationality": "Stateless", "keyword": "カデシュ会員/Beyond Horizons", "notionUrl": "", "iconKey": "roz", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["roz"], "nameSearch": "Roz ロズ ろず"},
+  {"id": "roz", "name": "Roz", "number": "81913", "affiliations": ["Member", "Beyond Horizons", "該当分類なし"], "nationality": "Stateless", "keyword": "カデシュ会員/Beyond Horizons", "notionUrl": "", "iconKey": "roz", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["roz"], "nationalitySearch": "国籍不明 不明", "nameSearch": "Roz ロズ ろず"},
   {"id": "ayaki", "name": "夜終 綾季（Ayaki Yosugara）", "number": "35", "affiliations": ["Member", "The Night Cloud", "該当分類なし"], "nationality": "Japan", "keyword": "カジノホテル The Night Cloud/次席", "notionUrl": "", "iconKey": "ayaki", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["ayaki"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "夜終 綾季 よすがら あやき よすがらあやき ヨスガラ アヤキ ヨスガラアヤキ Ayaki Yosugara"},
   {"id": "dina", "name": "ジーナ・リュビーモヴァ", "number": "520", "affiliations": ["Member", "Concierge"], "nationality": "アメリカ合衆国", "keyword": "カジノコンシェルジュ", "notionUrl": "", "iconKey": "dina", "catGroup": "qadesh", "subGroup": "", "fullImgKeys": ["dina"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "ジーナ リュビーモヴァ ジーナ・リュビーモヴァ じーな りゅびーもゔぁ じーな・りゅびーもゔぁ"},
   {"id": "fidelio", "name": "Fidelio Rosalia Bellini", "number": "19911", "affiliations": ["Member", "La Famiglia D'Oro", "Bodyguard"], "nationality": "Repubblica Italiana", "keyword": "La Famiglia D'Oro", "notionUrl": "", "iconKey": "fidelio", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["fidelio"], "nationalitySearch": "イタリア IT ITA Italy italy ITALY Repubblica Italiana", "nameSearch": "Fidelio Rosalia Bellini フィデリオ ロザリア ベリーニ ふぃでりお ろざりあ べりーに"},
@@ -658,6 +709,75 @@ const CHARS = [
 // =====================================================================
 // カテゴリ定義
 // =====================================================================
+
+// =====================================================================
+// ORGANIZATION DATA (from Notion)
+// =====================================================================
+var ORGS = [
+  {
+    id: 'gcc',
+    name: 'G.C.C.',
+    qadeshRel: ['友好'],
+    types: ['企業'],
+    corpType: '株式会社',
+    recognition: '広く知られている（公的・国際的）',
+    frontExists: 'ない',
+    frontDetail: '',
+    relatedUrl: '',
+    description: '・組織名は？\n GeneralContractCompany(G.C.C.)\n\n・何をやっている所？\n全世界に支社を置く大企業。\n考えうる全ての仕事をしており、社内\nで1から10全てできると言われる程。\nその中でも製造技術、医療技術、輸送技術が飛び抜けている。\n\n・組織の理念は？\n『無駄のない仕事』\n『金額に見合ったサービス』 \n『有能であれ』\n\n・誰が居るの？\n公式サイトの社員紹介からご覧下さい\nカデシュに来てる人や公式サイト掲載の人間は本社の社員\n\n・実は……？\nホテルカデシュと業務提携を組んでおり商品から武器まで幅広く提供している。ネフェルタリ・フーズの食品や器具にはG.C.C.製品が使われている',
+    symbolImg: 'gcc.png',
+    corrImgKey: 'gcc'
+  },
+  {
+    id: 'fbi',
+    name: 'FBI',
+    qadeshRel: ['敵対'],
+    types: ['公的機関'],
+    corpType: '',
+    recognition: '広く知られている（公的・国際的）',
+    frontExists: 'ない',
+    frontDetail: '',
+    relatedUrl: '',
+    description: '・組織名は？\nFederal Bureau of Investigation\n連邦捜査局:通称FBI\n\n・なにやってるところ？\nアメリカ合衆国内の治安維持、警察活動全般。対テロ・スパイ、政府や大企業の汚職、誘拐、殺人、複数の州に渡る広域事件等の捜査を行っています。\n各州の警察、麻薬取締局(DEA)、アルコール・タバコ・火器及び爆発物取締局(ATF)、合衆国中央情報局(CIA)などの機関とは別の組織です。\nメディアでの露出も多く、最も有名な公的捜査機関と言っても過言ではないかもしれません。\n\n・組織の理念は？\nFidelity, Bravery, Integrity\n“信義・勇気・保全”\n\n・誰が居るの？\n米国市民権を持つ合衆国市民から志願を経て選抜された捜査官、事務官、技官など全米で約35,000人程度の職員で構成されます。\nアレックス・ヘイデンも一員です。\n\n・実は……？\n1960年代には鷹派のフーバー長官のもと全国土全市民監視態勢の名の下に、厳しい思想弾圧や政治的闘争が行われました。\n黒人人権運動を主導したキング牧師や元ビートルズのジョン・レノンもFBIから厳しい弾圧と監視を受けた著名人として知られています。\n組織改革が繰り返された現在においても、フィクション・ノンフィクション問わず違法な捜査活動を行なっているとまことしやかに囁かれています、遺憾ながら。',
+    symbolImg: 'fbi.png',
+    corrImgKey: ''
+  },
+  {
+    id: 'test01',
+    name: 'テスト０１',
+    qadeshRel: ['友好'],
+    types: ['秘密結社'],
+    corpType: 'テスト０２',
+    recognition: '広く知られている（公的・国際的）',
+    frontExists: 'その他',
+    frontDetail: 'テスト０３',
+    corrInfo: '',
+    relatedUrl: 'テスト０４',
+    description: 'テスト０５',
+    symbolImg: '',
+    corrImgKey: '',
+    note: ''
+  }
+];
+
+// 組織種別→ノード分類マップ
+var ORG_TYPE_NODE = {
+  '企業':              { node:'企業',         stroke:'#206840', fill:'rgba(10,55,25,0.55)',  text:'#88d8a8', sub:'rgba(136,216,168,0.7)' },
+  '公的機関':           { node:'公的機関',     stroke:'#206878', fill:'rgba(10,50,65,0.55)',  text:'#88d8e8', sub:'rgba(136,216,232,0.7)' },
+  '秘密結社':           { node:'秘密結社',     stroke:'#602898', fill:'rgba(40,10,60,0.55)',  text:'#d4a8f0', sub:'rgba(212,168,240,0.7)' },
+  '協会・組合':         { node:'協会・組合',   stroke:'#1a7878', fill:'rgba(8,50,50,0.55)',   text:'#80d8d8', sub:'rgba(128,216,216,0.7)' },
+  '組織犯罪集団（マフィア・極道等）': { node:'組織犯罪集団', stroke:'#882020', fill:'rgba(60,8,8,0.55)',   text:'#f0a8a8', sub:'rgba(240,168,168,0.7)' },
+  'その他':             { node:'その他',       stroke:'#7a5828', fill:'rgba(48,30,8,0.55)',   text:'#d4a860', sub:'rgba(212,168,96,0.7)' }
+};
+
+// カデシュ関係→ノード色
+var QADESH_REL_STYLE = {
+  '友好': { stroke:'#2a2060', fill:'rgba(12,10,55,0.55)',  text:'#c8c0f0', sub:'rgba(200,192,240,0.7)' },
+  '敵対': { stroke:'#c0302a', fill:'rgba(120,20,15,0.55)', text:'#f09090', sub:'rgba(240,144,144,0.7)' },
+  '中立': { stroke:'#7a5828', fill:'rgba(48,30,8,0.55)',   text:'#d4a860', sub:'rgba(212,168,96,0.7)'  },
+  'その他':{ stroke:'#384030', fill:'rgba(20,28,15,0.55)', text:'#c0c8b8', sub:'rgba(192,200,184,0.7)' }
+};
+
 var CATS = {
   '\u6575\u5bfe': { label:'\u6575\u5bfe\u7d44\u7e54', stroke:'#c0302a', fill:'rgba(120,20,15,0.55)', text:'#f09090', sub:'rgba(240,144,144,0.7)', count:1,
     tags:['\u6681\u306e\u6843','\u004e\u006f\u006e\u0043\u0052\u0045\u0044\u0049\u0054','\u30d6\u30fc\u30eb\u5c0f\u968a','\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5\u30fb\u30d5\u30e9\u30f3\u30b9'] },
@@ -716,16 +836,33 @@ document.getElementById('loginBtn').addEventListener('click', function() {
 document.querySelectorAll('.nav-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
     var nav = btn.dataset.nav;
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.toggle('active', b === btn); });
     if (nav === 'profiles') {
-      document.querySelectorAll('.nav-btn').forEach(function(b) {
-        b.classList.toggle('active', b.dataset.nav === 'profiles');
-      });
-      closeModal();
+      closeModal(); closeModal2();
+      document.getElementById('orgView').style.display = 'none';
+      document.getElementById('orgSwitchBar').style.display = 'none';
+      document.querySelector('.canvas-area').style.display = '';
       return;
     }
-    document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.toggle('active', b === btn); });
+    if (nav === 'organization') {
+      closeModal(); closeModal2();
+      document.querySelector('.canvas-area').style.display = 'none';
+      var ov = document.getElementById('orgView');
+      ov.style.display = 'flex';
+      ov.style.flexDirection = 'column';
+      document.getElementById('orgSwitchBar').style.display = 'flex';
+      _orgView = 'rel';
+      document.getElementById('orgViewRelBtn').classList.add('active');
+      document.getElementById('orgViewTypeBtn').classList.remove('active');
+      initOrgDiagram();
+      return;
+    }
+    // world など
+    document.getElementById('orgView').style.display = 'none';
+    document.getElementById('orgSwitchBar').style.display = 'none';
+    document.querySelector('.canvas-area').style.display = '';
     modalDot.style.background = 'var(--silver3)';
-    modalTitle.textContent = (nav === 'organization') ? 'Organization' : 'World';
+    modalTitle.textContent = 'World';
     modalSub.textContent = '— COMING SOON —';
     modalBody.innerHTML = '<div class="preparing-modal"><div class="preparing-text">\u6e96\u5099\u4e2d</div><div class="preparing-sub">Under Construction</div></div>';
     openModal();
@@ -828,15 +965,17 @@ var minC = Math.min.apply(null,_counts), maxC = Math.max.apply(null,_counts);
 
 function catRadius(count, sw) {
   var scale = Math.min(sw/1400, 1.0);
-  // スマホ(sw<500)では最低半径を大きめに確保して文字が読めるようにする
   var minR = sw < 500 ? Math.max(28, sw * 0.065) : BASE_MIN;
-  return minR + ((count-minC)/(maxC-minC))*(BASE_MAX-BASE_MIN) * scale;
+  // 全ノード共通の固定半径：公的機関(count=6)を基準サイズとして統一
+  var REF_COUNT = 6;
+  return (minR + ((REF_COUNT-minC)/(maxC-minC))*(BASE_MAX-BASE_MIN)) * scale + minR * (1 - scale);
 }
 function resize() {
   var area = canvas.parentElement;
   DPR = window.devicePixelRatio||1; W = area.clientWidth; H = area.clientHeight;
-  CENTER_W = Math.max(140,W*0.12); CENTER_H = Math.max(46,W*0.04);
-  ORBIT_R = Math.min(CENTER_W*0.5 + catRadius(maxC,W) + W*0.09, Math.min(W,H)*0.44);
+  CENTER_W = Math.max(210,W*0.18); CENTER_H = Math.max(69,W*0.06);
+  // ノードを中心に近づける
+  ORBIT_R = Math.min(CENTER_W*0.5 + catRadius(6,W) + W*0.06, Math.min(W,H)*0.32);
   canvas.width=W*DPR; canvas.height=H*DPR; canvas.style.width=W+'px'; canvas.style.height=H+'px';
   cx=W/2; cy=H/2; buildNodes(); draw();
 }
@@ -844,15 +983,11 @@ function buildNodes() {
   nodes = [{ type:'center', cx:cx, cy:cy, w:CENTER_W, h:CENTER_H }];
   var keys = Object.keys(CATS).filter(function(k){ return CATS[k].count > 0; });
   var n = keys.length;
-  // 各ノードに個別半径を使って重なりを防ぐ
-  // 大ノード(count>=10)は外側、小ノードは内側の異なる軌道を使用
-  var orbitLarge = ORBIT_R;
-  var orbitSmall = ORBIT_R * 0.88;
+  // 全ノード同一orbit・同一r
   keys.forEach(function(key, i) {
     var angle = (i/n)*Math.PI*2 - Math.PI/2;
     var r = catRadius(CATS[key].count, W);
-    var orbit = CATS[key].count >= 10 ? orbitLarge : orbitSmall;
-    nodes.push({ type:'circle', cat:key, cx:cx+Math.cos(angle)*orbit, cy:cy+Math.sin(angle)*orbit, r:r, count:CATS[key].count });
+    nodes.push({ type:'circle', cat:key, cx:cx+Math.cos(angle)*ORBIT_R, cy:cy+Math.sin(angle)*ORBIT_R, r:r, count:CATS[key].count });
   });
 }
 function draw() {
@@ -868,15 +1003,18 @@ function draw() {
     if (n.type!=='circle') return;
     var p=CATS[n.cat], dx=cx-n.cx, dy=cy-n.cy, dist=Math.hypot(dx,dy);
     var ux=dx/dist, uy=dy/dist;
-    var sx=n.cx+ux*n.r, sy=n.cy+uy*n.r, ex=cx-ux*CENTER_W*0.45, ey=cy-uy*CENTER_H*0.4;
+    var sx=n.cx+ux*n.r, sy=n.cy+uy*n.r;
+    var _a=CENTER_W/2, _b=CENTER_H/2;
+    var _re=_a*_b/Math.sqrt(_b*_b*ux*ux+_a*_a*uy*uy);
+    var ex=cx-ux*_re, ey=cy-uy*_re;
     var isLineLight=document.body.classList.contains('light');
     var gr=ctx.createLinearGradient(sx,sy,ex,ey);
     if(isLineLight){
-      gr.addColorStop(0,p.stroke+'88'); gr.addColorStop(0.5,p.stroke+'44'); gr.addColorStop(1,'rgba(138,96,32,0.6)');
+      gr.addColorStop(0,p.stroke+'cc'); gr.addColorStop(0.5,p.stroke+'99'); gr.addColorStop(1,'rgba(138,96,32,0.85)');
     } else {
-      gr.addColorStop(0,p.stroke+'40'); gr.addColorStop(0.5,p.stroke+'18'); gr.addColorStop(1,'rgba(201,168,76,0.5)');
+      gr.addColorStop(0,p.stroke+'bb'); gr.addColorStop(0.5,p.stroke+'88'); gr.addColorStop(1,'rgba(201,168,76,0.8)');
     }
-    ctx.save(); ctx.strokeStyle=gr; ctx.lineWidth=isLineLight?1.2:0.8; ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(ex,ey); ctx.stroke();
+    ctx.save(); ctx.strokeStyle=gr; ctx.lineWidth=isLineLight?1.6:1.2; ctx.beginPath(); ctx.moveTo(sx,sy); ctx.lineTo(ex,ey); ctx.stroke();
     ctx.fillStyle=p.stroke+(isLineLight?'ee':'cc'); ctx.beginPath(); ctx.arc(sx,sy,2,0,Math.PI*2); ctx.fill(); ctx.restore();
   });
   var gp=ctx.createRadialGradient(cx,cy,0,cx,cy,8);
@@ -930,10 +1068,10 @@ function drawCircle(ctx,n,hov) {
   ctx.shadowColor=p.stroke; ctx.shadowBlur=isLight?(hov?16:6):(hov?28:14);
   ctx.beginPath(); ctx.arc(n.cx,n.cy,n.r,0,Math.PI*2);
   ctx.strokeStyle=hov?p.stroke:p.stroke+(isLight?'ff':'aa'); ctx.lineWidth=strokeW; ctx.stroke(); ctx.shadowBlur=0;
-  // 小ノード(r<70)はライトモード時に文字サイズを底上げ
-  // ただし円からはみ出ないよう n.r に対して比率上限を設ける
-  var fsC=isLight&&n.r<70 ? Math.min(n.r*0.52, Math.max(12,n.r*0.48)) : Math.min(n.r*0.48, Math.max(10,n.r*0.44));
-  var fsL=isLight&&n.r<70 ? Math.min(n.r*0.26, Math.max(8,n.r*0.23))  : Math.min(n.r*0.22, Math.max(7,n.r*0.19));
+  // 文字サイズ：企業(count=10)のrを基準に固定（全ノード統一）
+  var _rRef = BASE_MIN + ((10-minC)/(maxC-minC||1))*(BASE_MAX-BASE_MIN);
+  var fsC = Math.min(_rRef*0.48, Math.max(10,_rRef*0.44));
+  var fsL = Math.min(_rRef*0.22, Math.max(7, _rRef*0.19));
   // maxWidthは円の直径の0.82倍に制限
   var maxW = n.r * 1.64;
   ctx.textAlign='center'; ctx.textBaseline='middle';
@@ -972,7 +1110,7 @@ document.addEventListener('keydown', function(e) { if(e.key==='Escape'){closeMod
 // HELPER FUNCTIONS
 // =====================================================================
 function sectionHeader(label) {
-  return '<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.45rem;">— ' + label + ' —</div>';
+  return '<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.45rem;">— ' + label + ' —</div>';
 }
 function iconCardHtml(char) {
   var imgSrc = IMAGES[char.iconKey] || '';
@@ -1152,7 +1290,7 @@ var badges=entries.map(function(e){
     return '<span style="display:inline-flex;font-family:\'Share Tech Mono\',monospace;font-size:0.82rem;color:'+st.color+';background:'+st.bg+';border:1px solid '+st.border+';border-radius:3px;padding:4px 10px;margin:3px 4px 3px 0;white-space:nowrap;">'+esc(lbl)+'</span>';
   }).join('');
   return '<div class="divider-line"></div>'
-    +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.68rem;color:var(--text-dim);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.55rem;">— REGISTERED NODES —</div>'
+    +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.68rem;color:var(--silver2);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.55rem;">— REGISTERED NODES —</div>'
     +'<div style="display:flex;flex-wrap:wrap;gap:2px;margin-bottom:0.3rem;">'+badges+'</div>';
 }
 
@@ -1201,10 +1339,10 @@ function showCharDetail(charId) {
     var arrows={'qadesh->france':'\u300cあいつは手足が短い\u300d','france->qadesh':'\u300cあいつは頭がデカい\u300d'};
     var s2o=arrows[self.side+'->'+other.side]||'', o2s=arrows[other.side+'->'+self.side]||'';
     body+='<div class="divider-line"></div>'
-      +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— CORRELATION DIAGRAM —</div>'
+      +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— CORRELATION DIAGRAM —</div>'
       +'<div class="corr-canvas-wrap"><canvas class="corr-canvas" id="corrCanvas"></canvas></div>'
       +'<div class="corr-memo"><div class="corr-memo-label">— Note —</div><div class="corr-memo-text">\u305d\u3063\u304f\u308a\u306a\u5974\u304c\u6575\u5bfe\u7d44\u7e54\u306b\u3044\u308b</div></div>';
-    if(self.note){ body+='<div class="divider-line"></div>' +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>' +'<div class="corr-memo"><div class="corr-memo-text">'+esc(self.note)+'</div></div>'; }
+    if(self.note){ body+='<div class="divider-line"></div>' +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>' +'<div class="corr-memo"><div class="corr-memo-text">'+esc(self.note)+'</div></div>'; }
     modal2Body.innerHTML=body; openModal2();
     setTimeout(function(){
       var cc=document.getElementById('corrCanvas'); if(!cc) return;
@@ -1259,10 +1397,10 @@ function showCharDetail(charId) {
       var _isLight=document.body.classList.contains('light');
       var corrSrc='images/'+self.corrImgKey+(_isLight?'_corr_l.png':'_corr_b.png');
       body+='<div class="divider-line"></div>'
-        +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— CORRELATION DIAGRAM —</div>'
+        +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— CORRELATION DIAGRAM —</div>'
         +'<img class="full-img" src="'+corrSrc+'" alt="'+esc(self.name)+' \u76f8\u95a2\u56f3">';
     }
-    if(self.note){ body+='<div class="divider-line"></div>'+'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>'+'<div class="corr-memo"><div class="corr-memo-text">'+esc(self.note)+'</div></div>'; }
+    if(self.note){ body+='<div class="divider-line"></div>'+'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>'+'<div class="corr-memo"><div class="corr-memo-text">'+esc(self.note)+'</div></div>'; }
     modal2Body.innerHTML=body; openModal2();
   }
 }
@@ -1272,9 +1410,9 @@ function showCharDetail(charId) {
 // =====================================================================
 function showQadeshModal(){
   modalDot.style.background='var(--gold)'; modalTitle.textContent='\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5';
-  modalSub.textContent='\u4e2d\u5fc3 — \u4f1a\u54e1\u30fb\u69cb\u6210\u54e1';
+  modalSub.textContent='';
   delete(window._SS&&window._SS['qSub']);
-  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('\u30ab\u30c6\u30b4\u30ea\u3092\u9078\u629e')
+  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')
     +'<button class="subcat-btn" id="qBtn0" style="border-color:rgba(201,168,76,0.35);color:var(--gold);" onclick="dimBtns(\'qBtn\',2,0);showMemberList()">\u4f1a\u54e1 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="qBtn1" style="border-color:rgba(201,168,76,0.35);color:var(--gold);" onclick="dimBtns(\'qBtn\',2,1);showStaffList()">\u69cb\u6210\u54e1 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'</div><div class="divider-line"></div><div id="qSub"></div>'; openModal();
@@ -1284,17 +1422,17 @@ function showStaffList(){ showSubList('qSub',CHARS.filter(function(c){return c.c
 
 function showChuritsuModal(){
   modalDot.style.background='#7a5828'; modalTitle.textContent='\u4e2d\u7acb';
-  modalSub.textContent='\u4e2d\u7acb \u2014 \u30b5\u30d6\u30ab\u30c6\u30b4\u30ea\u3092\u9078\u629e';
+  modalSub.textContent='';
   delete(window._SS&&window._SS['crSub']);
-  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('\u5927\u5206\u985e\u3092\u9078\u629e')
+  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')
     +'<button class="subcat-btn" style="border-color:rgba(122,88,40,0.3);color:#d4a860;" onclick="showSubList(\'crSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u7121\u6240\u5c5e\')>=0;}),true)">\u7121\u6240\u5c5e <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'</div><div class="divider-line"></div><div id="crSub"></div>';
 }
 function showTekirModal(){
   modalDot.style.background='#d04848'; modalTitle.textContent='\u6575\u5bfe\u7d44\u7e54';
-  modalSub.textContent='\u6575\u5bfe — \u30b5\u30d6\u30ab\u30c6\u30b4\u30ea\u3092\u9078\u629e';
+  modalSub.textContent='';
   delete(window._SS&&window._SS['tkSub']);
-  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('\u7d44\u7e54\u3092\u9078\u629e')
+  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')
     +'<button class="subcat-btn cat-\u6575\u5bfe" onclick="showSubList(\'tkSub\',CHARS.filter(function(c){return c.catGroup===\'france\';}),true)">\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5\u30fb\u30d5\u30e9\u30f3\u30b9 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'</div><div class="divider-line"></div><div id="tkSub"></div>';
 }
@@ -1302,30 +1440,30 @@ function _filterLaFamiglia(){ return CHARS.filter(function(c){return(c.affiliati
 function _filterGhoulGrasp(){ return CHARS.filter(function(c){return(c.affiliations||[]).indexOf("Ghoul's Grasp")>=0;}); }
 function showYukoModal(){
   modalDot.style.background='#2a2060'; modalTitle.textContent='\u53cb\u597d\u7d44\u7e54';
-  modalSub.textContent='\u53cb\u597d\u7d44\u7e54 \u2014 \u30b5\u30d6\u30ab\u30c6\u30b4\u30ea\u3092\u9078\u629e';
+  modalSub.textContent='';
   delete(window._SS&&window._SS['ykSub']);
-  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('\u7d44\u7e54\u3092\u9078\u629e')
-    +'<button class="subcat-btn" id="ykBtn0" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,0);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'BAR REBELLION\')>=0;}),true)">BAR REBELLION <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn1" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,1);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u516b\u83ef\u7d44\')>=0;}),true)">\u516b\u83ef\u7d44 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn2" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,2);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u6708\u83ef\u4f1a\')>=0;}),true)">\u6708\u83ef\u4f1a <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn3" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,3);showSubList(\'ykSub\',_filterLaFamiglia(),true)">La Famiglia D\'Oro <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn4" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,4);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Trade Hublist\')>=0;}),true)">Trade Hublist <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn5" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,5);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Secret Scale Service\')>=0;}),true)">Secret Scale Service <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn6" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,6);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc\')>=0;}),true)">\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn7" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,7);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'The Night Cloud\')>=0;}),true)">The Night Cloud <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn8" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,8);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Paradise of Bubble\')>=0;}),true)">Paradise of Bubble <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn9" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,9);showSubList(\'ykSub\',_filterGhoulGrasp(),true)">Ghoul\'s Grasp <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn10" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,10);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u58ca\u8599\')>=0;}),true)">\u58ca\u8599 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn11" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,11);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'MHIC\')>=0;}),true)">MHIC <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn12" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,12);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Cuddly Plush Corps\')>=0;}),true)">Cuddly Plush Corps <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="ykBtn13" style="border-color:rgba(144,136,224,0.3);color:#b0a8e8;" onclick="dimBtns(\'ykBtn\',14,13);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u6708\u86c7\u4f1a\')>=0;}),true)">\u6708\u86c7\u4f1a <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')
+    +'<button class="subcat-btn cat-友好" id="ykBtn0" onclick="dimBtns(\'ykBtn\',14,0);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'BAR REBELLION\')>=0;}),true)">BAR REBELLION <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn1" onclick="dimBtns(\'ykBtn\',14,1);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u516b\u83ef\u7d44\')>=0;}),true)">\u516b\u83ef\u7d44 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn2" onclick="dimBtns(\'ykBtn\',14,2);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u6708\u83ef\u4f1a\')>=0;}),true)">\u6708\u83ef\u4f1a <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn3" onclick="dimBtns(\'ykBtn\',14,3);showSubList(\'ykSub\',_filterLaFamiglia(),true)">La Famiglia D\'Oro <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn4" onclick="dimBtns(\'ykBtn\',14,4);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Trade Hublist\')>=0;}),true)">Trade Hublist <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn5" onclick="dimBtns(\'ykBtn\',14,5);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Secret Scale Service\')>=0;}),true)">Secret Scale Service <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn6" onclick="dimBtns(\'ykBtn\',14,6);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc\')>=0;}),true)">\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn7" onclick="dimBtns(\'ykBtn\',14,7);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'The Night Cloud\')>=0;}),true)">The Night Cloud <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn8" onclick="dimBtns(\'ykBtn\',14,8);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Paradise of Bubble\')>=0;}),true)">Paradise of Bubble <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn9" onclick="dimBtns(\'ykBtn\',14,9);showSubList(\'ykSub\',_filterGhoulGrasp(),true)">Ghoul\'s Grasp <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn10" onclick="dimBtns(\'ykBtn\',14,10);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u58ca\u8599\')>=0;}),true)">\u58ca\u8599 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn11" onclick="dimBtns(\'ykBtn\',14,11);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'MHIC\')>=0;}),true)">MHIC <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn12" onclick="dimBtns(\'ykBtn\',14,12);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Cuddly Plush Corps\')>=0;}),true)">Cuddly Plush Corps <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn cat-友好" id="ykBtn13" onclick="dimBtns(\'ykBtn\',14,13);showSubList(\'ykSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u6708\u86c7\u4f1a\')>=0;}),true)">\u6708\u86c7\u4f1a <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'</div><div class="divider-line"></div><div id="ykSub"></div>';
 }
 function showKigyoModal(){
   modalDot.style.background='#206840'; modalTitle.textContent='\u4f01\u696d';
-  modalSub.textContent='\u4f01\u696d — \u30b5\u30d6\u30ab\u30c6\u30b4\u30ea\u3092\u9078\u629e';
+  modalSub.textContent='';
   delete(window._SS&&window._SS['kgSub']);
-  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('\u4f01\u696d\u3092\u9078\u629e')
+  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')
     +'<button class="subcat-btn" id="kgBtn0" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',10,0);showSubList(\'kgSub\',CHARS.filter(_kgFilter),false)">RAVEN\'S EXPRESS <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="kgBtn1" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',10,1);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'LSI Industry\')>=0;}),false)">LSI Industry <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="kgBtn2" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',10,2);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Beyond Horizons\')>=0;}),false)">Beyond Horizons <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
@@ -1340,9 +1478,9 @@ function showKigyoModal(){
 }
 function showKokiModal(){
   modalDot.style.background='#206878'; modalTitle.textContent='\u516c\u7684\u6a5f\u95a2';
-  modalSub.textContent='\u516c\u7684\u6a5f\u95a2 — \u30b5\u30d6\u30ab\u30c6\u30b4\u30ea\u3092\u9078\u629e';
+  modalSub.textContent='';
   delete(window._SS&&window._SS['kkSub']);
-  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('\u6a5f\u95a2\u3092\u9078\u629e')
+  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')
     +'<button class="subcat-btn" id="kkBtn0" style="border-color:rgba(40,160,184,0.3);color:#60c8d8;" onclick="dimBtns(\'kkBtn\',6,0);showSubList(\'kkSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'FBI\')>=0;}),true)">FBI <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="kkBtn1" style="border-color:rgba(40,160,184,0.3);color:#60c8d8;" onclick="dimBtns(\'kkBtn\',6,1);showSubList(\'kkSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'ISMO\')>=0;}),true)">ISMO <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="kkBtn2" style="border-color:rgba(40,160,184,0.3);color:#60c8d8;" onclick="dimBtns(\'kkBtn\',6,2);showSubList(\'kkSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u8b66\u5bdf\u5e81\')>=0;}),true)">\u8b66\u5bdf\u5e81 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
@@ -1361,7 +1499,7 @@ function dimBtns(prefix, count, selectedIdx) {
 
 function showShokuModal(){
   modalDot.style.background='#809078'; modalTitle.textContent='\u8077\u7a2e';
-  modalSub.textContent='\u8077\u7a2e\u30bf\u30b0 \u2014 \u5927\u5206\u985e\u3092\u9078\u629e';
+  modalSub.textContent='';
   if(!window._SS) window._SS={};
   delete window._SS['skSub'];
   window._shokuGroups=[
@@ -1385,7 +1523,7 @@ function showShokuModal(){
       +'>'+g.label+' <span style="font-size:0.65rem;opacity:0.7;background:rgba(255,255,255,0.08);border-radius:3px;padding:1px 5px;margin-left:3px;">'+total+'</span>'
       +' <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>';
   }).join('');
-  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('\u5927\u5206\u985e\u3092\u9078\u629e')+btns
+  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')+btns
     +'</div><div class="divider-line"></div><div id="skSub"></div>';
 }
 function showShokuGroup(gi){
@@ -1444,7 +1582,7 @@ function showCatModal(catKey){
   else if(catKey==='\u4e2d\u7acb'){showChuritsuModal();openModal();}
   else{
     var p=CATS[catKey]; if(!p) return;
-    modalDot.style.background=p.stroke; modalTitle.textContent=p.label; modalSub.textContent=p.count+' \u30bf\u30b0\u542b\u3080';
+    modalDot.style.background=p.stroke; modalTitle.textContent=p.label; modalSub.textContent='';
     var f=CHARS.filter(function(c){return(c.affiliations||[]).some(function(a){return p.tags.indexOf(a)>=0;});});
     modalBody.innerHTML=f.length?'<div class="modal-count-bar">'+f.length+' \u30ad\u30e3\u30e9\u30af\u30bf\u30fc</div>'+f.map(charCardHtml).join(''):'<div class="modal-empty">\u8a72\u5f53\u306a\u3057</div>';
     openModal();
@@ -1540,6 +1678,12 @@ window.addEventListener('resize',function(){
     }
     // canvasを再描画
     if(typeof draw === 'function') draw();
+    if(document.getElementById('orgView').style.display !== 'none') initOrgDiagram();
+    // 組織詳細の相関図タブが表示中であればsrcを切り替え
+    if(window._orgActiveTab === 'corr' && window._orgDetailData && window._orgDetailData.corrImgKey) {
+      var mainImg = document.getElementById('orgMainImg');
+      if(mainImg) mainImg.src = 'images/' + window._orgDetailData.corrImgKey + (light ? '_corr_l.png' : '_corr_b.png');
+    }
   }
   var loginToggle = document.getElementById('loginModeToggle');
   var loginIcon   = document.getElementById('loginModeIcon');
@@ -1568,6 +1712,451 @@ window.addEventListener('resize',function(){
   try{ saved = localStorage.getItem('hq_light_mode')||'0'; } catch(e){}
   applyModeAll(saved==='1');
 })();
+
+
+
+// =====================================================================
+// ORGANIZATION DIAGRAM
+// =====================================================================
+var _orgView = 'rel'; // 'rel' or 'type'
+var _orgCanvas = null, _orgCtx = null;
+var _orgNodes = []; // { id, label, x, y, r, color, stroke, fill, orgs }
+
+function setOrgView(v) {
+  _orgView = v;
+  document.getElementById('orgViewRelBtn').classList.toggle('active', v === 'rel');
+  document.getElementById('orgViewTypeBtn').classList.toggle('active', v === 'type');
+  initOrgDiagram();
+}
+
+function initOrgDiagram() {
+  requestAnimationFrame(function() {
+    _orgCanvas = document.getElementById('orgDiagram');
+    if (!_orgCanvas) return;
+    var wrap = document.getElementById('orgCanvasWrap');
+    if (!wrap) return;
+    var dpr = window.devicePixelRatio || 1;
+    var W = wrap.clientWidth;
+    var H = wrap.clientHeight;
+    if (!W || !H) {
+      // フォールバック: mainScreen 高さからヘッダ・スイッチバーを引く
+      var ms = document.getElementById('mainScreen');
+      var totalH = ms ? ms.clientHeight : window.innerHeight;
+      var hdr = document.querySelector('.main-header');
+      var nav = document.querySelector('.nav-bar');
+      var sw  = document.getElementById('orgSwitchBar');
+      var usedH = (hdr ? hdr.offsetHeight : 60) + (nav ? nav.offsetHeight : 44) + (sw ? sw.offsetHeight : 36);
+      H = Math.max(400, totalH - usedH);
+      W = wrap.clientWidth || (ms ? ms.clientWidth : window.innerWidth);
+    }
+    _orgCanvas.width = W * dpr; _orgCanvas.height = H * dpr;
+    _orgCanvas.style.width = W + 'px'; _orgCanvas.style.height = H + 'px';
+    _orgCtx = _orgCanvas.getContext('2d');
+    _orgCtx.scale(dpr, dpr);
+    _drawOrgDiagram(W, H);
+    _orgCanvas.onclick = _orgCanvasClick;
+  });
+}
+
+function _drawOrgDiagram(W, H) {
+  var c = _orgCtx;
+  var isLight = document.body.classList.contains('light');
+  c.fillStyle = isLight ? '#f4f2ee' : '#06060e';
+  c.fillRect(0, 0, W, H);
+
+  var cx = W / 2, cy = H / 2;
+  var centerR = Math.min(W, H) * 0.095;
+  var orgCW = Math.max(210, W * 0.18);
+  var orgCH = Math.max(69,  W * 0.06);
+  _orgNodes = [];
+
+  if (_orgView === 'rel') {
+    _drawOrgRelView(c, W, H, cx, cy, orgCW, orgCH, isLight);
+  } else {
+    _drawOrgTypeView(c, W, H, cx, cy, orgCW, orgCH, isLight);
+  }
+
+  // ホテルカデシュ中心ノード
+  _drawOrgCenter(c, cx, cy, orgCW, orgCH, isLight);
+}
+
+function _drawOrgRelView(c, W, H, cx, cy, cw, ch, isLight) {
+  var groups = { '友好':[], '敵対':[], '中立':[], 'その他':[] };
+  ORGS.forEach(function(org) {
+    var rel = (org.qadeshRel && org.qadeshRel[0]) || 'その他';
+    if (!groups[rel]) groups[rel] = [];
+    groups[rel].push(org);
+  });
+  var nodeLabels = ['友好', '敵対', '中立'];
+  var nodeCount = nodeLabels.length;
+  // PROFILES catRadius(6,W) と同じ固定r・中心に近いorbit
+  var nodeR = catRadius(6, W);
+  var orbit = ORBIT_R;
+  nodeLabels.forEach(function(label, i) {
+    var angle = (i / nodeCount) * Math.PI * 2 - Math.PI / 2;
+    var orgsInGroup = groups[label] || [];
+    var cnt = orgsInGroup.length;
+    var nx = cx + Math.cos(angle) * orbit;
+    var ny = cy + Math.sin(angle) * orbit;
+    var st = QADESH_REL_STYLE[label] || QADESH_REL_STYLE['その他'];
+    _drawOrgEdge(c, cx, cy, nx, ny, cw, ch, nodeR, st, isLight);
+    _drawOrgNode(c, nx, ny, nodeR, st, label, cnt, isLight);
+    _orgNodes.push({ id: 'rel_' + label, label: label, x: nx, y: ny, r: nodeR, color: st.color, orgs: orgsInGroup, isGroup: true, relKey: label });
+  });
+}
+
+function _drawOrgTypeView(c, W, H, cx, cy, cw, ch, isLight) {
+  var typeKeys = ['企業', '公的機関', '秘密結社', '協会・組合', '組織犯罪集団（マフィア・極道等）', 'その他'];
+  var typeLabels = ['企業', '公的機関', '秘密結社', '協会・組合', '犯罪集団', 'その他'];
+  // PROFILES catRadius(6,W) と同じ固定r・中心に近いorbit
+  var nodeR = catRadius(6, W);
+  var orbit = ORBIT_R;
+  typeKeys.forEach(function(typeKey, i) {
+    var angle = (i / typeKeys.length) * Math.PI * 2 - Math.PI / 2;
+    var nx = cx + Math.cos(angle) * orbit;
+    var ny = cy + Math.sin(angle) * orbit;
+    var st = ORG_TYPE_NODE[typeKey] || ORG_TYPE_NODE['その他'];
+    var orgsInGroup = ORGS.filter(function(org) { return (org.types || []).indexOf(typeKey) >= 0; });
+    _drawOrgEdge(c, cx, cy, nx, ny, cw, ch, nodeR, st, isLight);
+    _drawOrgNode(c, nx, ny, nodeR, st, typeLabels[i], orgsInGroup.length, isLight);
+    _orgNodes.push({ id: 'type_' + typeKey, label: typeLabels[i], x: nx, y: ny, r: nodeR, color: st.color, orgs: orgsInGroup, isGroup: true, typeKey: typeKey });
+  });
+}
+
+function _drawOrgEdge(c, x1, y1, x2, y2, cw, ch, r2, p, isLight) {
+  // PROFILES drawと同等: 楕円の正確な境界交点から始点を計算
+  var dx = x2 - x1, dy = y2 - y1, dist = Math.hypot(dx, dy);
+  var _ux = dx / dist, _uy = dy / dist;
+  var _a = cw / 2, _b = ch / 2;
+  var _re = _a * _b / Math.sqrt(_b * _b * _ux * _ux + _a * _a * _uy * _uy);
+  var sx = x1 + _ux * _re, sy = y1 + _uy * _re;
+  var ex = x2 - _ux * r2, ey = y2 - _uy * r2;
+  c.save();
+  var gr = c.createLinearGradient(sx, sy, ex, ey);
+  if (isLight) {
+    gr.addColorStop(0, p.stroke + 'cc'); gr.addColorStop(0.5, p.stroke + '99'); gr.addColorStop(1, 'rgba(138,96,32,0.85)');
+  } else {
+    gr.addColorStop(0, p.stroke + 'bb'); gr.addColorStop(0.5, p.stroke + '88'); gr.addColorStop(1, 'rgba(201,168,76,0.8)');
+  }
+  c.strokeStyle = gr; c.lineWidth = isLight ? 1.6 : 1.2;
+  c.beginPath(); c.moveTo(sx, sy); c.lineTo(ex, ey); c.stroke();
+  // 端点ドット
+  c.fillStyle = p.stroke + (isLight ? 'ee' : 'cc');
+  c.beginPath(); c.arc(sx, sy, 2, 0, Math.PI * 2); c.fill();
+  c.restore();
+}
+
+function _drawOrgCenter(c, x, y, cw, ch, isLight) {
+  // PROFILES drawCenter と完全一致（cw=n.w相当, ch=n.h相当）
+  c.save();
+  var goldMain = isLight ? '#8a6020' : 'rgba(201,168,76,0.9)';
+  var goldGlow = isLight ? 'rgba(138,96,32,0.6)' : 'rgba(201,168,76,0.8)';
+  var bgFill   = isLight ? 'rgba(245,244,240,0.97)' : 'rgba(12,10,4,0.95)';
+  var textMain = isLight ? '#6a4810' : '#c9a84c';
+  var textSub  = isLight ? 'rgba(100,72,16,0.65)' : 'rgba(201,168,76,0.5)';
+  var eg = c.createRadialGradient(x, y, ch/2, x, y, ch*1.8);
+  if (isLight) { eg.addColorStop(0,'rgba(138,96,32,0.18)'); eg.addColorStop(0.5,'rgba(138,96,32,0.06)'); eg.addColorStop(1,'transparent'); }
+  else         { eg.addColorStop(0,'rgba(201,168,76,0.35)'); eg.addColorStop(0.5,'rgba(201,168,76,0.1)'); eg.addColorStop(1,'transparent'); }
+  c.fillStyle = eg; c.beginPath(); c.ellipse(x, y, cw*0.9, ch*1.7, 0, 0, Math.PI*2); c.fill();
+  c.shadowColor = goldGlow; c.shadowBlur = 22;
+  c.beginPath(); c.ellipse(x, y, cw/2, ch/2, 0, 0, Math.PI*2);
+  c.fillStyle = bgFill; c.fill(); c.shadowBlur = 0;
+  c.beginPath(); c.ellipse(x, y, cw/2, ch/2, 0, 0, Math.PI*2);
+  c.strokeStyle = goldMain; c.lineWidth = 1.4; c.stroke();
+  c.beginPath(); c.ellipse(x, y, cw/2-4, ch/2-4, 0, 0, Math.PI*2);
+  c.strokeStyle = isLight ? 'rgba(138,96,32,0.2)' : 'rgba(201,168,76,0.18)'; c.lineWidth = 0.5; c.stroke();
+  var fs = Math.max(11, cw*0.086);
+  c.textAlign = 'center'; c.textBaseline = 'middle';
+  c.font = '400 ' + fs + 'px \'Cormorant Garamond\',serif';
+  c.fillStyle = textMain;
+  c.shadowColor = isLight ? 'transparent' : goldGlow; c.shadowBlur = isLight ? 0 : 6;
+  c.fillText('HOTEL QADESH', x, y - fs*0.48); c.shadowBlur = 0;
+  c.font = '400 ' + (fs*0.58) + 'px \'Noto Serif JP\',serif'; c.fillStyle = textSub;
+  c.fillText('\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5', x, y + fs*0.6);
+  c.restore();
+}
+
+function _drawOrgNode(c, x, y, r, p, label, count, isLight) {
+  // PROFILES drawCircle と完全一致（上段:count数字、下段:label名）
+  c.save();
+  var eg = c.createRadialGradient(x, y, r * 0.5, x, y, r * 2.2);
+  eg.addColorStop(0, p.stroke + '28'); eg.addColorStop(0.6, p.stroke + '0a'); eg.addColorStop(1, 'transparent');
+  c.fillStyle = eg; c.beginPath(); c.arc(x, y, r * 2.2, 0, Math.PI * 2); c.fill();
+  if (isLight) {
+    c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fillStyle = 'rgba(245,244,240,0.92)'; c.fill();
+  } else {
+    c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2); c.fillStyle = p.fill; c.fill();
+  }
+  var strokeW = isLight ? (r < 70 ? 2.4 : 1.8) : 1.2;
+  c.shadowColor = p.stroke; c.shadowBlur = isLight ? 6 : 14;
+  c.beginPath(); c.arc(x, y, r, 0, Math.PI * 2);
+  c.strokeStyle = p.stroke + (isLight ? 'ff' : 'aa'); c.lineWidth = strokeW; c.stroke(); c.shadowBlur = 0;
+  // 文字サイズ：PROFILES企業(count=10)のrを基準に固定（PROFILES側と統一）
+  var _rRef = BASE_MIN + ((10-minC)/(maxC-minC||1))*(BASE_MAX-BASE_MIN);
+  var fsC = Math.min(_rRef*0.48, Math.max(10,_rRef*0.44));
+  var fsL = Math.min(_rRef*0.22, Math.max(7, _rRef*0.19));
+  var maxW = r * 1.64;
+  c.textAlign = 'center'; c.textBaseline = 'middle';
+  var textMain = isLight ? p.stroke : p.text + 'cc';
+  var textSub  = isLight ? p.stroke : p.sub.replace('0.7', '0.42');
+  // 上段：count（数字）/ 下段：label（日本語対応）
+  c.font = '700 ' + fsC + 'px \'Cormorant Garamond\',serif'; c.fillStyle = textMain;
+  c.shadowColor = isLight ? 'transparent' : p.stroke; c.shadowBlur = isLight ? 0 : 4;
+  c.fillText(count, x, y - fsL * 0.65, maxW); c.shadowBlur = 0;
+  var isJP = /[\u3000-\u9fff]/.test(label);
+  c.font = '700 ' + fsL + 'px \'' + (isJP ? 'Noto Serif JP' : 'Share Tech Mono') + '\'';
+  c.fillStyle = textSub;
+  c.fillText(label, x, y + fsC * 0.55, maxW);
+  c.restore();
+}
+
+function _drawOrgMiniNodes(c, nx, ny, nodeR, angle, orgs, p, isLight) {
+  if (!orgs.length) return;
+  var miniR = Math.max(20, nodeR * 0.42);
+  var spread = Math.PI * 0.45;
+  var dist = nodeR + miniR + 24;
+  orgs.forEach(function(org, i) {
+    var offset = orgs.length === 1 ? 0 : (i / (orgs.length - 1) - 0.5) * spread;
+    var a = angle + offset;
+    var mx = nx + Math.cos(a) * dist;
+    var my = ny + Math.sin(a) * dist;
+    c.save();
+    // 接続線（グラデーション）
+    var gr = c.createLinearGradient(nx + Math.cos(a) * nodeR, ny + Math.sin(a) * nodeR, mx, my);
+    var edgeCol = isLight ? 'rgba(138,96,32,0.22)' : (p.stroke + '88');
+    gr.addColorStop(0, 'transparent'); gr.addColorStop(0.2, edgeCol); gr.addColorStop(1, edgeCol);
+    c.strokeStyle = gr; c.lineWidth = isLight ? 1.0 : 0.7;
+    c.beginPath(); c.moveTo(nx + Math.cos(a) * nodeR, ny + Math.sin(a) * nodeR); c.lineTo(mx, my); c.stroke();
+    // ミニノード（drawCircleと同じグロー＋fill）
+    var eg2 = c.createRadialGradient(mx, my, miniR * 0.5, mx, my, miniR * 2.2);
+    eg2.addColorStop(0, p.stroke + '28'); eg2.addColorStop(0.6, p.stroke + '0a'); eg2.addColorStop(1, 'transparent');
+    c.fillStyle = eg2; c.beginPath(); c.arc(mx, my, miniR * 2.2, 0, Math.PI * 2); c.fill();
+    if (isLight) {
+      c.beginPath(); c.arc(mx, my, miniR, 0, Math.PI * 2); c.fillStyle = 'rgba(245,244,240,0.92)'; c.fill();
+    } else {
+      c.beginPath(); c.arc(mx, my, miniR, 0, Math.PI * 2); c.fillStyle = p.fill; c.fill();
+    }
+    var sw2 = isLight ? 2.2 : 1.0;
+    c.shadowColor = p.stroke; c.shadowBlur = isLight ? 5 : 10;
+    c.beginPath(); c.arc(mx, my, miniR, 0, Math.PI * 2);
+    c.strokeStyle = p.stroke + (isLight ? 'ff' : 'aa'); c.lineWidth = sw2; c.stroke(); c.shadowBlur = 0;
+    // テキスト
+    var fs2 = Math.max(8, miniR * 0.44);
+    var isJP = /[\u3000-\u9fff]/.test(org.name);
+    c.font = '400 ' + fs2 + 'px \'' + (isJP ? 'Noto Serif JP' : 'Share Tech Mono') + '\'';
+    c.fillStyle = isLight ? p.stroke : p.text + 'cc';
+    c.textAlign = 'center'; c.textBaseline = 'middle';
+    var nm = org.name.length > 6 ? org.name.slice(0, 5) + '\u2026' : org.name;
+    c.fillText(nm, mx, my);
+    c.restore();
+    _orgNodes.push({ id: org.id, label: org.name, x: mx, y: my, r: miniR, isOrg: true, orgData: org });
+  });
+}
+
+function _orgCanvasClick(e) {
+  var rect = _orgCanvas.getBoundingClientRect();
+  var scaleX = _orgCanvas.width / rect.width;
+  var px = (e.clientX - rect.left) * scaleX / (window.devicePixelRatio || 1);
+  var py = (e.clientY - rect.top) * scaleX / (window.devicePixelRatio || 1);
+  // 中心ノード（ホテルカデシュ）判定
+  var W = _orgCanvas.style.width ? parseInt(_orgCanvas.style.width) : _orgCanvas.width;
+  var H = _orgCanvas.style.height ? parseInt(_orgCanvas.style.height) : _orgCanvas.height;
+  var ccx = W / 2, ccy = H / 2;
+  var _ccw = Math.max(210, W * 0.18) / 2, _cch = Math.max(69, W * 0.06) / 2;
+  var _ddx = (px - ccx) / _ccw, _ddy = (py - ccy) / _cch;
+  if (_ddx * _ddx + _ddy * _ddy <= 1.1) {
+    // ORG側のホテルカデシュ：現時点では該当なし
+    modalDot.style.background = 'var(--gold)';
+    modalTitle.textContent = '\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5';
+    modalSub.textContent = '';
+    modalBody.innerHTML = '<div class="modal-empty">\u8a72\u5f53\u306a\u3057</div>';
+    openModal(); return;
+  }
+  for (var i = _orgNodes.length - 1; i >= 0; i--) {
+    var n = _orgNodes[i];
+    if (Math.hypot(px - n.x, py - n.y) <= n.r + 4) {
+      if (n.isOrg)   { showOrgDetail(n.orgData); return; }
+      if (n.isGroup) { showOrgGroupModal(n); return; }
+      break;
+    }
+  }
+}
+
+
+// =====================================================================
+// ORG GROUP MODAL（グループノードクリック時）
+// =====================================================================
+function orgCardHtml(org, context) {
+  // context='rel': 関係性ビュー → 組織種別タグのみ（関係性はノード名で自明）
+  // context='type': 種別ビュー → 関係性タグのみ（種別はノード名で自明）
+  var typeTags = (context === 'type') ? '' :
+    (org.types || []).map(function(t) { return '<span class="char-tag tag-\u4f01\u696d">' + esc(t) + '</span>'; }).join('');
+  var relTags = (context === 'rel') ? '' :
+    (org.qadeshRel || []).map(function(r) {
+      var relCls = r==='\u6575\u5bfe' ? 'tag-\u6575\u5bfe'
+                 : r==='\u4e2d\u7acb' ? 'tag-\u4e2d\u7acb'
+                 : r==='\u53cb\u597d' ? 'tag-\u53cb\u597d'
+                 : 'tag-org-qadesh';
+      return '<span class="char-tag ' + relCls + '">' + esc(r) + '</span>';
+    }).join('');
+  return '<div class="char-card" onclick="showOrgDetail(ORGS.find(function(o){return o.id===\'' + org.id + '\';}))" style="cursor:pointer;">'
+    + '<div class="char-left">'
+    + '<div class="char-name">' + esc(org.name) + '</div>'
+    + '<div class="char-tags">' + typeTags + relTags + '</div></div></div>';
+}
+
+function showOrgGroupModal(node) {
+  var orgs = node.orgs || [];
+  var label = node.label;
+  // ノードの色を取得
+  var dotColor = (node.color && node.color.stroke) ? node.color.stroke
+    : (node.color || 'var(--silver3)');
+  // QADESH_REL_STYLE か ORG_TYPE_NODE から色を取得
+  var styleObj = QADESH_REL_STYLE[node.relKey] || ORG_TYPE_NODE[node.typeKey];
+  var strokeCol = styleObj ? styleObj.stroke : '#888';
+  modalDot.style.background = strokeCol;
+  modalTitle.textContent = label;
+  modalSub.textContent = '';
+  if (!orgs.length) {
+    modalBody.innerHTML = '<div class="modal-empty">\u8a72\u5f53\u306a\u3057</div>';
+  } else {
+    // node.relKey があれば関係性ビュー、node.typeKey があれば種別ビュー
+    var ctx = node.relKey ? 'rel' : (node.typeKey ? 'type' : '');
+    // 関係性ビュー → 組織種別順にソート、種別ビュー → 関係性順にソート
+    var TYPE_ORDER = ['企業','公的機関','秘密結社','協会・組合','組織犯罪集団（マフィア・極道等）','その他'];
+    var REL_ORDER  = ['友好','敵対','中立','その他'];
+    var sorted = orgs.slice().sort(function(a, b) {
+      if (ctx === 'rel') {
+        var ai = TYPE_ORDER.indexOf((a.types || [])[0] || 'その他');
+        var bi = TYPE_ORDER.indexOf((b.types || [])[0] || 'その他');
+        if (ai < 0) ai = TYPE_ORDER.length;
+        if (bi < 0) bi = TYPE_ORDER.length;
+        return ai !== bi ? ai - bi : (a.name || '').localeCompare(b.name || '', 'ja');
+      } else if (ctx === 'type') {
+        var ai = REL_ORDER.indexOf((a.qadeshRel || [])[0] || 'その他');
+        var bi = REL_ORDER.indexOf((b.qadeshRel || [])[0] || 'その他');
+        if (ai < 0) ai = REL_ORDER.length;
+        if (bi < 0) bi = REL_ORDER.length;
+        return ai !== bi ? ai - bi : (a.name || '').localeCompare(b.name || '', 'ja');
+      }
+      return 0;
+    });
+    modalBody.innerHTML = sorted.map(function(o){ return orgCardHtml(o, ctx); }).join('');
+  }
+  openModal();
+}
+
+function showOrgDetail(org) {
+  var body = modal2Body;
+  modal2Title.textContent = org.name + ' — 詳細';
+  var isLight = document.body.classList.contains('light');
+
+  // 画像エリア
+  // symbolImg（○○.png）がある場合はそれをトップ表示
+  // ない場合は corrImgKey（相関図）があれば相関図をトップ表示
+  // どちらもない場合はダミーSVG
+  var dummySvg = 'data:image/svg+xml,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">'
+    + '<rect width="960" height="540" fill="' + (isLight ? '#e8e6e0' : '#0a0a14') + '"/>'
+    + '<rect x="380" y="200" width="200" height="140" rx="8" fill="none" stroke="' + (isLight ? '#888' : '#666') + '" stroke-width="2"/>'
+    + '<text x="480" y="285" font-family="serif" font-size="18" fill="' + (isLight ? '#888' : '#666') + '" text-anchor="middle">NO IMAGE</text>'
+    + '<text x="480" y="310" font-family="monospace" font-size="11" fill="' + (isLight ? '#aaa' : '#444') + '" text-anchor="middle">' + org.name + '</text>'
+    + '</svg>'
+  );
+  var symbolSrc = org.symbolImg ? 'images/' + org.symbolImg : '';
+  var corrSrc   = org.corrImgKey ? 'images/' + org.corrImgKey + (isLight ? '_corr_l.png' : '_corr_b.png') : '';
+  // トップ表示：symbolImg → corrImg → dummySvg
+  var mainSrc   = symbolSrc || corrSrc || dummySvg;
+  var imgHtml = '<div id="orgImgMain" style="margin-bottom:0.5rem;">'
+    + '<img class="full-img" id="orgMainImg" src="' + mainSrc + '" alt="' + esc(org.name) + '">'
+    + '</div>';
+  // タブ行：symbolImg タブ（ある場合）・corrImg タブ（ある場合）
+  var tabHtml = '<div class="org-img-tab-wrap">';
+  if (symbolSrc) {
+    tabHtml += '<div class="org-img-tab' + (!corrSrc ? ' active' : ' active') + '" id="orgTabImg" onclick="switchOrgTab(\'img\')" title="シンボル画像">'
+      + '<img src="' + symbolSrc + '" alt="画像">'
+      + '</div>';
+  }
+  if (corrSrc) {
+    var corrActive = !symbolSrc ? ' active' : '';
+    tabHtml += '<div class="org-img-tab' + corrActive + '" id="orgTabCorr" onclick="switchOrgTab(\'corr\')" title="相関図">'
+      + '<img src="' + corrSrc + '" alt="相関図">'
+      + '</div>';
+  }
+  tabHtml += '</div>';
+
+  window._orgDetailData = { dummySvg: dummySvg, symbolSrc: symbolSrc, corrSrc: corrSrc, corrImgKey: org.corrImgKey || '' };
+
+  // 項目リスト（フォームの順番通り）
+  function row(label, val) {
+    var v = (val && val.trim && val.trim()) || '';
+    var isEmpty = !v || v === '[]' || v === '';
+    return '<div class="org-detail-row">'
+      + '<div class="org-detail-label">' + label + '</div>'
+      + '<div class="org-detail-val' + (isEmpty ? ' empty' : '') + '">' + (isEmpty ? '入力なし' : esc(v)) + '</div>'
+      + '</div>';
+  }
+  function rowArr(label, arr) {
+    var v = arr && arr.length ? arr.join('、') : '';
+    return row(label, v);
+  }
+
+  // 表向きの顔：'ない'なら非表示、'ある'/'その他'なら frontDetail を表示
+  var frontRow = '';
+  if (org.frontExists && org.frontExists !== 'ない') {
+    frontRow = row('表向きの顔', org.frontDetail || org.frontExists);
+  }
+  // 法人種別：types に '企業' が含まれる場合のみ表示
+  var corpTypeRow = (org.types || []).indexOf('企業') >= 0 ? row('法人種別', org.corpType) : '';
+
+  var infoHtml = '<div class="divider-line" style="margin:0.8rem 0 0.6rem;"></div>'
+    + '<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.55rem;">— ORGANIZATION INFO —</div>'
+    + rowArr('カデシュとの関係性', org.qadeshRel)
+    + rowArr('組織種別', org.types)
+    + corpTypeRow
+    + row('世界的認知度', org.recognition)
+    + frontRow
+    + (org.relatedUrl && org.relatedUrl.trim() ? row('関連URL', org.relatedUrl) : '');
+
+  // DETAILED NOTES：キャラ詳細のNoteと同じ corr-memo 形式
+  var notesHtml = '';
+  if (org.description && org.description.trim()) {
+    notesHtml = '<div class="divider-line" style="margin:0.8rem 0 0.6rem;"></div>'
+      + '<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— DETAILED NOTES —</div>'
+      + '<div class="corr-memo"><div class="corr-memo-text" style="white-space:pre-wrap;">' + esc(org.description) + '</div></div>';
+  }
+
+  body.innerHTML = imgHtml + tabHtml + infoHtml + notesHtml;
+  openModal2();
+}
+
+function switchOrgTab(tab) {
+  var d = window._orgDetailData;
+  if (!d) return;
+  var mainImg = document.getElementById('orgMainImg');
+  var tabImg = document.getElementById('orgTabImg');
+  var tabCorr = document.getElementById('orgTabCorr');
+  var isLight = document.body.classList.contains('light');
+  if (tab === 'img') {
+    mainImg.src = d.symbolSrc || d.dummySvg;
+    if (tabImg) tabImg.classList.add('active');
+    if (tabCorr) tabCorr.classList.remove('active');
+    window._orgActiveTab = 'img';
+  } else {
+    if (d.corrImgKey) {
+      mainImg.src = 'images/' + d.corrImgKey + (isLight ? '_corr_l.png' : '_corr_b.png');
+    }
+    if (tabCorr) tabCorr.classList.add('active');
+    if (tabImg) tabImg.classList.remove('active');
+    window._orgActiveTab = 'corr';
+  }
+}
+
+// orgDetailOverlay は modal2Overlay を使用（closeModal2 / ESC / 外クリックで閉じる）
+
+window.addEventListener('resize', function() {
+  if (document.getElementById('orgView').style.display !== 'none') initOrgDiagram();
+});
 
 </script>
 </body>
