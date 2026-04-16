@@ -1054,7 +1054,7 @@ function drawCircle(ctx,n,hov) {
   ctx.strokeStyle=hov?p.stroke:p.stroke+(isLight?'ff':'aa'); ctx.lineWidth=strokeW; ctx.stroke(); ctx.shadowBlur=0;
   // 文字サイズ：企業(count=10)のrを基準に固定（全ノード統一）
   var _rRef = BASE_MIN + ((10-minC)/(maxC-minC||1))*(BASE_MAX-BASE_MIN);
-  var _fsMobile = W < 600 ? 0.8 : 1.0;
+  var _fsMobile = 1.0;
   var fsC = Math.min(_rRef*0.48, Math.max(10,_rRef*0.44)) * _fsMobile;
   var fsL = Math.min(_rRef*0.22, Math.max(7, _rRef*0.19)) * _fsMobile;
   // maxWidthは円の直径の0.82倍に制限
@@ -1886,7 +1886,7 @@ function _drawOrgNode(c, x, y, r, p, label, count, isLight) {
   c.strokeStyle = p.stroke + (isLight ? 'ff' : 'aa'); c.lineWidth = strokeW; c.stroke(); c.shadowBlur = 0;
   // 文字サイズ：PROFILES企業(count=10)のrを基準に固定（PROFILES側と統一）
   var _rRef = BASE_MIN + ((10-minC)/(maxC-minC||1))*(BASE_MAX-BASE_MIN);
-  var _fsMobileOrg = W < 600 ? 0.8 : 1.0;
+  var _fsMobileOrg = 1.0;
   var fsC = Math.min(_rRef*0.48, Math.max(10,_rRef*0.44)) * _fsMobileOrg;
   var fsL = Math.min(_rRef*0.22, Math.max(7, _rRef*0.19)) * _fsMobileOrg;
   var maxW = r * 1.64;
