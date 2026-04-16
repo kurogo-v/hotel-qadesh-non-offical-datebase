@@ -970,7 +970,7 @@ function buildNodes() {
   // 全ノード同一orbit・同一r
   keys.forEach(function(key, i) {
     var angle = (i/n)*Math.PI*2 - Math.PI/2;
-    var r = catRadius(CATS[key].count, W) * (_isMobile ? 1.1 : 1.0);
+    var r = catRadius(CATS[key].count, W) * (_isMobile ? 1.21 : 1.0);
     nodes.push({ type:'circle', cat:key, cx:cx+Math.cos(angle)*ORBIT_R, cy:cy+Math.sin(angle)*ORBIT_R, r:r, count:CATS[key].count });
   });
 }
@@ -1054,7 +1054,7 @@ function drawCircle(ctx,n,hov) {
   ctx.strokeStyle=hov?p.stroke:p.stroke+(isLight?'ff':'aa'); ctx.lineWidth=strokeW; ctx.stroke(); ctx.shadowBlur=0;
   // 文字サイズ：企業(count=10)のrを基準に固定（全ノード統一）
   var _rRef = BASE_MIN + ((10-minC)/(maxC-minC||1))*(BASE_MAX-BASE_MIN);
-  var _fsMobile = 1.0;
+  var _fsMobile = W < 600 ? 0.7 : 1.0;
   var fsC = Math.min(_rRef*0.48, Math.max(10,_rRef*0.44)) * _fsMobile;
   var fsL = Math.min(_rRef*0.22, Math.max(7, _rRef*0.19)) * _fsMobile;
   // maxWidthは円の直径の0.82倍に制限
@@ -1783,7 +1783,7 @@ function _drawOrgRelView(c, W, H, cx, cy, cw, ch, isLight) {
   var nodeLabels = ['友好', '敵対', '中立'];
   var nodeCount = nodeLabels.length;
   // PROFILES catRadius(6,W) と同じ固定r・中心に近いorbit
-  var nodeR = catRadius(6, W) * (W < 600 ? 1.1 : 1.0);
+  var nodeR = catRadius(6, W) * (W < 600 ? 1.21 : 1.0);
   var orbit = ORBIT_R;
   nodeLabels.forEach(function(label, i) {
     var angle = (i / nodeCount) * Math.PI * 2 - Math.PI / 2;
@@ -1802,7 +1802,7 @@ function _drawOrgTypeView(c, W, H, cx, cy, cw, ch, isLight) {
   var typeKeys = ['企業', '公的機関', '秘密結社', '協会・組合', '組織犯罪集団（マフィア・極道等）', 'その他'];
   var typeLabels = ['企業', '公的機関', '不正事業集団', '協会・組合・結社', '組織犯罪集団', 'その他'];
   // PROFILES catRadius(6,W) と同じ固定r・中心に近いorbit
-  var nodeR = catRadius(6, W) * (W < 600 ? 1.1 : 1.0);
+  var nodeR = catRadius(6, W) * (W < 600 ? 1.21 : 1.0);
   var orbit = ORBIT_R;
   typeKeys.forEach(function(typeKey, i) {
     var angle = (i / typeKeys.length) * Math.PI * 2 - Math.PI / 2;
@@ -1886,7 +1886,7 @@ function _drawOrgNode(c, x, y, r, p, label, count, isLight) {
   c.strokeStyle = p.stroke + (isLight ? 'ff' : 'aa'); c.lineWidth = strokeW; c.stroke(); c.shadowBlur = 0;
   // 文字サイズ：PROFILES企業(count=10)のrを基準に固定（PROFILES側と統一）
   var _rRef = BASE_MIN + ((10-minC)/(maxC-minC||1))*(BASE_MAX-BASE_MIN);
-  var _fsMobileOrg = 1.0;
+  var _fsMobileOrg = W < 600 ? 0.7 : 1.0;
   var fsC = Math.min(_rRef*0.48, Math.max(10,_rRef*0.44)) * _fsMobileOrg;
   var fsL = Math.min(_rRef*0.22, Math.max(7, _rRef*0.19)) * _fsMobileOrg;
   var maxW = r * 1.64;
