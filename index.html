@@ -1857,7 +1857,6 @@ function _drawOrgRelView(c, W, H, cx, cy, cw, ch, isLight) {
     _drawOrgEdge(c, cx, cy, nx, ny, cw, ch, nodeR, st, isLight);
     _drawOrgNode(c, nx, ny, nodeR, st, label, cnt, isLight);
     _orgNodes.push({ id: 'rel_' + label, label: label, x: nx, y: ny, r: nodeR, color: st.color, orgs: orgsInGroup, isGroup: true, relKey: label });
-    if (orgsInGroup.length) _drawOrgMiniNodes(c, nx, ny, nodeR, angle, orgsInGroup, st, isLight);
   });
 }
 
@@ -1876,7 +1875,6 @@ function _drawOrgTypeView(c, W, H, cx, cy, cw, ch, isLight) {
     _drawOrgEdge(c, cx, cy, nx, ny, cw, ch, nodeR, st, isLight);
     _drawOrgNode(c, nx, ny, nodeR, st, typeLabels[i], orgsInGroup.length, isLight);
     _orgNodes.push({ id: 'type_' + typeKey, label: typeLabels[i], x: nx, y: ny, r: nodeR, color: st.color, orgs: orgsInGroup, isGroup: true, typeKey: typeKey });
-    if (orgsInGroup.length) _drawOrgMiniNodes(c, nx, ny, nodeR, angle, orgsInGroup, st, isLight);
   });
 }
 
