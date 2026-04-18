@@ -748,9 +748,9 @@ var ORGS = [
 ,
   {
     id: 'reikage',
-    name: '\u96f6\u5f71',
-    qadeshRel: ['\u53cb\u597d'],
-    types: ['\u305d\u306e\u4ed6'],
+    name: '零影',
+    qadeshRel: ['友好'],
+    types: ['その他'],
     corpType: '',
     recognition: '\u591a\u5c11\u306f\u77e5\u3089\u308c\u3066\u3044\u308b\uff08\u60c5\u5831\u901a\u30fb\u30ed\u30fc\u30ab\u30eb\uff09',
     frontExists: '\u306a\u3044',
@@ -762,9 +762,9 @@ var ORGS = [
   },
   {
     id: 'mhic',
-    name: 'Murder Handling Information Center\uff08MHIC\uff09',
-    qadeshRel: ['\u4e2d\u7acb'],
-    types: ['\u516c\u7684\u6a5f\u95a2'],
+    name: 'Murder Handling Information Center（MHIC）',
+    qadeshRel: ['中立'],
+    types: ['公的機関'],
     corpType: '',
     recognition: '\u307b\u307c\u77e5\u3089\u308c\u3066\u3044\u306a\u3044\uff08\u6975\u79d8\uff09',
     frontExists: '\u3042\u308b',
@@ -776,9 +776,9 @@ var ORGS = [
   },
   {
     id: 'valverde',
-    name: '\u30d0\u30eb\u30d9\u30eb\u30c7\u5171\u548c\u56fd',
-    qadeshRel: ['\u305d\u306e\u4ed6'],
-    types: ['\u56fd\u5bb6'],
+    name: 'バルベルデ共和国',
+    qadeshRel: ['その他'],
+    types: ['国家'],
     corpType: '',
     recognition: '\u5e83\u304f\u77e5\u3089\u308c\u3066\u3044\u308b\uff08\u516c\u7684\u30fb\u56fd\u969b\u7684\uff09',
     frontExists: '\u3042\u308b',
@@ -791,8 +791,8 @@ var ORGS = [
   {
     id: 'tableeggs',
     name: 'TABLEEGGS',
-    qadeshRel: ['\u53cb\u597d'],
-    types: ['\u5354\u4f1a\u30fb\u7d44\u5408'],
+    qadeshRel: ['友好'],
+    types: ['協会・組合・結社'],
     corpType: '',
     recognition: '\u307b\u307c\u77e5\u3089\u308c\u3066\u3044\u306a\u3044\uff08\u6975\u79d8\uff09',
     frontExists: '\u3042\u308b',
@@ -1857,6 +1857,7 @@ function _drawOrgRelView(c, W, H, cx, cy, cw, ch, isLight) {
     _drawOrgEdge(c, cx, cy, nx, ny, cw, ch, nodeR, st, isLight);
     _drawOrgNode(c, nx, ny, nodeR, st, label, cnt, isLight);
     _orgNodes.push({ id: 'rel_' + label, label: label, x: nx, y: ny, r: nodeR, color: st.color, orgs: orgsInGroup, isGroup: true, relKey: label });
+    if (orgsInGroup.length) _drawOrgMiniNodes(c, nx, ny, nodeR, angle, orgsInGroup, st, isLight);
   });
 }
 
@@ -1875,6 +1876,7 @@ function _drawOrgTypeView(c, W, H, cx, cy, cw, ch, isLight) {
     _drawOrgEdge(c, cx, cy, nx, ny, cw, ch, nodeR, st, isLight);
     _drawOrgNode(c, nx, ny, nodeR, st, typeLabels[i], orgsInGroup.length, isLight);
     _orgNodes.push({ id: 'type_' + typeKey, label: typeLabels[i], x: nx, y: ny, r: nodeR, color: st.color, orgs: orgsInGroup, isGroup: true, typeKey: typeKey });
+    if (orgsInGroup.length) _drawOrgMiniNodes(c, nx, ny, nodeR, angle, orgsInGroup, st, isLight);
   });
 }
 
