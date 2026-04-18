@@ -745,7 +745,6 @@ var ORGS = [
     symbolImg: 'fbi.png',
     corrImgKey: ''
   },
-,
   {
     id: 'reikage',
     name: '零影',
@@ -792,7 +791,7 @@ var ORGS = [
     id: 'tableeggs',
     name: 'TABLEEGGS',
     qadeshRel: ['友好'],
-    types: ['協会・組合・結社'],
+    types: ['協会・組合'],
     corpType: '',
     recognition: '\u307b\u307c\u77e5\u3089\u308c\u3066\u3044\u306a\u3044\uff08\u6975\u79d8\uff09',
     frontExists: '\u3042\u308b',
@@ -2103,6 +2102,7 @@ function showOrgGroupModal(node) {
 }
 
 function showOrgDetail(org) {
+  if (!org) return;
   var body = modal2Body;
   modal2Title.textContent = org.name + ' — 詳細';
   var isLight = document.body.classList.contains('light');
