@@ -129,6 +129,20 @@ canvas#diagram{display:block;width:100%;height:100%;cursor:default;}
 .tag-Member{background:rgba(201,168,76,0.12);color:#d4b840;border:1px solid rgba(201,168,76,0.2);}
 .tag-org-qadesh{background:rgba(201,168,76,0.12);color:#e8c96a;border:1px solid rgba(201,168,76,0.35);}
 body.light .tag-org-qadesh{background:rgba(154,112,48,0.10);color:#7a5010;border-color:rgba(154,112,48,0.45);}
+.tag-org-企業{background:rgba(136,216,168,0.10);color:#88d8a8;border:1px solid rgba(136,216,168,0.25);}
+.tag-org-公的機関{background:rgba(136,216,232,0.10);color:#88d8e8;border:1px solid rgba(136,216,232,0.25);}
+.tag-org-不正事業集団{background:rgba(212,168,240,0.10);color:#d4a8f0;border:1px solid rgba(212,168,240,0.25);}
+.tag-org-協会組合結社{background:rgba(128,216,216,0.10);color:#80d8d8;border:1px solid rgba(128,216,216,0.25);}
+.tag-org-組織犯罪集団{background:rgba(240,168,168,0.10);color:#f0a8a8;border:1px solid rgba(240,168,168,0.25);}
+.tag-org-国家{background:rgba(216,192,128,0.10);color:#d8c080;border:1px solid rgba(216,192,128,0.25);}
+.tag-org-その他{background:rgba(212,168,96,0.10);color:#d4a860;border:1px solid rgba(212,168,96,0.25);}
+body.light .tag-org-企業{background:rgba(32,104,64,0.10);color:#206840;border-color:rgba(32,104,64,0.35);}
+body.light .tag-org-公的機関{background:rgba(32,104,120,0.10);color:#206878;border-color:rgba(32,104,120,0.35);}
+body.light .tag-org-不正事業集団{background:rgba(96,40,152,0.10);color:#602898;border-color:rgba(96,40,152,0.35);}
+body.light .tag-org-協会組合結社{background:rgba(26,120,120,0.10);color:#1a7878;border-color:rgba(26,120,120,0.35);}
+body.light .tag-org-組織犯罪集団{background:rgba(136,32,32,0.10);color:#882020;border-color:rgba(136,32,32,0.35);}
+body.light .tag-org-国家{background:rgba(96,72,32,0.10);color:#604820;border-color:rgba(96,72,32,0.35);}
+body.light .tag-org-その他{background:rgba(122,88,40,0.10);color:#7a5828;border-color:rgba(122,88,40,0.35);}
 .tag-other{background:rgba(100,100,110,0.1);color:#888898;border:1px solid rgba(100,100,110,0.2);}
 /* ライトモード：タグ文字色を暗くして視認性確保 */
 body.light .tag-敵対{background:rgba(192,48,42,0.10);color:#a01c18;border-color:rgba(192,48,42,0.45);}
@@ -2046,7 +2060,18 @@ function orgCardHtml(org, context) {
   // context='rel': 関係性ビュー → 組織種別タグのみ（関係性はノード名で自明）
   // context='type': 種別ビュー → 関係性タグのみ（種別はノード名で自明）
   var typeTags = (context === 'type') ? '' :
-    (org.types || []).map(function(t) { return '<span class="char-tag tag-\u4f01\u696d">' + esc(t) + '</span>'; }).join('');
+    (org.types || []).map(function(t) {
+      var tn = ORG_TYPE_NODE[t];
+      var label = tn ? tn.node : t;
+      var cls = t === '企業'                          ? 'tag-org-企業'
+              : t === '公的機関'                      ? 'tag-org-公的機関'
+              : t === '秘密結社'                      ? 'tag-org-不正事業集団'
+              : t === '協会・組合'                    ? 'tag-org-協会組合結社'
+              : t === '組織犯罪集団（マフィア・極道等）' ? 'tag-org-組織犯罪集団'
+              : t === '国家'                          ? 'tag-org-国家'
+              : 'tag-org-その他';
+      return '<span class="char-tag ' + cls + '">' + esc(label) + '</span>';
+    }).join('');
   var relTags = (context === 'rel') ? '' :
     (org.qadeshRel || []).map(function(r) {
       var relCls = r==='\u6575\u5bfe' ? 'tag-\u6575\u5bfe'
