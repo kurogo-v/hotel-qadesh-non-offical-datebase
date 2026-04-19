@@ -776,7 +776,7 @@ var ORGS = [
   {
     id: 'valverde',
     name: 'バルベルデ共和国',
-    qadeshRel: ['その他'],
+    qadeshRel: ['隷属'],
     types: ['国家'],
     corpType: '',
     recognition: '\u5e83\u304f\u77e5\u3089\u308c\u3066\u3044\u308b\uff08\u516c\u7684\u30fb\u56fd\u969b\u7684\uff09',
@@ -819,6 +819,7 @@ var QADESH_REL_STYLE = {
   '友好': { stroke:'#2a2060', fill:'rgba(12,10,55,0.55)',  text:'#c8c0f0', sub:'rgba(200,192,240,0.7)' },
   '敵対': { stroke:'#c0302a', fill:'rgba(120,20,15,0.55)', text:'#f09090', sub:'rgba(240,144,144,0.7)' },
   '中立': { stroke:'#7a5828', fill:'rgba(48,30,8,0.55)',   text:'#d4a860', sub:'rgba(212,168,96,0.7)'  },
+  '隷属':{ stroke:'#602030', fill:'rgba(50,8,20,0.55)',  text:'#e898b0', sub:'rgba(232,152,176,0.7)' },
   'その他':{ stroke:'#384030', fill:'rgba(20,28,15,0.55)', text:'#c0c8b8', sub:'rgba(192,200,184,0.7)' }
 };
 
@@ -2079,7 +2080,7 @@ function showOrgGroupModal(node) {
     var ctx = node.relKey ? 'rel' : (node.typeKey ? 'type' : '');
     // 関係性ビュー → 組織種別順にソート、種別ビュー → 関係性順にソート
     var TYPE_ORDER = ['企業','公的機関','秘密結社','協会・組合','組織犯罪集団（マフィア・極道等）','その他'];
-    var REL_ORDER  = ['友好','敵対','中立','その他'];
+    var REL_ORDER  = ['友好','敵対','中立','隷属','その他'];
     var sorted = orgs.slice().sort(function(a, b) {
       if (ctx === 'rel') {
         var ai = TYPE_ORDER.indexOf((a.types || [])[0] || 'その他');
@@ -2110,38 +2111,33 @@ function showOrgDetail(org) {
   // 画像エリア
   // symbolImg（○○.png）がある場合はそれをトップ表示
   // ない場合は corrImgKey（相関図）があれば相関図をトップ表示
-  // どちらもない場合はダミーSVG
-  var dummySvg = 'data:image/svg+xml,' + encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">'
-    + '<rect width="960" height="540" fill="' + (isLight ? '#e8e6e0' : '#0a0a14') + '"/>'
-    + '<rect x="380" y="200" width="200" height="140" rx="8" fill="none" stroke="' + (isLight ? '#888' : '#666') + '" stroke-width="2"/>'
-    + '<text x="480" y="285" font-family="serif" font-size="18" fill="' + (isLight ? '#888' : '#666') + '" text-anchor="middle">NO IMAGE</text>'
-    + '<text x="480" y="310" font-family="monospace" font-size="11" fill="' + (isLight ? '#aaa' : '#444') + '" text-anchor="middle">' + org.name + '</text>'
-    + '</svg>'
-  );
+  // どちらもない場合は画像エリアを非表示
   var symbolSrc = org.symbolImg ? 'images/' + org.symbolImg : '';
   var corrSrc   = org.corrImgKey ? 'images/' + org.corrImgKey + (isLight ? '_corr_l.png' : '_corr_b.png') : '';
-  // トップ表示：symbolImg → corrImg → dummySvg
-  var mainSrc   = symbolSrc || corrSrc || dummySvg;
-  var imgHtml = '<div id="orgImgMain" style="margin-bottom:0.5rem;">'
-    + '<img class="full-img" id="orgMainImg" src="' + mainSrc + '" alt="' + esc(org.name) + '">'
-    + '</div>';
-  // タブ行：symbolImg タブ（ある場合）・corrImg タブ（ある場合）
-  var tabHtml = '<div class="org-img-tab-wrap">';
-  if (symbolSrc) {
-    tabHtml += '<div class="org-img-tab' + (!corrSrc ? ' active' : ' active') + '" id="orgTabImg" onclick="switchOrgTab(\'img\')" title="シンボル画像">'
-      + '<img src="' + symbolSrc + '" alt="画像">'
+  // 画像エリア：symbolImg・corrImgKey のどちらもない場合は非表示
+  var imgHtml = '';
+  var tabHtml = '';
+  if (symbolSrc || corrSrc) {
+    var mainSrc = symbolSrc || corrSrc;
+    imgHtml = '<div id="orgImgMain" style="margin-bottom:0.5rem;">'
+      + '<img class="full-img" id="orgMainImg" src="' + mainSrc + '" alt="' + esc(org.name) + '">'
       + '</div>';
+    tabHtml = '<div class="org-img-tab-wrap">';
+    if (symbolSrc) {
+      tabHtml += '<div class="org-img-tab active" id="orgTabImg" onclick="switchOrgTab(\'img\')" title="シンボル画像">'
+        + '<img src="' + symbolSrc + '" alt="画像">'
+        + '</div>';
+    }
+    if (corrSrc) {
+      var corrActive = !symbolSrc ? ' active' : '';
+      tabHtml += '<div class="org-img-tab' + corrActive + '" id="orgTabCorr" onclick="switchOrgTab(\'corr\')" title="相関図">'
+        + '<img src="' + corrSrc + '" alt="相関図">'
+        + '</div>';
+    }
+    tabHtml += '</div>';
   }
-  if (corrSrc) {
-    var corrActive = !symbolSrc ? ' active' : '';
-    tabHtml += '<div class="org-img-tab' + corrActive + '" id="orgTabCorr" onclick="switchOrgTab(\'corr\')" title="相関図">'
-      + '<img src="' + corrSrc + '" alt="相関図">'
-      + '</div>';
-  }
-  tabHtml += '</div>';
 
-  window._orgDetailData = { dummySvg: dummySvg, symbolSrc: symbolSrc, corrSrc: corrSrc, corrImgKey: org.corrImgKey || '' };
+  window._orgDetailData = { symbolSrc: symbolSrc, corrSrc: corrSrc, corrImgKey: org.corrImgKey || '' };
 
   // 項目リスト（フォームの順番通り）
   function row(label, val) {
@@ -2200,7 +2196,7 @@ function switchOrgTab(tab) {
   var tabCorr = document.getElementById('orgTabCorr');
   var isLight = document.body.classList.contains('light');
   if (tab === 'img') {
-    mainImg.src = d.symbolSrc || d.dummySvg;
+    mainImg.src = d.symbolSrc;
     if (tabImg) tabImg.classList.add('active');
     if (tabCorr) tabCorr.classList.remove('active');
     window._orgActiveTab = 'img';
