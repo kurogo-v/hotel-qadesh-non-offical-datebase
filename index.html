@@ -640,7 +640,7 @@ const CHARS = [
   {"id": "lucas", "name": "Lucas kaneda(ルーカス・カネダ)", "number": "-", "affiliations": ["LSI Industry", "Executive"], "nationality": "アメリカ", "keyword": "LSI Industry/Horsemens", "notionUrl": "", "iconKey": "lucas", "catGroup": "none", "subGroup": "", "fullImgKeys": ["lucas"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "Lucas kaneda ルーカス カネダ ルーカス・カネダ るーかす かねだ るーかす・かねだ"},
   {"id": "cheri", "name": "シェリ・スティア（Cheri Stia）", "number": "???", "affiliations": ["Member", "Consultant"], "nationality": "イングランド", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "cheri", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["cheri"], "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド", "nameSearch": "シェリ スティア シェリ・スティア Cheri Stia しぇり すてぃあ しぇり・すてぃあ"},
   {"id": "ryuu", "name": "緑狐（リュー・フゥー）", "number": "81181", "affiliations": ["Member", "Trade Hublist", "Broker", "Negotiator"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "ryuu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["ryuu"], "corrImgKey": "ryuu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "緑狐 リュー フゥー リュー・フゥー りょっこ みどりきつね りゅー ふぅー りゅー・ふぅー リョッコ ミドリキツネ"},
-  {"id": "honyu", "name": "紅雨（ホンユー）", "number": "14719", "affiliations": ["Member", "月華会", "Executive"], "nationality": "中国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "honyu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["honyu"], "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "紅雨 ホンユー こうう べにあめ ほんゆー コウウ ベニアメ"},
+  {"id": "honyu", "name": "紅雨（ホンユー）", "number": "14719", "affiliations": ["Member", "月華会", "Executive"], "nationality": "中国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "honyu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["honyu"], "corrImgKey": "honyu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "紅雨 ホンユー こうう べにあめ ほんゆー コウウ ベニアメ"},
   {"id": "mathilda", "name": "Mathilda・S・Albert", "number": "1510", "affiliations": ["Member", "Secret Scale Service", "Executive"], "nationality": "ドイツ連邦共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "mathilda", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["mathilda"], "nationalitySearch": "ドイツ ドイツ連邦共和国 DE DEU Germany germany GERMANY", "nameSearch": "Mathilda S Albert Mathilda・S・Albert"},
   {"id": "bee", "name": "ビー・ファンフー", "number": "8782", "affiliations": ["Member", "Killer"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "bee", "catGroup": "qadesh", "subGroup": "", "fullImgKeys": ["bee", "bee2"], "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "ビー ファンフー ビー・ファンフー びー ふぁんふー びー・ふぁんふー"},
   {"id": "albireo", "name": "アルビレオ・オルバース", "number": "-", "affiliations": ["該当分類なし"], "nationality": "不明", "keyword": "カデシュ・フランス", "notionUrl": "", "iconKey": "albireo", "catGroup": "france", "subGroup": "", "fullImgKeys": ["albireo"], "nationalitySearch": "国籍不明 不明", "nameSearch": "アルビレオ オルバース アルビレオ・オルバース あるびれお おるばーす あるびれお・おるばーす"},
@@ -840,7 +840,7 @@ var QADESH_REL_STYLE = {
 var CATS = {
   '\u6575\u5bfe': { label:'\u6575\u5bfe\u7d44\u7e54', stroke:'#c0302a', fill:'rgba(120,20,15,0.55)', text:'#f09090', sub:'rgba(240,144,144,0.7)', count:1,
     tags:['\u6681\u306e\u6843','\u004e\u006f\u006e\u0043\u0052\u0045\u0044\u0049\u0054','\u30d6\u30fc\u30eb\u5c0f\u968a','\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5\u30fb\u30d5\u30e9\u30f3\u30b9'] },
-  '\u516c\u7684': { label:'\u516c\u7684\u6a5f\u95a2', stroke:'#206878', fill:'rgba(10,50,65,0.55)', text:'#88d8e8', sub:'rgba(136,216,232,0.7)', count:6,
+  '\u516c\u7684': { label:'\u516c\u7684\u6a5f\u95a2', stroke:'#206878', fill:'rgba(10,50,65,0.55)', text:'#88d8e8', sub:'rgba(136,216,232,0.7)', count:7,
     tags:['FBI','CIA','ISMO','SVR','Striker 3rd Team'] },
   '\u4f01\u696d': { label:'\u4f01\u696d', stroke:'#206840', fill:'rgba(10,55,25,0.55)', text:'#88d8a8', sub:'rgba(136,216,168,0.7)', count:10,
     tags:['G.C.C.',"RAVEN'S EXPRESS",'Southern Cross Engineering','G.E.N.','Unicorn Crown','\u30a2\u30f3\u30bb\u30e0\u5546\u4f1a','Willa','\u5149\u83ef\u4e16\u754c\u9280\u884c','\u661f\u85ac\u72d7\u9752\u96fb\u5b50','Beyond Horizons','LSI Industry','La/C=na','Trunk Corporation','Clean Unclean','IMR INDUSTRY','\u682a\u5f0f\u4f1a\u793e\u30a2\u30f3\u30c1\u30e9',"Tomcat's Toy Box Trade Co.",'Schwarze Katze','\u6c34\u7121\u6708\u91cd\u5de5','Bar Casa Segreto','EGGNOGS','\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a','\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3'] },
@@ -1512,18 +1512,22 @@ function showYukoModal(){
     { label:'\u305d\u306e\u4ed6',                   filter:['\u58ca\u8599','Cuddly Plush Corps'],                                                            color:'rgba(190,130,50,0.85)'  }
   ];
   var btns=window._yukoGroups.map(function(g,gi){
-    var total=g.filter.reduce(function(sum,org){
-      return sum+CHARS.filter(function(c){return(c.affiliations||[]).indexOf(org)>=0;}).length;
-    },0);
-    if(!total) return '';
+    var activeOrgs=g.filter.filter(function(org){
+      return CHARS.some(function(c){return(c.affiliations||[]).indexOf(org)>=0;});
+    });
+    if(!activeOrgs.length) return '';
     return '<button class="subcat-btn cat-\u53cb\u597d" id="ykGrpBtn'+gi+'" onclick="showYukoGroup('+gi+')"'
       +' style="border-color:'+g.color+';color:'+g.color+';"'
-      +'>'+g.label+' <span style="font-size:0.65rem;opacity:0.7;background:rgba(255,255,255,0.08);border-radius:3px;padding:1px 5px;margin-left:3px;">'+total+'</span>'
+      +'>'+g.label+' <span style="font-size:0.65rem;opacity:0.7;background:rgba(255,255,255,0.08);border-radius:3px;padding:1px 5px;margin-left:3px;">'+activeOrgs.length+'</span>'
       +' <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>';
   }).join('');
   modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('\u9805\u76ee\u3092\u9078\u629e')+btns
     +'</div><div class="divider-line"></div><div id="ykSub"></div>';
-  var _ykCount=modalBody.querySelectorAll('[id^="ykGrpBtn"]').length;
+  var _ykCount=window._yukoGroups.reduce(function(sum,g){
+    return sum+g.filter.filter(function(org){
+      return CHARS.some(function(c){return(c.affiliations||[]).indexOf(org)>=0;});
+    }).length;
+  },0);
   window._ykCount=_ykCount;
   if(CATS['\u53cb\u597d'].count !== _ykCount){ CATS['\u53cb\u597d'].count = _ykCount; buildNodes(); draw(); }
 }
