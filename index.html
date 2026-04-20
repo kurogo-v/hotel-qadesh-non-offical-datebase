@@ -826,8 +826,9 @@ var ORGS = [
     frontDetail: '',
     relatedUrl: '',
     description: '国際的複合企業体（コングロマリット）である「E&E Holdings」の持株会社。グループ全体では建設や製薬、電気通信や自動車などの製造業を手広く展開している。その内、軍需品製造に特化した企業がE&E Arsenalである。\n暗殺用の小型ナイフから核搭載大陸間弾道ミサイルまで製造をしている。',
-    symbolImg: '',
-    corrImgKey: 'ee_arsenal'
+    symbolImg: 'ee_arsenal4.png',
+    corrImgKey: 'ee_arsenal',
+    extraImgs: ['ee_arsenal3.png', 'ee_arsenal2.png', 'ee_arsenal1.png']
   }
 ];
 
@@ -2219,14 +2220,21 @@ function showOrgDetail(org) {
       + '</div>';
     tabHtml = '<div class="org-img-tab-wrap">';
     if (symbolSrc) {
-      tabHtml += '<div class="org-img-tab active" id="orgTabImg" onclick="switchOrgTab(\'img\')" title="シンボル画像">'
+      tabHtml += '<div class="org-img-tab active" id="orgTabImg" onclick="switchOrgImg(\'img\', this)" title="シンボル画像">'
         + '<img src="' + symbolSrc + '" alt="画像">'
         + '</div>';
     }
     if (corrSrc) {
       var corrActive = !symbolSrc ? ' active' : '';
-      tabHtml += '<div class="org-img-tab' + corrActive + '" id="orgTabCorr" onclick="switchOrgTab(\'corr\')" title="相関図">'
+      tabHtml += '<div class="org-img-tab' + corrActive + '" id="orgTabCorr" onclick="switchOrgImg(\'corr\', this)" title="相関図">'
         + '<img src="' + corrSrc + '" alt="相関図">'
+        + '</div>';
+    }
+    var extraImgs = org.extraImgs || [];
+    for (var ei = 0; ei < extraImgs.length; ei++) {
+      var eSrc = 'images/' + extraImgs[ei];
+      tabHtml += '<div class="org-img-tab" onclick="switchOrgImg(\'' + eSrc + '\', this)" title="' + esc(extraImgs[ei]) + '">'
+        + '<img src="' + eSrc + '" alt="' + esc(extraImgs[ei]) + '">'
         + '</div>';
     }
     tabHtml += '</div>';
@@ -2284,24 +2292,31 @@ function showOrgDetail(org) {
 }
 
 function switchOrgTab(tab) {
+  // 後方互換ラッパー（applyMode等から呼ばれる場合に備えて残す）
+  if (tab === 'img') switchOrgImg('img', document.getElementById('orgTabImg'));
+  else switchOrgImg('corr', document.getElementById('orgTabCorr'));
+}
+function switchOrgImg(src, tabEl) {
   var d = window._orgDetailData;
   if (!d) return;
   var mainImg = document.getElementById('orgMainImg');
-  var tabImg = document.getElementById('orgTabImg');
-  var tabCorr = document.getElementById('orgTabCorr');
   var isLight = document.body.classList.contains('light');
-  if (tab === 'img') {
+  // アクティブをリセット
+  var allTabs = document.querySelectorAll('.org-img-tab');
+  for (var i = 0; i < allTabs.length; i++) allTabs[i].classList.remove('active');
+  if (tabEl) tabEl.classList.add('active');
+  // 画像切り替え
+  if (src === 'img') {
     mainImg.src = d.symbolSrc;
-    if (tabImg) tabImg.classList.add('active');
-    if (tabCorr) tabCorr.classList.remove('active');
     window._orgActiveTab = 'img';
-  } else {
+  } else if (src === 'corr') {
     if (d.corrImgKey) {
       mainImg.src = 'images/' + d.corrImgKey + (isLight ? '_corr_l.png' : '_corr_b.png');
     }
-    if (tabCorr) tabCorr.classList.add('active');
-    if (tabImg) tabImg.classList.remove('active');
     window._orgActiveTab = 'corr';
+  } else {
+    mainImg.src = src;
+    window._orgActiveTab = 'extra';
   }
 }
 
