@@ -508,6 +508,8 @@ const IMAGES = {
   'lucius':  'images/lucius_icon.png',
   'wu':      'images/wu_icon.png',
   'wu_kuonshi': 'images/wu_kuonshi_icon.png',
+  'gibson':    'images/gibson_icon.png',
+  'magpie':    'images/magpie_icon.png',
 };
 
 const FULL_IMGS = {
@@ -620,6 +622,9 @@ const FULL_IMGS = {
   'wu':       'images/wu.png',
   'wu_kuonshi': 'images/wu_kuonshi.png',
   'lucius2':  'images/lucius2.png',
+  'gibson':   'images/gibson.png',
+  'gibson1':  'images/gibson1.png',
+  'magpie':   'images/magpie.png',
 };
 const CHARS = [
   {"id": "rizzot", "name": "リゾット", "number": "-", "affiliations": ["BAR REBELLION", "該当分類なし"], "nationality": "ヨーロッパ某国", "keyword": "BAR REBELLION", "notionUrl": "", "iconKey": "rizzot", "catGroup": "none", "subGroup": "rebellion", "nationalitySearch": "国籍不明 不明", "nameSearch": "リゾット りぞっと"},
@@ -722,7 +727,7 @@ const CHARS = [
   {"id": "lucius", "name": "Lucius·Rathii（ルキウス・ラティー）", "number": "-", "affiliations": ["カデシュフランス", "Killer"], "nationality": "フランス", "keyword": "彫り師/コードネーム:Luin（ルイン）", "notionUrl": "", "iconKey": "lucius", "catGroup": "france", "subGroup": "", "fullImgKeys": ["lucius", "lucius2"], "nationalitySearch": "フランス FR FRA France france FRANCE", "nameSearch": "Lucius Rathii ルキウス ラティー ルキウス・ラティー るきうす らてぃー るきうす・らてぃー"},
   {"id": "wu", "name": "无", "number": "49827", "affiliations": ["Member", "Secret Scale Service", "Assassin", "Killer", "Cleaner"], "nationality": "-", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "wu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["wu"], "corrImgKey": "wu", "note": "掃除屋\n盲目の掃除屋\n九龍にてかつての城塩を思わせる建物群を「零影楼」と名付けて拠点にしている", "nationalitySearch": "国籍不明 不明", "nameSearch": "无 ウー うー Wu wu WU"},
   {"id": "wu_kuonshi", "name": "无 光是", "number": "49828", "affiliations": ["Member", "Secret Scale Service", "EGGNOGS", "Killer", "Assassin", "Cleaner"], "nationality": "-", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "wu_kuonshi", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["wu_kuonshi"], "corrImgKey": "wu_kuonshi", "note": "掃除屋\n本名 国籍不詳\nかつてアンファン・アルムと呼ばれギャングにいい様に扱われていた少女\n今はその名は捨て无光是として仒間達と様々な事を学び、一人の人間として成長を続けている", "nationalitySearch": "国籍不明 不明", "nameSearch": "无光是 无 光是 ウー クォンシー ウー・クォンシー うー くぉんしー うー・くぉんしー Wu Kuonshi Wu-Kuonshi"},
-  {"id": "gibson", "name": "尾紐 希(オムスビ ノゾミ)/ギブソン", "number": "-", "affiliations": ["ISMO", "Spy", "Public institution"], "nationality": "日本", "keyword": "ISMO", "notionUrl": "", "iconKey": "gibson", "catGroup": "none", "subGroup": "", "fullImgKeys": ["gibson"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "尾紐希 尾紐 希 おむすびのぞみ おむすび のぞみ オムスビ ノゾミ オムスビノゾミ ギブソン gibson Gibson GIBSON"},
+  {"id": "gibson", "name": "尾紐 希(オムスビ ノゾミ)/ギブソン", "number": "-", "affiliations": ["ISMO", "Spy", "Public institution"], "nationality": "日本", "keyword": "ISMO", "notionUrl": "", "iconKey": "gibson", "catGroup": "none", "subGroup": "", "fullImgKeys": ["gibson", "gibson1"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "尾紐希 尾紐 希 おむすびのぞみ おむすび のぞみ オムスビ ノゾミ オムスビノゾミ ギブソン gibson Gibson GIBSON"},
   {"id": "magpie", "name": "Mr.Magpie", "number": "-", "affiliations": ["E&E Arsenal", "Arms Dealer", "Negotiator", "Spy"], "nationality": "イギリス・スコットランド", "keyword": "E&E Arsenal", "notionUrl": "", "iconKey": "magpie", "catGroup": "none", "subGroup": "", "fullImgKeys": ["magpie"], "corrImgKey": "magpie", "note": "いわゆる「武器商人」ではあるものの、基本的には各国軍及び各国法執行機関への納入が基本な為武器はあまり売らない。", "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド スコットランド Scotland scotland SCOTLAND", "nameSearch": "Mr.Magpie MrMagpie mrmapie Mr Magpie まぐぱい マグパイ"}
 ];
 // =====================================================================
@@ -859,7 +864,7 @@ var CATS = {
     tags:['\u6681\u306e\u6843','\u004e\u006f\u006e\u0043\u0052\u0045\u0044\u0049\u0054','\u30d6\u30fc\u30eb\u5c0f\u968a','\u30db\u30c6\u30eb\u30ab\u30c7\u30b7\u30e5\u30fb\u30d5\u30e9\u30f3\u30b9'] },
   '\u516c\u7684': { label:'\u516c\u7684\u6a5f\u95a2', stroke:'#206878', fill:'rgba(10,50,65,0.55)', text:'#88d8e8', sub:'rgba(136,216,232,0.7)', count:7,
     tags:['FBI','CIA','ISMO','SVR','Striker 3rd Team'] },
-  '\u4f01\u696d': { label:'\u4f01\u696d', stroke:'#206840', fill:'rgba(10,55,25,0.55)', text:'#88d8a8', sub:'rgba(136,216,168,0.7)', count:11,
+  '\u4f01\u696d': { label:'\u4f01\u696d', stroke:'#206840', fill:'rgba(10,55,25,0.55)', text:'#88d8a8', sub:'rgba(136,216,168,0.7)', count:12,
     tags:['G.C.C.',"RAVEN'S EXPRESS",'Southern Cross Engineering','G.E.N.','Unicorn Crown','\u30a2\u30f3\u30bb\u30e0\u5546\u4f1a','Willa','\u5149\u83ef\u4e16\u754c\u9280\u884c','\u661f\u85ac\u72d7\u9752\u96fb\u5b50','Beyond Horizons','LSI Industry','La/C=na','Trunk Corporation','Clean Unclean','IMR INDUSTRY','\u682a\u5f0f\u4f1a\u793e\u30a2\u30f3\u30c1\u30e9',"Tomcat's Toy Box Trade Co.",'Schwarze Katze','\u6c34\u7121\u6708\u91cd\u5de5','Bar Casa Segreto','EGGNOGS','\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a','\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3'] },
   '\u53cb\u597d': { label:'\u53cb\u597d\u7d44\u7e54', stroke:'#2a2060', fill:'rgba(12,10,55,0.55)', text:'#c8c0f0', sub:'rgba(200,192,240,0.7)', count:11,
     tags:['\u516b\u83ef\u7d44',"La Famiglia D'Oro",'\u30ed\u30fc\u30b6\u30d6\u30eb\u30fc\u30d5\u30a1\u30df\u30ea\u30fc','\u96f6\u5f71','Secret Scale Service','\u5bc6\u58f2\u5bfe\u7b56\u8ab2','REvolve','\u30ca\u30fc\u30ef\u30eb\u5546\u4f1a','EMC','Silky','\u5b64\u5150\u9662','\u30c6\u30f3\u30d6\u30fb\u30cf\u30a6\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0',"Ghoul's Grasp",'MHIC','BAR REBELLION','\u30a2\u30e2\u30eb\u30b0','\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a','Paradise of Bubble','\u6708\u86c7\u4f1a','\u6708\u83ef\u4f1a','Enforcer of Justice','Epithymia of Hexis','StrorkCompany','CW-SnackC-',"Kowloon&Co.",'月華会','Trade Hublist','Cuddly Plush Corps'] },
@@ -2304,3 +2309,30 @@ function switchOrgTab(tab) {
 function switchOrgImg(src, tabEl) {
   var d = window._orgDetailData;
   if (!d) return
+  var mainImg = document.getElementById('orgMainImg');
+  var isLight = document.body.classList.contains('light');
+  var allTabs = document.querySelectorAll('.org-img-tab');
+  for (var i = 0; i < allTabs.length; i++) allTabs[i].classList.remove('active');
+  if (tabEl) tabEl.classList.add('active');
+  if (src === 'img') {
+    mainImg.src = d.symbolSrc;
+    window._orgActiveTab = 'img';
+  } else if (src === 'corr') {
+    if (d.corrImgKey) {
+      mainImg.src = 'images/' + d.corrImgKey + (isLight ? '_corr_l.png' : '_corr_b.png');
+    }
+    window._orgActiveTab = 'corr';
+  } else {
+    mainImg.src = src;
+    window._orgActiveTab = 'extra';
+  }
+}
+
+// orgDetailOverlay は modal2Overlay を使用（closeModal2 / ESC / 外クリックで閉じる）
+
+window.addEventListener('resize', function() {
+  resize();
+});
+</script>
+</body>
+</html>
