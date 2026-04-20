@@ -642,7 +642,7 @@ const CHARS = [
   {"id": "ryuu", "name": "緑狐（リュー・フゥー）", "number": "81181", "affiliations": ["Member", "Trade Hublist", "Broker", "Negotiator"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "ryuu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["ryuu"], "corrImgKey": "ryuu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "緑狐 リュー フゥー リュー・フゥー りょっこ みどりきつね りゅー ふぅー りゅー・ふぅー リョッコ ミドリキツネ"},
   {"id": "honyu", "name": "紅雨（ホンユー）", "number": "14719", "affiliations": ["Member", "月華会", "Executive"], "nationality": "中国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "honyu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["honyu"], "corrImgKey": "honyu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "紅雨 ホンユー こうう べにあめ ほんゆー コウウ ベニアメ"},
   {"id": "mathilda", "name": "Mathilda・S・Albert", "number": "1510", "affiliations": ["Member", "Secret Scale Service", "Executive"], "nationality": "ドイツ連邦共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "mathilda", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["mathilda"], "nationalitySearch": "ドイツ ドイツ連邦共和国 DE DEU Germany germany GERMANY", "nameSearch": "Mathilda S Albert Mathilda・S・Albert"},
-  {"id": "bee", "name": "ビー・ファンフー", "number": "8782", "affiliations": ["Member", "Killer"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "bee", "catGroup": "qadesh", "subGroup": "", "fullImgKeys": ["bee", "bee2"], "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "ビー ファンフー ビー・ファンフー びー ふぁんふー びー・ふぁんふー"},
+  {"id": "bee", "name": "ビー・ファンフー", "number": "8782", "affiliations": ["Member", "Killer"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "bee", "catGroup": "qadesh", "subGroup": "", "fullImgKeys": ["bee", "bee2"], "corrImgKey": "bee", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "ビー ファンフー ビー・ファンフー びー ふぁんふー びー・ふぁんふー"},
   {"id": "albireo", "name": "アルビレオ・オルバース", "number": "-", "affiliations": ["該当分類なし"], "nationality": "不明", "keyword": "カデシュ・フランス", "notionUrl": "", "iconKey": "albireo", "catGroup": "france", "subGroup": "", "fullImgKeys": ["albireo"], "nationalitySearch": "国籍不明 不明", "nameSearch": "アルビレオ オルバース アルビレオ・オルバース あるびれお おるばーす あるびれお・おるばーす"},
   {"id": "raven", "name": "レイヴン", "number": "12823", "affiliations": ["Member", "八華組", "Killer", "EGGNOGS"], "nationality": "日本", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "raven", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["raven"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "レイヴン れいゔん"},
   {"id": "amabuki", "name": "アマブキ", "number": "11321", "affiliations": ["Member", "テンブ・ハウスクリーニング", "Cleaner"], "nationality": "日本", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "amabuki", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["amabuki"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "アマブキ あまぶき"},
@@ -2298,34 +2298,4 @@ function switchOrgTab(tab) {
 }
 function switchOrgImg(src, tabEl) {
   var d = window._orgDetailData;
-  if (!d) return;
-  var mainImg = document.getElementById('orgMainImg');
-  var isLight = document.body.classList.contains('light');
-  // アクティブをリセット
-  var allTabs = document.querySelectorAll('.org-img-tab');
-  for (var i = 0; i < allTabs.length; i++) allTabs[i].classList.remove('active');
-  if (tabEl) tabEl.classList.add('active');
-  // 画像切り替え
-  if (src === 'img') {
-    mainImg.src = d.symbolSrc;
-    window._orgActiveTab = 'img';
-  } else if (src === 'corr') {
-    if (d.corrImgKey) {
-      mainImg.src = 'images/' + d.corrImgKey + (isLight ? '_corr_l.png' : '_corr_b.png');
-    }
-    window._orgActiveTab = 'corr';
-  } else {
-    mainImg.src = src;
-    window._orgActiveTab = 'extra';
-  }
-}
-
-// orgDetailOverlay は modal2Overlay を使用（closeModal2 / ESC / 外クリックで閉じる）
-
-window.addEventListener('resize', function() {
-  if (document.getElementById('orgView').style.display !== 'none') initOrgDiagram();
-});
-
-</script>
-</body>
-</html>
+  if (!d) return
