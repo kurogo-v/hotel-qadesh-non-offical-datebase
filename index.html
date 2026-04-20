@@ -721,7 +721,9 @@ const CHARS = [
   {"id": "vincent", "name": "Vincent Alicetweed Albert（ヴィンセント・アリスティード・アルベール）", "number": "-", "affiliations": ["Paradise of Bubble", "Casino dealer"], "nationality": "Switzerland", "keyword": "Paradise of Bubble/Dealer", "notionUrl": "", "iconKey": "vincent", "catGroup": "none", "subGroup": "", "fullImgKeys": ["vincent"], "nationalitySearch": "スイス CH CHE Switzerland switzerland SWITZERLAND", "nameSearch": "Vincent Alicetweed Albert ヴィンセント アリスティード アルベール ヴィンセント・アリスティード・アルベール ゔぃんせんと ありすてぃーど あるべーる ゔぃんせんと・ありすてぃーど・あるべーる"},
   {"id": "lucius", "name": "Lucius·Rathii（ルキウス・ラティー）", "number": "-", "affiliations": ["カデシュフランス", "Killer"], "nationality": "フランス", "keyword": "彫り師/コードネーム:Luin（ルイン）", "notionUrl": "", "iconKey": "lucius", "catGroup": "france", "subGroup": "", "fullImgKeys": ["lucius", "lucius2"], "nationalitySearch": "フランス FR FRA France france FRANCE", "nameSearch": "Lucius Rathii ルキウス ラティー ルキウス・ラティー るきうす らてぃー るきうす・らてぃー"},
   {"id": "wu", "name": "无", "number": "49827", "affiliations": ["Member", "Secret Scale Service", "Assassin", "Killer", "Cleaner"], "nationality": "-", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "wu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["wu"], "corrImgKey": "wu", "note": "掃除屋\n盲目の掃除屋\n九龍にてかつての城塩を思わせる建物群を「零影楼」と名付けて拠点にしている", "nationalitySearch": "国籍不明 不明", "nameSearch": "无 ウー うー Wu wu WU"},
-  {"id": "wu_kuonshi", "name": "无 光是", "number": "49828", "affiliations": ["Member", "Secret Scale Service", "EGGNOGS", "Killer", "Assassin", "Cleaner"], "nationality": "-", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "wu_kuonshi", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["wu_kuonshi"], "corrImgKey": "wu_kuonshi", "note": "掃除屋\n本名 国籍不詳\nかつてアンファン・アルムと呼ばれギャングにいい様に扱われていた少女\n今はその名は捨て无光是として仒間達と様々な事を学び、一人の人間として成長を続けている", "nationalitySearch": "国籍不明 不明", "nameSearch": "无光是 无 光是 ウー クォンシー ウー・クォンシー うー くぉんしー うー・くぉんしー Wu Kuonshi Wu-Kuonshi"}
+  {"id": "wu_kuonshi", "name": "无 光是", "number": "49828", "affiliations": ["Member", "Secret Scale Service", "EGGNOGS", "Killer", "Assassin", "Cleaner"], "nationality": "-", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "wu_kuonshi", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["wu_kuonshi"], "corrImgKey": "wu_kuonshi", "note": "掃除屋\n本名 国籍不詳\nかつてアンファン・アルムと呼ばれギャングにいい様に扱われていた少女\n今はその名は捨て无光是として仒間達と様々な事を学び、一人の人間として成長を続けている", "nationalitySearch": "国籍不明 不明", "nameSearch": "无光是 无 光是 ウー クォンシー ウー・クォンシー うー くぉんしー うー・くぉんしー Wu Kuonshi Wu-Kuonshi"},
+  {"id": "gibson", "name": "尾紐 希(オムスビ ノゾミ)/ギブソン", "number": "-", "affiliations": ["ISMO", "Spy", "Public institution"], "nationality": "日本", "keyword": "ISMO", "notionUrl": "", "iconKey": "gibson", "catGroup": "none", "subGroup": "", "fullImgKeys": ["gibson"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "尾紐希 尾紐 希 おむすびのぞみ おむすび のぞみ オムスビ ノゾミ オムスビノゾミ ギブソン gibson Gibson GIBSON"},
+  {"id": "magpie", "name": "Mr.Magpie", "number": "-", "affiliations": ["E&E Arsenal", "Arms Dealer", "Negotiator", "Spy"], "nationality": "イギリス・スコットランド", "keyword": "E&E Arsenal", "notionUrl": "", "iconKey": "magpie", "catGroup": "none", "subGroup": "", "fullImgKeys": ["magpie"], "corrImgKey": "magpie", "note": "いわゆる「武器商人」ではあるものの、基本的には各国軍及び各国法執行機関への納入が基本な為武器はあまり売らない。", "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド スコットランド Scotland scotland SCOTLAND", "nameSearch": "Mr.Magpie MrMagpie mrmapie Mr Magpie まぐぱい マグパイ"}
 ];
 // =====================================================================
 // カテゴリ定義
@@ -1222,6 +1224,7 @@ function _cardTags(c) {
   if(aff.indexOf('US Navy')>=0) g3.push({l:'US Navy', cl:'\u516c\u7684'});
   if(aff.indexOf('CIA')>=0) g3.push({l:'CIA', cl:'\u516c\u7684'});
   if(aff.indexOf('Sir Francis')>=0) g3.push({l:'Sir Francis', cl:'\u4f01\u696d'});
+  if(aff.indexOf('E&E Arsenal')>=0) g3.push({l:'E&E Arsenal', cl:'\u4f01\u696d'});
   if(aff.indexOf('\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3')>=0) g3.push({l:'\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3', cl:'\u4f01\u696d'});
   if(aff.indexOf('Paradise of Bubble')>=0) g3.push({l:'Paradise of Bubble', cl:'\u53cb\u597d'});
   if(aff.indexOf('\u7121\u6240\u5c5e')>=0) g3.push({l:'\u7121\u6240\u5c5e', cl:'\u4e2d\u7acb'});
@@ -1329,6 +1332,7 @@ function buildRegInfo(char) {
   if(aff.indexOf('\u8b66\u5bdf\u5e81')>=0) g3.push({node:'\u516c\u7684\u6a5f\u95a2',sub:'\u8b66\u5bdf\u5e81'});
   if(aff.indexOf('US Navy')>=0) g3.push({node:'\u516c\u7684\u6a5f\u95a2',sub:'US Navy'});
   if(aff.indexOf('Sir Francis')>=0) g3.push({node:'\u4f01\u696d',sub:'Sir Francis'});
+  if(aff.indexOf('E&E Arsenal')>=0) g3.push({node:'\u4f01\u696d',sub:'E&E Arsenal'});
   if(aff.indexOf('CIA')>=0) g3.push({node:'\u516c\u7684\u6a5f\u95a2',sub:'CIA'});
   if(aff.indexOf('Scotland Yard')>=0) g3.push({node:'\u516c\u7684\u6a5f\u95a2',sub:'Scotland Yard'});
   if(aff.indexOf('\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3')>=0) g3.push({node:'\u4f01\u696d',sub:'\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3'});
@@ -1605,6 +1609,7 @@ function showKigyoModal(){
     +'<button class="subcat-btn" id="kgBtn8" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),8);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3\')>=0;}),false)">\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="kgBtn9" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),9);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'BAR REBELLION\')>=0;}),false)">BAR REBELLION <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'<button class="subcat-btn" id="kgBtn10" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),10);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'The Night Cloud\')>=0;}),false)">The Night Cloud <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+    +'<button class="subcat-btn" id="kgBtn11" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||12),11);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'E&E Arsenal\')>=0;}),false)">E&E Arsenal <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
     +'</div><div class="divider-line"></div><div id="kgSub"></div>';
   var _kgCount = modalBody.querySelectorAll('[id^="kgBtn"]').length;
   window._kgCount = _kgCount;
