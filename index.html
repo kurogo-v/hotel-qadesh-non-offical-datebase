@@ -510,6 +510,7 @@ const IMAGES = {
   'wu_kuonshi': 'images/wu_kuonshi_icon.png',
   'gibson':    'images/gibson_icon.png',
   'magpie':    'images/magpie_icon.png',
+  'nowroad':   'images/nowroad_icon.png',
 };
 
 const FULL_IMGS = {
@@ -536,12 +537,8 @@ const FULL_IMGS = {
   'bren': 'images/bren.png',
   'yuki': 'images/yuki.png',
   'yakumo': 'images/yakumo.png',
-  'rizzot': 'images/rizzot.png',
   'yomikawa': 'images/yomikawa.png',
   'morte': 'images/morte.png',
-  'martel': 'images/martel.png',
-  'hans': 'images/hans.png',
-  'jeffrey': 'images/jeffrey.png',
   'yomikawa2': 'images/yomikawa2.png',
   'marje_s': 'images/marje_s.png',
   'nieze': 'images/nieze.png',
@@ -625,6 +622,7 @@ const FULL_IMGS = {
   'gibson':   'images/gibson.png',
   'gibson1':  'images/gibson1.png',
   'magpie':   'images/magpie.png',
+  'nowroad':  'images/nowroad.png',
 };
 const CHARS = [
   {"id": "rizzot", "name": "リゾット", "number": "-", "affiliations": ["BAR REBELLION", "該当分類なし"], "nationality": "ヨーロッパ某国", "keyword": "BAR REBELLION", "notionUrl": "", "iconKey": "rizzot", "catGroup": "none", "subGroup": "rebellion", "nationalitySearch": "国籍不明 不明", "nameSearch": "リゾット りぞっと"},
@@ -646,7 +644,7 @@ const CHARS = [
   {"id": "cheri", "name": "シェリ・スティア（Cheri Stia）", "number": "???", "affiliations": ["Member", "Consultant"], "nationality": "イングランド", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "cheri", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["cheri"], "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド", "nameSearch": "シェリ スティア シェリ・スティア Cheri Stia しぇり すてぃあ しぇり・すてぃあ"},
   {"id": "ryuu", "name": "緑狐（リュー・フゥー）", "number": "81181", "affiliations": ["Member", "Trade Hublist", "Broker", "Negotiator"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "ryuu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["ryuu"], "corrImgKey": "ryuu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "緑狐 リュー フゥー リュー・フゥー りょっこ みどりきつね りゅー ふぅー りゅー・ふぅー リョッコ ミドリキツネ"},
   {"id": "honyu", "name": "紅雨（ホンユー）", "number": "14719", "affiliations": ["Member", "月華会", "Executive"], "nationality": "中国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "honyu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["honyu"], "corrImgKey": "honyu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "紅雨 ホンユー こうう べにあめ ほんゆー コウウ ベニアメ"},
-  {"id": "mathilda", "name": "Mathilda・S・Albert", "number": "1510", "affiliations": ["Member", "Secret Scale Service", "Executive"], "nationality": "ドイツ連邦共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "mathilda", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["mathilda"], "nationalitySearch": "ドイツ ドイツ連邦共和国 DE DEU Germany germany GERMANY", "nameSearch": "Mathilda S Albert Mathilda・S・Albert"},
+  {"id": "mathilda", "name": "Mathilda・S・Albert", "number": "1510", "affiliations": ["Member", "Secret Scale Service", "Executive"], "nationality": "ドイツ連邦共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "mathilda", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["mathilda"], "nationalitySearch": "ドイツ ドイツ連邦共和国 DE DEU Germany germany GERMANY", "nameSearch": "Mathilda S Albert Mathilda・S・Albert マチルダ エス アルベール マチルダ・エス・アルベール まちるだ えす あるべーる まちるだ・えす・あるべーる"},
   {"id": "bee", "name": "ビー・ファンフー", "number": "8782", "affiliations": ["Member", "Killer"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "bee", "catGroup": "qadesh", "subGroup": "", "fullImgKeys": ["bee", "bee2"], "corrImgKey": "bee", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "ビー ファンフー ビー・ファンフー びー ふぁんふー びー・ふぁんふー"},
   {"id": "albireo", "name": "アルビレオ・オルバース", "number": "-", "affiliations": ["該当分類なし"], "nationality": "不明", "keyword": "カデシュ・フランス", "notionUrl": "", "iconKey": "albireo", "catGroup": "france", "subGroup": "", "fullImgKeys": ["albireo"], "nationalitySearch": "国籍不明 不明", "nameSearch": "アルビレオ オルバース アルビレオ・オルバース あるびれお おるばーす あるびれお・おるばーす"},
   {"id": "raven", "name": "レイヴン", "number": "12823", "affiliations": ["Member", "八華組", "Killer", "EGGNOGS"], "nationality": "日本", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "raven", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["raven"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "レイヴン れいゔん"},
@@ -681,7 +679,7 @@ const CHARS = [
   {"id": "lir", "name": "リル・デッカード", "number": "-", "affiliations": ["無所属", "Bodyguard", "Porter", "Handyman"], "nationality": "-", "keyword": "無所属", "notionUrl": "", "iconKey": "lir", "catGroup": "none", "subGroup": "", "fullImgKeys": ["lir"], "note": "カデシュ・フランスによって殺害された従姉の名は「メグ・デッカード」。", "nationalitySearch": "国籍不明 不明", "nameSearch": "リル デッカード リル・デッカード りる でっかーど りる・でっかーど"},
   {"id": "grims", "name": "グリムス・リンドバーグ", "number": "1927", "affiliations": ["Member", "Beyond Horizons", "Executive"], "nationality": "米国・英国・豪州", "keyword": "Beyond Horizons/CEO", "notionUrl": "", "iconKey": "grims", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["grims"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england オーストラリア AU AUS Australia australia 豪州", "nameSearch": "グリムス リンドバーグ グリムス・リンドバーグ ぐりむす りんどばーぐ ぐりむす・りんどばーぐ"},
   {"id": "adrik", "name": "アドリク・コンラード(Adrik Conrad)", "number": "1511", "affiliations": ["Member", "Secret Scale Service", "Executive"], "nationality": "アメリカ合衆国", "keyword": "Secret Scale Service・副社長", "notionUrl": "", "iconKey": "adrik", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["adrik"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "アドリク コンラード アドリク・コンラード Adrik Conrad あどりく こんらーど あどりく・こんらーど"},
-  {"id": "darren", "name": "Darren Lancaster", "number": "1512", "affiliations": ["Member", "Secret Scale Service", "Executive"], "nationality": "America", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "darren", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["darren"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "Darren Lancaster"},
+  {"id": "darren", "name": "Darren Lancaster", "number": "1512", "affiliations": ["Member", "Secret Scale Service", "Executive"], "nationality": "America", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "darren", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["darren"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "Darren Lancaster ダレン ランカスター ダレン・ランカスター だれん らんかすたー だれん・らんかすたー"},
   {"id": "nadia", "name": "ナディア・シェーファー", "number": "-", "affiliations": ["Secret Scale Service", "Back-alley doctor"], "nationality": "ドイツ", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "nadia", "catGroup": "none", "subGroup": "", "fullImgKeys": ["nadia"], "nationalitySearch": "ドイツ ドイツ連邦共和国 DE DEU Germany germany GERMANY", "nameSearch": "ナディア シェーファー ナディア・シェーファー なでぃあ しぇーふぁー なでぃあ・しぇーふぁー"},
   {"id": "matilda_craig", "name": "Matilda Craig（マチルダ・クレイグ）", "number": "20912", "affiliations": ["Member", "Secret Scale Service", "該当分類なし"], "nationality": "America", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "matilda_craig", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["matilda_craig"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "Matilda Craig マチルダ クレイグ マチルダ・クレイグ まちるだ くれいぐ まちるだ・くれいぐ"},
   {"id": "crown", "name": "クラウン", "number": "-", "affiliations": ["Secret Scale Service", "Mechanic"], "nationality": "イギリス", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "crown", "catGroup": "none", "subGroup": "", "fullImgKeys": ["crown"], "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド", "nameSearch": "クラウン くらうん"},
@@ -692,7 +690,7 @@ const CHARS = [
   {"id": "renri", "name": "Renri Brossa(レンリ・ブロッサ)", "number": "-", "affiliations": ["Secret Scale Service", "Bodyguard"], "nationality": "アメリカ合衆国", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "renri", "catGroup": "none", "subGroup": "", "fullImgKeys": ["renri"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "Renri Brossa レンリ ブロッサ レンリ・ブロッサ れんり ぶろっさ れんり・ぶろっさ"},
   {"id": "francisca", "name": "フランシスカ・ナイトレイ", "number": "-", "affiliations": ["FBI", "Public institution"], "nationality": "U.S.", "keyword": "連邦捕査局", "notionUrl": "", "iconKey": "francisca", "catGroup": "none", "subGroup": "", "fullImgKeys": ["francisca"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "フランシスカ ナイトレイ フランシスカ・ナイトレイ ふらんしすか ないとれい ふらんしすか・ないとれい"},
   {"id": "master", "name": "マスター", "number": "23", "affiliations": ["Member", "BAR REBELLION", "Assassin", "Negotiator", "Other"], "nationality": "アメリカ合衆国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "master", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["master"], "note": "本名不明", "corrImgKey": "master", "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "マスター ますたー"},
-  {"id": "jack_the", "name": "JACK THE", "number": "-", "affiliations": ["MHIC", "Killer", "Assassin", "Mercenary", "Public institution"], "nationality": "-", "keyword": "MHIC", "notionUrl": "", "iconKey": "jack_the", "catGroup": "none", "subGroup": "", "fullImgKeys": ["jack_the"], "corrImgKey": "jack_the", "note": "JACK THE 彼女は誰もが恐れた殺人鬼でありMHICという組織の犬にすぎない。彼女には極力接触は避けるべきである。JACKと友好的接するのであれば周りの犠牲を理解した上でJACKと接触することを望む", "nationalitySearch": "国籍不明 不明", "nameSearch": "JACK THE"},
+  {"id": "jack_the", "name": "JACK THE", "number": "-", "affiliations": ["MHIC", "Killer", "Assassin", "Mercenary", "Public institution"], "nationality": "-", "keyword": "MHIC", "notionUrl": "", "iconKey": "jack_the", "catGroup": "none", "subGroup": "", "fullImgKeys": ["jack_the"], "corrImgKey": "jack_the", "note": "JACK THE 彼女は誰もが恐れた殺人鬼でありMHICという組織の犬にすぎない。彼女には極力接触は避けるべきである。JACKと友好的接するのであれば周りの犠牲を理解した上でJACKと接触することを望む", "nationalitySearch": "国籍不明 不明", "nameSearch": "JACK THE ジャック ザ ジャック・ザ じゃっく ざ じゃっく・ざ"},
   {"id": "emilia", "name": "エミリア・ベルウッド", "number": "2600", "affiliations": ["Hacker"], "nationality": "イギリス", "keyword": "カデシュ構成員", "notionUrl": "", "iconKey": "emilia", "catGroup": "qadesh", "subGroup": "", "fullImgKeys": ["emilia"], "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド", "nameSearch": "エミリア ベルウッド エミリア・ベルウッド えみりあ べるうっど えみりあ・べるうっど"},
   {"id": "katze", "name": "カッツェ", "number": "-", "affiliations": ["無所属", "Free Agent"], "nationality": "日本", "keyword": "無所属", "notionUrl": "", "iconKey": "katze", "catGroup": "none", "subGroup": "", "fullImgKeys": ["katze"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "カッツェ かっつぇ"},
   {"id": "eight", "name": "エイト", "number": "-", "affiliations": ["RAVEN'S EXPRESS", "Cleaner", "Porter"], "nationality": "アメリカ合衆国", "keyword": "RAVEN'S EXPRESS/清掃業", "notionUrl": "", "iconKey": "eight", "catGroup": "none", "subGroup": "", "fullImgKeys": ["eight"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "エイト えいと"},
@@ -728,7 +726,8 @@ const CHARS = [
   {"id": "wu", "name": "无", "number": "49827", "affiliations": ["Member", "Secret Scale Service", "Assassin", "Killer", "Cleaner"], "nationality": "-", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "wu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["wu"], "corrImgKey": "wu", "note": "掃除屋\n盲目の掃除屋\n九龍にてかつての城塩を思わせる建物群を「零影楼」と名付けて拠点にしている", "nationalitySearch": "国籍不明 不明", "nameSearch": "无 ウー うー Wu wu WU"},
   {"id": "wu_kuonshi", "name": "无 光是", "number": "49828", "affiliations": ["Member", "Secret Scale Service", "EGGNOGS", "Killer", "Assassin", "Cleaner"], "nationality": "-", "keyword": "Secret Scale Service", "notionUrl": "", "iconKey": "wu_kuonshi", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["wu_kuonshi"], "corrImgKey": "wu_kuonshi", "note": "掃除屋\n本名 国籍不詳\nかつてアンファン・アルムと呼ばれギャングにいい様に扱われていた少女\n今はその名は捨て无光是として仒間達と様々な事を学び、一人の人間として成長を続けている", "nationalitySearch": "国籍不明 不明", "nameSearch": "无光是 无 光是 ウー クォンシー ウー・クォンシー うー くぉんしー うー・くぉんしー Wu Kuonshi Wu-Kuonshi"},
   {"id": "gibson", "name": "尾紐 希(オムスビ ノゾミ)/ギブソン", "number": "-", "affiliations": ["ISMO", "Spy", "Public institution"], "nationality": "日本", "keyword": "ISMO", "notionUrl": "", "iconKey": "gibson", "catGroup": "none", "subGroup": "", "fullImgKeys": ["gibson", "gibson1"], "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "尾紐希 尾紐 希 おむすびのぞみ おむすび のぞみ オムスビ ノゾミ オムスビノゾミ ギブソン gibson Gibson GIBSON"},
-  {"id": "magpie", "name": "Mr.Magpie", "number": "-", "affiliations": ["E&E Arsenal", "Arms Dealer", "Negotiator", "Spy"], "nationality": "イギリス・スコットランド", "keyword": "E&E Arsenal", "notionUrl": "", "iconKey": "magpie", "catGroup": "none", "subGroup": "", "fullImgKeys": ["magpie"], "corrImgKey": "magpie", "note": "いわゆる「武器商人」ではあるものの、基本的には各国軍及び各国法執行機関への納入が基本な為武器はあまり売らない。", "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド スコットランド Scotland scotland SCOTLAND", "nameSearch": "Mr.Magpie MrMagpie mrmapie Mr Magpie まぐぱい マグパイ"}
+  {"id": "magpie", "name": "Mr.Magpie", "number": "-", "affiliations": ["E&E Arsenal", "Arms Dealer", "Negotiator", "Spy"], "nationality": "イギリス・スコットランド", "keyword": "E&E Arsenal", "notionUrl": "", "iconKey": "magpie", "catGroup": "none", "subGroup": "", "fullImgKeys": ["magpie"], "corrImgKey": "magpie", "note": "いわゆる「武器商人」ではあるものの、基本的には各国軍及び各国法執行機関への納入が基本な為武器はあまり売らない。", "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド スコットランド Scotland scotland SCOTLAND", "nameSearch": "Mr.Magpie MrMagpie mrmapie Mr Magpie まぐぱい マグパイ"},
+  {"id": "nowroad", "name": "ナウ・ロード", "number": "76610", "affiliations": ["Member", "Informer", "Broker", "Handyman"], "nationality": "日本", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "nowroad", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["nowroad"], "corrImgKey": "nowroad", "nationalitySearch": "日本 JP JPN Japan japan JAPAN", "nameSearch": "ナウ ロード ナウ・ロード なう ろーど なう・ろーど"}
 ];
 // =====================================================================
 // カテゴリ定義
@@ -1913,7 +1912,6 @@ function _drawOrgDiagram(W, H) {
   c.fillRect(0, 0, W, H);
 
   var cx = W / 2, cy = H / 2;
-  var centerR = Math.min(W, H) * 0.095;
   var _isMobileOrg = W < 600;
   var orgCW = Math.max(210, W * 0.18) * (_isMobileOrg ? 0.75 : 1.0);
   var orgCH = Math.max(69,  W * 0.06) * (_isMobileOrg ? 0.75 : 1.0);
@@ -2059,49 +2057,6 @@ function _drawOrgNode(c, x, y, r, p, label, count, isLight) {
   c.fillStyle = textSub;
   c.fillText(label, x, y + fsC * 0.55, maxW);
   c.restore();
-}
-
-function _drawOrgMiniNodes(c, nx, ny, nodeR, angle, orgs, p, isLight) {
-  if (!orgs.length) return;
-  var miniR = Math.max(20, nodeR * 0.42);
-  var spread = Math.PI * 0.45;
-  var dist = nodeR + miniR + 24;
-  orgs.forEach(function(org, i) {
-    var offset = orgs.length === 1 ? 0 : (i / (orgs.length - 1) - 0.5) * spread;
-    var a = angle + offset;
-    var mx = nx + Math.cos(a) * dist;
-    var my = ny + Math.sin(a) * dist;
-    c.save();
-    // 接続線（グラデーション）
-    var gr = c.createLinearGradient(nx + Math.cos(a) * nodeR, ny + Math.sin(a) * nodeR, mx, my);
-    var edgeCol = isLight ? 'rgba(138,96,32,0.22)' : (p.stroke + '88');
-    gr.addColorStop(0, 'transparent'); gr.addColorStop(0.2, edgeCol); gr.addColorStop(1, edgeCol);
-    c.strokeStyle = gr; c.lineWidth = isLight ? 1.0 : 0.7;
-    c.beginPath(); c.moveTo(nx + Math.cos(a) * nodeR, ny + Math.sin(a) * nodeR); c.lineTo(mx, my); c.stroke();
-    // ミニノード（drawCircleと同じグロー＋fill）
-    var eg2 = c.createRadialGradient(mx, my, miniR * 0.5, mx, my, miniR * 2.2);
-    eg2.addColorStop(0, p.stroke + '28'); eg2.addColorStop(0.6, p.stroke + '0a'); eg2.addColorStop(1, 'transparent');
-    c.fillStyle = eg2; c.beginPath(); c.arc(mx, my, miniR * 2.2, 0, Math.PI * 2); c.fill();
-    if (isLight) {
-      c.beginPath(); c.arc(mx, my, miniR, 0, Math.PI * 2); c.fillStyle = 'rgba(245,244,240,0.92)'; c.fill();
-    } else {
-      c.beginPath(); c.arc(mx, my, miniR, 0, Math.PI * 2); c.fillStyle = p.fill; c.fill();
-    }
-    var sw2 = isLight ? 2.2 : 1.0;
-    c.shadowColor = p.stroke; c.shadowBlur = isLight ? 5 : 10;
-    c.beginPath(); c.arc(mx, my, miniR, 0, Math.PI * 2);
-    c.strokeStyle = p.stroke + (isLight ? 'ff' : 'aa'); c.lineWidth = sw2; c.stroke(); c.shadowBlur = 0;
-    // テキスト
-    var fs2 = Math.max(8, miniR * 0.44);
-    var isJP = /[\u3000-\u9fff]/.test(org.name);
-    c.font = '400 ' + fs2 + 'px \'' + (isJP ? 'Noto Serif JP' : 'Share Tech Mono') + '\'';
-    c.fillStyle = isLight ? p.stroke : p.text + 'cc';
-    c.textAlign = 'center'; c.textBaseline = 'middle';
-    var nm = org.name.length > 6 ? org.name.slice(0, 5) + '\u2026' : org.name;
-    c.fillText(nm, mx, my);
-    c.restore();
-    _orgNodes.push({ id: org.id, label: org.name, x: mx, y: my, r: miniR, isOrg: true, orgData: org });
-  });
 }
 
 function _orgCanvasClick(e) {
@@ -2301,11 +2256,6 @@ function showOrgDetail(org) {
   openModal2();
 }
 
-function switchOrgTab(tab) {
-  // 後方互換ラッパー（applyMode等から呼ばれる場合に備えて残す）
-  if (tab === 'img') switchOrgImg('img', document.getElementById('orgTabImg'));
-  else switchOrgImg('corr', document.getElementById('orgTabCorr'));
-}
 function switchOrgImg(src, tabEl) {
   var d = window._orgDetailData;
   if (!d) return
