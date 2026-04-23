@@ -1598,26 +1598,84 @@ function showYukoOrgList(gi,oi){
   showSubList('ykCharList',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(org)>=0;}),true);
 }
 function showKigyoModal(){
-  modalDot.style.background='#206840'; modalTitle.textContent='\u4f01\u696d';
+  modalDot.style.background='#206840'; modalTitle.textContent='企業';
   modalSub.textContent='';
-  delete(window._SS&&window._SS['kgSub']);
-  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')
-    +'<button class="subcat-btn" id="kgBtn0" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),0);showSubList(\'kgSub\',CHARS.filter(_kgFilter),false)">RAVEN\'S EXPRESS <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn1" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),1);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'LSI Industry\')>=0;}),false)">LSI Industry <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn2" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),2);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Beyond Horizons\')>=0;}),false)">Beyond Horizons <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn3" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),3);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u30c6\u30f3\u30d6\u30fb\u30cf\u30a6\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0\')>=0;}),false)">\u30c6\u30f3\u30d6\u30fb\u30cf\u30a6\u30b9\u30af\u30ea\u30fc\u30cb\u30f3\u30b0 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn4" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),4);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'AJYARI\')>=0;}),false)">AJYARI <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn5" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),5);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'Sir Francis\')>=0;}),false)">Sir Francis <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn6" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),6);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'EGGNOGS\')>=0;}),false)">EGGNOGS <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn7" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),7);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a\')>=0;}),false)">\u30f4\u30a3\u30fc\u30f4\u30eb\u5546\u4f1a <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn8" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),8);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3\')>=0;}),false)">\u30db\u30ef\u30a4\u30c8\u8ca1\u56e3 <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn9" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),9);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'BAR REBELLION\')>=0;}),false)">BAR REBELLION <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn10" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||11),10);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'The Night Cloud\')>=0;}),false)">The Night Cloud <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
-    +'<button class="subcat-btn" id="kgBtn11" style="border-color:rgba(64,168,112,0.3);color:#60c898;" onclick="dimBtns(\'kgBtn\',(window._kgCount||12),11);showSubList(\'kgSub\',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(\'E&E Arsenal\')>=0;}),false)">E&E Arsenal <span style="font-size:0.6rem;opacity:0.45">\u25b6</span></button>'
+  if(!window._SS) window._SS={};
+  delete window._SS['kgSub'];
+  window._kigyoGroups=[
+    { label:'生活・サービス系', filter:['BAR REBELLION','EGGNOGS','テンブ・ハウスクリーニング','Beyond Horizons'], color:'rgba(220,140,40,0.85)' },
+    { label:'物流系',                               filter:["RAVEN'S EXPRESS"],                                                                    color:'rgba(30,170,170,0.85)' },
+    { label:'技術・特殊企業系', filter:['LSI Industry'],                                                                       color:'rgba(60,190,120,0.85)' },
+    { label:'複合ビジネス',             filter:['E&E Arsenal'],                                                                         color:'rgba(170,80,210,0.85)' },
+    { label:'娯楽・大型施設',       filter:['The Night Cloud'],                                                                     color:'rgba(210,70,130,0.85)' },
+    { label:'公益',                                     filter:['ホワイト財団'],                                                 color:'rgba(60,160,220,0.85)' },
+    { label:'その他',                               filter:['ヴィーヴル商会','Sir Francis','AJYARI'],                   color:'rgba(180,155,55,0.85)' }
+  ];
+  var btns=window._kigyoGroups.map(function(g,gi){
+    var activeOrgs=g.filter.filter(function(org){
+      return CHARS.some(function(c){return(c.affiliations||[]).indexOf(org)>=0;});
+    });
+    if(!activeOrgs.length) return '';
+    var total=activeOrgs.reduce(function(sum,org){
+      return sum+CHARS.filter(function(c){return(c.affiliations||[]).indexOf(org)>=0;}).length;
+    },0);
+    return '<button class="subcat-btn cat-企業" id="kgGrpBtn'+gi+'" onclick="showKigyoGroup('+gi+')"'
+      +' style="border-color:'+g.color+';color:'+g.color+';"'
+      +'>'+g.label+' <span style="font-size:0.65rem;opacity:0.7;background:rgba(255,255,255,0.08);border-radius:3px;padding:1px 5px;margin-left:3px;">'+total+'</span>'
+      +' <span style="font-size:0.6rem;opacity:0.45">▶</span></button>';
+  }).join('');
+  modalBody.innerHTML='<div style="margin-bottom:0.7rem;">'+sectionHeader('項目を選択')+btns
     +'</div><div class="divider-line"></div><div id="kgSub"></div>';
-  var _kgCount = modalBody.querySelectorAll('[id^="kgBtn"]').length;
-  window._kgCount = _kgCount;
-  if(CATS['\u4f01\u696d'].count !== _kgCount){ CATS['\u4f01\u696d'].count = _kgCount; buildNodes(); draw(); }
+  var _kgCount=window._kigyoGroups.reduce(function(sum,g){
+    return sum+g.filter.filter(function(org){
+      return CHARS.some(function(c){return(c.affiliations||[]).indexOf(org)>=0;});
+    }).length;
+  },0);
+  window._kgCount=_kgCount;
+  if(CATS['企業'].count !== _kgCount){ CATS['企業'].count = _kgCount; buildNodes(); draw(); }
+}
+function showKigyoGroup(gi){
+  var g=window._kigyoGroups[gi]; if(!g) return;
+  window._kigyoGroups.forEach(function(grp,i){
+    var b=document.getElementById('kgGrpBtn'+i);
+    if(!b) return;
+    b.style.borderColor=grp.color; b.style.color=grp.color;
+    b.style.opacity=(i===gi)?'1':'0.4';
+  });
+  if(!window._SS) window._SS={};
+  delete window._SS['kgOrgList'];
+  var activeOrgs=g.filter.filter(function(org){
+    return CHARS.some(function(c){return(c.affiliations||[]).indexOf(org)>=0;});
+  });
+  var orgBtns=activeOrgs.map(function(org,oi){
+    var cnt=CHARS.filter(function(c){return(c.affiliations||[]).indexOf(org)>=0;}).length;
+    return '<button class="subcat-btn cat-企業" id="kgOrgBtn'+gi+'_'+oi+'" onclick="showKigyoOrgList('+gi+','+oi+')"'
+      +' style="border-color:'+g.color+';color:'+g.color+';"'
+      +'>'+org+' <span style="font-size:0.65rem;opacity:0.6;background:rgba(255,255,255,0.08);border-radius:3px;padding:1px 5px;margin-left:3px;">'+cnt+'</span>'
+      +' <span style="font-size:0.6rem;opacity:0.45">▶</span></button>';
+  }).join('');
+  var sub=document.getElementById('kgSub');
+  if(sub) sub.innerHTML='<div style="margin:0.5rem 0 0.7rem;">'+sectionHeader(g.label)+orgBtns+'</div><div id="kgOrgList"></div>';
+}
+function showKigyoOrgList(gi,oi){
+  var g=window._kigyoGroups[gi]; if(!g) return;
+  var activeOrgs=g.filter.filter(function(org){
+    return CHARS.some(function(c){return(c.affiliations||[]).indexOf(org)>=0;});
+  });
+  var org=activeOrgs[oi]; if(!org) return;
+  window._kigyoGroups.forEach(function(grp,i){
+    var b=document.getElementById('kgGrpBtn'+i);
+    if(!b) return;
+    b.style.borderColor=grp.color; b.style.color=grp.color;
+    b.style.opacity=(i===gi)?'1':'0.4';
+  });
+  activeOrgs.forEach(function(o,i){
+    var b=document.getElementById('kgOrgBtn'+gi+'_'+i);
+    if(!b) return;
+    b.style.borderColor=g.color; b.style.color=g.color;
+    b.style.opacity=(i===oi)?'1':'0.4';
+  });
+  showSubList('kgOrgList',CHARS.filter(function(c){return(c.affiliations||[]).indexOf(org)>=0;}),false);
 }
 function showKokiModal(){
   modalDot.style.background='#206878'; modalTitle.textContent='\u516c\u7684\u6a5f\u95a2';
