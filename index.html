@@ -26,6 +26,50 @@ body.light .modal2-overlay{background:rgba(220,218,210,0.92);}
 body.light .lb-overlay{background:rgba(230,228,220,0.97);}
 body.light .search-dropdown{background:var(--bg3);box-shadow:0 12px 40px rgba(0,0,0,0.18);}
 body.light .corr-canvas-wrap{background:#f0eeea;}
+/* World View */
+.world-center-btn{font-family:'Share Tech Mono',monospace;font-size:0.82rem;letter-spacing:0.12em;padding:0.32rem 0.9rem;background:transparent;border:1px solid rgba(201,168,76,0.2);color:var(--silver3);cursor:pointer;border-radius:2px;transition:all 0.15s;text-transform:none;}
+.world-center-btn:hover{color:var(--gold);border-color:rgba(201,168,76,0.5);}
+.world-center-btn.active{color:var(--gold);border-color:var(--gold);background:rgba(201,168,76,0.07);}
+.world-country{fill:#1c1c26;stroke:rgba(201,168,76,0.12);stroke-width:0.5;transition:fill 0.18s;cursor:pointer;}
+.world-country.has-chars{fill:#1a2030;stroke:rgba(201,168,76,0.25);}
+.world-country.active{fill:#203040;stroke:rgba(201,168,76,0.6);}
+.world-country:hover{fill:#252535;}
+.world-country.has-chars:hover{fill:#253545;}
+body.light .world-country{fill:#d8d6d0;stroke:rgba(60,60,80,0.18);}
+body.light .world-country.has-chars{fill:#c8d4e0;stroke:rgba(80,100,160,0.35);}
+body.light .world-country.active{fill:#b8c8da;stroke:rgba(80,100,160,0.7);}
+body.light .world-country:hover{fill:#cccac4;}
+body.light .world-country.has-chars:hover{fill:#bed0de;}
+.world-badge{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;pointer-events:all;cursor:pointer;transition:all 0.15s;z-index:2;}
+.world-badge:hover .world-badge-circle{border-color:var(--gold);box-shadow:0 0 14px rgba(201,168,76,0.5);}
+.world-badge-circle{width:42px;height:42px;border-radius:50%;background:rgba(0,0,4,0.85);border:1.5px solid rgba(201,168,76,0.45);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all 0.18s;box-shadow:0 2px 14px rgba(0,0,0,0.7);}
+body.light .world-badge-circle{background:rgba(240,238,232,0.92);border-color:rgba(120,90,30,0.5);}
+.world-badge-flag{font-size:1.1rem;line-height:1;}
+.world-badge-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--gold);line-height:1;margin-top:1px;}
+.world-badge-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(210,210,220,0.95);letter-spacing:0.05em;margin-top:3px;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,0.95),0 0 8px rgba(0,0,0,0.8);}
+body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(255,255,255,0.9);}
+.world-panel-country{border-bottom:1px solid rgba(201,168,76,0.06);}
+.world-panel-country-header{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.9rem;cursor:pointer;transition:background 0.13s;}
+.world-panel-country-header:hover{background:rgba(201,168,76,0.04);}
+.world-panel-country-header.active-header{background:rgba(201,168,76,0.06);}
+.world-panel-flag{font-size:1rem;}
+.world-panel-name{font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--silver);letter-spacing:0.08em;flex:1;}
+.world-panel-count{font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--gold);}
+.world-panel-arrow{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);transition:transform 0.18s;}
+.world-panel-arrow.open{transform:rotate(90deg);}
+.world-panel-chars{display:none;padding:0.2rem 0 0.3rem;}
+.world-panel-chars.open{display:block;}
+.world-char-row{display:flex;align-items:center;gap:0.6rem;padding:0.38rem 0.9rem 0.38rem 2.4rem;cursor:pointer;transition:background 0.13s;}
+.world-char-row:hover{background:rgba(201,168,76,0.04);}
+.world-char-icon{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid rgba(201,168,76,0.18);flex-shrink:0;background:var(--bg4);}
+.world-char-name{font-family:'Noto Serif JP',serif;font-size:0.82rem;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.world-char-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);}
+.world-char-tag{font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:0.1rem 0.4rem;border:1px solid rgba(201,168,76,0.25);color:var(--silver3);border-radius:1px;}
+#worldUnknownBar:hover{background:rgba(201,168,76,0.04);}
+#worldPanelList::-webkit-scrollbar{width:4px;}
+#worldPanelList::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.12);border-radius:2px;}
+/* SVGバッジ（ライトモード） */
+body.light .world-badge-svg-circle{fill:rgba(240,238,232,0.9);stroke:rgba(120,90,30,0.55);}
 body.light .tooltip{box-shadow:0 4px 18px rgba(0,0,0,0.18);}
 /* ログイン画面ライトモード */
 body.light .notice-box{background:rgba(60,60,80,0.04);border-color:rgba(60,60,80,0.14);}
@@ -356,6 +400,42 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
   <div id="orgView" style="display:none;flex:1;min-height:0;overflow:hidden;flex-direction:column;background:var(--bg);">
     <div id="orgCanvasWrap" style="flex:1;min-height:0;position:relative;overflow:hidden;">
       <canvas id="orgDiagram" style="display:block;"></canvas>
+    </div>
+  </div>
+  <!-- World View -->
+  <div id="worldView" style="display:none;flex:1;min-height:0;overflow:hidden;flex-direction:row;background:var(--bg);">
+    <!-- 地図エリア -->
+    <div id="worldMapArea" style="flex:1;min-width:0;position:relative;overflow:hidden;display:flex;flex-direction:column;">
+      <!-- ビュー切り替えバー -->
+      <div id="worldViewBar" style="flex-shrink:0;display:flex;align-items:center;gap:0.5rem;padding:0.65rem 1.2rem;border-bottom:1px solid rgba(201,168,76,0.08);background:var(--bg);">
+        <span style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--text-dim);letter-spacing:0.14em;margin-right:0.3rem;">VIEW CENTER</span>
+        <button class="world-center-btn active" data-center="japan">日本</button>
+        <button class="world-center-btn" data-center="america">アメリカ</button>
+        <button class="world-center-btn" data-center="uk">イギリス</button>
+        <button class="world-center-btn" data-center="china">中国</button>
+      </div>
+      <!-- PNG地図 + バッジオーバーレイ -->
+      <div id="worldMapWrap" style="flex:1;min-height:0;overflow:hidden;position:relative;background:#06060a;">
+        <img id="worldMapImg" src="images/world_japan.png" alt="World Map"
+          style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;user-select:none;-webkit-user-drag:none;">
+        <!-- バッジオーバーレイ（position:absoluteで%座標） -->
+        <div id="worldBadgeLayer" style="position:absolute;inset:0;pointer-events:none;"></div>
+      </div>
+      <!-- 国籍不明 -->
+      <div id="worldUnknownBar" style="flex-shrink:0;display:flex;align-items:center;gap:0.7rem;padding:0.55rem 1.2rem;border-top:1px solid rgba(201,168,76,0.08);cursor:pointer;" onclick="worldToggleUnknown()">
+        <span style="font-size:1.1rem;">👤</span>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--silver2);letter-spacing:0.1em;">国籍不明 (UNKNOWN)</span>
+        <span id="worldUnknownCount" style="font-family:'Share Tech Mono',monospace;font-size:0.85rem;color:var(--gold);margin-left:0.3rem;"></span>
+        <span id="worldUnknownArrow" style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:var(--text-dim);margin-left:auto;">▶</span>
+      </div>
+    </div>
+    <!-- 右パネル -->
+    <div id="worldPanel" style="width:320px;min-width:260px;max-width:360px;flex-shrink:0;border-left:1px solid rgba(201,168,76,0.1);display:flex;flex-direction:column;overflow:hidden;background:var(--bg2);">
+      <div style="padding:0.75rem 1rem 0.55rem;border-bottom:1px solid rgba(201,168,76,0.08);flex-shrink:0;">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;letter-spacing:0.18em;color:var(--silver3);text-transform:uppercase;">登録キャラクター一覧</div>
+        <div style="font-family:'Noto Serif JP',serif;font-size:0.72rem;color:var(--text-dim);margin-top:0.25rem;">地図上の国をクリックすると、所属キャラクターを表示します。</div>
+      </div>
+      <div id="worldPanelList" style="flex:1;overflow-y:auto;padding:0.4rem 0;"></div>
     </div>
   </div>
 </div>
@@ -919,12 +999,14 @@ document.querySelectorAll('.nav-btn').forEach(function(btn) {
       closeModal(); closeModal2();
       document.getElementById('orgView').style.display = 'none';
       document.getElementById('orgSwitchBar').style.display = 'none';
+      document.getElementById('worldView').style.display = 'none';
       document.querySelector('.canvas-area').style.display = '';
       return;
     }
     if (nav === 'organization') {
       closeModal(); closeModal2();
       document.querySelector('.canvas-area').style.display = 'none';
+      document.getElementById('worldView').style.display = 'none';
       var ov = document.getElementById('orgView');
       ov.style.display = 'flex';
       ov.style.flexDirection = 'column';
@@ -935,9 +1017,21 @@ document.querySelectorAll('.nav-btn').forEach(function(btn) {
       initOrgDiagram();
       return;
     }
-    // world など
+    // world
+    if (nav === 'world') {
+      closeModal(); closeModal2();
+      document.querySelector('.canvas-area').style.display = 'none';
+      document.getElementById('orgView').style.display = 'none';
+      document.getElementById('orgSwitchBar').style.display = 'none';
+      var wv = document.getElementById('worldView');
+      wv.style.display = 'flex';
+      initWorldView();
+      return;
+    }
+    // その他
     document.getElementById('orgView').style.display = 'none';
     document.getElementById('orgSwitchBar').style.display = 'none';
+    document.getElementById('worldView').style.display = 'none';
     document.querySelector('.canvas-area').style.display = '';
     modalDot.style.background = 'var(--silver3)';
     modalTitle.textContent = 'World';
@@ -1051,6 +1145,7 @@ function catRadius(count, sw) {
 function resize() {
   var area = canvas.parentElement;
   DPR = window.devicePixelRatio||1; W = area.clientWidth; H = area.clientHeight;
+  if (!W || !H) return; // canvas非表示時はスキップ
   var _isMobile = W < 600;
   CENTER_W = Math.max(210,W*0.18) * (_isMobile ? 0.75 : 1.0);
   CENTER_H = Math.max(69,W*0.06)  * (_isMobile ? 0.75 : 1.0);
@@ -1072,6 +1167,7 @@ function buildNodes() {
   });
 }
 function draw() {
+  if (!W || !H || !cx || !cy || !CENTER_W) return; // サイズ未確定時はスキップ
   var ctx = canvas.getContext('2d');
   ctx.setTransform(DPR,0,0,DPR,0,0); ctx.clearRect(0,0,W,H);
   var isLight=document.body.classList.contains('light');
@@ -2340,7 +2436,296 @@ function switchOrgImg(src, tabEl) {
 
 window.addEventListener('resize', function() {
   resize();
+  _onWorldResize();
 });
+
+// =====================================================================
+// WORLD VIEW
+// =====================================================================
+
+// WorldビューからCHARSを参照できるよう公開
+window.CHARS = CHARS;
+
+// =====================================================================
+// WORLD MAP PNG + BADGE SYSTEM
+// =====================================================================
+
+// 各ビューのPNG画像パス
+var WORLD_MAP_IMAGES = {
+  japan:   'images/world_japan.png',
+  america: 'images/world_america.png',
+  uk:      'images/world_uk.png',
+  china:   'images/world_china.png',
+};
+
+// バッジ座標（画像に対する%：left%, top%）
+// 画像サイズ1774x887、正距円筒図法基準で計算
+var WORLD_BADGE_PCT = {
+  japan: {
+    japan:       [50.7, 37.5],
+    usa:         [83.1, 36.3],
+    uk:          [14.0, 30.2],
+    china:       [41.8, 38.4],
+    france:      [15.1, 33.3],
+    germany:     [17.2, 31.6],
+    italy:       [17.7, 34.9],
+    switzerland: [16.7, 33.3],
+    romania:     [21.1, 33.7],
+    russia:      [40.2, 26.7],
+    saudi:       [26.4, 42.7],
+  },
+  america: {
+    japan:       [16.7, 37.5],
+    usa:         [49.1, 36.3],
+    uk:          [74.2, 30.2],
+    china:       [ 7.8, 38.4],
+    france:      [75.3, 33.3],
+    germany:     [77.3, 31.6],
+    italy:       [77.8, 34.9],
+    switzerland: [76.8, 33.3],
+    romania:     [81.3, 33.7],
+    russia:      [ 6.2, 26.7],
+    saudi:       [86.5, 42.7],
+  },
+  uk: {
+    japan:       [86.5, 37.5],
+    usa:         [24.8, 36.3],
+    uk:          [49.9, 30.2],
+    china:       [77.6, 38.4],
+    france:      [51.0, 33.3],
+    germany:     [53.0, 31.6],
+    italy:       [53.6, 34.9],
+    switzerland: [52.5, 33.3],
+    romania:     [56.9, 33.7],
+    russia:      [76.0, 26.7],
+    saudi:       [62.2, 42.7],
+  },
+  china: {
+    japan:       [58.5, 37.5],
+    usa:         [90.9, 36.3],
+    uk:          [21.9, 30.2],
+    china:       [49.6, 38.4],
+    france:      [22.9, 33.3],
+    germany:     [25.0, 31.6],
+    italy:       [25.6, 34.9],
+    switzerland: [24.5, 33.3],
+    romania:     [29.0, 33.7],
+    russia:      [48.1, 26.7],
+    saudi:       [34.2, 42.7],
+  },
+};
+
+// 国定義（nationalitySearchキーワードで判定）
+var WORLD_COUNTRIES = [
+  { key:'japan',        label:'日本',          flag:'🇯🇵', keywords:['JP ','JPN','Japan','日本'] },
+  { key:'usa',          label:'アメリカ',       flag:'🇺🇸', keywords:['USA','U.S.','America','アメリカ'] },
+  { key:'uk',           label:'イギリス',       flag:'🇬🇧', keywords:['UK ','GB ','GBR','Britain','England','イギリス','イングランド','スコットランド'] },
+  { key:'china',        label:'中国',           flag:'🇨🇳', keywords:['CHN','China','中国','中華','台湾'] },
+  { key:'italy',        label:'イタリア',       flag:'🇮🇹', keywords:['ITA','Italy','イタリア','Italiana'] },
+  { key:'germany',      label:'ドイツ',         flag:'🇩🇪', keywords:['DEU','Germany','ドイツ'] },
+  { key:'france',       label:'フランス',       flag:'🇫🇷', keywords:['FRA','France','フランス'] },
+  { key:'russia',       label:'ロシア',         flag:'🇷🇺', keywords:['RUS','Russia','ロシア'] },
+  { key:'romania',      label:'ルーマニア',     flag:'🇷🇴', keywords:['ROU','Romania','ルーマニア'] },
+  { key:'switzerland',  label:'スイス',         flag:'🇨🇭', keywords:['CHE','Switzerland','スイス'] },
+  { key:'saudi',        label:'サウジアラビア', flag:'🇸🇦', keywords:['SAU','Saudi','サウジ'] },
+  { key:'unknown',      label:'国籍不明',       flag:'👤',  keywords:['国籍不明'] },
+];
+
+var _worldInitialized = false;
+var _worldCurrentCenter = 'japan';
+var _worldGroupData = [];
+
+// 国別グループ化
+function _buildWorldGroups() {
+  if (typeof WORLD_COUNTRIES === 'undefined' || typeof CHARS === 'undefined') return;
+  var groups = {};
+  WORLD_COUNTRIES.forEach(function(c) { groups[c.key] = []; });
+
+  CHARS.forEach(function(ch) {
+    var ns = ' ' + (ch.nationalitySearch || '') + ' ';
+    var matched = false;
+    for (var i = 0; i < WORLD_COUNTRIES.length - 1; i++) {
+      var c = WORLD_COUNTRIES[i];
+      for (var j = 0; j < c.keywords.length; j++) {
+        if (ns.indexOf(c.keywords[j]) >= 0) {
+          groups[c.key].push(ch);
+          matched = true;
+          break;
+        }
+      }
+      if (matched) break;
+    }
+    if (!matched) groups['unknown'].push(ch);
+  });
+
+  _worldGroupData = WORLD_COUNTRIES.map(function(c) {
+    return { key: c.key, label: c.label, flag: c.flag, chars: groups[c.key] || [] };
+  });
+}
+
+// バッジをHTML divで描画（%座標ベース → PNG上に正確に配置）
+function _renderWorldBadges(viewKey) {
+  var layer = document.getElementById('worldBadgeLayer');
+  if (!layer) return;
+  if (!_worldGroupData || !_worldGroupData.length) return;
+  layer.innerHTML = '';
+
+  var posMap = (WORLD_BADGE_PCT[viewKey] || WORLD_BADGE_PCT['japan']);
+
+  _worldGroupData.forEach(function(g) {
+    if (g.key === 'unknown' || g.chars.length === 0) return;
+    var pos = posMap[g.key];
+    if (!pos) return;
+
+    var div = document.createElement('div');
+    div.className = 'world-badge';
+    div.dataset.key = g.key;
+    div.style.left = pos[0] + '%';
+    div.style.top  = pos[1] + '%';
+    div.style.pointerEvents = 'all';
+    div.innerHTML =
+      '<div class="world-badge-circle" id="wbadge_' + g.key + '">' +
+        '<span class="world-badge-flag">' + g.flag + '</span>' +
+        '<span class="world-badge-num">' + g.chars.length + '</span>' +
+      '</div>' +
+      '<span class="world-badge-label">' + g.label + '</span>';
+    div.addEventListener('click', function() { worldToggleCountry(g.key); });
+    layer.appendChild(div);
+  });
+}
+
+// 右パネル描画
+function _renderWorldPanel(activeKey) {
+  var list = document.getElementById('worldPanelList');
+  if (!list) return;
+  if (!_worldGroupData || !_worldGroupData.length) return;
+  var html = '';
+  _worldGroupData.forEach(function(g) {
+    if (g.key === 'unknown' || g.chars.length === 0) return;
+    var isActive = g.key === activeKey;
+    html += '<div class="world-panel-country" id="wpc_' + g.key + '">';
+    html += '<div class="world-panel-country-header' + (isActive ? ' active-header' : '') + '" onclick="worldToggleCountry(\'' + g.key + '\')">';
+    html += '<span class="world-panel-flag">' + g.flag + '</span>';
+    html += '<span class="world-panel-name">' + g.label + '</span>';
+    html += '<span class="world-panel-count">' + g.chars.length + '人</span>';
+    html += '<span class="world-panel-arrow' + (isActive ? ' open' : '') + '" id="wparrow_' + g.key + '">▶</span>';
+    html += '</div>';
+    html += '<div class="world-panel-chars' + (isActive ? ' open' : '') + '" id="wpchars_' + g.key + '">';
+    g.chars.forEach(function(ch) {
+      var iconSrc = IMAGES[ch.iconKey] || '';
+      var tag = (ch.number && ch.number !== '-' && ch.number !== '???') ? '#' + ch.number : '';
+      html += '<div class="world-char-row" onclick="worldOpenChar(\'' + ch.id + '\')">';
+      if (iconSrc) {
+        html += '<img class="world-char-icon" src="' + iconSrc + '" alt="">';
+      } else {
+        html += '<div class="world-char-icon" style="display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:var(--text-dim);">—</div>';
+      }
+      html += '<span class="world-char-name">' + ch.name + '</span>';
+      if (tag) html += '<span class="world-char-num">' + tag + '</span>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  list.innerHTML = html;
+}
+
+// 国籍不明バー更新
+function _updateWorldUnknownBar() {
+  var g = _worldGroupData.find(function(x){ return x.key === 'unknown'; });
+  var count = g ? g.chars.length : 0;
+  var el = document.getElementById('worldUnknownCount');
+  if (el) el.textContent = count + '人';
+}
+
+// 国トグル（右パネル + バッジ連動）
+window.worldToggleCountry = function(key) {
+  // バッジアクティブ化
+  document.querySelectorAll('.world-badge-circle').forEach(function(b) {
+    var badge = b.closest('.world-badge');
+    var isActive = badge && badge.dataset.key === key;
+    b.style.borderColor = isActive ? 'var(--gold)' : '';
+    b.style.boxShadow = isActive ? '0 0 14px rgba(201,168,76,0.6)' : '';
+    b.style.background = isActive ? 'rgba(20,20,10,0.92)' : '';
+  });
+
+  var chars = document.getElementById('wpchars_' + key);
+  var arrow = document.getElementById('wparrow_' + key);
+  var header = chars ? chars.previousElementSibling : null;
+  if (!chars) return;
+  var isOpen = chars.classList.contains('open');
+  document.querySelectorAll('.world-panel-chars').forEach(function(el){ el.classList.remove('open'); });
+  document.querySelectorAll('.world-panel-arrow').forEach(function(el){ el.classList.remove('open'); });
+  document.querySelectorAll('.world-panel-country-header').forEach(function(el){ el.classList.remove('active-header'); });
+  if (!isOpen) {
+    chars.classList.add('open');
+    if (arrow) arrow.classList.add('open');
+    if (header) header.classList.add('active-header');
+    var el2 = document.getElementById('wpc_' + key);
+    if (el2) el2.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+};
+
+// 国籍不明モーダル
+window.worldToggleUnknown = function() {
+  var g = _worldGroupData.find(function(x){ return x.key === 'unknown'; });
+  if (!g || g.chars.length === 0) return;
+  modalDot.style.background = 'var(--silver3)';
+  modalTitle.textContent = '国籍不明 (UNKNOWN)';
+  modalSub.textContent = g.chars.length + ' characters';
+  var html = '<div style="display:flex;flex-direction:column;gap:0.5rem;padding:0.5rem 0;">';
+  g.chars.forEach(function(ch) {
+    var iconSrc = IMAGES[ch.iconKey] || '';
+    var tag = (ch.number && ch.number !== '-' && ch.number !== '???') ? '#' + ch.number : '';
+    html += '<div class="world-char-row" style="padding:0.4rem 0.6rem;border:1px solid rgba(201,168,76,0.08);border-radius:2px;cursor:pointer;display:flex;align-items:center;gap:0.6rem;" onclick="worldOpenChar(\'' + ch.id + '\');closeModal();">';
+    if (iconSrc) {
+      html += '<img class="world-char-icon" src="' + iconSrc + '" alt="">';
+    } else {
+      html += '<div class="world-char-icon" style="width:28px;height:28px;border-radius:50%;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:var(--text-dim);">—</div>';
+    }
+    html += '<span style="font-family:\'Noto Serif JP\',serif;font-size:0.85rem;color:var(--text);flex:1;">' + ch.name + '</span>';
+    html += '<span style="font-family:\'Noto Serif JP\',serif;font-size:0.72rem;color:var(--text-dim);">' + (ch.nationality || '') + '</span>';
+    if (tag) html += '<span style="font-family:\'Share Tech Mono\',monospace;font-size:0.7rem;color:var(--text-dim);">' + tag + '</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+  modalBody.innerHTML = html;
+  openModal();
+};
+
+window.worldOpenChar = function(charId) { showCharDetail(charId); };
+
+// ビュー切り替え（PNG画像を差し替え）
+function _switchWorldCenter(viewKey) {
+  _worldCurrentCenter = viewKey;
+  document.querySelectorAll('.world-center-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.center === viewKey);
+  });
+  var img = document.getElementById('worldMapImg');
+  if (img) img.src = WORLD_MAP_IMAGES[viewKey] || WORLD_MAP_IMAGES['japan'];
+  _renderWorldBadges(viewKey);
+}
+
+function _initWorldCenterBtns() {
+  document.querySelectorAll('.world-center-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() { _switchWorldCenter(btn.dataset.center); });
+  });
+}
+
+function _onWorldResize() {}
+
+function initWorldView() {
+  _buildWorldGroups();
+  if (!_worldInitialized) {
+    _initWorldCenterBtns();
+    _worldInitialized = true;
+  }
+  var img = document.getElementById('worldMapImg');
+  if (img) img.src = WORLD_MAP_IMAGES[_worldCurrentCenter] || WORLD_MAP_IMAGES['japan'];
+  _renderWorldPanel(null);
+  _updateWorldUnknownBar();
+  _renderWorldBadges(_worldCurrentCenter);
+}
+
 </script>
 </body>
 </html>
