@@ -110,23 +110,20 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
   #worldView { flex-direction: column !important; }
   #worldMapArea { width: 100% !important; flex: none !important; height: 70vh !important; }
 
-  /* 地図ラップ：横スクロール可能 */
+  /* 地図ラップ：横スクロール可能（スマホ時はInnerが画面より大きくなる） */
   #worldMapWrap {
     overflow-x: auto !important;
     overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch;
+    justify-content: flex-start !important; /* 左端から表示 */
   }
 
-  /* 画像は高さ固定・横は縦横比で自動拡大 */
-  #worldMapImg {
-    width: auto !important;
-    height: 100% !important;
-    max-width: none !important;
-    object-fit: fill !important;
-    display: block;
+  /* スマホ時はJSの_adjustMobileMapSizeでサイズを制御 */
+  #worldMapInner {
+    flex-shrink: 0;
   }
 
-  /* バッジレイヤーは画像と同じサイズに（幅はJSで設定） */
+  /* バッジレイヤーはInner基準なので変更不要 */
   #worldBadgeLayer {
     position: absolute !important;
     top: 0 !important; left: 0 !important;
@@ -604,11 +601,15 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
       <!-- パネル用バックドロップ（スマホのみ） -->
       <div id="worldPanelBackdrop" onclick="toggleWorldPanel()"></div>
       <!-- PNG地図 + バッジオーバーレイ -->
-      <div id="worldMapWrap" style="flex:1;min-height:0;overflow:hidden;position:relative;background:#06060a;">
-        <img id="worldMapImg" src="images/world_japan.png" alt="World Map"
-          style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;user-select:none;-webkit-user-drag:none;">
-        <!-- バッジオーバーレイ（position:absoluteで%座標） -->
-        <div id="worldBadgeLayer" style="position:absolute;inset:0;pointer-events:none;"></div>
+      <!-- worldMapWrap: 表示エリア全体（overflow:hidden） -->
+      <div id="worldMapWrap" style="flex:1;min-height:0;overflow:hidden;position:relative;background:#06060a;display:flex;align-items:center;justify-content:center;">
+        <!-- worldMapInner: 画像と同じサイズに固定。バッジはここに対して%配置 -->
+        <div id="worldMapInner" style="position:relative;flex-shrink:0;">
+          <img id="worldMapImg" src="images/world_japan.png" alt="World Map"
+            style="display:block;user-select:none;-webkit-user-drag:none;">
+          <!-- バッジオーバーレイ: 画像と完全に同じサイズ・位置 -->
+          <div id="worldBadgeLayer" style="position:absolute;inset:0;pointer-events:none;"></div>
+        </div>
       </div>
       <!-- 国籍不明 -->
       <div id="worldUnknownBar" style="flex-shrink:0;display:flex;align-items:center;gap:0.7rem;padding:0.55rem 1.2rem;border-top:1px solid rgba(201,168,76,0.08);cursor:pointer;" onclick="worldToggleUnknown()">
@@ -3036,24 +3037,24 @@ window.worldOpenChar = function(charId) { showCharDetail(charId); };
 // ビュー切り替え（PNG画像を差し替え）
 function _switchWorldCenter(viewKey) {
   _worldCurrentCenter = viewKey;
-  _europeClusterOpen = false; // クラスタをリセット
+  _europeClusterOpen = false;
   document.querySelectorAll('.world-center-btn').forEach(function(b){
     b.classList.toggle('active', b.dataset.center === viewKey);
   });
   var img = document.getElementById('worldMapImg');
   if (img) {
     img.src = WORLD_MAP_IMAGES[viewKey] || WORLD_MAP_IMAGES['japan'];
-  }
-  _renderWorldBadges(viewKey);
-  // スマホ時：バッジ再配置 & スクロール位置をセンターに
-  if (_isMobileWorld()) {
-    var wrap = document.getElementById('worldMapWrap');
-    var imgEl = document.getElementById('worldMapImg');
-    if (wrap && imgEl) {
-      setTimeout(function(){
-        _adjustMobileMapSize();
-      }, 50);
-    }
+    // 画像切り替え後にサイズ再調整してからバッジ描画
+    img.onload = function() {
+      _adjustMapSize();
+      _renderWorldBadges(viewKey);
+      if (_isMobileWorld()) _adjustMobileMapSize();
+    };
+    // キャッシュ済みの場合の保険
+    setTimeout(function() {
+      _adjustMapSize();
+      _renderWorldBadges(viewKey);
+    }, 50);
   }
 }
 
@@ -3065,8 +3066,40 @@ function _initWorldCenterBtns() {
 
 function _onWorldResize() {
   if (document.getElementById('worldView').style.display !== 'none') {
-    _adjustMobileMapSize();
+    _adjustMapSize();
   }
+}
+
+// 地図画像を余白なしで表示するサイズ計算
+// 画像縦横比(1774/887≒2.0)を保ちつつwrapに収まる最大サイズを設定
+var MAP_ASPECT = 1774 / 887; // 約2.0
+
+function _adjustMapSize() {
+  var wrap  = document.getElementById('worldMapWrap');
+  var inner = document.getElementById('worldMapInner');
+  var img   = document.getElementById('worldMapImg');
+  if (!wrap || !inner || !img) return;
+
+  var wrapW = wrap.clientWidth;
+  var wrapH = wrap.clientHeight;
+  if (!wrapW || !wrapH) return;
+
+  // wrapに収まる最大サイズ（縦横比固定）
+  var imgW, imgH;
+  if (wrapW / wrapH > MAP_ASPECT) {
+    // 横長のwrap → 高さ基準
+    imgH = wrapH;
+    imgW = Math.round(imgH * MAP_ASPECT);
+  } else {
+    // 縦長のwrap → 幅基準
+    imgW = wrapW;
+    imgH = Math.round(imgW / MAP_ASPECT);
+  }
+
+  inner.style.width  = imgW + 'px';
+  inner.style.height = imgH + 'px';
+  img.style.width    = imgW + 'px';
+  img.style.height   = imgH + 'px';
 }
 
 // ===== スマホ対応 =====
@@ -3077,32 +3110,27 @@ function _isMobileWorld() {
 // スマホ時：地図画像の実サイズをバッジレイヤーに反映し、初期スクロール位置を設定
 function _adjustMobileMapSize() {
   if (!_isMobileWorld()) return;
-  var wrap = document.getElementById('worldMapWrap');
-  var img  = document.getElementById('worldMapImg');
-  var layer = document.getElementById('worldBadgeLayer');
-  if (!wrap || !img || !layer) return;
+  var wrap  = document.getElementById('worldMapWrap');
+  var inner = document.getElementById('worldMapInner');
+  var img   = document.getElementById('worldMapImg');
+  if (!wrap || !inner || !img) return;
 
   // 地図の高さは画面高さの70%
   var mapH = Math.floor(window.innerHeight * 0.70);
   var mapArea = document.getElementById('worldMapArea');
   if (mapArea) mapArea.style.height = mapH + 'px';
-
-  // wrap自体のheightも明示
   wrap.style.height = mapH + 'px';
 
-  // 画像の縦横比(1774/887≒2.0)から横幅を計算
-  var imgW = Math.floor(mapH * (1774 / 887));
-  img.style.width  = imgW + 'px';
-  img.style.height = mapH + 'px';
+  // 縦横比から幅を計算
+  var imgW = Math.floor(mapH * MAP_ASPECT);
 
-  // バッジレイヤーも同じサイズに
-  layer.style.width  = imgW + 'px';
-  layer.style.height = mapH + 'px';
+  // Inner・画像を同じサイズに設定
+  inner.style.width  = imgW + 'px';
+  inner.style.height = mapH + 'px';
+  img.style.width    = imgW + 'px';
+  img.style.height   = mapH + 'px';
 
-  // バッジ座標を再計算（%→px）
-  _repositionBadgesMobile(imgW, mapH);
-
-  // 初期スクロール位置：現在のビューセンター国が中央に来るよう
+  // バッジはinner基準の%なのでpx再計算は不要（PCと共通）
   _scrollToCenter(_worldCurrentCenter, imgW);
 }
 
@@ -3202,17 +3230,29 @@ function initWorldView() {
   }
   var img = document.getElementById('worldMapImg');
   if (img) img.src = WORLD_MAP_IMAGES[_worldCurrentCenter] || WORLD_MAP_IMAGES['japan'];
-  _renderWorldPanel(null);
-  _updateWorldUnknownBar();
-  _renderWorldBadges(_worldCurrentCenter);
-  // スマホ時の初期設定
-  if (_isMobileWorld()) {
-    // 画像ロード後にサイズ調整
-    if (img && img.complete) {
-      _adjustMobileMapSize();
-    } else if (img) {
-      img.onload = function() { _adjustMobileMapSize(); };
-    }
+
+  // PC・スマホ共通: 画像サイズを余白なしで設定してからバッジを配置
+  if (img && img.complete && img.naturalWidth) {
+    _adjustMapSize();
+    _renderWorldPanel(null);
+    _updateWorldUnknownBar();
+    _renderWorldBadges(_worldCurrentCenter);
+    if (_isMobileWorld()) _adjustMobileMapSize();
+  } else if (img) {
+    img.onload = function() {
+      _adjustMapSize();
+      _renderWorldPanel(null);
+      _updateWorldUnknownBar();
+      _renderWorldBadges(_worldCurrentCenter);
+      if (_isMobileWorld()) _adjustMobileMapSize();
+    };
+    // キャッシュ済みで onload が発火しない場合の保険
+    setTimeout(function() {
+      _adjustMapSize();
+      _renderWorldPanel(null);
+      _updateWorldUnknownBar();
+      _renderWorldBadges(_worldCurrentCenter);
+    }, 100);
   }
 }
 
