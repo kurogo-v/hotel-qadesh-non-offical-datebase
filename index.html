@@ -46,8 +46,8 @@ body.light .world-country.has-chars:hover{fill:#bed0de;}
 body.light .world-badge-circle{background:rgba(240,238,232,0.92);border-color:rgba(120,90,30,0.5);}
 .world-badge-flag{font-size:1.1rem;line-height:1;}
 .world-badge-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--gold);line-height:1;margin-top:1px;}
-.world-badge-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(220,215,200,0.98);letter-spacing:0.05em;margin-top:3px;white-space:nowrap;text-shadow:0 1px 3px rgba(0,0,0,1),0 0 6px rgba(0,0,0,1),-1px 0 2px rgba(0,0,0,0.9),1px 0 2px rgba(0,0,0,0.9);}
-body.light .world-badge-label{color:#2a200a;text-shadow:0 1px 2px rgba(255,255,255,0.7),0 0 4px rgba(255,255,255,0.5),-1px 0 2px rgba(255,255,255,0.6),1px 0 2px rgba(255,255,255,0.6);}
+.world-badge-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(210,210,220,0.95);letter-spacing:0.05em;margin-top:3px;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,0.95),0 0 8px rgba(0,0,0,0.8);}
+body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(255,255,255,0.9);}
 .world-panel-country{border-bottom:1px solid rgba(201,168,76,0.06);}
 .world-panel-country-header{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.9rem;cursor:pointer;transition:background 0.13s;}
 .world-panel-country-header:hover{background:rgba(201,168,76,0.04);}
@@ -68,6 +68,17 @@ body.light .world-badge-label{color:#2a200a;text-shadow:0 1px 2px rgba(255,255,2
 #worldUnknownBar:hover{background:rgba(201,168,76,0.04);}
 #worldPanelList::-webkit-scrollbar{width:4px;}
 #worldPanelList::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.12);border-radius:2px;}
+/* ヨーロッパクラスタバッジ */
+.world-cluster-circle{background:rgba(0,0,4,0.88);border:1.5px solid rgba(201,168,76,0.6);box-shadow:0 2px 16px rgba(0,0,0,0.8),0 0 8px rgba(201,168,76,0.15);}
+.world-cluster-circle:hover{border-color:var(--gold);box-shadow:0 0 18px rgba(201,168,76,0.55);}
+body.light .world-cluster-circle{background:rgba(240,238,232,0.92);border-color:rgba(120,90,30,0.65);}
+.world-cluster-child{z-index:4;}
+.world-cluster-child-circle{width:36px;height:36px;border-radius:50%;background:rgba(0,0,4,0.85);border:1.5px solid rgba(201,168,76,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:border-color 0.18s,box-shadow 0.18s;box-shadow:0 2px 10px rgba(0,0,0,0.7);}
+.world-cluster-child:hover .world-cluster-child-circle{border-color:var(--gold);box-shadow:0 0 12px rgba(201,168,76,0.5);}
+body.light .world-cluster-child-circle{background:rgba(240,238,232,0.9);border-color:rgba(120,90,30,0.4);}
+.world-cluster-child .world-badge-flag{font-size:0.95rem;}
+.world-cluster-child .world-badge-num{font-size:0.62rem;}
+.world-cluster-child .world-badge-label{font-size:0.55rem;}
 /* SVGバッジ（ライトモード） */
 body.light .world-badge-svg-circle{fill:rgba(240,238,232,0.9);stroke:rgba(120,90,30,0.55);}
 body.light .tooltip{box-shadow:0 4px 18px rgba(0,0,0,0.18);}
@@ -2463,58 +2474,48 @@ var WORLD_MAP_IMAGES = {
 // 画像サイズ1774x887、正距円筒図法基準で計算
 var WORLD_BADGE_PCT = {
   japan: {
-    japan:       [50.7, 37.5],
-    usa:         [83.1, 36.3],
-    uk:          [14.0, 30.2],
-    china:       [41.8, 38.4],
-    france:      [15.1, 33.3],
-    germany:     [17.2, 31.6],
-    italy:       [17.7, 34.9],
-    switzerland: [16.7, 33.3],
-    romania:     [21.1, 33.7],
-    russia:      [40.2, 26.7],
-    saudi:       [26.4, 42.7],
+    japan:   [50.7, 37.5],
+    usa:     [83.1, 36.3],
+    china:   [41.8, 38.4],
+    russia:  [40.2, 26.7],
+    saudi:   [26.4, 42.7],
+    uk:      [13.0, 30.5],  // イギリス単独
+    europe:  [18.5, 34.5],  // ヨーロッパクラスタ（仏独伊瑞羅）
   },
   america: {
-    japan:       [16.7, 37.5],
-    usa:         [49.1, 36.3],
-    uk:          [74.2, 30.2],
-    china:       [ 7.8, 38.4],
-    france:      [75.3, 33.3],
-    germany:     [77.3, 31.6],
-    italy:       [77.8, 34.9],
-    switzerland: [76.8, 33.3],
-    romania:     [81.3, 33.7],
-    russia:      [ 6.2, 26.7],
-    saudi:       [86.5, 42.7],
+    japan:   [16.7, 37.5],
+    usa:     [49.1, 36.3],
+    china:   [ 7.8, 38.4],
+    russia:  [ 6.2, 26.7],
+    saudi:   [86.5, 42.7],
+    uk:      [73.2, 30.5],  // イギリス単独
+    europe:  [78.5, 34.5],  // ヨーロッパクラスタ（仏独伊瑞羅）
   },
   uk: {
-    japan:       [86.5, 37.5],
-    usa:         [24.8, 36.3],
-    uk:          [49.9, 30.2],
-    china:       [77.6, 38.4],
-    france:      [51.0, 33.3],
-    germany:     [53.0, 31.6],
-    italy:       [53.6, 34.9],
-    switzerland: [52.5, 33.3],
-    romania:     [56.9, 33.7],
-    russia:      [76.0, 26.7],
-    saudi:       [62.2, 42.7],
+    japan:   [86.5, 37.5],
+    usa:     [24.8, 36.3],
+    china:   [77.6, 38.4],
+    russia:  [76.0, 26.7],
+    saudi:   [62.2, 42.7],
+    uk:      [49.5, 28.5],  // イギリス単独（中央・やや上）
+    europe:  [54.5, 34.5],  // ヨーロッパクラスタ（仏独伊瑞羅）
   },
   china: {
-    japan:       [58.5, 37.5],
-    usa:         [90.9, 36.3],
-    uk:          [21.9, 30.2],
-    china:       [49.6, 38.4],
-    france:      [22.9, 33.3],
-    germany:     [25.0, 31.6],
-    italy:       [25.6, 34.9],
-    switzerland: [24.5, 33.3],
-    romania:     [29.0, 33.7],
-    russia:      [48.1, 26.7],
-    saudi:       [34.2, 42.7],
+    japan:   [58.5, 37.5],
+    usa:     [90.9, 36.3],
+    china:   [49.6, 38.4],
+    russia:  [48.1, 26.7],
+    saudi:   [34.2, 42.7],
+    uk:      [21.5, 30.5],  // イギリス単独
+    europe:  [26.5, 34.5],  // ヨーロッパクラスタ（仏独伊瑞羅）
   },
 };
+
+// ヨーロッパクラスタ内の各国配置（クラスタ中心からの扇形オフセット、単位%）
+// 扇形: 上方向を中心(90°)に ±75° の範囲に6カ国を配置
+var EUROPE_CLUSTER_KEYS = ['france','germany','italy','switzerland','romania'];
+var EUROPE_CLUSTER_ANGLES = [165, 135, 108, 80, 52, 22]; // 左から右へ(度、0=右)
+var EUROPE_CLUSTER_RADIUS = [6.0, 1.8]; // [x方向半径%, y方向半径%]
 
 // 国定義（nationalitySearchキーワードで判定）
 var WORLD_COUNTRIES = [
@@ -2522,12 +2523,12 @@ var WORLD_COUNTRIES = [
   { key:'usa',          label:'アメリカ',       flag:'🇺🇸', keywords:['USA','U.S.','America','アメリカ'] },
   { key:'uk',           label:'イギリス',       flag:'🇬🇧', keywords:['UK ','GB ','GBR','Britain','England','イギリス','イングランド','スコットランド'] },
   { key:'china',        label:'中国',           flag:'🇨🇳', keywords:['CHN','China','中国','中華','台湾'] },
-  { key:'italy',        label:'イタリア',       flag:'🇮🇹', keywords:['ITA','Italy','イタリア','Italiana'] },
-  { key:'germany',      label:'ドイツ',         flag:'🇩🇪', keywords:['DEU','Germany','ドイツ'] },
-  { key:'france',       label:'フランス',       flag:'🇫🇷', keywords:['FRA','France','フランス'] },
+  { key:'italy',        label:'イタリア',       flag:'🇮🇹', keywords:['ITA','Italy','イタリア','Italiana'], cluster:'europe' },
+  { key:'germany',      label:'ドイツ',         flag:'🇩🇪', keywords:['DEU','Germany','ドイツ'], cluster:'europe' },
+  { key:'france',       label:'フランス',       flag:'🇫🇷', keywords:['FRA','France','フランス'], cluster:'europe' },
   { key:'russia',       label:'ロシア',         flag:'🇷🇺', keywords:['RUS','Russia','ロシア'] },
-  { key:'romania',      label:'ルーマニア',     flag:'🇷🇴', keywords:['ROU','Romania','ルーマニア'] },
-  { key:'switzerland',  label:'スイス',         flag:'🇨🇭', keywords:['CHE','Switzerland','スイス'] },
+  { key:'romania',      label:'ルーマニア',     flag:'🇷🇴', keywords:['ROU','Romania','ルーマニア'], cluster:'europe' },
+  { key:'switzerland',  label:'スイス',         flag:'🇨🇭', keywords:['CHE','Switzerland','スイス'], cluster:'europe' },
   { key:'saudi',        label:'サウジアラビア', flag:'🇸🇦', keywords:['SAU','Saudi','サウジ'] },
   { key:'unknown',      label:'国籍不明',       flag:'👤',  keywords:['国籍不明'] },
 ];
@@ -2565,16 +2566,86 @@ function _buildWorldGroups() {
 }
 
 // バッジをHTML divで描画（%座標ベース → PNG上に正確に配置）
+var _europeClusterOpen = false;
+
 function _renderWorldBadges(viewKey) {
   var layer = document.getElementById('worldBadgeLayer');
   if (!layer) return;
   if (!_worldGroupData || !_worldGroupData.length) return;
   layer.innerHTML = '';
+  _europeClusterOpen = false;
 
   var posMap = (WORLD_BADGE_PCT[viewKey] || WORLD_BADGE_PCT['japan']);
 
+  // ヨーロッパクラスタの合計人数を計算
+  var europeTotalChars = [];
+  _worldGroupData.forEach(function(g) {
+    var def = WORLD_COUNTRIES.find(function(c){ return c.key === g.key; });
+    if (def && def.cluster === 'europe') europeTotalChars = europeTotalChars.concat(g.chars);
+  });
+
+  // ヨーロッパクラスタバッジを生成
+  if (europeTotalChars.length > 0 && posMap['europe']) {
+    var epos = posMap['europe'];
+    var eDiv = document.createElement('div');
+    eDiv.className = 'world-badge world-cluster-badge';
+    eDiv.dataset.key = 'europe';
+    eDiv.style.left = epos[0] + '%';
+    eDiv.style.top  = epos[1] + '%';
+    eDiv.style.pointerEvents = 'all';
+    eDiv.style.zIndex = '5';
+    eDiv.innerHTML =
+      '<div class="world-badge-circle world-cluster-circle" id="wbadge_europe">' +
+        '<span class="world-badge-flag">🌍</span>' +
+        '<span class="world-badge-num">' + europeTotalChars.length + '</span>' +
+      '</div>' +
+      '<span class="world-badge-label">ヨーロッパ</span>';
+    eDiv.addEventListener('click', function(e) {
+      e.stopPropagation();
+      _toggleEuropeCluster(viewKey);
+    });
+    layer.appendChild(eDiv);
+
+    // 各国の子バッジを生成（最初は非表示）
+    var clusterKeys = EUROPE_CLUSTER_KEYS.filter(function(k) {
+      var g = _worldGroupData.find(function(x){ return x.key === k; });
+      return g && g.chars.length > 0;
+    });
+    clusterKeys.forEach(function(k, i) {
+      var g = _worldGroupData.find(function(x){ return x.key === k; });
+      var def = WORLD_COUNTRIES.find(function(c){ return c.key === k; });
+      if (!g || !def) return;
+
+      var child = document.createElement('div');
+      child.className = 'world-badge world-cluster-child';
+      child.dataset.key = k;
+      child.dataset.clusterIdx = i;
+      child.dataset.clusterTotal = clusterKeys.length;
+      child.style.left = epos[0] + '%';
+      child.style.top  = epos[1] + '%';
+      child.style.pointerEvents = 'none';
+      child.style.opacity = '0';
+      child.style.zIndex = '4';
+      child.style.transition = 'opacity 0.25s ease, left 0.3s cubic-bezier(0.34,1.56,0.64,1), top 0.3s cubic-bezier(0.34,1.56,0.64,1)';
+      child.innerHTML =
+        '<div class="world-badge-circle world-cluster-child-circle" id="wbadge_' + k + '">' +
+          '<span class="world-badge-flag">' + def.flag + '</span>' +
+          '<span class="world-badge-num">' + g.chars.length + '</span>' +
+        '</div>' +
+        '<span class="world-badge-label">' + def.label + '</span>';
+      (function(key){ child.addEventListener('click', function(e) {
+        e.stopPropagation();
+        worldToggleCountry(key);
+      }); })(k);
+      layer.appendChild(child);
+    });
+  }
+
+  // 通常バッジ（クラスタ外）
   _worldGroupData.forEach(function(g) {
     if (g.key === 'unknown' || g.chars.length === 0) return;
+    var def = WORLD_COUNTRIES.find(function(c){ return c.key === g.key; });
+    if (def && def.cluster) return; // クラスタ内はスキップ
     var pos = posMap[g.key];
     if (!pos) return;
 
@@ -2592,6 +2663,57 @@ function _renderWorldBadges(viewKey) {
       '<span class="world-badge-label">' + g.label + '</span>';
     div.addEventListener('click', function() { worldToggleCountry(g.key); });
     layer.appendChild(div);
+  });
+}
+
+// ヨーロッパクラスタ展開/折りたたみ
+function _toggleEuropeCluster(viewKey) {
+  var layer = document.getElementById('worldBadgeLayer');
+  if (!layer) return;
+  var posMap = WORLD_BADGE_PCT[viewKey] || WORLD_BADGE_PCT['japan'];
+  var epos = posMap['europe'];
+  if (!epos) return;
+
+  _europeClusterOpen = !_europeClusterOpen;
+
+  // クラスタバッジの見た目を更新
+  var eCircle = document.getElementById('wbadge_europe');
+  if (eCircle) {
+    eCircle.style.borderColor = _europeClusterOpen ? 'var(--gold)' : '';
+    eCircle.style.boxShadow   = _europeClusterOpen ? '0 0 18px rgba(201,168,76,0.7)' : '';
+  }
+
+  // 子バッジを展開/折りたたみ
+  var children = layer.querySelectorAll('.world-cluster-child');
+  var total = children.length;
+
+  // 扇形配置: 上方向中心(90°)、±75° の範囲
+  var startAngle = 165; // 左端
+  var endAngle   = 15;  // 右端
+  var rx = 7.5; // x半径(%)
+  var ry = 5.5; // y半径(%)
+
+  children.forEach(function(child, i) {
+    if (_europeClusterOpen) {
+      // 展開: 等間隔で扇形配置
+      var angle = startAngle - (startAngle - endAngle) / (total - 1) * i;
+      var rad = angle * Math.PI / 180;
+      var tx = epos[0] + Math.cos(rad) * rx;
+      var ty = epos[1] - Math.sin(rad) * ry; // y軸は下が正なので反転
+      // 少しディレイをずらしてアニメーション
+      child.style.transitionDelay = (i * 0.04) + 's';
+      child.style.left = tx + '%';
+      child.style.top  = ty + '%';
+      child.style.opacity = '1';
+      child.style.pointerEvents = 'all';
+    } else {
+      // 折りたたみ: クラスタ中心に戻す
+      child.style.transitionDelay = ((total - 1 - i) * 0.03) + 's';
+      child.style.left = epos[0] + '%';
+      child.style.top  = epos[1] + '%';
+      child.style.opacity = '0';
+      child.style.pointerEvents = 'none';
+    }
   });
 }
 
@@ -2640,14 +2762,18 @@ function _updateWorldUnknownBar() {
 
 // 国トグル（右パネル + バッジ連動）
 window.worldToggleCountry = function(key) {
-  var isLight = document.body.classList.contains('light');
+  // クラスタ外の国クリック時はクラスタを閉じる
+  var clickedDef = WORLD_COUNTRIES.find(function(c){ return c.key === key; });
+  if (_europeClusterOpen && (!clickedDef || clickedDef.cluster !== 'europe')) {
+    _toggleEuropeCluster(_worldCurrentCenter);
+  }
   // バッジアクティブ化（円周のみ強調、背景は変えない）
   document.querySelectorAll('.world-badge-circle').forEach(function(b) {
     var badge = b.closest('.world-badge');
     var isActive = badge && badge.dataset.key === key;
     b.style.borderColor = isActive ? 'var(--gold)' : '';
     b.style.boxShadow   = isActive ? '0 0 14px rgba(201,168,76,0.6)' : '';
-    b.style.background  = ''; // ダーク/ライト問わず背景は変えない
+    b.style.background  = '';
   });
 
   var chars = document.getElementById('wpchars_' + key);
@@ -2699,6 +2825,7 @@ window.worldOpenChar = function(charId) { showCharDetail(charId); };
 // ビュー切り替え（PNG画像を差し替え）
 function _switchWorldCenter(viewKey) {
   _worldCurrentCenter = viewKey;
+  _europeClusterOpen = false; // クラスタをリセット
   document.querySelectorAll('.world-center-btn').forEach(function(b){
     b.classList.toggle('active', b.dataset.center === viewKey);
   });
