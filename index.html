@@ -40,13 +40,13 @@ body.light .world-country.has-chars{fill:#c8d4e0;stroke:rgba(80,100,160,0.35);}
 body.light .world-country.active{fill:#b8c8da;stroke:rgba(80,100,160,0.7);}
 body.light .world-country:hover{fill:#cccac4;}
 body.light .world-country.has-chars:hover{fill:#bed0de;}
-.world-badge{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;pointer-events:all;cursor:pointer;transition:all 0.15s;z-index:2;}
+.world-badge{position:absolute;transform:translate(-21px,-50%);display:flex;flex-direction:row;align-items:center;pointer-events:all;cursor:pointer;transition:all 0.15s;z-index:2;}
 .world-badge:hover .world-badge-circle{border-color:var(--gold);box-shadow:0 0 14px rgba(201,168,76,0.5);}
 .world-badge-circle{width:42px;height:42px;border-radius:50%;background:rgba(0,0,4,0.85);border:1.5px solid rgba(201,168,76,0.45);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all 0.18s;box-shadow:0 2px 14px rgba(0,0,0,0.7);}
 body.light .world-badge-circle{background:rgba(240,238,232,0.92);border-color:rgba(120,90,30,0.5);}
 .world-badge-flag{font-size:1.1rem;line-height:1;font-family:'Noto Color Emoji',serif;}
 .world-badge-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--gold);line-height:1;margin-top:1px;}
-.world-badge-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(210,210,220,0.95);letter-spacing:0.05em;margin-top:3px;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,0.95),0 0 8px rgba(0,0,0,0.8);}
+.world-badge-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(210,210,220,0.95);letter-spacing:0.05em;margin-left:5px;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,0.95),0 0 8px rgba(0,0,0,0.8);}
 body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(255,255,255,0.9);}
 .world-panel-country{border-bottom:1px solid rgba(201,168,76,0.06);}
 .world-panel-country-header{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.9rem;cursor:pointer;transition:background 0.13s;}
@@ -131,6 +131,7 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
   }
 
   /* バッジを少し小さく */
+  .world-badge { transform: translate(-18px,-50%) !important; }
   .world-badge-circle { width: 36px !important; height: 36px !important; }
   .world-badge-flag   { font-size: 0.95rem !important; }
   .world-badge-num    { font-size: 0.62rem !important; }
