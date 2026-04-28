@@ -65,7 +65,10 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
 .world-char-name{font-family:'Noto Serif JP',serif;font-size:0.82rem;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .world-char-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);}
 .world-char-tag{font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:0.1rem 0.4rem;border:1px solid rgba(201,168,76,0.25);color:var(--silver3);border-radius:1px;}
-#worldUnknownBar:hover{background:rgba(201,168,76,0.04);}
+#worldPanelUnknown{flex-shrink:0;display:flex;align-items:center;gap:0.7rem;padding:0.5rem 0.9rem;border-bottom:1px solid rgba(201,168,76,0.15);cursor:pointer;transition:background 0.13s;background:rgba(201,168,76,0.03);}
+#worldPanelUnknown:hover{background:rgba(201,168,76,0.07);}
+body.light #worldPanelUnknown{background:rgba(120,90,30,0.04);}
+body.light #worldPanelUnknown:hover{background:rgba(120,90,30,0.09);}
 #worldPanelList::-webkit-scrollbar{width:4px;}
 #worldPanelList::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.12);border-radius:2px;}
 /* ===================== スマホ対応 (≤600px) ===================== */
@@ -154,8 +157,7 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
     flex-shrink: 0;
   }
 
-  /* 国籍不明バーもコンパクトに */
-  #worldUnknownBar { padding: 0.4rem 0.8rem !important; }
+  /* ビューバー：ハンバーガー込みでコンパクトに */
 }
 
 /* ハンバーガーボタン（PCでは常に非表示） */
@@ -612,19 +614,19 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
           <div id="worldBadgeLayer" style="position:absolute;inset:0;pointer-events:none;"></div>
         </div>
       </div>
-      <!-- 国籍不明 -->
-      <div id="worldUnknownBar" style="flex-shrink:0;display:flex;align-items:center;gap:0.7rem;padding:0.55rem 1.2rem;border-top:1px solid rgba(201,168,76,0.08);cursor:pointer;" onclick="worldToggleUnknown()">
-        <span style="font-size:1.1rem;font-family:'Noto Color Emoji',serif;">👤</span>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--silver2);letter-spacing:0.1em;">国籍不明 (UNKNOWN)</span>
-        <span id="worldUnknownCount" style="font-family:'Share Tech Mono',monospace;font-size:0.85rem;color:var(--gold);margin-left:0.3rem;"></span>
-        <span id="worldUnknownArrow" style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:var(--text-dim);margin-left:auto;">▶</span>
-      </div>
     </div>
     <!-- 右パネル -->
     <div id="worldPanel" style="width:320px;min-width:260px;max-width:360px;flex-shrink:0;border-left:1px solid rgba(201,168,76,0.1);display:flex;flex-direction:column;overflow:hidden;background:var(--bg2);">
       <div style="padding:0.75rem 1rem 0.55rem;border-bottom:1px solid rgba(201,168,76,0.08);flex-shrink:0;">
         <div style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;letter-spacing:0.18em;color:var(--silver3);text-transform:uppercase;">登録キャラクター一覧</div>
         <div style="font-family:'Noto Serif JP',serif;font-size:0.72rem;color:var(--text-dim);margin-top:0.25rem;">地図上の国をクリックすると、所属キャラクターを表示します。</div>
+      </div>
+      <!-- 国籍不明ヘッダー（固定） -->
+      <div id="worldPanelUnknown" onclick="worldToggleUnknown()">
+        <span style="font-size:1rem;font-family:'Noto Color Emoji',serif;">👤</span>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--silver2);letter-spacing:0.08em;flex:1;">国籍不明 (UNKNOWN)</span>
+        <span id="worldUnknownCount" style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--gold);margin-right:0.4rem;"></span>
+        <span id="worldUnknownArrow" style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);">▶</span>
       </div>
       <div id="worldPanelList" style="flex:1;overflow-y:auto;padding:0.4rem 0;"></div>
     </div>
