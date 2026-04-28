@@ -68,6 +68,175 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
 #worldUnknownBar:hover{background:rgba(201,168,76,0.04);}
 #worldPanelList::-webkit-scrollbar{width:4px;}
 #worldPanelList::-webkit-scrollbar-thumb{background:rgba(201,168,76,0.12);border-radius:2px;}
+/* ===================== スマホ対応 (≤600px) ===================== */
+@media (max-width: 600px) {
+  /* 右パネルは初期非表示（ハンバーガーで開閉） */
+  #worldPanel {
+    position: fixed !important;
+    top: 0; right: 0; bottom: 0;
+    width: 85vw !important;
+    max-width: 320px !important;
+    min-width: unset !important;
+    z-index: 250;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(0.32,0.72,0,1);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.6);
+  }
+  #worldPanel.sp-open {
+    transform: translateX(0);
+  }
+
+  /* ハンバーガーボタン */
+  #worldHamburger {
+    display: flex !important;
+  }
+
+  /* パネル用バックドロップ */
+  #worldPanelBackdrop {
+    display: block !important;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 249;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s;
+  }
+  #worldPanelBackdrop.sp-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* 地図レイアウト */
+  #worldView { flex-direction: column !important; }
+  #worldMapArea { width: 100% !important; flex: none !important; height: 70vh !important; }
+
+  /* 地図ラップ：横スクロール可能 */
+  #worldMapWrap {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* 画像は高さ固定・横は縦横比で自動拡大 */
+  #worldMapImg {
+    width: auto !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: fill !important;
+    display: block;
+  }
+
+  /* バッジレイヤーは画像と同じサイズに（幅はJSで設定） */
+  #worldBadgeLayer {
+    position: absolute !important;
+    top: 0 !important; left: 0 !important;
+    height: 100% !important;
+  }
+
+  /* バッジを少し小さく */
+  .world-badge-circle { width: 36px !important; height: 36px !important; }
+  .world-badge-flag   { font-size: 0.95rem !important; }
+  .world-badge-num    { font-size: 0.62rem !important; }
+  .world-badge-label  { font-size: 0.55rem !important; }
+  .world-cluster-child-circle { width: 30px !important; height: 30px !important; }
+
+  /* ビューバー：ハンバーガー込みでコンパクトに */
+  #worldViewBar {
+    padding: 0.4rem 0.6rem !important;
+    gap: 0.3rem !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  #worldViewBar::-webkit-scrollbar { display: none; }
+  .world-center-btn {
+    font-size: 0.72rem !important;
+    padding: 0.25rem 0.6rem !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* 国籍不明バーもコンパクトに */
+  #worldUnknownBar { padding: 0.4rem 0.8rem !important; }
+}
+
+/* ハンバーガーボタン（PCでは常に非表示） */
+#worldHamburger { display: none; }
+#worldPanelBackdrop { display: none; }
+
+/* ===== スマホ用ポップアップ ===== */
+#worldMobileBackdrop {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 300;
+}
+#worldMobileSheet {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  max-height: 70vh;
+  background: var(--bg2);
+  border-top: 1px solid rgba(201,168,76,0.25);
+  border-radius: 14px 14px 0 0;
+  z-index: 301;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+}
+#worldMobileSheet.open {
+  transform: translateY(0);
+}
+#worldMobilePopup.open #worldMobileBackdrop,
+#worldMobilePopup.open #worldMobileSheet {
+  display: flex;
+}
+#worldMobileSheetHandle {
+  width: 36px; height: 4px;
+  background: rgba(201,168,76,0.3);
+  border-radius: 2px;
+  margin: 10px auto 0;
+  flex-shrink: 0;
+}
+#worldMobileSheetHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem 0.55rem;
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  flex-shrink: 0;
+}
+#worldMobileFlag  { font-size: 1.3rem; }
+#worldMobileTitle {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--silver);
+  letter-spacing: 0.1em;
+  flex: 1;
+}
+#worldMobileCount {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--gold);
+}
+#worldMobileClose {
+  background: none; border: none;
+  color: var(--text-dim); font-size: 1rem;
+  cursor: pointer; padding: 0.2rem 0.4rem;
+  line-height: 1;
+}
+#worldMobileClose:hover { color: var(--silver); }
+#worldMobileCharList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.3rem 0 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+#worldMobileCharList::-webkit-scrollbar { width: 3px; }
+#worldMobileCharList::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.15); border-radius:2px; }
+body.light #worldMobileSheet { background: var(--bg2); border-color: rgba(120,90,30,0.25); }
+body.light #worldMobileSheetHandle { background: rgba(120,90,30,0.25); }
 /* ヨーロッパクラスタバッジ */
 .world-cluster-circle{background:rgba(0,0,4,0.88);border:1.5px solid rgba(201,168,76,0.6);box-shadow:0 2px 16px rgba(0,0,0,0.8),0 0 8px rgba(201,168,76,0.15);}
 .world-cluster-circle:hover{border-color:var(--gold);box-shadow:0 0 18px rgba(201,168,76,0.55);}
@@ -424,7 +593,16 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
         <button class="world-center-btn" data-center="america">アメリカ</button>
         <button class="world-center-btn" data-center="uk">イギリス</button>
         <button class="world-center-btn" data-center="china">中国</button>
+        <!-- ハンバーガーボタン（スマホのみ表示） -->
+        <button id="worldHamburger" onclick="toggleWorldPanel()" aria-label="キャラクター一覧"
+          style="margin-left:auto;flex-shrink:0;background:transparent;border:1px solid rgba(201,168,76,0.3);border-radius:3px;padding:0.28rem 0.5rem;cursor:pointer;align-items:center;justify-content:center;gap:3px;flex-direction:column;">
+          <span style="display:block;width:16px;height:1.5px;background:var(--gold);border-radius:1px;"></span>
+          <span style="display:block;width:16px;height:1.5px;background:var(--gold);border-radius:1px;margin-top:3px;"></span>
+          <span style="display:block;width:16px;height:1.5px;background:var(--gold);border-radius:1px;margin-top:3px;"></span>
+        </button>
       </div>
+      <!-- パネル用バックドロップ（スマホのみ） -->
+      <div id="worldPanelBackdrop" onclick="toggleWorldPanel()"></div>
       <!-- PNG地図 + バッジオーバーレイ -->
       <div id="worldMapWrap" style="flex:1;min-height:0;overflow:hidden;position:relative;background:#06060a;">
         <img id="worldMapImg" src="images/world_japan.png" alt="World Map"
@@ -451,6 +629,21 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
   </div>
 </div>
 
+
+<!-- スマホ用Worldポップアップ -->
+<div id="worldMobilePopup" style="display:none;">
+  <div id="worldMobileBackdrop" onclick="closeWorldMobilePopup()"></div>
+  <div id="worldMobileSheet">
+    <div id="worldMobileSheetHandle"></div>
+    <div id="worldMobileSheetHeader">
+      <span id="worldMobileFlag"></span>
+      <span id="worldMobileTitle"></span>
+      <span id="worldMobileCount"></span>
+      <button id="worldMobileClose" onclick="closeWorldMobilePopup()">✕</button>
+    </div>
+    <div id="worldMobileCharList"></div>
+  </div>
+</div>
 <!-- 組織詳細オーバーレイ -->
 <div class="modal2-overlay" id="orgDetailOverlay">
   <div class="modal2">
@@ -2776,6 +2969,17 @@ window.worldToggleCountry = function(key) {
     b.style.background  = '';
   });
 
+  // スマホ時はポップアップ表示
+  if (_isMobileWorld()) {
+    var g = _worldGroupData.find(function(x){ return x.key === key; });
+    var def = WORLD_COUNTRIES.find(function(c){ return c.key === key; });
+    if (g && def && g.chars.length > 0) {
+      openWorldMobilePopup(key, def.label, def.flag, g.chars);
+    }
+    return;
+  }
+
+  // PC時は右パネル
   var chars = document.getElementById('wpchars_' + key);
   var arrow = document.getElementById('wparrow_' + key);
   var header = chars ? chars.previousElementSibling : null;
@@ -2797,6 +3001,11 @@ window.worldToggleCountry = function(key) {
 window.worldToggleUnknown = function() {
   var g = _worldGroupData.find(function(x){ return x.key === 'unknown'; });
   if (!g || g.chars.length === 0) return;
+  // スマホ時はポップアップ
+  if (_isMobileWorld()) {
+    openWorldMobilePopup('unknown', '国籍不明', '👤', g.chars);
+    return;
+  }
   modalDot.style.background = 'var(--silver3)';
   modalTitle.textContent = '国籍不明 (UNKNOWN)';
   modalSub.textContent = g.chars.length + ' characters';
@@ -2830,8 +3039,20 @@ function _switchWorldCenter(viewKey) {
     b.classList.toggle('active', b.dataset.center === viewKey);
   });
   var img = document.getElementById('worldMapImg');
-  if (img) img.src = WORLD_MAP_IMAGES[viewKey] || WORLD_MAP_IMAGES['japan'];
+  if (img) {
+    img.src = WORLD_MAP_IMAGES[viewKey] || WORLD_MAP_IMAGES['japan'];
+  }
   _renderWorldBadges(viewKey);
+  // スマホ時：バッジ再配置 & スクロール位置をセンターに
+  if (_isMobileWorld()) {
+    var wrap = document.getElementById('worldMapWrap');
+    var imgEl = document.getElementById('worldMapImg');
+    if (wrap && imgEl) {
+      setTimeout(function(){
+        _adjustMobileMapSize();
+      }, 50);
+    }
+  }
 }
 
 function _initWorldCenterBtns() {
@@ -2840,7 +3061,136 @@ function _initWorldCenterBtns() {
   });
 }
 
-function _onWorldResize() {}
+function _onWorldResize() {
+  if (document.getElementById('worldView').style.display !== 'none') {
+    _adjustMobileMapSize();
+  }
+}
+
+// ===== スマホ対応 =====
+function _isMobileWorld() {
+  return window.innerWidth <= 600;
+}
+
+// スマホ時：地図画像の実サイズをバッジレイヤーに反映し、初期スクロール位置を設定
+function _adjustMobileMapSize() {
+  if (!_isMobileWorld()) return;
+  var wrap = document.getElementById('worldMapWrap');
+  var img  = document.getElementById('worldMapImg');
+  var layer = document.getElementById('worldBadgeLayer');
+  if (!wrap || !img || !layer) return;
+
+  // 地図の高さは画面高さの70%
+  var mapH = Math.floor(window.innerHeight * 0.70);
+  var mapArea = document.getElementById('worldMapArea');
+  if (mapArea) mapArea.style.height = mapH + 'px';
+
+  // wrap自体のheightも明示
+  wrap.style.height = mapH + 'px';
+
+  // 画像の縦横比(1774/887≒2.0)から横幅を計算
+  var imgW = Math.floor(mapH * (1774 / 887));
+  img.style.width  = imgW + 'px';
+  img.style.height = mapH + 'px';
+
+  // バッジレイヤーも同じサイズに
+  layer.style.width  = imgW + 'px';
+  layer.style.height = mapH + 'px';
+
+  // バッジ座標を再計算（%→px）
+  _repositionBadgesMobile(imgW, mapH);
+
+  // 初期スクロール位置：現在のビューセンター国が中央に来るよう
+  _scrollToCenter(_worldCurrentCenter, imgW);
+}
+
+// スマホ時バッジ座標をpx指定に変換（%だと正しく動かないため）
+function _repositionBadgesMobile(imgW, imgH) {
+  var layer = document.getElementById('worldBadgeLayer');
+  if (!layer) return;
+  var badges = layer.querySelectorAll('.world-badge');
+  badges.forEach(function(b) {
+    var lStr = b.style.left;
+    var tStr = b.style.top;
+    if (lStr.indexOf('%') >= 0) {
+      b.style.left = (parseFloat(lStr) / 100 * imgW) + 'px';
+      b.style.top  = (parseFloat(tStr) / 100 * imgH) + 'px';
+    }
+  });
+}
+
+// ビュー切り替え後に該当国が画面中央に来るようスクロール
+var WORLD_CENTER_SCROLL_PCT = {
+  japan:   0.507,  // 日本のX位置（%）
+  america: 0.491,  // アメリカのX位置
+  uk:      0.495,  // イギリスのX位置（ukビューの場合）
+  china:   0.496,  // 中国のX位置
+};
+function _scrollToCenter(viewKey, imgW) {
+  var wrap = document.getElementById('worldMapWrap');
+  if (!wrap) return;
+  var pct = WORLD_CENTER_SCROLL_PCT[viewKey] || 0.5;
+  var targetX = imgW * pct - wrap.clientWidth / 2;
+  wrap.scrollLeft = Math.max(0, targetX);
+}
+
+// ポップアップを開く（スマホ用）
+window.openWorldMobilePopup = function(key, label, flag, chars) {
+  var popup = document.getElementById('worldMobilePopup');
+  var sheet = document.getElementById('worldMobileSheet');
+  var titleEl = document.getElementById('worldMobileTitle');
+  var flagEl  = document.getElementById('worldMobileFlag');
+  var countEl = document.getElementById('worldMobileCount');
+  var listEl  = document.getElementById('worldMobileCharList');
+  if (!popup) return;
+
+  titleEl.textContent = label;
+  flagEl.textContent  = flag;
+  countEl.textContent = chars.length + '人';
+
+  var html = '';
+  chars.forEach(function(ch) {
+    var iconSrc = IMAGES[ch.iconKey] || '';
+    var tag = (ch.number && ch.number !== '-' && ch.number !== '???') ? '#' + ch.number : '';
+    html += '<div class="world-char-row" style="padding:0.5rem 1rem;" onclick="worldOpenChar(\'' + ch.id + '\');closeWorldMobilePopup();">';
+    if (iconSrc) {
+      html += '<img class="world-char-icon" src="' + iconSrc + '" alt="">';
+    } else {
+      html += '<div class="world-char-icon" style="width:28px;height:28px;border-radius:50%;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:var(--text-dim);">—</div>';
+    }
+    html += '<span class="world-char-name">' + ch.name + '</span>';
+    if (tag) html += '<span class="world-char-num">' + tag + '</span>';
+    html += '</div>';
+  });
+  listEl.innerHTML = html;
+
+  popup.classList.add('open');
+  popup.style.display = 'block';
+  // アニメーション用に少し遅らせてopenクラス付与
+  setTimeout(function(){ sheet.classList.add('open'); }, 10);
+};
+
+// ポップアップを閉じる
+// ハンバーガーでパネル開閉（スマホ用）
+window.toggleWorldPanel = function() {
+  var panel = document.getElementById('worldPanel');
+  var backdrop = document.getElementById('worldPanelBackdrop');
+  if (!panel) return;
+  var isOpen = panel.classList.contains('sp-open');
+  panel.classList.toggle('sp-open', !isOpen);
+  if (backdrop) backdrop.classList.toggle('sp-open', !isOpen);
+};
+
+window.closeWorldMobilePopup = function() {
+  var popup = document.getElementById('worldMobilePopup');
+  var sheet = document.getElementById('worldMobileSheet');
+  if (!popup) return;
+  sheet.classList.remove('open');
+  setTimeout(function(){
+    popup.classList.remove('open');
+    popup.style.display = 'none';
+  }, 300);
+};
 
 function initWorldView() {
   _buildWorldGroups();
@@ -2853,6 +3203,15 @@ function initWorldView() {
   _renderWorldPanel(null);
   _updateWorldUnknownBar();
   _renderWorldBadges(_worldCurrentCenter);
+  // スマホ時の初期設定
+  if (_isMobileWorld()) {
+    // 画像ロード後にサイズ調整
+    if (img && img.complete) {
+      _adjustMobileMapSize();
+    } else if (img) {
+      img.onload = function() { _adjustMobileMapSize(); };
+    }
+  }
 }
 
 </script>
