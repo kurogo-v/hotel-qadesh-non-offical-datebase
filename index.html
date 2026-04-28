@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hotel Qadesh — Unofficial Database</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400&family=Share+Tech+Mono&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#000000;--bg2:#06060a;--bg3:#0c0c12;--bg4:#121218;
@@ -44,7 +44,7 @@ body.light .world-country.has-chars:hover{fill:#bed0de;}
 .world-badge:hover .world-badge-circle{border-color:var(--gold);box-shadow:0 0 14px rgba(201,168,76,0.5);}
 .world-badge-circle{width:42px;height:42px;border-radius:50%;background:rgba(0,0,4,0.85);border:1.5px solid rgba(201,168,76,0.45);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all 0.18s;box-shadow:0 2px 14px rgba(0,0,0,0.7);}
 body.light .world-badge-circle{background:rgba(240,238,232,0.92);border-color:rgba(120,90,30,0.5);}
-.world-badge-flag{font-size:1.1rem;line-height:1;}
+.world-badge-flag{font-size:1.1rem;line-height:1;font-family:'Noto Color Emoji',serif;}
 .world-badge-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--gold);line-height:1;margin-top:1px;}
 .world-badge-label{font-family:'Share Tech Mono',monospace;font-size:0.6rem;color:rgba(210,210,220,0.95);letter-spacing:0.05em;margin-top:3px;white-space:nowrap;text-shadow:0 1px 4px rgba(0,0,0,0.95),0 0 8px rgba(0,0,0,0.8);}
 body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(255,255,255,0.9);}
@@ -52,7 +52,7 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
 .world-panel-country-header{display:flex;align-items:center;gap:0.6rem;padding:0.55rem 0.9rem;cursor:pointer;transition:background 0.13s;}
 .world-panel-country-header:hover{background:rgba(201,168,76,0.04);}
 .world-panel-country-header.active-header{background:rgba(201,168,76,0.06);}
-.world-panel-flag{font-size:1rem;}
+.world-panel-flag{font-size:1rem;font-family:'Noto Color Emoji',serif;}
 .world-panel-name{font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--silver);letter-spacing:0.08em;flex:1;}
 .world-panel-count{font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--gold);}
 .world-panel-arrow{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);transition:transform 0.18s;}
@@ -207,7 +207,7 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
   border-bottom: 1px solid rgba(201,168,76,0.1);
   flex-shrink: 0;
 }
-#worldMobileFlag  { font-size: 1.3rem; }
+#worldMobileFlag  { font-size: 1.3rem; font-family: 'Noto Color Emoji', serif; }
 #worldMobileTitle {
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.9rem;
@@ -612,7 +612,7 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
       </div>
       <!-- 国籍不明 -->
       <div id="worldUnknownBar" style="flex-shrink:0;display:flex;align-items:center;gap:0.7rem;padding:0.55rem 1.2rem;border-top:1px solid rgba(201,168,76,0.08);cursor:pointer;" onclick="worldToggleUnknown()">
-        <span style="font-size:1.1rem;">👤</span>
+        <span style="font-size:1.1rem;font-family:'Noto Color Emoji',serif;">👤</span>
         <span style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--silver2);letter-spacing:0.1em;">国籍不明 (UNKNOWN)</span>
         <span id="worldUnknownCount" style="font-family:'Share Tech Mono',monospace;font-size:0.85rem;color:var(--gold);margin-left:0.3rem;"></span>
         <span id="worldUnknownArrow" style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:var(--text-dim);margin-left:auto;">▶</span>
