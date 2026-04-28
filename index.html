@@ -2669,43 +2669,43 @@ var WORLD_MAP_IMAGES = {
 // バッジ座標（画像に対する%：left%, top%）
 // 画像サイズ1774x887、正距円筒図法基準で計算
 var WORLD_BADGE_PCT = {
-  // 座標 = バッジ円の中心 = 地図上の国名ラベル右端の右横
-  // ラベルなしの国（UK・サウジ）はその国がある場所の近く
+  // 座標は地図PNG実画像（1774x887px）からテキスト領域を自動検出して算出
+  // バッジ左端（円の中心）= ラベル右端% + 1.5%
   japan: {
-    russia:   [ 25.1,  27.8],  // 「ロシア」ラベル右横
-    china:    [ 35.1,  48.4],  // 「中国」ラベル右横
-    japan:    [ 47.5,  48.4],  // 「日本」ラベル右横
-    usa:      [ 73.9,  44.2],  // 「アメリカ」ラベル右横
-    europe:   [ 15.2,  36.3],  // ヨーロッパクラスタ（「ヨーロッパ」ラベル右横）
-    uk:       [  8.7,  31.2],  // イギリス島付近（ラベルなし）
-    saudi:    [ 20.0,  49.7],  // サウジアラビア付近（ラベルなし）
+    russia:   [ 25.1,  28.4],  // 「ロシア」ラベル右横
+    china:    [ 35.1,  47.8],  // 「中国」ラベル右横
+    japan:    [ 47.6,  48.7],  // 「日本」ラベル右横
+    usa:      [ 73.5,  44.8],  // 「アメリカ」ラベル右横
+    europe:   [ 15.8,  37.1],  // ヨーロッパクラスタ（「ヨーロッパ」ラベル右横）
+    uk:       [  9.2,  32.1],  // イギリス（ラベルなし）
+    saudi:    [ 21.1,  50.5],  // サウジ（ラベルなし）
   },
   america: {
-    russia:   [ 28.4,  27.3],  // 「ロシア」ラベル右横
-    china:    [ 22.1,  45.9],  // 「中国」ラベル右横
-    japan:    [ 37.8,  45.9],  // 「日本」ラベル右横
-    usa:      [ 80.0,  40.0],  // 「アメリカ」ラベル右横
-    europe:   [  7.7,  33.1],  // ヨーロッパクラスタ（「ヨーロッパ」ラベル右横）
-    uk:       [  8.1,  26.8],  // イギリス島付近（ラベルなし）
-    // saudi: このビューでは範囲外のため非表示
+    russia:   [ 28.1,  28.4],  // 「ロシア」ラベル右横
+    china:    [ 21.7,  46.3],  // 「中国」ラベル右横
+    japan:    [ 37.8,  46.5],  // 「日本」ラベル右横
+    usa:      [ 79.3,  40.5],  // 「アメリカ」ラベル右横
+    europe:   [  8.2,  33.8],  // ヨーロッパクラスタ（「ヨーロッパ」ラベル右横）
+    uk:       [  8.6,  28.2],  // イギリス（ラベルなし）
+    // saudi: このビューでは左端に近すぎるため非表示
   },
   uk: {
-    russia:   [ 74.5,  28.2],  // 「ロシア」ラベル右横
-    china:    [ 50.8,  49.4],  // 「中国」ラベル右横
-    japan:    [ 88.6,  47.7],  // 「日本」ラベル右横
-    usa:      [ 18.3,  44.9],  // 「アメリカ」ラベル右横
-    europe:   [ 48.0,  38.5],  // ヨーロッパクラスタ（「ヨーロッパ」ラベル右横）
-    uk:       [ 43.5,  35.0],  // イギリス島付近（ラベルなし）
-    saudi:    [ 56.0,  49.2],  // サウジアラビア付近（ラベルなし）
+    russia:   [ 73.9,  28.9],  // 「ロシア」ラベル右横
+    china:    [ 50.6,  50.2],  // 「中国」ラベル右横
+    japan:    [ 87.7,  48.0],  // 「日本」ラベル右横
+    usa:      [ 18.6,  45.4],  // 「アメリカ」ラベル右横
+    europe:   [ 51.8,  39.7],  // ヨーロッパクラスタ（「ヨーロッパ」ラベル右横）
+    uk:       [ 47.5,  37.0],  // イギリス（ラベルなし）
+    saudi:    [ 56.1,  50.0],  // サウジ（ラベルなし）
   },
   china: {
-    russia:   [ 37.3,  29.7],  // 「ロシア」ラベル右横
-    china:    [ 51.3,  47.6],  // 「中国」ラベル右横
-    japan:    [ 54.7,  47.6],  // 「日本」ラベル右横
-    usa:      [ 80.3,  44.2],  // 「アメリカ」ラベル右横
-    europe:   [ 10.0,  37.5],  // ヨーロッパクラスタ（「ヨーロッパ」ラベル右横）
-    uk:       [  9.6,  33.7],  // イギリス島付近（ラベルなし）
-    saudi:    [ 26.8,  48.1],  // サウジアラビア付近（ラベルなし）
+    russia:   [ 37.0,  30.5],  // 「ロシア」ラベル右横
+    china:    [ 50.9,  47.9],  // 「中国」ラベル右横
+    japan:    [ 54.2,  47.9],  // 「日本」ラベル右横
+    usa:      [ 79.3,  44.6],  // 「アメリカ」ラベル右横
+    europe:   [ 15.3,  39.1],  // ヨーロッパクラスタ（「ヨーロッパ」ラベル右横）
+    uk:       [ 10.3,  34.6],  // イギリス（ラベルなし）
+    saudi:    [ 26.9,  49.0],  // サウジ（ラベルなし）
   },
 }
 
@@ -2772,9 +2772,19 @@ function _renderWorldBadges(viewKey) {
   _europeClusterOpen = false;
 
   // 現在の画像表示幅から縮小率を算出 → 円半径を動的に計算
+  // worldMapInnerのwidthを優先（_adjustMapSizeで設定済み）
+  var innerEl = document.getElementById('worldMapInner');
   var imgEl = document.getElementById('worldMapImg');
-  var currentImgW = imgEl ? (parseInt(imgEl.style.width) || imgEl.clientWidth || 1774) : 1774;
+  var currentImgW = 1774;
+  if (innerEl && parseInt(innerEl.style.width) > 0) {
+    currentImgW = parseInt(innerEl.style.width);
+  } else if (imgEl && parseInt(imgEl.style.width) > 0) {
+    currentImgW = parseInt(imgEl.style.width);
+  } else if (imgEl && imgEl.clientWidth > 0) {
+    currentImgW = imgEl.clientWidth;
+  }
   var circleR = Math.round(21 * currentImgW / 1774); // 円半径(px)。21=42/2
+  // 縦並びレイアウト: X方向は中央揃え(-50%)、Y方向は円半径分上にオフセット(円の中心が座標点)
   var badgeTransform = 'translate(-50%, -' + circleR + 'px)';
 
   var posMap = (WORLD_BADGE_PCT[viewKey] || WORLD_BADGE_PCT['japan']);
@@ -3053,17 +3063,13 @@ function _switchWorldCenter(viewKey) {
   var img = document.getElementById('worldMapImg');
   if (img) {
     img.src = WORLD_MAP_IMAGES[viewKey] || WORLD_MAP_IMAGES['japan'];
-    // 画像切り替え後にサイズ再調整してからバッジ描画
+    // 画像切り替え後にサイズ再調整（_adjustMapSize内でバッジ再描画も行われる）
     img.onload = function() {
       _adjustMapSize();
-      _renderWorldBadges(viewKey);
       if (_isMobileWorld()) _adjustMobileMapSize();
     };
     // キャッシュ済みの場合の保険
-    setTimeout(function() {
-      _adjustMapSize();
-      _renderWorldBadges(viewKey);
-    }, 50);
+    setTimeout(function() { _adjustMapSize(); }, 50);
   }
 }
 
@@ -3109,6 +3115,11 @@ function _adjustMapSize() {
   inner.style.height = imgH + 'px';
   img.style.width    = imgW + 'px';
   img.style.height   = imgH + 'px';
+
+  // サイズ確定後にバッジを再描画（circleRが正しい値で計算されるように）
+  if (_worldCurrentCenter && _worldGroupData && _worldGroupData.length) {
+    _renderWorldBadges(_worldCurrentCenter);
+  }
 }
 
 // ===== スマホ対応 =====
@@ -3245,14 +3256,12 @@ function initWorldView() {
     _adjustMapSize();
     _renderWorldPanel(null);
     _updateWorldUnknownBar();
-    _renderWorldBadges(_worldCurrentCenter);
     if (_isMobileWorld()) _adjustMobileMapSize();
   } else if (img) {
     img.onload = function() {
       _adjustMapSize();
       _renderWorldPanel(null);
       _updateWorldUnknownBar();
-      _renderWorldBadges(_worldCurrentCenter);
       if (_isMobileWorld()) _adjustMobileMapSize();
     };
     // キャッシュ済みで onload が発火しない場合の保険
@@ -3260,7 +3269,6 @@ function initWorldView() {
       _adjustMapSize();
       _renderWorldPanel(null);
       _updateWorldUnknownBar();
-      _renderWorldBadges(_worldCurrentCenter);
     }, 100);
   }
 }
