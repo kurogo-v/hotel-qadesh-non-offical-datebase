@@ -2845,8 +2845,14 @@ function geoTo3D(lng, lat) {
 }
 
 // パルス用 uniform を共有（全ライン同じuniformオブジェクトを参照）
+// 常時表示用（水色・薄め）
+var alwaysUniforms = {
+  uOpacity: { value: 0.28 },
+  uColor:   { value: new THREE.Color(0x4ec8e0) }
+};
+// 選択国強調用（金色・パルス）
 var borderUniforms = {
-  uOpacity: { value: 0.22 },
+  uOpacity: { value: 0.0 },
   uColor:   { value: new THREE.Color(0xffd850) }
 };
 
@@ -2863,29 +2869,48 @@ var borderFragShader = `
   }
 `;
 
-var BORDER_LINES = {};
+var BORDER_LINES = {};        // 選択用（金色パルス）
+var BORDER_LINES_ALWAYS = {}; // 常時用（水色）
 (function buildBorderLines() {
   Object.entries(BORDER_DATA).forEach(([key, rings]) => {
-    var lines = [];
+    var selLines    = [];
+    var alwaysLines = [];
     rings.forEach(ring => {
       var pts = ring.map(([lng, lat]) => geoTo3D(lng, lat));
       if (pts.length < 2) return;
       pts.push(pts[0].clone());
       var geom = new THREE.BufferGeometry().setFromPoints(pts);
-      var mat  = new THREE.ShaderMaterial({
-        uniforms:       borderUniforms,   // 全ライン共有
+
+      // 常時表示ライン（水色）
+      var matAlways = new THREE.ShaderMaterial({
+        uniforms:       alwaysUniforms,
         vertexShader:   borderVertShader,
         fragmentShader: borderFragShader,
         transparent:    true,
-        depthTest:      false,            // ★地球に埋もれない
+        depthTest:      false,
         depthWrite:     false,
       });
-      var line = new THREE.Line(geom, mat);
-      line.visible = false;
-      earthMesh.add(line); // 地球の子→回転追従
-      lines.push(line);
+      var lineAlways = new THREE.Line(geom, matAlways);
+      lineAlways.visible = true;
+      earthMesh.add(lineAlways);
+      alwaysLines.push(lineAlways);
+
+      // 選択用ライン（金色パルス）
+      var matSel = new THREE.ShaderMaterial({
+        uniforms:       borderUniforms,
+        vertexShader:   borderVertShader,
+        fragmentShader: borderFragShader,
+        transparent:    true,
+        depthTest:      false,
+        depthWrite:     false,
+      });
+      var lineSel = new THREE.Line(geom, matSel);
+      lineSel.visible = false;
+      earthMesh.add(lineSel);
+      selLines.push(lineSel);
     });
-    BORDER_LINES[key] = lines;
+    BORDER_LINES[key]        = selLines;
+    BORDER_LINES_ALWAYS[key] = alwaysLines;
   });
 })();
 
@@ -2986,10 +3011,9 @@ var ZOOM_SELECTED = 1.85;
 var   zoomTarget    = ZOOM_DEFAULT;
 
 function showBorderLines(key) {
-  // 全ライン非表示
-  Object.values(BORDER_LINES).forEach(ls => ls.forEach(l => {
-    l.visible = false; l.material.opacity = 0;
-  }));
+  // 選択用ライン（金色）をリセット（常時ラインはそのまま）
+  Object.values(BORDER_LINES).forEach(ls => ls.forEach(l => { l.visible = false; }));
+  borderUniforms.uOpacity.value = 0.0;
   if (!key || key === 'unknown') return;
   var ls = BORDER_LINES[key];
   if (ls) ls.forEach(l => { l.visible = true; });
@@ -3163,17 +3187,13 @@ stage.addEventListener('wheel', e => {
   });
 
     // 国境ライン パルス（uniform更新のみ・earthMeshの子なので追従は自動）
-  if (selectedKey && selectedKey !== 'unknown') {
-    var ls = BORDER_LINES[selectedKey];
-    if (ls) {
-      var pulse = (Math.sin(glowT * 1.8) + 1) / 2;
-      borderUniforms.uOpacity.value = 0.55 + pulse * 0.45;
-      borderUniforms.uColor.value.setHex(pulse > 0.5 ? 0xffe080 : 0xffcc00);
-    }
+  // 選択国の金色パルス（常時水色ラインはalwaysUniformsで自動表示）
+  if (selectedKey && selectedKey !== 'unknown' && BORDER_LINES[selectedKey]) {
+    var pulse = (Math.sin(glowT * 1.8) + 1) / 2;
+    borderUniforms.uOpacity.value = 0.6 + pulse * 0.4;
+    borderUniforms.uColor.value.setHex(pulse > 0.5 ? 0xffe080 : 0xffcc00);
   } else {
-    // 非選択時も常時薄く輪郭を表示（全国が分かるように）
-    borderUniforms.uOpacity.value = 0.22;
-    borderUniforms.uColor.value.setHex(0xc8a84c);
+    borderUniforms.uOpacity.value = 0.0;
   }
 
   updateBadges();
@@ -3238,16 +3258,23 @@ function _buildWorldGroups() {
   });
 }
 
-// 五十音順ソート用（nameSearchのひらがな部分で比較）
+// 五十音順ソート用（nameSearchからひらがな読みを抽出して比較）
 var _jaCollator = (function() {
   try { return new Intl.Collator('ja', { sensitivity: 'base' }); }
   catch(e) { return null; }
 })();
 function _getReadingKey(ch) {
-  // nameSearch: "リゾット りぞっと" → スペース以降のひらがなを取得
   var ns = (ch.nameSearch || ch.name || '');
-  var sp = ns.indexOf(' ');
-  return sp !== -1 ? ns.slice(sp + 1) : ns;
+  // スペース区切りのトークンのうち、ひらがなのみのものを読みキーに使用
+  var tokens = ns.split(/\s+/);
+  for (var i = 0; i < tokens.length; i++) {
+    if (/^[ぁ-んー・っ]+$/.test(tokens[i])) return tokens[i];
+  }
+  // ひらがなのみトークンがなければ、ひらがなを含む最初のトークン
+  for (var i = 0; i < tokens.length; i++) {
+    if (/[ぁ-ん]/.test(tokens[i])) return tokens[i];
+  }
+  return ns;
 }
 function _sortByName(arr) {
   return arr.slice().sort(function(a, b) {
