@@ -121,7 +121,7 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
 .card-role { color: rgba(185,160,75,0.48); font-size: 11px; margin-top: 2px; }
 .card.u .card-role { color: rgba(145,145,145,0.45); }
 
-#worldPanelUnknown{flex-shrink:0;display:flex;align-items:center;gap:0.7rem;padding:0.5rem 0.9rem;border-bottom:1px solid rgba(201,168,76,0.15);cursor:pointer;transition:background 0.13s;background:rgba(201,168,76,0.03);}
+#worldPanelUnknown{border-bottom:1px solid rgba(201,168,76,0.08);}
 #worldPanelUnknown:hover{background:rgba(201,168,76,0.07);}
 body.light #worldPanelUnknown{background:rgba(120,90,30,0.04);}
 body.light #worldPanelUnknown:hover{background:rgba(120,90,30,0.09);}
@@ -671,12 +671,12 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
         <div style="font-family:'Noto Serif JP',serif;font-size:0.72rem;color:var(--text-dim);margin-top:0.25rem;">地球儀上の国をクリックすると、所属キャラクターを表示します。</div>
       </div>
       <!-- 国籍不明ヘッダー（固定） -->
-      <div id="worldPanelUnknown" onclick="worldToggleUnknown()">
-        <span style="font-size:1rem;font-family:'Noto Color Emoji',serif;">👤</span>
-        <span style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--silver2);letter-spacing:0.08em;flex:1;">国籍不明 (UNKNOWN)</span>
-        <span id="worldUnknownCount" style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--gold);margin-right:0.4rem;"></span>
-        <span id="worldUnknownArrow" style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);">▶</span>
-        <div id="worldPanelUnknownChars" style="display:none;padding:0.2rem 0 0.4rem;border-bottom:1px solid rgba(201,168,76,0.08);"></div>
+      <div id="worldPanelUnknown" class="world-panel-country-header" onclick="worldToggleUnknown()">
+        <span class="world-panel-flag">👤</span>
+        <span class="world-panel-name">国籍不明 (UNKNOWN)</span>
+        <span id="worldUnknownCount" class="world-panel-count"></span>
+        <span id="worldUnknownArrow" class="world-panel-arrow">▶</span>
+      </div>
       </div>
       <div id="worldPanelList" style="flex:1;overflow-y:auto;padding:0.4rem 0;"></div>
     </div>
@@ -982,7 +982,7 @@ const CHARS = [
   {"id": "lucas", "name": "Lucas kaneda(ルーカス・カネダ)", "number": "-", "affiliations": ["LSI Industry", "Executive"], "nationality": "アメリカ", "keyword": "LSI Industry/Horsemens", "notionUrl": "", "iconKey": "lucas", "catGroup": "none", "subGroup": "", "fullImgKeys": ["lucas"], "nationalitySearch": "アメリカ アメリカ合衆国 米国 US USA U.S. U.S.A. America america AMERICA United States united states", "nameSearch": "Lucas kaneda ルーカス カネダ ルーカス・カネダ るーかす かねだ るーかす・かねだ"},
   {"id": "cheri", "name": "シェリ・スティア（Cheri Stia）", "number": "???", "affiliations": ["Member", "Consultant"], "nationality": "イングランド", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "cheri", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["cheri"], "nationalitySearch": "イギリス 英国 UK GB GBR United Kingdom united kingdom Britain britain England england イングランド", "nameSearch": "シェリ スティア シェリ・スティア Cheri Stia しぇり すてぃあ しぇり・すてぃあ"},
   {"id": "ryuu", "name": "緑狐（リュー・フゥー）", "number": "81181", "affiliations": ["Member", "Trade Hublist", "Broker", "Negotiator"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "ryuu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["ryuu"], "corrImgKey": "ryuu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "緑狐 リュー フゥー リュー・フゥー りょっこ みどりきつね りゅー ふぅー りゅー・ふぅー リョッコ ミドリキツネ"},
-  {"id": "honyu", "name": "紅雨（ホンユー）", "number": "14719", "affiliations": ["Member", "月華会", "Executive"], "nationality": "中国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "honyu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["honyu"], "corrImgKey": "honyu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "紅雨 ホンユー こうう べにあめ ほんゆー コウウ ベニアメ"},
+  {"id": "honyu", "name": "紅雨（ホンユー）", "number": "14719", "affiliations": ["Member", "月華会", "Executive"], "nationality": "中国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "honyu", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["honyu"], "corrImgKey": "honyu", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "紅雨 ホンユー ほんゆー こうう べにあめ コウウ ベニアメ"},
   {"id": "mathilda", "name": "Mathilda・S・Albert", "number": "1510", "affiliations": ["Member", "Secret Scale Service", "Executive"], "nationality": "ドイツ連邦共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "mathilda", "catGroup": "qadesh", "subGroup": "member", "fullImgKeys": ["mathilda"], "nationalitySearch": "ドイツ ドイツ連邦共和国 DE DEU Germany germany GERMANY", "nameSearch": "Mathilda S Albert Mathilda・S・Albert マチルダ エス アルベール マチルダ・エス・アルベール まちるだ えす あるべーる まちるだ・えす・あるべーる"},
   {"id": "bee", "name": "ビー・ファンフー", "number": "8782", "affiliations": ["Member", "Killer"], "nationality": "中華人民共和国", "keyword": "カデシュ会員", "notionUrl": "", "iconKey": "bee", "catGroup": "qadesh", "subGroup": "", "fullImgKeys": ["bee", "bee2"], "corrImgKey": "bee", "nationalitySearch": "中国 中華人民共和国 CN CHN China china CHINA", "nameSearch": "ビー ファンフー ビー・ファンフー びー ふぁんふー びー・ふぁんふー"},
   {"id": "albireo", "name": "アルビレオ・オルバース", "number": "-", "affiliations": ["該当分類なし"], "nationality": "不明", "keyword": "カデシュ・フランス", "notionUrl": "", "iconKey": "albireo", "catGroup": "france", "subGroup": "", "fullImgKeys": ["albireo"], "nationalitySearch": "国籍不明 不明", "nameSearch": "アルビレオ オルバース アルビレオ・オルバース あるびれお おるばーす あるびれお・おるばーす"},
@@ -3192,6 +3192,10 @@ document.getElementById('globeCloseBtn').addEventListener('click', deselectAll);
       e.stopPropagation();
       if (!wasDragging) fn(e);
     }, { passive: false });
+  }
+  var _ham = document.getElementById('worldHamburger');
+  if (_ham) {
+    _ham.addEventListener('click', function(e) { e.stopPropagation(); toggleWorldPanel(); });
   }
   addTouchTap(document.getElementById('worldHamburger'), function() { toggleWorldPanel(); });
   addTouchTap(document.getElementById('globeCloseBtn'),  function() { deselectAll(); });
