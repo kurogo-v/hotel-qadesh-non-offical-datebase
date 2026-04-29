@@ -2846,7 +2846,7 @@ function geoTo3D(lng, lat) {
 
 // パルス用 uniform を共有（全ライン同じuniformオブジェクトを参照）
 var borderUniforms = {
-  uOpacity: { value: 0.0 },
+  uOpacity: { value: 0.22 },
   uColor:   { value: new THREE.Color(0xffd850) }
 };
 
@@ -3007,10 +3007,10 @@ function selectCountry(country) {
   autoRotate = false;
 
   document.getElementById('globePanelDot').className = '';
-  document.getElementById('globePanelDot').style.background = 'none';
-  document.getElementById('globePanelDot').style.fontSize = '18px';
-  document.getElementById('globePanelDot').style.fontFamily = "'Noto Color Emoji','Apple Color Emoji',serif";
-  document.getElementById('globePanelDot').textContent = country.flag || '●';
+  document.getElementById('globePanelDot').style.background = 'rgba(220,190,100,0.85)';
+  document.getElementById('globePanelDot').style.fontSize = '';
+  document.getElementById('globePanelDot').style.fontFamily = '';
+  document.getElementById('globePanelDot').textContent = '';
   document.getElementById('globePanelLabel').innerHTML =
     '<span style="font-family:\'Noto Color Emoji\',\'Apple Color Emoji\',serif;margin-right:6px;">' +
     (country.flag || '') + '</span>' + country.label + '　' + country.chars.length + '人';
@@ -3171,7 +3171,9 @@ stage.addEventListener('wheel', e => {
       borderUniforms.uColor.value.setHex(pulse > 0.5 ? 0xffe080 : 0xffcc00);
     }
   } else {
-    borderUniforms.uOpacity.value = 0.0;
+    // 非選択時も常時薄く輪郭を表示（全国が分かるように）
+    borderUniforms.uOpacity.value = 0.22;
+    borderUniforms.uColor.value.setHex(0xc8a84c);
   }
 
   updateBadges();
@@ -3236,10 +3238,23 @@ function _buildWorldGroups() {
   });
 }
 
-// 五十音順ソート用（localeCompare ja）
+// 五十音順ソート用（nameSearchのひらがな部分で比較）
+var _jaCollator = (function() {
+  try { return new Intl.Collator('ja', { sensitivity: 'base' }); }
+  catch(e) { return null; }
+})();
+function _getReadingKey(ch) {
+  // nameSearch: "リゾット りぞっと" → スペース以降のひらがなを取得
+  var ns = (ch.nameSearch || ch.name || '');
+  var sp = ns.indexOf(' ');
+  return sp !== -1 ? ns.slice(sp + 1) : ns;
+}
 function _sortByName(arr) {
   return arr.slice().sort(function(a, b) {
-    return (a.name || '').localeCompare(b.name || '', 'ja');
+    var na = _getReadingKey(a);
+    var nb = _getReadingKey(b);
+    if (_jaCollator) return _jaCollator.compare(na, nb);
+    return na.localeCompare(nb, 'ja', { sensitivity: 'base' });
   });
 }
 
