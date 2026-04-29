@@ -676,6 +676,7 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
         <span style="font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--silver2);letter-spacing:0.08em;flex:1;">国籍不明 (UNKNOWN)</span>
         <span id="worldUnknownCount" style="font-family:'Share Tech Mono',monospace;font-size:0.82rem;color:var(--gold);margin-right:0.4rem;"></span>
         <span id="worldUnknownArrow" style="font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);">▶</span>
+        <div id="worldPanelUnknownChars" style="display:none;padding:0.2rem 0 0.4rem;border-bottom:1px solid rgba(201,168,76,0.08);"></div>
       </div>
       <div id="worldPanelList" style="flex:1;overflow-y:auto;padding:0.4rem 0;"></div>
     </div>
@@ -3382,30 +3383,37 @@ function _buildWorldGroups() {
   });
 }
 
-// 五十音順ソート用（nameSearchからひらがな読みを抽出して比較）
+// 五十音順ソート用（nameSearchからひらがな読みを抽出、NFD正規化で濁音を清音扱い）
 var _jaCollator = (function() {
-  try { return new Intl.Collator('ja', { sensitivity: 'base' }); }
+  try { return new Intl.Collator('ja'); }
   catch(e) { return null; }
 })();
 function _getReadingKey(ch) {
   var ns = (ch.nameSearch || ch.name || '');
-  // スペース区切りのトークンのうち、ひらがなのみのものを読みキーに使用
   var tokens = ns.split(/\s+/);
+  var key = '';
+  // ひらがなのみのトークンを優先
   for (var i = 0; i < tokens.length; i++) {
-    if (/^[ぁ-んー・っ]+$/.test(tokens[i])) return tokens[i];
+    if (/^[ぁ-んー・っ]+$/.test(tokens[i])) { key = tokens[i]; break; }
   }
-  // ひらがなのみトークンがなければ、ひらがなを含む最初のトークン
-  for (var i = 0; i < tokens.length; i++) {
-    if (/[ぁ-ん]/.test(tokens[i])) return tokens[i];
+  // なければひらがなを含む最初のトークン
+  if (!key) {
+    for (var i = 0; i < tokens.length; i++) {
+      if (/[ぁ-ん]/.test(tokens[i])) { key = tokens[i]; break; }
+    }
   }
-  return ns;
+  if (!key) key = ns;
+  // NFD正規化: 濁点・半濁点を除去して清音として比較（は行→ば行の順を保つ）
+  try {
+    return key.normalize('NFD').replace(/[\u3099\u309A]/g, '').normalize('NFC');
+  } catch(e) { return key; }
 }
 function _sortByName(arr) {
   return arr.slice().sort(function(a, b) {
     var na = _getReadingKey(a);
     var nb = _getReadingKey(b);
     if (_jaCollator) return _jaCollator.compare(na, nb);
-    return na.localeCompare(nb, 'ja', { sensitivity: 'base' });
+    return na.localeCompare(nb, 'ja');
   });
 }
 
@@ -3450,6 +3458,11 @@ function _updateWorldUnknownBar() {
   var count = g ? g.chars.length : 0;
   var el = document.getElementById('worldUnknownCount');
   if (el) el.textContent = count + '人';
+  // 展開エリアをリセット
+  var unkChars = document.getElementById('worldPanelUnknownChars');
+  var unkArrow = document.getElementById('worldUnknownArrow');
+  if (unkChars) unkChars.style.display = 'none';
+  if (unkArrow) unkArrow.textContent = '▶';
 }
 
 function _isMobileWorld() {
@@ -3487,9 +3500,41 @@ window.worldToggleCountry = function(key) {
 window.worldToggleUnknown = function() {
   var _wp = document.getElementById('worldPanel');
   var _panelOpen = _wp && _wp.classList.contains('sp-open');
-  // 右パネルが閉じているときのみグローブ側の選択を実行
-  if (!_panelOpen && typeof window.selectUnknown === 'function') window.selectUnknown();
 
+  // ── 右パネル内での国籍不明リスト展開 ──
+  var unkChars = document.getElementById('worldPanelUnknownChars');
+  var unkArrow = document.getElementById('worldUnknownArrow');
+  if (unkChars) {
+    var isOpen = unkChars.style.display !== 'none';
+    if (isOpen) {
+      // 閉じる
+      unkChars.style.display = 'none';
+      if (unkArrow) unkArrow.textContent = '▶';
+    } else {
+      // 開く: UNKNOWN.chars をキャラ行として描画
+      var html = '';
+      var sorted = typeof _sortByName === 'function' ? _sortByName(UNKNOWN.chars) : UNKNOWN.chars;
+      sorted.forEach(function(ch) {
+        var iconSrc = IMAGES[ch.iconKey] || '';
+        var tag = (ch.number && ch.number !== '-' && ch.number !== '???') ? '#' + ch.number : '';
+        html += '<div class="world-char-row" onclick="worldOpenChar(\'' + ch.id + '\')">';
+        if (iconSrc) {
+          html += '<img class="world-char-icon" src="' + iconSrc + '" alt="">';
+        } else {
+          html += '<div class="world-char-icon" style="display:flex;align-items:center;justify-content:center;font-size:0.85rem;color:var(--text-dim);">—</div>';
+        }
+        html += '<span class="world-char-name">' + ch.name + '</span>';
+        if (tag) html += '<span class="world-char-num">' + tag + '</span>';
+        html += '</div>';
+      });
+      unkChars.innerHTML = html;
+      unkChars.style.display = 'block';
+      if (unkArrow) unkArrow.textContent = '▼';
+    }
+  }
+
+  // ── グローブ側の選択（右パネルが閉じているときのみ）──
+  if (!_panelOpen && typeof window.selectUnknown === 'function') window.selectUnknown();
 };
 
 window.worldOpenChar = function(charId) { showCharDetail(charId); };
