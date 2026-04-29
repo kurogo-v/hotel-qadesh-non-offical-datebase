@@ -2866,15 +2866,27 @@ var borderUniforms = {
 };
 
 var borderVertShader = `
+  varying float vVisible;
   void main() {
+    // 球面上の点の法線 = 正規化された位置ベクトル（球中心=原点）
+    vec3 worldNormal = normalize((modelMatrix * vec4(position, 0.0)).xyz);
+    // カメラ方向（ワールド座標）
+    vec3 toCam = normalize(cameraPosition - (modelMatrix * vec4(position, 1.0)).xyz);
+    // dot > 0 ならカメラ側（前面）、< 0 なら裏面
+    vVisible = dot(worldNormal, toCam);
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `;
 var borderFragShader = `
   uniform float uOpacity;
   uniform vec3  uColor;
+  varying float vVisible;
   void main() {
-    gl_FragColor = vec4(uColor, uOpacity);
+    // 裏面（vVisible < 0）は完全に非表示
+    // エッジ付近（0 ~ 0.12）はフェードアウト
+    float alpha = uOpacity * smoothstep(0.0, 0.12, vVisible);
+    if (alpha <= 0.0) discard;
+    gl_FragColor = vec4(uColor, alpha);
   }
 `;
 
