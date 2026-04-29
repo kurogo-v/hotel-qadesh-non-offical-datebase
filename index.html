@@ -271,6 +271,26 @@ body.light .world-cluster-circle{background:rgba(240,238,232,0.92);border-color:
 .world-cluster-child-circle{width:36px;height:36px;border-radius:50%;background:rgba(0,0,4,0.85);border:1.5px solid rgba(201,168,76,0.35);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:border-color 0.18s,box-shadow 0.18s;box-shadow:0 2px 10px rgba(0,0,0,0.7);}
 .world-cluster-child:hover .world-cluster-child-circle{border-color:var(--gold);box-shadow:0 0 12px rgba(201,168,76,0.5);}
 body.light .world-cluster-child-circle{background:rgba(240,238,232,0.9);border-color:rgba(120,90,30,0.4);}
+/* ライトモード: グローブパネル・右パネルのキャラ名 */
+.light .world-char-name{color:var(--text);}
+.light .world-char-num{color:var(--silver2);}
+.light .world-char-row:hover{background:rgba(120,90,30,0.06);}
+.light .world-char-icon{border-color:rgba(120,90,30,0.18);background:var(--bg4);}
+.light .card{background:rgba(245,240,225,0.92);border-color:rgba(120,90,30,0.25);}
+.light .card-name{color:var(--text);}
+.light .card.u{background:rgba(235,233,228,0.92);}
+.light .card.u .card-name{color:var(--silver2);}
+.light .card-role{color:var(--text-dim);}
+.light .world-panel-name{color:var(--silver);}
+.light .world-panel-country-header:hover{background:rgba(120,90,30,0.05);}
+.light .world-panel-country-header.active-header{background:rgba(120,90,30,0.08);}
+.light #globeHint{color:rgba(80,60,20,0.35);}
+.light #globeUnkbtn{background:rgba(240,238,232,0.92) !important;border-color:rgba(120,90,30,0.35) !important;color:var(--text) !important;}
+.light #globeUnkbtn .dot{background:rgba(100,80,20,0.5) !important;}
+.light #globeUnkbtn:hover,.light #globeUnkbtn.on{background:rgba(225,218,200,0.97) !important;border-color:var(--gold) !important;color:var(--text) !important;}
+.light #worldHamburger{background:rgba(240,238,232,0.9) !important;border-color:rgba(120,90,30,0.35) !important;}
+.light #worldHamburger span{background:var(--gold) !important;}
+.light #globeCloseBtn{color:var(--text-dim) !important;}
 .world-cluster-child .world-badge-flag{font-size:0.95rem;}
 .world-cluster-child .world-badge-num{font-size:0.62rem;}
 .world-cluster-child .world-badge-label{font-size:0.55rem;}
@@ -633,9 +653,9 @@ body.light .mode-knob{left:18px;background:#2a2a34;}
         </button>
       </div>
       <!-- グローブ下部パネル（国選択時に展開） -->
-      <div id="globePanel" style="width:100%;background:rgba(6,10,20,0.98);border-top:1px solid rgba(220,190,100,0.0);max-height:0;overflow:hidden;transition:max-height 0.32s ease,border-color 0.32s;flex-shrink:0;">
+      <div id="globePanel" style="width:100%;background:var(--bg2);border-top:1px solid rgba(220,190,100,0.0);max-height:0;overflow:hidden;transition:max-height 0.32s ease,border-color 0.32s;flex-shrink:0;">
         <div id="globePanelHead" style="padding:12px 16px 5px;display:flex;align-items:center;justify-content:space-between;">
-          <div id="globePanelTitle" style="display:flex;align-items:center;gap:9px;color:#e4d498;font-size:14px;font-weight:500;">
+          <div id="globePanelTitle" style="display:flex;align-items:center;gap:9px;color:var(--gold2);font-size:14px;font-weight:500;">
             <div id="globePanelDot" style="width:8px;height:8px;border-radius:50%;flex-shrink:0;background:rgba(220,190,100,0.85);"></div>
             <span id="globePanelLabel"></span>
           </div>
@@ -3097,7 +3117,12 @@ function selectCountry(country) {
     });
     document.getElementById('globeCards').innerHTML = html;
   })();
-  var gp2=document.getElementById('globePanel');if(gp2){gp2.classList.add('open');}
+  // スマホで右パネル（ハンバーガー）が開いているときはglobePanelを開かない
+  var _wp = document.getElementById('worldPanel');
+  var _panelOpen = _wp && _wp.classList.contains('sp-open');
+  if (!_panelOpen) {
+    var gp2=document.getElementById('globePanel');if(gp2){gp2.classList.add('open');}
+  }
   document.getElementById('globeUnkbtn').classList.remove('on');
 }
 
@@ -3130,7 +3155,12 @@ function selectUnknown() {
     });
     document.getElementById('globeCards').innerHTML = html;
   })();
-  var gp2=document.getElementById('globePanel');if(gp2){gp2.classList.add('open');}
+  // スマホで右パネルが開いているときはglobePanelを開かない
+  var _wp2 = document.getElementById('worldPanel');
+  var _panelOpen2 = _wp2 && _wp2.classList.contains('sp-open');
+  if (!_panelOpen2) {
+    var gp2=document.getElementById('globePanel');if(gp2){gp2.classList.add('open');}
+  }
 }
 
 function deselectAll() {
@@ -3375,12 +3405,16 @@ function _isMobileWorld() {
 }
 
 window.worldToggleCountry = function(key) {
-  // グローブ側のバッジ選択と連動
-  var c = COUNTRIES.find(function(x){ return x.key === key; });
-  if (c && typeof window.selectCountry === 'function') window.selectCountry(c);
+  // グローブ側のバッジ選択と連動（右パネルが閉じているときのみ）
+  var _wp = document.getElementById('worldPanel');
+  var _panelOpen = _wp && _wp.classList.contains('sp-open');
+  if (!_panelOpen) {
+    var c = COUNTRIES.find(function(x){ return x.key === key; });
+    if (c && typeof window.selectCountry === 'function') window.selectCountry(c);
+  }
 
-  // 右パネル展開（PC時）
-  if (_isMobileWorld()) return;
+  // 右パネル展開（右パネルが開いているとき or PC時）
+  if (_isMobileWorld() && !_panelOpen) return;
   var chars = document.getElementById('wpchars_' + key);
   var arrow = document.getElementById('wparrow_' + key);
   var header = chars ? chars.previousElementSibling : null;
@@ -3399,7 +3433,11 @@ window.worldToggleCountry = function(key) {
 };
 
 window.worldToggleUnknown = function() {
-  if (typeof window.selectUnknown === 'function') window.selectUnknown();
+  var _wp = document.getElementById('worldPanel');
+  var _panelOpen = _wp && _wp.classList.contains('sp-open');
+  // 右パネルが閉じているときのみグローブ側の選択を実行
+  if (!_panelOpen && typeof window.selectUnknown === 'function') window.selectUnknown();
+
 };
 
 window.worldOpenChar = function(charId) { showCharDetail(charId); };
