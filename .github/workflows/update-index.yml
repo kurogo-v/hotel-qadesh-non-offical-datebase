@@ -1,0 +1,151 @@
+name: Update index.html from Supabase
+
+on:
+  schedule:
+    - cron: '0 15 * * *'  # 毎日 UTC 15:00 = JST 0:00
+  workflow_dispatch:       # 手動実行も可能
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch data from Supabase and update index.html
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          node << 'EOF'
+          const fs = require('fs');
+
+          async function fetchAll(url, headers) {
+            // Supabase REST API は最大1000件なので全件取得
+            let all = [];
+            let offset = 0;
+            const limit = 1000;
+            while (true) {
+              const res = await fetch(`${url}&limit=${limit}&offset=${offset}`, { headers });
+              const data = await res.json();
+              if (!Array.isArray(data) || data.length === 0) break;
+              all = all.concat(data);
+              if (data.length < limit) break;
+              offset += limit;
+            }
+            return all;
+          }
+
+          const SUPABASE_URL = process.env.SUPABASE_URL;
+          const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY;
+          const headers = {
+            'apikey': SUPABASE_SERVICE_KEY,
+            'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+          };
+
+          async function main() {
+            // キャラクターデータ取得
+            const chars = await fetchAll(
+              `${SUPABASE_URL}/rest/v1/characters?select=*&order=id.asc`,
+              headers
+            );
+
+            // 組織データ取得
+            const orgs = await fetchAll(
+              `${SUPABASE_URL}/rest/v1/organizations?select=*&order=id.asc`,
+              headers
+            );
+
+            console.log(`取得: キャラ ${chars.length}件, 組織 ${orgs.length}件`);
+
+            // snake_case → camelCase 変換（CHARS用）
+            const charsJs = chars.map(c => {
+              const obj = {
+                id: c.id,
+                name: c.name || '',
+                number: c.number || '-',
+                affiliations: c.affiliations || [],
+                nationality: c.nationality || '',
+                keyword: c.keyword || '',
+                notionUrl: c.notion_url || '',
+                iconKey: c.icon_key || '',
+                catGroup: c.cat_group || 'none',
+                subGroup: c.sub_group || '',
+                nationalitySearch: c.nationality_search || '',
+                nameSearch: c.name_search || '',
+              };
+              if (c.full_img_keys && c.full_img_keys.length > 0) obj.fullImgKeys = c.full_img_keys;
+              if (c.corr_img_key) obj.corrImgKey = c.corr_img_key;
+              if (c.note) obj.note = c.note;
+              return obj;
+            });
+
+            // snake_case → camelCase 変換（ORGS用）
+            const orgsJs = orgs.map(o => {
+              const obj = {
+                id: o.id,
+                name: o.name || '',
+                qadeshRel: o.qadesh_rel || [],
+                types: o.types || [],
+                corpType: o.corp_type || '',
+                recognition: o.recognition || '',
+                frontExists: o.front_exists || 'ない',
+                frontDetail: o.front_detail || '',
+                relatedUrl: o.related_url || '',
+                description: o.description || '',
+              };
+              if (o.symbol_img) obj.symbolImg = o.symbol_img;
+              if (o.corr_img_key) obj.corrImgKey = o.corr_img_key;
+              if (o.extra_imgs && o.extra_imgs.length > 0) obj.extraImgs = o.extra_imgs;
+              return obj;
+            });
+
+            // index.html 読み込み
+            let html = fs.readFileSync('index.html', 'utf8');
+
+            // CHARS 部分を置き換え
+            const charsLines = charsJs.map(c => '  ' + JSON.stringify(c, null, 0)).join(',\n');
+            html = html.replace(
+              /const CHARS = \[[\s\S]*?\];/,
+              `const CHARS = [\n${charsLines}\n];`
+            );
+
+            // ORGS 部分を置き換え
+            const orgsLines = orgsJs.map(o => {
+              const lines = Object.entries(o).map(([k, v]) => `    ${k}: ${JSON.stringify(v)}`).join(',\n');
+              return `  {\n${lines}\n  }`;
+            }).join(',\n');
+            html = html.replace(
+              /var ORGS = \[[\s\S]*?\];/,
+              `var ORGS = [\n${orgsLines}\n];`
+            );
+
+            // 書き込み
+            fs.writeFileSync('index.html', html, 'utf8');
+            console.log('index.html を更新しました');
+          }
+
+          main().catch(e => { console.error(e); process.exit(1); });
+          EOF
+
+      - name: Check for changes
+        id: check
+        run: |
+          git diff --quiet index.html && echo "changed=false" >> $GITHUB_OUTPUT || echo "changed=true" >> $GITHUB_OUTPUT
+
+      - name: Commit and push if changed
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "chore: Supabaseからindex.htmlを自動更新 [skip ci]"
+          git push
