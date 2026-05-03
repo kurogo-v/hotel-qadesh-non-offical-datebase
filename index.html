@@ -2672,7 +2672,9 @@ function showOrgDetail(org) {
     + corpTypeRow
     + row('世界的認知度', org.recognition)
     + frontRow
-    + (org.relatedUrl && org.relatedUrl.trim() ? row('関連URL', org.relatedUrl) : '');
+    + (org.relatedUrl && org.relatedUrl.trim()
+        ? '<div class="org-detail-row"><div class="org-detail-label">関連URL</div><div class="org-detail-val"><a href="' + esc(org.relatedUrl.trim()) + '" target="_blank" rel="noopener noreferrer" style="color:var(--gold);text-decoration:underline;word-break:break-all;">' + esc(org.relatedUrl.trim()) + '</a></div></div>'
+        : '');
 
   // DETAILED NOTES：キャラ詳細のNoteと同じ corr-memo 形式
   var notesHtml = '';
