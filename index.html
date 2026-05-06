@@ -3154,7 +3154,17 @@ function selectCountry(country) {
       if (tag) html += '<span class="world-char-num">' + tag + '</span>';
       html += '</div>';
     });
-    document.getElementById('globeCards').innerHTML = html;
+    // 日本の場合は先頭に埼馬県リンクを追加
+    if (country.key === 'japan') {
+      var japanExtra = '<div style="padding:6px 10px 4px;border-bottom:1px solid rgba(201,168,76,0.1);">'
+        + '<span style="font-family:\'Share Tech Mono\',monospace;font-size:0.78rem;color:var(--gold2);">★埼馬県　</span>'
+        + '<a href="https://www.youtube.com/watch?v=5WQ5wOIKDhQ" target="_blank" rel="noopener noreferrer" '
+        + 'style="font-family:\'Share Tech Mono\',monospace;font-size:0.78rem;color:var(--gold);text-decoration:underline;text-underline-offset:2px;cursor:pointer;">本編映像</a>'
+        + '</div>';
+      document.getElementById('globeCards').innerHTML = japanExtra + html;
+    } else {
+      document.getElementById('globeCards').innerHTML = html;
+    }
   })();
   // スマホで右パネル（ハンバーガー）が開いているときはglobePanelを開かない
   var _wp = document.getElementById('worldPanel');
