@@ -3520,7 +3520,7 @@ function drawETunnel(a, b) {
   var sLat=a.lat+offLat, sLng=a.lng+offLng;
   var eLat=b.lat-offLat, eLng=b.lng-offLng;
   var perpLat=-ndlng, perpLng=ndlat;
-  var steps=12, seg=24;
+  var steps=32, seg=24;
   for(var s=0;s<steps;s++){
     var t=steps===1?0:(s/(steps-1)-0.5);
     var oLat=perpLat*TUNNEL_HALF_W_LAT*t*2;
