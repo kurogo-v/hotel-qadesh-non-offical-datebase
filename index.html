@@ -1800,7 +1800,7 @@ function showCharDetail(charId) {
       +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— CORRELATION DIAGRAM —</div>'
       +'<div class="corr-canvas-wrap"><canvas class="corr-canvas" id="corrCanvas"></canvas></div>'
       +'<div class="corr-memo"><div class="corr-memo-label">— Note —</div><div class="corr-memo-text">そっくりな奴が敵対組織にいる</div></div>';
-    if(self.note){ body+='<div class="divider-line"></div>' +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>' +'<div class="corr-memo"><div class="corr-memo-text">'+esc(self.note)+'</div></div>'; }
+    if(self.note){ body+='<div class="divider-line"></div>' +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>' +'<div class="corr-memo"><div class="corr-memo-text" style="white-space:pre-wrap;">'+esc(self.note.replace(/\\n/g,"\n"))+'</div></div>'; }
     modal2Body.innerHTML=body; openModal2();
     setTimeout(function(){
       var cc=document.getElementById('corrCanvas'); if(!cc) return;
@@ -1858,7 +1858,7 @@ function showCharDetail(charId) {
         +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— CORRELATION DIAGRAM —</div>'
         +'<img class="full-img" src="'+corrSrc+'" alt="'+esc(self.name)+' 相関図">';
     }
-    if(self.note){ body+='<div class="divider-line"></div>'+'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>'+'<div class="corr-memo"><div class="corr-memo-text">'+esc(self.note)+'</div></div>'; }
+    if(self.note){ body+='<div class="divider-line"></div>'+'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>'+'<div class="corr-memo"><div class="corr-memo-text" style="white-space:pre-wrap;">'+esc(self.note.replace(/\\n/g,"\n"))+'</div></div>'; }
     modal2Body.innerHTML=body; openModal2();
   }
 }
@@ -2681,7 +2681,7 @@ function showOrgDetail(org) {
   if (org.description && org.description.trim()) {
     notesHtml = '<div class="divider-line" style="margin:0.8rem 0 0.6rem;"></div>'
       + '<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— DETAILED NOTES —</div>'
-      + '<div class="corr-memo"><div class="corr-memo-text" style="white-space:pre-wrap;">' + esc(org.description) + '</div></div>';
+      + '<div class="corr-memo"><div class="corr-memo-text" style="white-space:pre-wrap;">' + esc(org.description.replace(/\\n/g,'\n')) + '</div></div>';
   }
 
   body.innerHTML = imgHtml + tabHtml + infoHtml + notesHtml;
