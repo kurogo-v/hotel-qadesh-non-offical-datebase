@@ -2343,8 +2343,8 @@ function _drawOrgDiagram(W, H) {
 
   var cx = W / 2, cy = H / 2;
   var _isMobileOrg = W < 600;
-  var orgCW = Math.max(210, W * 0.18) * (_isMobileOrg ? 0.75 : 1.0);
-  var orgCH = Math.max(69,  W * 0.06) * (_isMobileOrg ? 0.75 : 1.0);
+  var orgCW = catRadius(6, W) * 2.82 * (_isMobileOrg ? 0.75 : 1.0);
+  var orgCH = catRadius(6, W) * 0.94 * (_isMobileOrg ? 0.75 : 1.0);
   _orgNodes = [];
 
   if (_orgView === 'rel') {
@@ -2498,7 +2498,7 @@ function _orgCanvasClick(e) {
   var W = _orgCanvas.style.width ? parseInt(_orgCanvas.style.width) : _orgCanvas.width;
   var H = _orgCanvas.style.height ? parseInt(_orgCanvas.style.height) : _orgCanvas.height;
   var ccx = W / 2, ccy = H / 2;
-  var _ccw = Math.max(210, W * 0.18) / 2, _cch = Math.max(69, W * 0.06) / 2;
+  var _ccw = catRadius(6, W) * 2.82 / 2, _cch = catRadius(6, W) * 0.94 / 2;
   var _ddx = (px - ccx) / _ccw, _ddy = (py - ccy) / _cch;
   if (_ddx * _ddx + _ddy * _ddy <= 1.1) {
     // ORG側のホテルカデシュ：現時点では該当なし
