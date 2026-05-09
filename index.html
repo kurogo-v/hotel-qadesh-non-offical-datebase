@@ -2042,7 +2042,7 @@ window.addEventListener('resize',function(){
   document.addEventListener('keydown', function(e){
     if(e.key==='Escape' && lbOverlay.classList.contains('open')) closeLb();
   });
-}
+})();
 
 // =====================================================================
 // MODE TOGGLE
@@ -3805,7 +3805,7 @@ function _initData() {
     console.error('[Data] 読み込みエラー:', err);
     showMsg('⚠ データの読み込みに失敗しました（' + err.message + '）', true);
   });
-})();
+}
 _initData();
 
 
