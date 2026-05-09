@@ -3727,7 +3727,10 @@ function initWorldView() {
 // =====================================================================
 // DATA LOADER — APIからキャラ・組織データを取得してCHARS/ORGSに設定する
 // =====================================================================
+var _initDataRunning = false;
 function _initData() {
+  if (_initDataRunning) return; // 二重実行防止
+  _initDataRunning = true;
   var loadingEl = document.getElementById('dataLoadingMsg');
   function showMsg(msg, isError) {
     if (!loadingEl) return;
@@ -3801,9 +3804,11 @@ function _initData() {
 
     showMsg('');
     console.log('[Data] CHARS:', CHARS.length, '/ ORGS:', ORGS.length);
+    _initDataRunning = false;
   }).catch(function(err) {
     console.error('[Data] 読み込みエラー:', err);
     showMsg('⚠ データの読み込みに失敗しました（' + err.message + '）', true);
+    _initDataRunning = false;
   });
 }
 _initData();
