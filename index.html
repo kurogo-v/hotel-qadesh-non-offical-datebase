@@ -3777,11 +3777,11 @@ function _initData() {
   showMsg('データを読み込み中...');
 
   Promise.all([
-    fetch('/api/characters', { credentials: 'include' }).then(function(r) {
+    fetch('https://qadesh-editor.pages.dev/api/characters').then(function(r) {
       if (!r.ok) throw new Error('characters: ' + r.status);
       return r.json();
     }),
-    fetch('/api/organizations', { credentials: 'include' }).then(function(r) {
+    fetch('https://qadesh-editor.pages.dev/api/organizations').then(function(r) {
       if (!r.ok) throw new Error('organizations: ' + r.status);
       return r.json();
     })
