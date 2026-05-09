@@ -2042,7 +2042,7 @@ window.addEventListener('resize',function(){
   document.addEventListener('keydown', function(e){
     if(e.key==='Escape' && lbOverlay.classList.contains('open')) closeLb();
   });
-})();
+}
 
 // =====================================================================
 // MODE TOGGLE
@@ -3727,7 +3727,7 @@ function initWorldView() {
 // =====================================================================
 // DATA LOADER — APIからキャラ・組織データを取得してCHARS/ORGSに設定する
 // =====================================================================
-(function _initData() {
+function _initData() {
   var loadingEl = document.getElementById('dataLoadingMsg');
   function showMsg(msg, isError) {
     if (!loadingEl) return;
@@ -3806,6 +3806,7 @@ function initWorldView() {
     showMsg('⚠ データの読み込みに失敗しました（' + err.message + '）', true);
   });
 })();
+_initData();
 
 
 </script>
