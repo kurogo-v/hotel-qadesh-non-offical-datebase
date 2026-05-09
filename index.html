@@ -1567,7 +1567,7 @@ var badges=entries.map(function(e){
 // =====================================================================
 function switchFullImg(charId, idx) {
   var self=CHARS.find(function(c){return c.id===charId;}); if(!self) return;
-  var keys=self.fullImgKeys||[self.iconKey];
+  var keys=(self.fullImgKeys && self.fullImgKeys.length ? self.fullImgKeys : [self.iconKey]);
   var src=FULL_IMGS[keys[idx]]||''; if(!src) return;
   var img=document.getElementById('mfi_'+charId); if(img) img.src=src;
   keys.forEach(function(_,i){
@@ -1579,7 +1579,7 @@ function switchFullImg(charId, idx) {
 
 function showCharDetail(charId) {
   var self=CHARS.find(function(c){return c.id===charId;}); if(!self) return;
-  var keys=self.fullImgKeys||[self.iconKey];
+  var keys=(self.fullImgKeys && self.fullImgKeys.length ? self.fullImgKeys : [self.iconKey]);
   var iconSrc=IMAGES[self.iconKey]||'';
   modal2Title.textContent=self.name+' — 詳細';
   var others=CHARS.filter(function(c){return c.iconKey===self.iconKey&&c.id!==self.id;});
@@ -3752,7 +3752,7 @@ function _initData() {
       nationalitySearch: c.nationality_search|| c.nationalitySearch || '',
       nameSearch:        c.name_search       || c.nameSearch || '',
       note:              c.note              || '',
-      fullImgKeys:       c.full_img_keys     || c.fullImgKeys || [],
+      fullImgKeys:       (c.full_img_keys && c.full_img_keys.length ? c.full_img_keys : null) || (c.fullImgKeys && c.fullImgKeys.length ? c.fullImgKeys : null) || [],
       corrImgKey:        c.corr_img_key      || c.corrImgKey  || '',
     };
   }
