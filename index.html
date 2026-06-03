@@ -1062,6 +1062,12 @@ function _kgFilter(c){return(c.affiliations||[]).indexOf("RAVEN'S EXPRESS")>=0;}
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
+function decodeUnicodeEscapes(s) {
+  if (!s) return s;
+  return String(s).replace(/\\u([0-9a-fA-F]{4})/g, function(_, code) {
+    return String.fromCharCode(parseInt(code, 16));
+  });
+}
 
 // =====================================================================
 // SCREEN TRANSITION
@@ -2450,6 +2456,7 @@ function showOrgDetail(org) {
   // 項目リスト（フォームの順番通り）
   function row(label, val) {
     var v = (val && val.trim && val.trim()) || '';
+    v = decodeUnicodeEscapes(v);
     var isEmpty = !v || v === '[]' || v === '';
     return '<div class="org-detail-row">'
       + '<div class="org-detail-label">' + label + '</div>'
@@ -2457,7 +2464,7 @@ function showOrgDetail(org) {
       + '</div>';
   }
   function rowArr(label, arr) {
-    var v = arr && arr.length ? arr.join('、') : '';
+    var v = arr && arr.length ? arr.map(decodeUnicodeEscapes).join('、') : '';
     return row(label, v);
   }
 
@@ -3743,18 +3750,18 @@ function _initData() {
   function normalizeChar(c) {
     return {
       id:                c.id,
-      name:              c.name              || '',
+      name:              decodeUnicodeEscapes(c.name              || ''),
       number:            c.number            || '-',
-      affiliations:      c.affiliations      || [],
-      nationality:       c.nationality       || '',
-      keyword:           c.keyword           || '',
+      affiliations:      (c.affiliations      || []).map(decodeUnicodeEscapes),
+      nationality:       decodeUnicodeEscapes(c.nationality       || ''),
+      keyword:           decodeUnicodeEscapes(c.keyword           || ''),
       notionUrl:         c.notion_url        || c.notionUrl || '',
       iconKey:           c.icon_key          || c.iconKey   || '',
       catGroup:          c.cat_group         || c.catGroup  || 'none',
       subGroup:          c.sub_group         || c.subGroup  || '',
       nationalitySearch: c.nationality_search|| c.nationalitySearch || '',
       nameSearch:        c.name_search       || c.nameSearch || '',
-      note:              c.note              || '',
+      note:              decodeUnicodeEscapes(c.note              || ''),
       fullImgKeys:       (c.full_img_keys && c.full_img_keys.length ? c.full_img_keys : null) || (c.fullImgKeys && c.fullImgKeys.length ? c.fullImgKeys : null) || [],
       corrImgKey:        c.corr_img_key      || c.corrImgKey  || '',
     };
@@ -3763,15 +3770,15 @@ function _initData() {
   function normalizeOrg(o) {
     return {
       id:           o.id,
-      name:         o.name          || '',
-      qadeshRel:    o.qadesh_rel    || o.qadeshRel    || [],
-      types:        o.types         || [],
-      corpType:     o.corp_type     || o.corpType      || '',
-      recognition:  o.recognition   || '',
-      frontExists:  o.front_exists  || o.frontExists   || 'ない',
-      frontDetail:  o.front_detail  || o.frontDetail   || '',
+      name:         decodeUnicodeEscapes(o.name          || ''),
+      qadeshRel:    (o.qadesh_rel    || o.qadeshRel    || []).map(decodeUnicodeEscapes),
+      types:        (o.types         || []).map(decodeUnicodeEscapes),
+      corpType:     decodeUnicodeEscapes(o.corp_type     || o.corpType      || ''),
+      recognition:  decodeUnicodeEscapes(o.recognition   || ''),
+      frontExists:  decodeUnicodeEscapes(o.front_exists  || o.frontExists   || 'ない'),
+      frontDetail:  decodeUnicodeEscapes(o.front_detail  || o.frontDetail   || ''),
       relatedUrl:   o.related_url   || o.relatedUrl    || '',
-      description:  o.description   || '',
+      description:  decodeUnicodeEscapes(o.description   || ''),
       symbolImg:    o.symbol_img    || o.symbolImg     || '',
       corrImgKey:   o.corr_img_key  || o.corrImgKey    || '',
     };
