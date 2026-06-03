@@ -2411,6 +2411,15 @@ function showOrgGroupModal(node) {
 
 function showOrgDetail(org) {
   if (!org) return;
+  // 組織ごとの追加画像オーバーライド（APIにmap_imgsがない場合のローカル定義）
+  var ORG_MAP_IMGS = {
+    'valverde': ['valverde1.png'],
+  };
+  if (!org.mapImgs || org.mapImgs.length === 0) {
+    var _symKey = org.symbolImg ? org.symbolImg.replace(/\.png$/i, '') : '';
+    var _override = ORG_MAP_IMGS[org.id] || ORG_MAP_IMGS[_symKey];
+    if (_override) org = Object.assign({}, org, { mapImgs: _override });
+  }
   var body = modal2Body;
   modal2Title.textContent = org.name + ' — 詳細';
   var isLight = document.body.classList.contains('light');
@@ -2424,23 +2433,36 @@ function showOrgDetail(org) {
   // 画像エリア：symbolImg・corrImgKey のどちらもない場合は非表示
   var imgHtml = '';
   var tabHtml = '';
-  if (symbolSrc || corrSrc) {
-    var mainSrc = symbolSrc || corrSrc;
+  var mapImgs = org.mapImgs || [];
+  var firstMapSrc = mapImgs.length > 0 ? 'images/' + mapImgs[0] : '';
+  if (symbolSrc || firstMapSrc || corrSrc) {
+    var mainSrc = symbolSrc || firstMapSrc || corrSrc;
     imgHtml = '<div id="orgImgMain" style="margin-bottom:0.5rem;">'
       + '<img class="full-img" id="orgMainImg" src="' + mainSrc + '" alt="' + esc(org.name) + '">'
       + '</div>';
     tabHtml = '<div class="org-img-tab-wrap">';
+    // 1. シンボル画像（旗など）
     if (symbolSrc) {
       tabHtml += '<div class="org-img-tab active" id="orgTabImg" onclick="switchOrgImg(\'img\', this)" title="シンボル画像">'
         + '<img src="' + symbolSrc + '" alt="画像">'
         + '</div>';
     }
+    // 2. 地図などの追加画像（symbolImg と corrImg の間）
+    for (var mi = 0; mi < mapImgs.length; mi++) {
+      var mSrc = 'images/' + mapImgs[mi];
+      var mActive = (!symbolSrc && mi === 0) ? ' active' : '';
+      tabHtml += '<div class="org-img-tab' + mActive + '" onclick="switchOrgImg(\'' + mSrc + '\', this)" title="' + esc(mapImgs[mi]) + '">'
+        + '<img src="' + mSrc + '" alt="' + esc(mapImgs[mi]) + '">'
+        + '</div>';
+    }
+    // 3. 相関図
     if (corrSrc) {
-      var corrActive = !symbolSrc ? ' active' : '';
+      var corrActive = (!symbolSrc && mapImgs.length === 0) ? ' active' : '';
       tabHtml += '<div class="org-img-tab' + corrActive + '" id="orgTabCorr" onclick="switchOrgImg(\'corr\', this)" title="相関図">'
         + '<img src="' + corrSrc + '" alt="相関図">'
         + '</div>';
     }
+    // 4. その他追加画像（extraImgs）
     var extraImgs = org.extraImgs || [];
     for (var ei = 0; ei < extraImgs.length; ei++) {
       var eSrc = 'images/' + extraImgs[ei];
@@ -3780,6 +3802,7 @@ function _initData() {
       relatedUrl:   o.related_url   || o.relatedUrl    || '',
       description:  decodeUnicodeEscapes(o.description   || ''),
       symbolImg:    o.symbol_img    || o.symbolImg     || '',
+      mapImgs:      o.map_imgs      || o.mapImgs       || [],
       corrImgKey:   o.corr_img_key  || o.corrImgKey    || '',
     };
   }
