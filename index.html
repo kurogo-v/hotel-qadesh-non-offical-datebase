@@ -1615,7 +1615,7 @@ function showCharDetail(charId) {
     body+='<div class="divider-line"></div>'
       +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— CORRELATION DIAGRAM —</div>'
       +'<div class="corr-canvas-wrap"><canvas class="corr-canvas" id="corrCanvas"></canvas></div>'
-      +'<div class="corr-memo"><div class="corr-memo-label">— Note —</div><div class="corr-memo-text">そっくりな奴が敵対組織にいる</div></div>';
+      ;
     if(self.note){ body+='<div class="divider-line"></div>' +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>' +'<div class="corr-memo"><div class="corr-memo-text" style="white-space:pre-wrap;">'+esc(self.note.replace(/\\n/g,"\n"))+'</div></div>'; }
     modal2Body.innerHTML=body; openModal2();
     setTimeout(function(){
