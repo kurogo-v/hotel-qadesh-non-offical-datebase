@@ -1354,7 +1354,7 @@ function drawCircle(ctx,n,hov) {
   // ライトモード: strokeカラーを直接使い視認性確保
   var textMain=isLight?p.stroke:(hov?p.text:p.text+'cc');
   var textSub=isLight?p.stroke:(hov?p.sub:p.sub.replace('0.7','0.42'));
-  ctx.font='700 '+fsC+'px \'Cormorant Garamond\',serif'; ctx.fillStyle=textMain;
+  ctx.font='700 '+fsC+'px \'Share Tech Mono\',monospace'; ctx.fillStyle=textMain;
   ctx.shadowColor=isLight?'transparent':p.stroke; ctx.shadowBlur=isLight?0:(hov?8:4);
   ctx.fillText(n.count,n.cx,n.cy-fsL*0.65,maxW); ctx.shadowBlur=0;
   var isJP=/[　-鿿]/.test(p.label);
@@ -1624,6 +1624,24 @@ function showCharDetail(charId) {
       +'<div class="corr-canvas-wrap"><canvas class="corr-canvas" id="corrCanvas"></canvas></div>'
       ;
     if(self.note){ body+='<div class="divider-line"></div>' +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>' +'<div class="corr-memo"><div class="corr-memo-text" style="white-space:pre-wrap;">'+esc(self.note.replace(/\\n/g,"\n"))+'</div></div>'; }
+    if(self.works && self.works.length){
+      var typeIcon2={'pixiv小説':'📖','pixivイラスト':'🎨','YouTube':'▶','ニコニコ動画':'📺','Twitter/X':'✕','その他':'🔗'};
+      var wHtml2=self.works.map(function(w){
+        var icon2=typeIcon2[w.type]||'🔗';
+        var label2=esc(w.title||w.url||'リンク');
+        var url2=esc(w.url||'');
+        return url2
+          ? '<a href="'+url2+'" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:0.5rem;padding:0.45rem 0.7rem;margin-bottom:0.35rem;background:rgba(200,200,208,0.05);border:1px solid rgba(200,200,208,0.12);border-radius:3px;color:var(--gold);text-decoration:none;font-family:\'Share Tech Mono\',monospace;font-size:0.78rem;" onmouseover="this.style.background=\'rgba(201,168,76,0.08)\'" onmouseout="this.style.background=\'rgba(200,200,208,0.05)\'">'
+            +'<span style="color:var(--silver3);font-size:0.72rem;">'+icon2+'</span>'
+            +'<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+label2+'</span>'
+            +'<span style="color:var(--silver3);font-size:0.65rem;flex-shrink:0;">'+esc(w.type||'その他')+'</span>'
+            +'</a>'
+          : '';
+      }).filter(Boolean).join('');
+      if(wHtml2) body+='<div class="divider-line"></div>'
+        +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Works —</div>'
+        +'<div>'+wHtml2+'</div>';
+    }
     modal2Body.innerHTML=body; openModal2();
     setTimeout(function(){
       var cc=document.getElementById('corrCanvas'); if(!cc) return;
@@ -1682,6 +1700,24 @@ function showCharDetail(charId) {
         +'<img class="full-img" src="'+corrSrc+'" alt="'+esc(self.name)+' 相関図">';
     }
     if(self.note){ body+='<div class="divider-line"></div>'+'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Note —</div>'+'<div class="corr-memo"><div class="corr-memo-text" style="white-space:pre-wrap;">'+esc(self.note.replace(/\\n/g,"\n"))+'</div></div>'; }
+    if(self.works && self.works.length){
+      var typeIcon={'pixiv小説':'📖','pixivイラスト':'🎨','YouTube':'▶','ニコニコ動画':'📺','Twitter/X':'✕','その他':'🔗'};
+      var wHtml=self.works.map(function(w){
+        var icon=typeIcon[w.type]||'🔗';
+        var label=esc(w.title||w.url||'リンク');
+        var url=esc(w.url||'');
+        return url
+          ? '<a href="'+url+'" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:0.5rem;padding:0.45rem 0.7rem;margin-bottom:0.35rem;background:rgba(200,200,208,0.05);border:1px solid rgba(200,200,208,0.12);border-radius:3px;color:var(--gold);text-decoration:none;font-family:\'Share Tech Mono\',monospace;font-size:0.78rem;transition:background 0.15s;" onmouseover="this.style.background=\'rgba(201,168,76,0.08)\'" onmouseout="this.style.background=\'rgba(200,200,208,0.05)\'">'
+            +'<span style="color:var(--silver3);font-size:0.72rem;">'+icon+'</span>'
+            +'<span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+label+'</span>'
+            +'<span style="color:var(--silver3);font-size:0.65rem;flex-shrink:0;">'+esc(w.type||'その他')+'</span>'
+            +'</a>'
+          : '';
+      }).filter(Boolean).join('');
+      if(wHtml) body+='<div class="divider-line"></div>'
+        +'<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.65rem;color:var(--silver2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.55rem;">— Works —</div>'
+        +'<div>'+wHtml+'</div>';
+    }
     modal2Body.innerHTML=body; openModal2();
   }
 }
@@ -3939,6 +3975,7 @@ function _initData() {
       note:              decodeUnicodeEscapes(c.note              || ''),
       fullImgKeys:       (c.full_img_keys && c.full_img_keys.length ? c.full_img_keys : null) || (c.fullImgKeys && c.fullImgKeys.length ? c.fullImgKeys : null) || [],
       corrImgKey:        c.corr_img_key      || c.corrImgKey  || '',
+      works:             c.works             || [],
     };
   }
 
