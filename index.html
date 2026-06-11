@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hotel Qadesh — Unofficial Database</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400&family=Share+Tech+Mono&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400&family=Oxanium:wght@300;400&family=Share+Tech+Mono&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#000000;--bg2:#06060a;--bg3:#0c0c12;--bg4:#121218;
@@ -63,7 +63,7 @@ body.light .world-badge-label{color:var(--silver2);text-shadow:0 1px 3px rgba(25
 .world-char-row:hover{background:rgba(201,168,76,0.04);}
 .world-char-icon{width:28px;height:28px;border-radius:50%;object-fit:cover;border:1px solid rgba(201,168,76,0.18);flex-shrink:0;background:var(--bg4);}
 .world-char-name{font-family:'Noto Serif JP',serif;font-size:0.82rem;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.world-char-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--text-dim);}
+.world-char-num{font-family:'Oxanium',sans-serif;font-size:0.7rem;color:var(--text-dim);}
 .world-char-tag{font-family:'Share Tech Mono',monospace;font-size:0.6rem;padding:0.1rem 0.4rem;border:1px solid rgba(201,168,76,0.25);color:var(--silver3);border-radius:1px;}
 /* Globe Panel */
 #globePanel.open { max-height: 260px !important; border-top-color: rgba(220,190,100,0.22) !important; }
@@ -359,7 +359,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Serif JP',serif;ov
 .search-result-item:last-child{border-bottom:none;}
 .search-result-name{font-family:'Noto Serif JP',serif;font-size:0.92rem;color:var(--text);line-height:1.35;}
 .search-result-tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px;}
-.search-result-num{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--gold);opacity:0.6;flex-shrink:0;padding-top:1px;}
+.search-result-num{font-family:'Oxanium',sans-serif;font-size:0.68rem;color:var(--gold);opacity:0.6;flex-shrink:0;padding-top:1px;}
 .search-no-result{padding:1rem 0.9rem;font-family:'Share Tech Mono',monospace;font-size:0.78rem;color:var(--text-dim);text-align:center;letter-spacing:0.08em;}
 .canvas-area{flex:1;min-height:0;position:relative;overflow:hidden;}
 canvas#diagram{display:block;width:100%;height:100%;cursor:default;}
@@ -387,7 +387,7 @@ canvas#diagram{display:block;width:100%;height:100%;cursor:default;}
 .char-name{font-family:'Noto Serif JP',serif;font-size:0.98rem;color:var(--text);line-height:1.4;}
 .char-tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px;}
 .char-tag{font-family:'Share Tech Mono',monospace;font-size:0.728rem;padding:1px 5px;border-radius:2px;letter-spacing:0.04em;white-space:nowrap;}
-.char-num{font-family:'Share Tech Mono',monospace;font-size:0.7rem;color:var(--gold);opacity:0.6;flex-shrink:0;padding-top:2px;}
+.char-num{font-family:'Oxanium',sans-serif;font-size:0.7rem;color:var(--gold);opacity:0.6;flex-shrink:0;padding-top:2px;}
 .modal-count-bar{font-family:'Share Tech Mono',monospace;font-size:0.68rem;color:var(--text-dim);padding:0 0 0.6rem;margin-bottom:0.3rem;border-bottom:1px solid rgba(200,200,208,0.055);letter-spacing:0.06em;}
 .modal-empty{text-align:center;padding:1.8rem 1rem;font-family:'Share Tech Mono',monospace;font-size:0.8rem;color:var(--text-dim);line-height:2;}
 .tag-敵対{background:rgba(192,48,42,0.12);color:#f09090;border:1px solid rgba(192,48,42,0.28);}
@@ -1354,7 +1354,7 @@ function drawCircle(ctx,n,hov) {
   // ライトモード: strokeカラーを直接使い視認性確保
   var textMain=isLight?p.stroke:(hov?p.text:p.text+'cc');
   var textSub=isLight?p.stroke:(hov?p.sub:p.sub.replace('0.7','0.42'));
-  ctx.font='700 '+fsC+'px \'Share Tech Mono\',monospace'; ctx.fillStyle=textMain;
+  ctx.font='400 '+fsC+'px \'Oxanium\',sans-serif'; ctx.fillStyle=textMain;
   ctx.shadowColor=isLight?'transparent':p.stroke; ctx.shadowBlur=isLight?0:(hov?8:4);
   ctx.fillText(n.count,n.cx,n.cy-fsL*0.65,maxW); ctx.shadowBlur=0;
   var isJP=/[　-鿿]/.test(p.label);
@@ -2338,7 +2338,7 @@ function _drawOrgNode(c, x, y, r, p, label, count, isLight) {
   var textMain = isLight ? p.stroke : p.text + 'cc';
   var textSub  = isLight ? p.stroke : p.sub.replace('0.7', '0.42');
   // 上段：count（数字）/ 下段：label（日本語対応）
-  c.font = '700 ' + fsC + 'px \'Cormorant Garamond\',serif'; c.fillStyle = textMain;
+  c.font = '400 ' + fsC + 'px \'Oxanium\',sans-serif'; c.fillStyle = textMain;
   c.shadowColor = isLight ? 'transparent' : p.stroke; c.shadowBlur = isLight ? 0 : 4;
   c.fillText(count, x, y - fsL * 0.65, maxW); c.shadowBlur = 0;
   var isJP = /[　-鿿]/.test(label);
